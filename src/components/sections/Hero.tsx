@@ -112,7 +112,7 @@ export default function Hero() {
             willChange: 'opacity',
           }}
         >
-          <source src="/video/hero-bg.mp4" type="video/mp4" />
+          {/* <source src="/video/hero-bg.mp4" type="video/mp4" /> */}
         </video>
 
         {/* 4-stop gradient: transparent top → heavy bottom — blends into --bg */}
@@ -280,7 +280,7 @@ export default function Hero() {
               textTransform: 'uppercase' as const,
             }}
           >
-            Available for opportunities · Dubai, UAE
+            Available for opportunities · Sahiwal, Pakistan
           </span>
         </motion.div>
 
@@ -337,7 +337,7 @@ export default function Hero() {
             }}
           >
             Building production-grade interfaces at the intersection of design,
-            engineering, and AI. Based in Dubai, UAE.
+            engineering, and AI. Based in Sahiwal, Pakistan.
           </motion.p>
 
           {/* CTA */}

@@ -8,13 +8,13 @@ export default function Footer() {
   useEffect(() => {
     const update = () => {
       const t = new Date().toLocaleTimeString('en-US', {
-        timeZone: 'Asia/Dubai',
+        timeZone: 'Asia/Karachi',
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
         hour12: false,
       });
-      setTime(`Dubai · ${t}`);
+      setTime(`Sahiwal · ${t}`);
     };
     update();
     const id = setInterval(update, 1000);
@@ -57,8 +57,8 @@ export default function Footer() {
         }}
       />
 
-      <span style={monoStyle}>© {year} Risheel. All rights reserved.</span>
-      <span style={monoStyle}>Senior Software Engineer · Dubai, UAE</span>
+      <span style={monoStyle}>© {year} Muhammad Adnan. All rights reserved.</span>
+      <span style={monoStyle}>Senior Software Engineer · Sahiwal, Pakistan</span>
       {/* key={time} remounts span on each tick → restarts clockGlow animation */}
       <span
         key={time}

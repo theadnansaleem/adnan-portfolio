@@ -172,7 +172,7 @@ export default function About() {
               <>
                 I&apos;m a{' '}
                 <strong style={{ color: 'var(--text)', fontWeight: 600 }}>Senior Software Engineer</strong>{' '}
-                based in Dubai with 12+ years of experience building production-ready software
+                based in Sahiwal with 7+ years of experience building production-ready software
                 that is fast, accessible, and visually refined.
               </>,
               <>

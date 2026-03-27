@@ -97,10 +97,10 @@ export default function Contact() {
   const handleMouseLeave = () => { mouseX.set(0.5); mouseY.set(0.5); };
 
   const buttons = [
-    { label: 'Email Me',    href: 'mailto:rishilmusthafa@gmail.com',                                    isEmail: true  },
-    { label: 'LinkedIn',    href: 'https://www.linkedin.com/in/risheel-musthafa-68694099/'                             },
-    { label: 'GitHub',      href: 'https://github.com/rishilmusthafa?tab=repositories'                                },
-    { label: 'Download CV', href: '#'                                                                                  },
+    { label: 'Email Me',    href: 'mailto:heyadnansaleem@gmail.com',                                    isEmail: true  },
+    { label: 'LinkedIn',    href: 'https://www.linkedin.com/in/theadnan/'                             },
+    { label: 'GitHub',      href: 'https://github.com/theadnansaleem?tab=repositories'                                },
+    { label: 'Download CV', href: 'https://drive.google.com/file/d/1AlroKzOEUJilF4TaTfIiSQECIJGx9HgZ/view?usp=sharing'                                                                                  },
   ];
 
   return (
@@ -271,7 +271,7 @@ export default function Contact() {
             textTransform: 'uppercase' as const,
           }}
         >
-          Based in Dubai, UAE · Open to remote &amp; relocation
+          Based in Sahiwal, Pakistan · Open to remote &amp; relocation
         </motion.p>
       </div>
     </section>

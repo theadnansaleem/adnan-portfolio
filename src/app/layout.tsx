@@ -32,7 +32,7 @@ const dmMono = DM_Mono({
   display: 'swap',
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rishilmusthafa.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://theadnan.vercel.app';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -42,27 +42,27 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Risheel — Senior Software Engineer',
+  title: 'Muhammad Adnan — Senior Software Engineer',
   description:
-    'Senior Software Engineer based in Dubai. Specialising in Next.js, AI-powered workflows, and enterprise-scale applications.',
-  keywords: ['Senior Software Engineer', 'Next.js', 'React', 'TypeScript', 'AI', 'Dubai', 'Portfolio'],
-  authors: [{ name: 'Risheel', url: SITE_URL }],
-  creator: 'Risheel',
+    'Senior Software Engineer based in Sahiwal. Specialising in Next.js, AI-powered workflows, and enterprise-scale applications.',
+  keywords: ['Senior Software Engineer', 'Next.js', 'React', 'TypeScript', 'AI', 'Sahiwal', 'Portfolio'],
+  authors: [{ name: 'Muhammad Adnan', url: SITE_URL }],
+  creator: 'Muhammad Adnan',
   robots: { index: true, follow: true },
   openGraph: {
     type: 'website',
     url: SITE_URL,
-    siteName: 'Risheel Portfolio',
-    title: 'Risheel — Senior Software Engineer',
-    description: 'Senior Software Engineer based in Dubai. Next.js · AI · Enterprise Apps.',
+    siteName: 'Muhammad Adnan Portfolio',
+    title: 'Muhammad Adnan — Senior Software Engineer',
+    description: 'Senior Software Engineer based in Sahiwal. Next.js · AI · Enterprise Apps.',
     locale: 'en_US',
-    images: [{ url: '/LinkedinPost.png', width: 1200, height: 630, alt: 'Risheel — Senior Software Engineer' }],
+    images: [{ url: '/LinkedinPost.png', width: 1200, height: 630, alt: 'Muhammad Adnan — Senior Software Engineer' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Risheel — Senior Software Engineer',
-    description: 'Senior Software Engineer based in Dubai. Next.js · AI · Enterprise Apps.',
-    creator: '@risheel',
+    title: 'Muhammad Adnan — Senior Software Engineer',
+    description: 'Senior Software Engineer based in Sahiwal. Next.js · AI · Enterprise Apps.',
+    creator: '@adnan',
     images: ['/LinkedinPost.png'],
   },
   icons: {
@@ -89,11 +89,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 __html: JSON.stringify({
                   '@context': 'https://schema.org',
                   '@type': 'Person',
-                  name: 'Risheel',
+                  name: 'Muhammad Adnan',
                   jobTitle: 'Senior Software Engineer',
                   url: SITE_URL,
                   worksFor: { '@type': 'Organization', name: 'e& enterprise' },
-                  address: { '@type': 'PostalAddress', addressLocality: 'Dubai', addressCountry: 'AE' },
+                  address: { '@type': 'PostalAddress', addressLocality: 'Sahiwal', addressCountry: 'AE' },
                   knowsAbout: ['Next.js', 'React', 'TypeScript', 'AI Automation', 'n8n', 'Claude AI'],
                 }),
               }}

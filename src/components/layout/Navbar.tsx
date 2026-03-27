@@ -71,7 +71,7 @@ export default function Navbar() {
             textDecoration: 'none',
           }}
         >
-          R●RISHEEL
+          M●ADNAN
         </a>
 
         {/* Desktop Links */}
@@ -201,7 +201,7 @@ export default function Navbar() {
                 letterSpacing: '0.2em',
               }}
             >
-              DUBAI, UAE · AVAILABLE FOR WORK
+              SAHIWAL, PAKISTAN · AVAILABLE FOR WORK
             </div>
           </motion.div>
         )}

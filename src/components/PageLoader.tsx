@@ -99,7 +99,7 @@ export default function PageLoader() {
               color: 'var(--accent)',
             }}
           >
-            RISHEEL
+            MUHAMMAD ADNAN
           </motion.div>
 
           {/* Loading bar */}
@@ -137,7 +137,7 @@ export default function PageLoader() {
               marginTop: '4px',
             }}
           >
-            Senior Software Engineer · Dubai
+            Senior Software Engineer · Sahiwal
           </motion.p>
         </motion.div>
       )}
