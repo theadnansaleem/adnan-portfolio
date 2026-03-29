@@ -214,7 +214,7 @@ const personSchema = {
     'https://github.com/theadnansaleem',
     `${SITE_URL}`,
   ],
-  email: 'heyadnansaleem@gmail.com',
+  email: 'contact@theadnansaleem.com',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Sahiwal',

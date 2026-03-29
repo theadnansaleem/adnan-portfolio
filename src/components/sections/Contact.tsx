@@ -97,10 +97,10 @@ export default function Contact() {
   const handleMouseLeave = () => { mouseX.set(0.5); mouseY.set(0.5); };
 
   const buttons = [
-    { label: 'Email Me',    href: 'mailto:heyadnansaleem@gmail.com',                                    isEmail: true  },
+    { label: 'Email Me',    href: 'mailto:contact@theadnansaleem.com',                                    isEmail: true  },
     { label: 'LinkedIn',    href: 'https://www.linkedin.com/in/theadnan/'                             },
     { label: 'GitHub',      href: 'https://github.com/theadnansaleem?tab=repositories'                                },
-    { label: 'Download CV', href: 'https://drive.google.com/file/d/1AlroKzOEUJilF4TaTfIiSQECIJGx9HgZ/view?usp=sharing'                                                                                  },
+    { label: 'Download CV', href: 'https://drive.google.com/file/d/14cXXtHeNqhD5ch3gHDHaQ1GbrSaU8fPV/view?usp=sharing'                                                                                  },
   ];
 
   return (
