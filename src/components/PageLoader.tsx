@@ -137,7 +137,7 @@ export default function PageLoader() {
               marginTop: '4px',
             }}
           >
-            Senior Software Engineer · Sahiwal
+            Senior Software Engineer · OPEN TO GCC ROLES
           </motion.p>
         </motion.div>
       )}

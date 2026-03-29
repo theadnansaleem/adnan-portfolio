@@ -280,7 +280,7 @@ export default function Hero() {
               textTransform: 'uppercase' as const,
             }}
           >
-            Available for opportunities · Sahiwal, Pakistan
+            Available for opportunities · Open to GCC Roles
           </span>
         </motion.div>
 
@@ -291,24 +291,27 @@ export default function Hero() {
           animate="visible"
           style={{ marginBottom: 'min(56px, 6vh)' }}
         >
-          {(['Senior', 'Software', 'Engineer'] as const).map((word, i) => (
-            <div key={word} style={{ overflow: 'hidden', lineHeight: 0.92 }}>
-              <motion.span
-                variants={lineVariants}
-                className="hero-title-word"
-                style={{
-                  display: 'block',
-                  fontFamily: 'var(--font-display, "Bebas Neue"), cursive',
-                  fontSize: 'clamp(52px, min(14vw, 22vh), 210px)',
-                  lineHeight: 0.88,
-                  letterSpacing: '-0.02em',
-                  color: i === 2 ? 'var(--accent)' : 'var(--text)',
-                }}
-              >
-                {word}
-              </motion.span>
-            </div>
-          ))}
+          {/* Semantic h1 wraps all title words — one per page for SEO */}
+          <h1 style={{ margin: 0, padding: 0, lineHeight: 0.92 }}>
+            {(['Senior', 'Software', 'Engineer'] as const).map((word, i) => (
+              <div key={word} style={{ overflow: 'hidden', lineHeight: 0.92 }}>
+                <motion.span
+                  variants={lineVariants}
+                  className="hero-title-word"
+                  style={{
+                    display: 'block',
+                    fontFamily: 'var(--font-display, "Bebas Neue"), cursive',
+                    fontSize: 'clamp(52px, min(14vw, 22vh), 210px)',
+                    lineHeight: 0.88,
+                    letterSpacing: '-0.02em',
+                    color: i === 2 ? 'var(--accent)' : 'var(--text)',
+                  }}
+                >
+                  {word}
+                </motion.span>
+              </div>
+            ))}
+          </h1>
         </motion.div>
 
         {/* Bottom row */}
@@ -336,8 +339,9 @@ export default function Hero() {
               lineHeight: 1.75,
             }}
           >
-            Building production-grade interfaces at the intersection of design,
-            engineering, and AI. Based in Sahiwal, Pakistan.
+            <strong style={{ fontWeight: 'inherit' }}>Muhammad Adnan Saleem</strong> — building
+            production-grade interfaces at the intersection of design, engineering, and AI.
+            Frontend Developer &amp; Software Engineer based in Sahiwal, Pakistan.
           </motion.p>
 
           {/* CTA */}
