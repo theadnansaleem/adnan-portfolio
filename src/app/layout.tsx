@@ -367,7 +367,7 @@ const workExperienceSchema = {
       position: 3,
       item: {
         '@type': 'WorkBasedProgram',
-        name: 'Senior Frontend Developer',
+        name: 'Senior Fullstack Developer',
         employmentType: 'FULL_TIME',
         description:
           'Built the core UI of Codex, a cybersecurity monitoring platform enabling security teams ' +

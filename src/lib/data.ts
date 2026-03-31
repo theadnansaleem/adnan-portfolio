@@ -21,9 +21,9 @@ export const jobs: Job[] = [
         id: 3,
         period: "2021 — 2023",
         company: "Primary Target GmbH",
-        role: "Senior Frontend Developer",
+        role: "Senior Fullstack Developer",
         description: "Built the core UI of Codex, a cybersecurity monitoring platform enabling security teams to assess attack surfaces across vehicle software stacks containing 60M+ lines of code. Led frontend architecture with real-time threat detection dashboards, reducing analyst time-to-insight by ~20%.",
-        tags: ["React", "TypeScript", "Material UI", "WebSockets", "RBAC"]
+        tags: ["React", "TypeScript", "Material UI", "Node.js", "PostgreSQL", "GraphQL", "WebSockets", "RBAC"]
     },
     {
         id: 4,
@@ -35,7 +35,7 @@ export const jobs: Job[] = [
     },
     {
         id: 5,
-        period: "2019 — 2020",
+        period: "2018 — 2020",
         company: "TechSurge Inc",
         role: "Frontend Developer",
         description: "Built responsive, cross-browser compatible web applications using React, JavaScript, and Redux. Promoted from Junior to Frontend Developer within 6 months based on consistent delivery and measurable technical growth. Contributed to frontend standards adopted across the team.",
