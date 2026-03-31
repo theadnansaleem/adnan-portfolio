@@ -220,8 +220,8 @@ export const marqueeItems: string[] = [
 ];
 
 export const stats: Stat[] = [
-    { number: "6+", label: "Years of Experience" },
-    { number: "11+", label: "Projects Delivered" },
-    { number: "5", label: "Countries Served" },
+    { number: "7+", label: "Years of Experience" },
+    { number: "25+", label: "Projects Delivered" },
+    { number: "6", label: "Countries Served" },
     { number: "∞", label: "Problems Solved" }
 ];
