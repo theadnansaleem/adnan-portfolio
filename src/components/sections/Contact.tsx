@@ -100,7 +100,7 @@ export default function Contact() {
     { label: 'Email Me',    href: 'mailto:contact@theadnansaleem.com',                                    isEmail: true  },
     { label: 'LinkedIn',    href: 'https://www.linkedin.com/in/theadnan/'                             },
     { label: 'GitHub',      href: 'https://github.com/theadnansaleem?tab=repositories'                                },
-    { label: 'Download CV', href: 'https://drive.google.com/file/d/14cXXtHeNqhD5ch3gHDHaQ1GbrSaU8fPV/view?usp=sharing'                                                                                  },
+    { label: 'Download CV', href: 'https://drive.google.com/file/d/1zxuwvoAxmLXlZEJlsYHrjV03xSxlmDYa/view?usp=sharing'                                                                                  },
   ];
 
   return (
