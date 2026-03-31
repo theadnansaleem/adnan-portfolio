@@ -209,8 +209,8 @@ export const skillBars: SkillBar[] = [
     { label: "Performance & Core Web Vitals", value: 92 },
     { label: "AI / LLM & Agentic Systems", value: 88 },
     { label: "UI / Design Systems", value: 91 },
-    { label: "Node.js / Backend", value: 82 },
-    { label: "Testing & Quality", value: 85 }
+    { label: "Node.js / Backend", value: 92 },
+    { label: "Testing & Quality", value: 94 }
 ];
 
 export const marqueeItems: string[] = [
