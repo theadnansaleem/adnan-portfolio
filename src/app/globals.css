@@ -60,6 +60,9 @@
      backdrop-filter, the light value reads as glass over paper. */
   --panel:         rgba(10, 10, 10, 0.85);
   --panel-shadow:  0 4px 24px rgba(0, 0, 0, 0.4);
+  /* Nav links brighten on hover. White pops against the dark theme but is
+     invisible on paper, so light goes the other way and deepens the ink. */
+  --nav-hover:     #ffffff;
 }
 
 /* ─── Light theme ───────────────────────────────────────────────────────── */
@@ -94,6 +97,7 @@
   --orb-b-rgb:     198, 47, 47;
   --panel:         rgba(255, 255, 255, 0.55);
   --panel-shadow:  0 4px 20px rgba(0, 0, 0, 0.10);
+  --nav-hover:     #000000;
 }
 
 /* ─── Reset & Base ───────────────────────────────────────────────────────── */

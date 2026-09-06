@@ -90,7 +90,7 @@ export default function Navbar() {
                   fontSize: '12px',
                   textTransform: 'uppercase' as const,
                   letterSpacing: '0.15em',
-                  color: isActive ? 'var(--accent)' : (hoveredLink === id ? '#ffffff' : 'var(--text)'),
+                  color: isActive ? 'var(--accent)' : (hoveredLink === id ? 'var(--nav-hover)' : 'var(--text)'),
                   opacity: isActive ? 1 : (hoveredLink === id ? 1 : 'var(--dim)'),
                   textDecoration: 'none',
                   transition: 'opacity 0.25s, color 0.25s',
