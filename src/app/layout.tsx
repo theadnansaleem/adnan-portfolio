@@ -222,7 +222,7 @@ const personSchema = {
     'https://github.com/theadnansaleem',
     `${SITE_URL}`,
   ],
-  email: 'contact@theadnansaleem.com',
+  email: 'heyadnansaleem@gmail.com',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Lahore',
