@@ -52,7 +52,7 @@ function StatCard({ stat, index }: { stat: Stat; index: number }) {
           ? { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }
           : { opacity: 0, scale: 0.88, y: 24, filter: 'blur(6px)' }
       }
-      whileHover={{ y: -6, borderColor: 'rgba(232,255,71,0.35)' }}
+      whileHover={{ y: -6, borderColor: 'var(--hover-line)' }}
       transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       style={{
         background: 'var(--glass)',
@@ -140,15 +140,15 @@ export default function About() {
     >
       {/* ── Atmosphere layer ─────────────────────────────────────────────── */}
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'hidden', zIndex: 0 }}>
-        <motion.div style={{ position: 'absolute', top: '-15%', right: '-10%', width: 'clamp(400px,55vw,800px)', height: 'clamp(400px,55vw,800px)', borderRadius: '50%', background: 'radial-gradient(circle, rgba(232,255,71,0.08) 0%, rgba(232,255,71,0.025) 40%, transparent 70%)', filter: 'blur(40px)', x: orb1X, y: orb1Y }} />
-        <motion.div style={{ position: 'absolute', bottom: '-10%', left: '-8%', width: 'clamp(250px,35vw,550px)', height: 'clamp(250px,35vw,550px)', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,71,71,0.05) 0%, transparent 70%)', filter: 'blur(60px)', x: orb2X, y: orb2Y }} />
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)', backgroundSize: '48px 48px', maskImage: 'radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 100%)', WebkitMaskImage: 'radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 100%)' }} />
+        <motion.div style={{ position: 'absolute', top: '-15%', right: '-10%', width: 'clamp(400px,55vw,800px)', height: 'clamp(400px,55vw,800px)', borderRadius: '50%', background: 'radial-gradient(circle, rgba(var(--orb-a-rgb),0.08) 0%, rgba(var(--orb-a-rgb),0.025) 40%, transparent 70%)', filter: 'blur(40px)', x: orb1X, y: orb1Y }} />
+        <motion.div style={{ position: 'absolute', bottom: '-10%', left: '-8%', width: 'clamp(250px,35vw,550px)', height: 'clamp(250px,35vw,550px)', borderRadius: '50%', background: 'radial-gradient(circle, rgba(var(--orb-b-rgb),0.05) 0%, transparent 70%)', filter: 'blur(60px)', x: orb2X, y: orb2Y }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, var(--dot) 1px, transparent 1px)', backgroundSize: '48px 48px', maskImage: 'radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 100%)', WebkitMaskImage: 'radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 100%)' }} />
       </div>
 
       {/* ── Ghost text ───────────────────────────────────────────────────── */}
       <div aria-hidden="true" style={{ position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 0, pointerEvents: 'none', userSelect: 'none' }}>
         <motion.div style={{ x: ghostX, y: ghostY }}>
-          <span style={{ fontFamily: 'var(--font-display,"Bebas Neue"),cursive', fontSize: 'clamp(120px,20vw,320px)', color: 'transparent', WebkitTextStroke: '1px rgba(255,255,255,0.04)', whiteSpace: 'nowrap', letterSpacing: '0.06em', display: 'block' }}>
+          <span style={{ fontFamily: 'var(--font-display,"Bebas Neue"),cursive', fontSize: 'clamp(120px,20vw,320px)', color: 'transparent', WebkitTextStroke: '1px var(--ghost)', whiteSpace: 'nowrap', letterSpacing: '0.06em', display: 'block' }}>
             ABOUT
           </span>
         </motion.div>

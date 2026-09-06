@@ -107,7 +107,7 @@ export default function Hero() {
             height: '100%',
             objectFit: 'cover',
             objectPosition: 'center top',
-            opacity: videoReady ? 0.38 : 0,
+            opacity: videoReady ? 'var(--hero-video)' : 0,
             transition: 'opacity 1.4s ease',
             willChange: 'opacity',
           }}
@@ -122,10 +122,10 @@ export default function Hero() {
             inset: 0,
             background: [
               'linear-gradient(to bottom,',
-              '  rgba(5,5,5,0.55) 0%,',
-              '  rgba(5,5,5,0.20) 30%,',
-              '  rgba(5,5,5,0.45) 65%,',
-              '  rgba(5,5,5,0.97) 100%',
+              '  rgba(var(--scrim-rgb),0.55) 0%,',
+              '  rgba(var(--scrim-rgb),0.20) 30%,',
+              '  rgba(var(--scrim-rgb),0.45) 65%,',
+              '  rgba(var(--scrim-rgb),0.97) 100%',
               ')',
             ].join(' '),
           }}
@@ -137,7 +137,7 @@ export default function Hero() {
             position: 'absolute',
             inset: 0,
             background:
-              'radial-gradient(ellipse 120% 100% at 50% 50%, transparent 40%, rgba(5,5,5,0.75) 100%)',
+              'radial-gradient(ellipse 120% 100% at 50% 50%, transparent 40%, rgba(var(--scrim-rgb),0.75) 100%)',
           }}
         />
       </div>
@@ -157,7 +157,7 @@ export default function Hero() {
             height: 'clamp(400px, 60vw, 900px)',
             borderRadius: '50%',
             background:
-              'radial-gradient(circle, rgba(232,255,71,0.08) 0%, rgba(232,255,71,0.025) 40%, transparent 70%)',
+              'radial-gradient(circle, rgba(var(--orb-a-rgb),0.08) 0%, rgba(var(--orb-a-rgb),0.025) 40%, transparent 70%)',
             filter: 'blur(40px)',
             x: orb1X,
             y: orb1Y,
@@ -173,7 +173,7 @@ export default function Hero() {
             width: 'clamp(300px, 40vw, 600px)',
             height: 'clamp(300px, 40vw, 600px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(255,71,71,0.06) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(var(--orb-b-rgb),0.06) 0%, transparent 70%)',
             filter: 'blur(60px)',
             x: orb2X,
             y: orb2Y,
@@ -186,24 +186,13 @@ export default function Hero() {
             position: 'absolute',
             inset: 0,
             backgroundImage:
-              'radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)',
+              'radial-gradient(circle, var(--dot) 1px, transparent 1px)',
             backgroundSize: '48px 48px',
             maskImage:
               'radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 100%)',
             WebkitMaskImage:
               'radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 100%)',
           }}
-        />
-
-        {/* Bottom rule */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '180px',
-            height: '1px',
-            background: 'var(--border)',
-          }}
-          className="left-12 right-12 max-md:left-6 max-md:right-6 [@media(max-height:850px)]:hidden"
         />
       </div>
 
@@ -229,7 +218,7 @@ export default function Hero() {
               fontFamily: 'var(--font-display, "Bebas Neue"), cursive',
               fontSize: 'clamp(80px, 22vw, 360px)',
               color: 'transparent',
-              WebkitTextStroke: '1px rgba(255,255,255,0.04)',
+              WebkitTextStroke: '1px var(--ghost)',
               whiteSpace: 'nowrap',
               letterSpacing: '0.06em',
               display: 'block',
@@ -253,8 +242,8 @@ export default function Hero() {
             gap: '10px',
             marginBottom: 'min(28px, 4vh)',
             padding: '8px 16px',
-            border: '1px solid rgba(232,255,71,0.18)',
-            background: 'rgba(232,255,71,0.04)',
+            border: '1px solid var(--accent-soft-line)',
+            background: 'var(--accent-soft)',
             backdropFilter: 'blur(4px)',
             width: 'fit-content',
           }}
@@ -357,7 +346,7 @@ export default function Hero() {
               alignItems: 'center',
               gap: '12px',
               padding: 'clamp(14px, 2vw, 20px) clamp(24px, 3.5vw, 40px)',
-              background: 'var(--accent)',
+              background: 'var(--accent-fill)',
               color: '#000',
               fontFamily: 'var(--font-mono, "DM Mono"), monospace',
               fontSize: '13px',

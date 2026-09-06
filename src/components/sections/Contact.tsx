@@ -33,7 +33,8 @@ function ContactButton({ label, href, isEmail }: ContactButtonProps) {
         justifyContent: 'center',
         gap: '8px',
         padding: 'clamp(12px, 2vw, 18px) clamp(20px, 3vw, 36px)',
-        border: '1px solid var(--border)',
+        border: '1px solid var(--chip-line)',
+        background: 'var(--chip-bg)',
         fontFamily: 'var(--font-mono, "DM Mono"), monospace',
         fontSize: '13px',
         letterSpacing: '0.1em',
@@ -54,7 +55,7 @@ function ContactButton({ label, href, isEmail }: ContactButtonProps) {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'var(--accent)',
+          background: 'var(--accent-fill)',
           zIndex: 0,
         }}
       />
@@ -125,20 +126,20 @@ export default function Contact() {
             width: 'clamp(300px, 50vw, 700px)',
             height: 'clamp(300px, 50vw, 700px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(232,255,71,0.05) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(var(--orb-a-rgb),0.05) 0%, transparent 70%)',
             filter: 'blur(60px)',
             x: orb1X,
             y: orb1Y,
           }}
         />
-        <motion.div style={{ position: 'absolute', bottom: '-10%', left: '-8%', width: 'clamp(250px,35vw,550px)', height: 'clamp(250px,35vw,550px)', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,71,71,0.05) 0%, transparent 70%)', filter: 'blur(60px)', x: orb2X, y: orb2Y }} />
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)', backgroundSize: '48px 48px', maskImage: 'radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 100%)', WebkitMaskImage: 'radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 100%)' }} />
+        <motion.div style={{ position: 'absolute', bottom: '-10%', left: '-8%', width: 'clamp(250px,35vw,550px)', height: 'clamp(250px,35vw,550px)', borderRadius: '50%', background: 'radial-gradient(circle, rgba(var(--orb-b-rgb),0.05) 0%, transparent 70%)', filter: 'blur(60px)', x: orb2X, y: orb2Y }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, var(--dot) 1px, transparent 1px)', backgroundSize: '48px 48px', maskImage: 'radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 100%)', WebkitMaskImage: 'radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 100%)' }} />
       </div>
 
       {/* ── Ghost text ───────────────────────────────────────────────────── */}
       <div aria-hidden="true" style={{ position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 0, pointerEvents: 'none', userSelect: 'none' }}>
         <motion.div style={{ x: ghostX, y: ghostY }}>
-          <span style={{ fontFamily: 'var(--font-display,"Bebas Neue"),cursive', fontSize: 'clamp(80px,14vw,220px)', color: 'transparent', WebkitTextStroke: '1px rgba(255,255,255,0.04)', whiteSpace: 'nowrap', letterSpacing: '0.06em', display: 'block' }}>
+          <span style={{ fontFamily: 'var(--font-display,"Bebas Neue"),cursive', fontSize: 'clamp(80px,14vw,220px)', color: 'transparent', WebkitTextStroke: '1px var(--ghost)', whiteSpace: 'nowrap', letterSpacing: '0.06em', display: 'block' }}>
             CONTACT
           </span>
         </motion.div>
@@ -182,7 +183,7 @@ export default function Contact() {
                       lineHeight: 0.92,
                       letterSpacing: '-0.02em',
                       color: line.filled ? 'var(--text)' : 'transparent',
-                      WebkitTextStroke: line.filled ? undefined : '2px rgba(240,240,240,0.9)',
+                      WebkitTextStroke: line.filled ? undefined : '2px var(--stroke-strong)',
                     }}
                   >
                     {line.text}
@@ -238,7 +239,7 @@ export default function Contact() {
               position: 'absolute',
               inset: 0,
               background:
-                'radial-gradient(ellipse 60% 55% at 54% 52%, rgba(232,255,71,0.07) 0%, transparent 68%)',
+                'radial-gradient(ellipse 60% 55% at 54% 52%, rgba(var(--orb-a-rgb),0.07) 0%, transparent 68%)',
               pointerEvents: 'none',
             }}
           />

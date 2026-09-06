@@ -90,7 +90,7 @@ function JobItem({ job, index }: { job: Job; index: number }) {
           style={{
             fontFamily: 'var(--font-mono, "DM Mono"), monospace',
             fontSize: '11px',
-            backgroundColor: 'var(--accent)',
+            backgroundColor: 'var(--accent-fill)',
             color: '#000',
             letterSpacing: '0.06em',
             marginBottom: '16px',
@@ -104,7 +104,7 @@ function JobItem({ job, index }: { job: Job; index: number }) {
         <p
           style={{
             fontSize: '14px',
-            opacity: 0.5,
+            opacity: 'var(--dim)',
             lineHeight: 1.75,
             marginBottom: '20px',
             maxWidth: '560px',
@@ -120,7 +120,8 @@ function JobItem({ job, index }: { job: Job; index: number }) {
                 fontFamily: 'var(--font-mono, "DM Mono"), monospace',
                 fontSize: '11px',
                 padding: '4px 12px',
-                border: '1px solid var(--border)',
+                border: '1px solid var(--chip-line)',
+                background: 'var(--chip-bg)',
                 color: 'var(--muted)',
                 letterSpacing: '0.05em',
               }}
@@ -187,9 +188,9 @@ export default function Experience() {
     >
       {/* ── Atmosphere layer ─────────────────────────────────────────────── */}
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'hidden', zIndex: 0 }}>
-        <motion.div style={{ position: 'absolute', bottom: '-10%', right: '-8%', width: 'clamp(400px,55vw,800px)', height: 'clamp(400px,55vw,800px)', borderRadius: '50%', background: 'radial-gradient(circle, rgba(232,255,71,0.08) 0%, rgba(232,255,71,0.025) 40%, transparent 70%)', filter: 'blur(40px)', x: orb1X, y: orb1Y }} />
-        <motion.div style={{ position: 'absolute', top: '-15%', left: '-10%', width: 'clamp(250px,35vw,550px)', height: 'clamp(250px,35vw,550px)', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,71,71,0.05) 0%, transparent 70%)', filter: 'blur(60px)', x: orb2X, y: orb2Y }} />
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)', backgroundSize: '48px 48px', maskImage: 'radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 100%)', WebkitMaskImage: 'radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 100%)' }} />
+        <motion.div style={{ position: 'absolute', bottom: '-10%', right: '-8%', width: 'clamp(400px,55vw,800px)', height: 'clamp(400px,55vw,800px)', borderRadius: '50%', background: 'radial-gradient(circle, rgba(var(--orb-a-rgb),0.08) 0%, rgba(var(--orb-a-rgb),0.025) 40%, transparent 70%)', filter: 'blur(40px)', x: orb1X, y: orb1Y }} />
+        <motion.div style={{ position: 'absolute', top: '-15%', left: '-10%', width: 'clamp(250px,35vw,550px)', height: 'clamp(250px,35vw,550px)', borderRadius: '50%', background: 'radial-gradient(circle, rgba(var(--orb-b-rgb),0.05) 0%, transparent 70%)', filter: 'blur(60px)', x: orb2X, y: orb2Y }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, var(--dot) 1px, transparent 1px)', backgroundSize: '48px 48px', maskImage: 'radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 100%)', WebkitMaskImage: 'radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 100%)' }} />
       </div>
 
       {/* ── Ghost text with scroll drift ─────────────────────────────────── */}
@@ -206,7 +207,7 @@ export default function Experience() {
         }}
       >
         <motion.div style={{ x: ghostX, y: ghostY }}>
-          <span style={{ fontFamily: 'var(--font-display,"Bebas Neue"),cursive', fontSize: 'clamp(120px,20vw,320px)', color: 'transparent', WebkitTextStroke: '1px rgba(255,255,255,0.04)', whiteSpace: 'nowrap', letterSpacing: '0.06em', display: 'block' }}>
+          <span style={{ fontFamily: 'var(--font-display,"Bebas Neue"),cursive', fontSize: 'clamp(120px,20vw,320px)', color: 'transparent', WebkitTextStroke: '1px var(--ghost)', whiteSpace: 'nowrap', letterSpacing: '0.06em', display: 'block' }}>
             002
           </span>
         </motion.div>

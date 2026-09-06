@@ -90,7 +90,7 @@ export default function ParallaxText() {
 
   const getStyle = (style: 'outlined' | 'colored' | 'filled'): React.CSSProperties => {
     if (style === 'outlined')
-      return { color: 'transparent', WebkitTextStroke: '2px rgba(255,255,255,0.55)' };
+      return { color: 'transparent', WebkitTextStroke: '2px var(--stroke)' };
     if (style === 'colored')
       return {
         color: 'var(--accent)',
@@ -132,7 +132,7 @@ export default function ParallaxText() {
             height: '100%',
             objectFit: 'cover',
             objectPosition: 'center center',
-            opacity: videoReady ? 0.65 : 0,
+            opacity: videoReady ? 'var(--band-video)' : 0,
             mixBlendMode: 'screen' as const,
             transition: 'opacity 1.4s ease',
             willChange: 'opacity',
@@ -156,13 +156,16 @@ export default function ParallaxText() {
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'rgba(5,5,5,0.15)',
+            background: 'rgba(var(--scrim-rgb),0.15)',
           }}
         />
 
+        {/* Light-theme stand-in for the video — CSS only, hidden on dark */}
+        <div aria-hidden="true" className="band-aurora" />
+
         {/* Atmospheric orbs — mouse-driven */}
-        <motion.div style={{ position: 'absolute', top: '20%', right: '15%', width: 'clamp(300px,40vw,600px)', height: 'clamp(300px,40vw,600px)', borderRadius: '50%', background: 'radial-gradient(circle, rgba(232,255,71,0.06) 0%, transparent 70%)', filter: 'blur(50px)', x: orbAX, y: orbAY }} />
-        <motion.div style={{ position: 'absolute', bottom: '20%', left: '10%', width: 'clamp(200px,30vw,450px)', height: 'clamp(200px,30vw,450px)', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,71,71,0.04) 0%, transparent 70%)', filter: 'blur(60px)', x: orbBX, y: orbBY }} />
+        <motion.div style={{ position: 'absolute', top: '20%', right: '15%', width: 'clamp(300px,40vw,600px)', height: 'clamp(300px,40vw,600px)', borderRadius: '50%', background: 'radial-gradient(circle, rgba(var(--orb-a-rgb),0.06) 0%, transparent 70%)', filter: 'blur(50px)', x: orbAX, y: orbAY }} />
+        <motion.div style={{ position: 'absolute', bottom: '20%', left: '10%', width: 'clamp(200px,30vw,450px)', height: 'clamp(200px,30vw,450px)', borderRadius: '50%', background: 'radial-gradient(circle, rgba(var(--orb-b-rgb),0.04) 0%, transparent 70%)', filter: 'blur(60px)', x: orbBX, y: orbBY }} />
       </div>
 
       {/* ── Parallax text lines ───────────────────────────────────────────── */}

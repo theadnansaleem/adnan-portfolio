@@ -19,17 +19,81 @@
 }
 
 /* ─── Design Tokens ─────────────────────────────────────────────────────── */
+/* --accent is the readable accent (text, lines, dots). --accent-fill is the  */
+/* bright lime reserved for filled surfaces that carry black text, so it must */
+/* stay light in both themes.                                                 */
 :root {
-  --bg:         #050505;
-  --bg2:        #0a0a0a;
-  --accent:     #e8ff47;
-  --accent2:    #ff4747;
-  --text:       #f0f0f0;
-  --muted:      #555555;
-  --border:     rgba(255, 255, 255, 0.06);
-  --glass:      rgba(255, 255, 255, 0.03);
+  --bg:            #050505;
+  --bg2:           #0a0a0a;
+  --accent:        #e8ff47;
+  --accent-fill:   #e8ff47;
+  --accent2:       #ff4747;
+  --text:          #f0f0f0;
+  --muted:         #555555;
+  --border:        rgba(255, 255, 255, 0.06);
+  --glass:         rgba(255, 255, 255, 0.03);
+  --dot:           rgba(255, 255, 255, 0.07);
+  --ghost:         rgba(255, 255, 255, 0.04);
+  --stroke:        rgba(255, 255, 255, 0.55);
+  --stroke-strong: rgba(240, 240, 240, 0.9);
+  --hero-video:    0.38;
+  --band-video:    0.65;
+  --nav-blend:     difference;
+  --accent-soft:      rgba(232, 255, 71, 0.04);
+  --accent-soft-line: rgba(232, 255, 71, 0.18);
+  /* Opacity for de-emphasised copy. Low values read fine as light-on-black but
+     turn to mush on paper, so the light theme pushes them much closer to 1. */
+  --dim:           0.55;
+  /* Tag chips and outline buttons need a firmer edge than the hairline used
+     for cards and dividers — a 6%-alpha line reads on black but not on paper. */
+  --chip-line:     rgba(255, 255, 255, 0.06);
+  --chip-bg:       transparent;
+  --hover-line:    rgba(232, 255, 71, 0.25);
+  /* Scrim colour behind the hero video, as bare RGB channels so the overlays
+     can vary alpha. Must match --bg or the gradients tint the page. */
+  --scrim-rgb:     5, 5, 5;
+  /* Orb hues as bare channels so each section keeps its own alpha. Bright lime
+     glows on black; on paper it needs a dark hue to register as a tint at all. */
+  --orb-a-rgb:     232, 255, 71;
+  --orb-b-rgb:     255, 71, 71;
+  /* Frosted surface for the floating music controls. Paired with the existing
+     backdrop-filter, the light value reads as glass over paper. */
+  --panel:         rgba(10, 10, 10, 0.85);
+  --panel-shadow:  0 4px 24px rgba(0, 0, 0, 0.4);
+}
 
-
+/* ─── Light theme ───────────────────────────────────────────────────────── */
+/* Warm paper rather than pure white — keeps the film-grain overlay readable  */
+/* and stops the accent from glaring. Applied via data-theme on <html>.       */
+[data-theme="light"] {
+  --bg:            #f4f3ee;
+  --bg2:           #eae8e0;
+  --accent:        #5c6900;
+  --accent2:       #c62f2f;
+  --text:          #12120f;
+  --muted:         #565550;
+  --border:        rgba(0, 0, 0, 0.16);
+  --glass:         rgba(255, 255, 255, 0.5);
+  --dot:           rgba(0, 0, 0, 0.08);
+  --ghost:         rgba(0, 0, 0, 0.05);
+  --stroke:        rgba(0, 0, 0, 0.45);
+  --stroke-strong: rgba(18, 18, 15, 0.9);
+  /* The background footage is dark cinematic grade — at any opacity it greys
+     out the paper. The light theme drops it and leans on the orbs + dot grid. */
+  --hero-video:    0;
+  --band-video:    0;
+  --nav-blend:     normal;
+  --accent-soft:      rgba(92, 105, 0, 0.10);
+  --accent-soft-line: rgba(92, 105, 0, 0.75);
+  --dim:           0.85;
+  --chip-line:     rgba(0, 0, 0, 0.45);
+  --chip-bg:       rgba(0, 0, 0, 0.035);
+  --hover-line:    rgba(92, 105, 0, 0.55);
+  --scrim-rgb:     244, 243, 238;
+  --orb-a-rgb:     92, 105, 0;
+  --orb-b-rgb:     198, 47, 47;
+  --panel:         rgba(255, 255, 255, 0.55);
+  --panel-shadow:  0 4px 20px rgba(0, 0, 0, 0.10);
 }
 
 /* ─── Reset & Base ───────────────────────────────────────────────────────── */
@@ -38,6 +102,7 @@ html { scroll-behavior: smooth; position: relative; }
 body {
   background: var(--bg);
   color: var(--text);
+  transition: background 0.4s ease, color 0.4s ease;
   font-family: var(--font-body);
   overflow-x: hidden;
   cursor: none;
@@ -90,6 +155,42 @@ body {
   100% { text-shadow: none; color: var(--muted); }
 }
 
+/* ─── Theme toggle icon ──────────────────────────────────────────────────── */
+/* Both icons are in the DOM; the theme decides which one shows, so the button
+   needs no React state and cannot mismatch during hydration. */
+.theme-moon { display: none; }
+[data-theme="light"] .theme-sun  { display: none; }
+[data-theme="light"] .theme-moon { display: inline-flex; }
+
+/* ─── Band aurora (light theme only) ─────────────────────────────────────── */
+/* The dark section gets its motion from video footage, which reads as a washed
+   out grey smear on paper whatever the blend mode. Light swaps it for a slow
+   drifting colour field built from the same orb hues. */
+.band-aurora { display: none; }
+[data-theme="light"] .band-aurora {
+  display: block;
+  position: absolute;
+  inset: -15%;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 42% 52% at 68% 32%, rgba(var(--orb-a-rgb), 0.22) 0%, transparent 62%),
+    radial-gradient(ellipse 38% 46% at 84% 68%, rgba(var(--orb-b-rgb), 0.13) 0%, transparent 64%),
+    radial-gradient(ellipse 46% 42% at 58% 82%, rgba(var(--orb-a-rgb), 0.14) 0%, transparent 66%);
+  filter: blur(40px);
+  animation: auroraDrift 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes auroraDrift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(-4%, 3%, 0) scale(1.1); }
+  100% { transform: translate3d(3%, -3%, 0) scale(1.04); }
+}
+
+/* ─── Navbar blend ───────────────────────────────────────────────────────── */
+/* Difference blend keeps nav text legible over the dark hero video. On the   */
+/* light theme it inverts the ink to near-white, so the theme turns it off.   */
+.nav-blend { mix-blend-mode: var(--nav-blend); }
+
 /* ─── Custom Cursor ──────────────────────────────────────────────────────── */
 .cursor-dot {
   position: fixed;
@@ -126,6 +227,17 @@ body {
 }
 .cursor-ring.hovered {
   opacity: 0;
+}
+
+/* No blend mode on paper: difference inverts to a garish cyan and multiply
+   still paints a solid disc over whatever is under it. The hover state becomes
+   an outline instead, so it can never occlude the thing it is pointing at. */
+[data-theme="light"] .cursor-dot,
+[data-theme="light"] .cursor-ring { mix-blend-mode: normal; }
+[data-theme="light"] .cursor-ring { border-color: var(--accent); }
+[data-theme="light"] .cursor-dot.hovered {
+  background: transparent;
+  border: 2px solid var(--accent2);
 }
 
 @media (pointer: coarse) {
@@ -185,7 +297,7 @@ body {
 
 /* ─── Selection color ────────────────────────────────────────────────────── */
 ::selection {
-  background: var(--accent);
+  background: var(--accent-fill);
   color: #000;
 }
 
@@ -197,7 +309,7 @@ body {
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--muted);
 }
 
 /* ─── Hero — Nest Hub (1024×600) font fix ───────────────────────────────── */

@@ -81,7 +81,7 @@ export default function MusicPlayer() {
               exit={{ opacity: 0, y: 8, scale: 0.96 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
               style={{
-                background: "rgba(10,10,10,0.85)",
+                background: "var(--panel)",
                 border: "1px solid var(--border)",
                 backdropFilter: "blur(16px)",
                 WebkitBackdropFilter: "blur(16px)",
@@ -89,8 +89,8 @@ export default function MusicPlayer() {
                 padding: "12px 16px",
                 minWidth: 'min(200px, calc(100vw - 56px))',
                 boxShadow: playing
-                  ? "0 0 18px rgba(232,255,71,0.08)"
-                  : "0 4px 24px rgba(0,0,0,0.4)",
+                  ? "0 0 18px rgba(var(--orb-a-rgb),0.14)"
+                  : "var(--panel-shadow)",
               }}
             >
               {/* Track name + eq bars */}
@@ -180,7 +180,7 @@ export default function MusicPlayer() {
               height: 36,
               borderRadius: 10,
               border: "1px solid var(--border)",
-              background: "rgba(10,10,10,0.8)",
+              background: "var(--panel)",
               backdropFilter: "blur(12px)",
               WebkitBackdropFilter: "blur(12px)",
               color: expanded ? "var(--accent)" : "var(--muted)",
@@ -204,12 +204,12 @@ export default function MusicPlayer() {
               width: 36,
               height: 36,
               borderRadius: 10,
-              border: `1px solid ${playing ? "rgba(232,255,71,0.35)" : pending ? "rgba(255,71,71,0.35)" : "var(--border)"}`,
+              border: `1px solid ${playing ? "var(--accent-soft-line)" : pending ? "rgba(var(--orb-b-rgb),0.45)" : "var(--border)"}`,
               background: playing
-                ? "rgba(232,255,71,0.06)"
+                ? "var(--accent-soft)"
                 : pending
-                ? "rgba(255,71,71,0.06)"
-                : "rgba(10,10,10,0.8)",
+                ? "rgba(var(--orb-b-rgb),0.10)"
+                : "var(--panel)",
               backdropFilter: "blur(12px)",
               WebkitBackdropFilter: "blur(12px)",
               color: playing ? "var(--accent)" : pending ? "var(--accent2)" : "var(--muted)",
@@ -220,9 +220,9 @@ export default function MusicPlayer() {
               justifyContent: "center",
               transition: "all 0.2s",
               boxShadow: playing
-                ? "0 0 12px rgba(232,255,71,0.12)"
+                ? "0 0 12px rgba(var(--orb-a-rgb),0.18)"
                 : pending
-                ? "0 0 10px rgba(255,71,71,0.1)"
+                ? "0 0 10px rgba(var(--orb-b-rgb),0.15)"
                 : "none",
             }}
           >

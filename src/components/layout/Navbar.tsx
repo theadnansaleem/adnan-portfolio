@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ThemeToggle from '@/components/ui/ThemeToggle';
 
 const navLinks = [
   { label: 'About',    href: '#about' },
@@ -56,9 +57,8 @@ export default function Navbar() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          mixBlendMode: 'difference',
         }}
-        className="px-12 py-6 max-md:px-6 max-md:py-4"
+        className="nav-blend px-12 py-6 max-md:px-6 max-md:py-4"
       >
         {/* Logo */}
         <a
@@ -91,7 +91,7 @@ export default function Navbar() {
                   textTransform: 'uppercase' as const,
                   letterSpacing: '0.15em',
                   color: isActive ? 'var(--accent)' : (hoveredLink === id ? '#ffffff' : 'var(--text)'),
-                  opacity: isActive ? 1 : (hoveredLink === id ? 1 : 0.55),
+                  opacity: isActive ? 1 : (hoveredLink === id ? 1 : 'var(--dim)'),
                   textDecoration: 'none',
                   transition: 'opacity 0.25s, color 0.25s',
                   position: 'relative' as const,
@@ -111,40 +111,44 @@ export default function Navbar() {
               </motion.a>
             );
           })}
+          <ThemeToggle />
         </div>
 
-        {/* Mobile Hamburger */}
-        <button
-          className="hidden max-md:flex"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-          style={{
-            cursor: 'pointer',
-            background: 'none',
-            border: 'none',
-            padding: '10px',
-            flexDirection: 'column' as const,
-            gap: '6px',
-          }}
-        >
-          {[0, 1, 2].map((i) => (
-            <span
-              key={i}
-              style={{
-                width: 24,
-                height: 1,
-                background: 'var(--text)',
-                display: 'block',
-                transition: 'transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.35s',
-                transform:
-                  menuOpen && i === 0 ? 'rotate(45deg) translate(5px, 5px)' :
-                  menuOpen && i === 2 ? 'rotate(-45deg) translate(5px, -5px)' :
-                  'none',
-                opacity: menuOpen && i === 1 ? 0 : 1,
-              }}
-            />
-          ))}
-        </button>
+        {/* Mobile — theme toggle + hamburger */}
+        <div className="hidden max-md:flex" style={{ alignItems: 'center', gap: '8px' }}>
+          <ThemeToggle />
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+            style={{
+              cursor: 'pointer',
+              background: 'none',
+              border: 'none',
+              padding: '10px',
+              display: 'flex',
+              flexDirection: 'column' as const,
+              gap: '6px',
+            }}
+          >
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                style={{
+                  width: 24,
+                  height: 1,
+                  background: 'var(--text)',
+                  display: 'block',
+                  transition: 'transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.35s',
+                  transform:
+                    menuOpen && i === 0 ? 'rotate(45deg) translate(5px, 5px)' :
+                    menuOpen && i === 2 ? 'rotate(-45deg) translate(5px, -5px)' :
+                    'none',
+                  opacity: menuOpen && i === 1 ? 0 : 1,
+                }}
+              />
+            ))}
+          </button>
+        </div>
       </nav>
 
       {/* FIX: Wrap mobile overlay in AnimatePresence for proper exit animation */}

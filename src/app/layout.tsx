@@ -449,8 +449,20 @@ const workExperienceSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${bebasNeue.variable} ${bricolage.variable} ${dmMono.variable}`}>
+    <html
+      lang="en"
+      className={`${bebasNeue.variable} ${bricolage.variable} ${dmMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
+        {/* Theme — runs before paint so a saved light preference never flashes
+            dark. Defaults to dark; the system preference is not auto-applied
+            because the dark treatment is the intended default presentation. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}})()`,
+          }}
+        />
         {/* Preconnect to critical origins */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
