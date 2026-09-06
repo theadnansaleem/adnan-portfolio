@@ -14,7 +14,7 @@ export default function Footer() {
         second: '2-digit',
         hour12: false,
       });
-      setTime(`Sahiwal · ${t}`);
+      setTime(`Lahore · ${t}`);
     };
     update();
     const id = setInterval(update, 1000);
@@ -58,7 +58,7 @@ export default function Footer() {
       />
 
       <span style={monoStyle}>© {year} Muhammad Adnan. All rights reserved.</span>
-      <span style={monoStyle}>Senior Software Engineer · Sahiwal, Pakistan</span>
+      <span style={monoStyle}>Senior Full-Stack Engineer · Lahore, Pakistan</span>
       {/* key={time} remounts span on each tick → restarts clockGlow animation */}
       <span
         key={time}

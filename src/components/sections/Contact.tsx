@@ -271,7 +271,7 @@ export default function Contact() {
             textTransform: 'uppercase' as const,
           }}
         >
-          Based in Sahiwal, Pakistan · Open to remote &amp; relocation
+          Based in Lahore, Pakistan · Available immediately · Open to remote &amp; relocation
         </motion.p>
       </div>
     </section>

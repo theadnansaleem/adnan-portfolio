@@ -3,11 +3,69 @@
 import { useRef } from 'react';
 import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import SectionLabel from '@/components/ui/SectionLabel';
-import { skills, skillBars } from '@/lib/data';
+import { skills, skillBars, education, certifications } from '@/lib/data';
+import type { Credential } from '@/types';
+
+function CredentialList({ heading, items, inView }: { heading: string; items: Credential[]; inView: boolean }) {
+  return (
+    <div>
+      <div
+        style={{
+          fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+          fontSize: '11px',
+          color: 'var(--muted)',
+          letterSpacing: '0.25em',
+          textTransform: 'uppercase' as const,
+          marginBottom: '28px',
+        }}
+      >
+        {heading}
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        {items.map((item, i) => (
+          <motion.div
+            key={item.title}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            style={{ borderLeft: '1px solid var(--border)', paddingLeft: '20px' }}
+          >
+            <div style={{ fontSize: 'clamp(15px, 2.5vw, 17px)', lineHeight: 1.4, marginBottom: '6px' }}>
+              {item.title}
+            </div>
+            <div
+              style={{
+                fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+                fontSize: '12px',
+                color: 'var(--accent)',
+                letterSpacing: '0.05em',
+                marginBottom: '4px',
+              }}
+            >
+              {item.issuer}
+            </div>
+            <div
+              style={{
+                fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+                fontSize: '11px',
+                color: 'var(--muted)',
+                letterSpacing: '0.05em',
+              }}
+            >
+              {item.meta}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Skills() {
   const barsRef = useRef<HTMLDivElement>(null);
   const barsInView = useInView(barsRef, { once: true, margin: '-80px' });
+  const credsRef = useRef<HTMLDivElement>(null);
+  const credsInView = useInView(credsRef, { once: true, margin: '-80px' });
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-80px' });
 
@@ -260,6 +318,23 @@ export default function Skills() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Education & Certifications */}
+        <div ref={credsRef} style={{ marginTop: 'clamp(40px, 8vw, 80px)' }}>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={credsInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            style={{ height: '1px', background: 'linear-gradient(90deg, var(--accent), transparent)', transformOrigin: 'left', marginBottom: '40px' }}
+          />
+          <div
+            style={{ display: 'grid', gap: '48px' }}
+            className="grid-cols-2 max-md:grid-cols-1"
+          >
+            <CredentialList heading="Education" items={education} inView={credsInView} />
+            <CredentialList heading="Certifications" items={certifications} inView={credsInView} />
           </div>
         </div>
       </motion.div>

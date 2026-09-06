@@ -33,3 +33,9 @@ export interface Stat {
     number: string;
     label: string;
 }
+
+export interface Credential {
+    title: string;
+    issuer: string;
+    meta: string;
+}

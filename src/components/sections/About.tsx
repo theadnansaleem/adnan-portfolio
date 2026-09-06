@@ -171,21 +171,21 @@ export default function About() {
             {[
               <>
                 I&apos;m a{' '}
-                <strong style={{ color: 'var(--text)', fontWeight: 600 }}>Senior Software Engineer</strong>{' '}
-                based in Sahiwal with 7+ years of experience building production-ready software
-                that is fast, accessible, and visually refined.
+                <strong style={{ color: 'var(--text)', fontWeight: 600 }}>Senior Full-Stack Engineer</strong>{' '}
+                based in Lahore with 8 years of experience building production platforms across
+                government, fintech, cybersecurity, and AI.
               </>,
               <>
-                My work lives at the intersection of{' '}
-                <strong style={{ color: 'var(--text)', fontWeight: 600 }}>engineering and AI</strong>{' '}
-                — I don&apos;t just build UIs, I architect complete workflows that bridge design tools,
-                code, and intelligent systems.
+                I work{' '}
+                <strong style={{ color: 'var(--text)', fontWeight: 600 }}>end to end</strong>{' '}
+                — React, Next.js, and TypeScript on the front, Node.js and C#/.NET Core behind it.
+                Most recently on Qatar&apos;s national event platforms at the Supreme Committee.
               </>,
               <>
-                Currently focused on the{' '}
-                <strong style={{ color: 'var(--text)', fontWeight: 600 }}>next iteration</strong> of
-                human-computer interaction: AI-native development environments, multi-agent pipelines,
-                and design-to-code automation.
+                Five of those eight years were{' '}
+                <strong style={{ color: 'var(--text)', fontWeight: 600 }}>fully remote</strong> with
+                US, UK, and German teams. Currently focused on AI-native tooling: agentic workflows,
+                multi-agent pipelines, and design-to-code automation.
               </>,
             ].map((para, i) => (
               <motion.p

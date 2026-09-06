@@ -35,7 +35,7 @@ const dmMono = DM_Mono({
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://theadnansaleem.com';
 const FULL_NAME = 'Muhammad Adnan Saleem';
 const SHORT_NAME = 'Adnan Saleem';
-const TITLE_SUFFIX = 'Senior Software Engineer & Frontend Developer';
+const TITLE_SUFFIX = 'Senior Full-Stack Software Engineer';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
     template: `%s | ${FULL_NAME}`,
   },
   description:
-    `${FULL_NAME} (Adnan Saleem) is a Senior Software Engineer and Frontend Developer with 7+ years of experience. ` +
-    `Expert in React, Next.js, TypeScript, Micro Frontend architecture, and AI-powered workflows. ` +
-    `Based in Sahiwal, Pakistan. Available for remote opportunities worldwide.`,
+    `${FULL_NAME} (Adnan Saleem) is a Senior Full-Stack Software Engineer with 8 years of experience. ` +
+    `React, Next.js, TypeScript, Node.js, and C#/.NET Core, with deep Micro Frontend and AI workflow expertise. ` +
+    `Based in Lahore, Pakistan. Available immediately for remote roles and relocation.`,
 
   /* ── Extended keyword set (all name variants + role terms) ──────────── */
   keywords: [
@@ -78,6 +78,9 @@ export const metadata: Metadata = {
     'JavaScript Developer',
     'Web Developer',
     'Full Stack Developer',
+    'Fullstack Engineer',
+    '.NET Developer',
+    'Node.js Developer',
     // Skills & specialities
     'React',
     'Next.js',
@@ -88,11 +91,15 @@ export const metadata: Metadata = {
     'Module Federation',
     'Redux Toolkit',
     'Node.js',
+    'C#',
+    '.NET Core',
+    'Blazor',
     'RLHF',
     'Agentic AI',
     // Location
-    'Sahiwal',
+    'Lahore',
     'Pakistan',
+    'Qatar',
     'Remote Developer Pakistan',
     // Portfolio
     'Portfolio',
@@ -136,16 +143,16 @@ export const metadata: Metadata = {
     siteName: `${FULL_NAME} — Portfolio`,
     title: `${FULL_NAME} — ${TITLE_SUFFIX}`,
     description:
-      `${FULL_NAME} (Adnan Saleem) — Senior Software Engineer & Frontend Developer. ` +
-      `React · Next.js · TypeScript · AI. Based in Sahiwal, Pakistan. ` +
-      `7+ years building enterprise-scale, production-grade applications.`,
+      `${FULL_NAME} (Adnan Saleem) — Senior Full-Stack Software Engineer. ` +
+      `React · Next.js · TypeScript · Node.js · .NET. Based in Lahore, Pakistan. ` +
+      `8 years building enterprise-scale, production-grade applications.`,
     locale: 'en_US',
     images: [
       {
         url: '/LinkedinPost.png',
         width: 1200,
         height: 630,
-        alt: `${FULL_NAME} — Senior Software Engineer & Frontend Developer`,
+        alt: `${FULL_NAME} — ${TITLE_SUFFIX}`,
         type: 'image/png',
       },
     ],
@@ -162,12 +169,12 @@ export const metadata: Metadata = {
     creator: '@theadnansaleem',
     title: `${FULL_NAME} — ${TITLE_SUFFIX}`,
     description:
-      `Senior Software Engineer & Frontend Developer. React · Next.js · TypeScript · AI. ` +
-      `Based in Sahiwal, Pakistan. Available for remote opportunities.`,
+      `Senior Full-Stack Software Engineer. React · Next.js · TypeScript · Node.js · .NET. ` +
+      `Based in Lahore, Pakistan. Available immediately for remote roles and relocation.`,
     images: [
       {
         url: '/LinkedinPost.png',
-        alt: `${FULL_NAME} — Senior Software Engineer & Frontend Developer`,
+        alt: `${FULL_NAME} — ${TITLE_SUFFIX}`,
       },
     ],
   },
@@ -176,8 +183,9 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
     ],
-    apple: '/favicon.ico',
+    apple: { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
     shortcut: '/favicon.ico',
   },
 
@@ -204,9 +212,9 @@ const personSchema = {
   alternateName: ['Adnan Saleem', 'Muhammad Adnan', 'Adnan', 'theadnan', 'theadnansaleem'],
   givenName: 'Muhammad Adnan',
   familyName: 'Saleem',
-  jobTitle: ['Senior Software Engineer', 'Senior Frontend Developer', 'Frontend Engineer'],
+  jobTitle: ['Senior Full-Stack Software Engineer', 'Senior Software Engineer', 'Senior Fullstack Developer'],
   description:
-    'Senior Software Engineer and Frontend Developer with 7+ years of experience building production-grade web applications. Expert in React, Next.js, TypeScript, Micro Frontend architecture, and AI-powered workflows.',
+    'Senior Full-Stack Software Engineer with 8 years of experience building production platforms across government, fintech, cybersecurity, and AI. React, Next.js, TypeScript, Node.js, and C#/.NET Core, with deep Micro Frontend and AI workflow expertise.',
   url: SITE_URL,
   image: `${SITE_URL}/LinkedinPost.png`,
   sameAs: [
@@ -217,7 +225,7 @@ const personSchema = {
   email: 'contact@theadnansaleem.com',
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Sahiwal',
+    addressLocality: 'Lahore',
     addressRegion: 'Punjab',
     addressCountry: 'PK',
   },
@@ -231,6 +239,8 @@ const personSchema = {
     'Micro Frontend Architecture', 'Module Federation',
     'AI Automation', 'LLM Fine-tuning', 'RLHF', 'Agentic AI',
     'Node.js', 'Redux Toolkit', 'TanStack Query',
+    'C#', '.NET Core', 'Blazor Server', 'Entity Framework Core',
+    'Domain-Driven Design', 'CQRS', 'REST API Design',
     'Web Performance Optimization', 'Core Web Vitals',
   ],
   knowsLanguage: [
@@ -239,17 +249,17 @@ const personSchema = {
   ],
   worksFor: {
     '@type': 'Organization',
-    name: 'Dallah Holding Media (Supreme Committee for Delivery & Legacy)',
+    name: 'Supreme Committee for Delivery & Legacy',
     url: 'https://sc.qa',
   },
   hasOccupation: {
     '@type': 'Occupation',
-    name: 'Senior Software Engineer',
+    name: 'Senior Full-Stack Software Engineer',
     occupationLocation: {
       '@type': 'City',
-      name: 'Sahiwal',
+      name: 'Lahore',
     },
-    skills: 'React, Next.js, TypeScript, Micro Frontend, AI, Node.js',
+    skills: 'React, Next.js, TypeScript, Micro Frontend, AI, Node.js, C#, .NET Core, Blazor',
     estimatedSalary: {
       '@type': 'MonetaryAmountDistribution',
       currency: 'USD',
@@ -259,15 +269,46 @@ const personSchema = {
       percentile90: 130000,
     },
   },
-  alumniOf: {
-    '@type': 'CollegeOrUniversity',
-    name: 'University of Education',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Lahore',
-      addressCountry: 'PK',
+  alumniOf: [
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'Iqra University',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Karachi',
+        addressCountry: 'PK',
+      },
     },
-  },
+    {
+      '@type': 'EducationalOrganization',
+      name: 'Qualifi Ltd.',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'London',
+        addressCountry: 'GB',
+      },
+    },
+  ],
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'Certified Cybersecurity Educator Professional (CCEP)',
+      credentialCategory: 'certificate',
+      dateCreated: '2025-12',
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'HP LIFE: Data Science & Analytics',
+      credentialCategory: 'certificate',
+      dateCreated: '2025-11',
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'Scrimba Frontend Career Path',
+      credentialCategory: 'certificate',
+      dateCreated: '2018-03',
+    },
+  ],
 };
 
 const websiteSchema = {
@@ -277,7 +318,7 @@ const websiteSchema = {
   url: SITE_URL,
   name: `${FULL_NAME} — Portfolio`,
   description:
-    'Official portfolio of Muhammad Adnan Saleem, Senior Software Engineer & Frontend Developer based in Sahiwal, Pakistan.',
+    'Official portfolio of Muhammad Adnan Saleem, Senior Full-Stack Software Engineer based in Lahore, Pakistan.',
   author: { '@id': `${SITE_URL}/#person` },
   inLanguage: 'en-US',
   potentialAction: {
@@ -295,9 +336,9 @@ const webpageSchema = {
   '@type': 'ProfilePage',
   '@id': `${SITE_URL}/#webpage`,
   url: SITE_URL,
-  name: `${FULL_NAME} — Senior Software Engineer & Frontend Developer`,
+  name: `${FULL_NAME} — ${TITLE_SUFFIX}`,
   description:
-    'Portfolio of Muhammad Adnan Saleem (Adnan Saleem), Senior Software Engineer and Frontend Developer with 7+ years of experience in React, Next.js, TypeScript, and AI-powered systems.',
+    'Portfolio of Muhammad Adnan Saleem (Adnan Saleem), Senior Full-Stack Software Engineer with 8 years of experience in React, Next.js, TypeScript, Node.js, .NET, and AI-powered systems.',
   isPartOf: { '@id': `${SITE_URL}/#website` },
   about: { '@id': `${SITE_URL}/#person` },
   breadcrumb: {
@@ -321,25 +362,27 @@ const workExperienceSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Work Experience — Muhammad Adnan Saleem',
-  description: 'Professional work history of Muhammad Adnan Saleem (Adnan Saleem), Senior Software Engineer.',
+  description: 'Professional work history of Muhammad Adnan Saleem (Adnan Saleem), Senior Full-Stack Software Engineer.',
   itemListElement: [
     {
       '@type': 'ListItem',
       position: 1,
       item: {
         '@type': 'WorkBasedProgram',
-        name: 'Senior Frontend Engineer',
+        name: 'Senior Fullstack Developer',
         employmentType: 'FULL_TIME',
         description:
-          'Leading frontend architecture for the Qatar Events Platform (QEP), a critical government system. ' +
-          'Refactored monolithic frontend into Micro Frontend architecture using Module Federation.',
+          'Owned features end to end across Qatar\'s government event platforms — the Qatar Events Platform, ' +
+          'Road to Qatar, and the Hayya eVisa system — and rearchitected a monolithic React frontend into ' +
+          'Micro Frontends using Module Federation.',
         occupationalCategory: 'Software Engineering',
         provider: {
           '@type': 'Organization',
-          name: 'Dallah Holding Media (Supreme Committee for Delivery & Legacy)',
+          name: 'Supreme Committee for Delivery & Legacy',
           url: 'https://sc.qa',
         },
-        startDate: '2025',
+        startDate: '2025-10',
+        endDate: '2026-08',
       },
     },
     {
@@ -347,19 +390,19 @@ const workExperienceSchema = {
       position: 2,
       item: {
         '@type': 'WorkBasedProgram',
-        name: 'Senior Frontend Developer',
+        name: 'Senior Fullstack Developer',
         employmentType: 'FULL_TIME',
         description:
-          'Delivered production features across a multi-currency payment and card management platform ' +
-          'handling operations for customers across 180+ countries.',
+          'Delivered production features across a multi-currency payments and card platform ' +
+          'serving customers in 180+ countries, meeting WCAG 2.1 and UK fintech regulatory standards.',
         occupationalCategory: 'Software Engineering',
         provider: {
           '@type': 'Organization',
-          name: 'MicrosysX (Volopa Financial Services)',
+          name: 'Volopa Financial Services',
           url: 'https://volopa.com',
         },
-        startDate: '2023',
-        endDate: '2025',
+        startDate: '2023-06',
+        endDate: '2025-10',
       },
     },
     {
@@ -367,7 +410,26 @@ const workExperienceSchema = {
       position: 3,
       item: {
         '@type': 'WorkBasedProgram',
-        name: 'Senior Fullstack Developer',
+        name: 'Freelance Full-Stack Developer',
+        employmentType: 'CONTRACTOR',
+        description:
+          'Migrated a legacy Visual FoxPro financial system to a C#/.NET Core and Blazor web application ' +
+          'as the sole engineer, rebuilding core financial workflows on Entity Framework Core and SQL Server.',
+        occupationalCategory: 'Software Engineering',
+        provider: {
+          '@type': 'Organization',
+          name: 'Benington Financials Canada',
+        },
+        startDate: '2023-02',
+        endDate: '2025-09',
+      },
+    },
+    {
+      '@type': 'ListItem',
+      position: 4,
+      item: {
+        '@type': 'WorkBasedProgram',
+        name: 'Mid-Level Fullstack Developer',
         employmentType: 'FULL_TIME',
         description:
           'Built the core UI of Codex, a cybersecurity monitoring platform enabling security teams ' +
@@ -378,8 +440,8 @@ const workExperienceSchema = {
           name: 'Primary Target GmbH',
           url: 'https://primary-target.com',
         },
-        startDate: '2021',
-        endDate: '2023',
+        startDate: '2021-12',
+        endDate: '2023-06',
       },
     },
   ],
@@ -397,7 +459,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://www.clarity.ms" />
         {/* Geo / author meta */}
         <meta name="geo.region" content="PK-PB" />
-        <meta name="geo.placename" content="Sahiwal, Punjab, Pakistan" />
+        <meta name="geo.placename" content="Lahore, Punjab, Pakistan" />
         <meta name="author" content={FULL_NAME} />
         <meta name="copyright" content={FULL_NAME} />
         <meta name="language" content="English" />

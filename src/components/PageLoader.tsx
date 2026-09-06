@@ -137,7 +137,7 @@ export default function PageLoader() {
               marginTop: '4px',
             }}
           >
-            Senior Software Engineer · OPEN TO GCC ROLES
+            Senior Full-Stack Engineer · OPEN TO RELOCATION
           </motion.p>
         </motion.div>
       )}

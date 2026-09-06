@@ -201,7 +201,7 @@ export default function Navbar() {
                 letterSpacing: '0.2em',
               }}
             >
-              SAHIWAL, PAKISTAN · AVAILABLE FOR WORK · OPEN TO GCC ROLES
+              LAHORE, PAKISTAN · AVAILABLE IMMEDIATELY · OPEN TO RELOCATION
             </div>
           </motion.div>
         )}
