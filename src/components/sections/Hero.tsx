@@ -22,10 +22,20 @@ export default function Hero() {
   const { triggerPlay } = useMusicPlayer();
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const onVideoPlayable = useEffectEvent(() => {
-    setVideoReady(true);
-    triggerPlay();
-  });
+  const onVideoPlayable = useEffectEvent(() => setVideoReady(true));
+  const startMusic = useEffectEvent(() => triggerPlay());
+
+  // Once the track plays it downloads in full (6 MB), so hold the autoplay attempt until window load
+  useEffect(() => {
+    if (!videoReady) return;
+    if (document.readyState === 'complete') {
+      startMusic();
+      return;
+    }
+    const onLoad = () => startMusic();
+    window.addEventListener('load', onLoad, { once: true });
+    return () => window.removeEventListener('load', onLoad);
+  }, [videoReady]);
 
   // The video can reach HAVE_FUTURE_DATA before hydration, in which case React never sees canplay
   useEffect(() => {

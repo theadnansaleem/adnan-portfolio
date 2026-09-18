@@ -29,7 +29,8 @@
   --accent-fill:   #e8ff47;
   --accent2:       #ff4747;
   --text:          #f0f0f0;
-  --muted:         #555555;
+  /* Secondary text. #808080 keeps WCAG AA (4.5:1) on --bg, --bg2 and glass cards */
+  --muted:         #808080;
   --border:        rgba(255, 255, 255, 0.06);
   --glass:         rgba(255, 255, 255, 0.03);
   --dot:           rgba(255, 255, 255, 0.07);
