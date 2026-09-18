@@ -145,7 +145,8 @@ export const projects: Project[] = [
         title: "Road to Qatar",
         description: "Supreme Committee fan gaming and engagement platform with interactive challenges, fantasy football, match predictions, and global leaderboards.",
         tags: ["React", "TypeScript", "Redux Toolkit", "REST APIs", ".NET"],
-        gradient: "linear-gradient(135deg, #200a12 0%, #45112a 50%, #180610 100%)"
+        gradient: "linear-gradient(135deg, #200a12 0%, #45112a 50%, #180610 100%)",
+        image: "/projects/roadtoqatar.png"
     },
     {
         id: 4,
@@ -179,6 +180,72 @@ export const projects: Project[] = [
         gradient: "linear-gradient(135deg, #0f0f1f 0%, #1a1a3f 50%, #0a0a1a 100%)",
         href: "https://eclipse-ai.com",
         image: "/projects/eclipse.png"
+    },
+    {
+        id: 7,
+        number: "07",
+        featured: false,
+        title: "Meta LLaMA: RLHF Tooling",
+        description: "Full-stack infrastructure for training, fine-tuning, alignment, and evaluation of LLaMA 2 and early LLaMA 3. Built agentic evaluation pipelines, human feedback collection interfaces, and multi-turn prompt orchestration tooling for ML researchers.",
+        tags: ["React", "Node.js", "Python", "RLHF", "AWS"],
+        gradient: "linear-gradient(135deg, #1a1200 0%, #2e2000 50%, #0f0b00 100%)",
+        href: "https://ai.meta.com/llama/",
+        image: "/projects/llama.png"
+    },
+    {
+        id: 8,
+        number: "08",
+        featured: false,
+        title: "Google DeepMind: LLM Optimization",
+        description: "Fine-tuned and optimized large language models using DeepMind frameworks and Meta's LLaMA architecture. Implemented RLHF, LoRA, and PEFT techniques with prompt engineering and benchmarking pipelines for model alignment.",
+        tags: ["Python", "PyTorch", "RLHF", "LoRA", "Docker"],
+        gradient: "radial-gradient(ellipse at 30% 50%, #0f1f0a 0%, #050a04 60%)",
+        href: "https://deepmind.google",
+        image: "/projects/deepmind.png"
+    },
+    {
+        id: 9,
+        number: "09",
+        featured: false,
+        title: "Codex: Cybersecurity Platform",
+        description: "Digital thread assessment tool mapping components, protocols, and software across vehicle stacks with 60M+ lines of code to automatically surface attack vectors, remediations, and penetration test data.",
+        tags: ["React", "TypeScript", "C#", "Blazor Server", ".NET"],
+        gradient: "linear-gradient(135deg, #0a1020 0%, #0d2045 50%, #060c1a 100%)",
+        href: "https://primary-target.com/",
+        image: "/projects/codex.png"
+    },
+    {
+        id: 10,
+        number: "10",
+        featured: false,
+        title: "National Compliance Management System",
+        description: "Comprehensive compliance management platform for US oil and gas operators, encompassing policies, procedures, and practices to meet legal, regulatory, and ethical standards with non-compliance risk mitigation.",
+        tags: ["Angular", ".NET", "Bootstrap", "RxJS"],
+        gradient: "linear-gradient(135deg, #1a0a1f 0%, #2d1145 50%, #110820 100%)",
+        href: "https://www.nationalcompliance.com/",
+        image: "/projects/ncms.png"
+    },
+    {
+        id: 11,
+        number: "11",
+        featured: false,
+        title: "TopTech TMS",
+        description: "Terminal Management System for a US-based oil and gas company, handling the full operational workflow of fuel terminal logistics including truck management, scheduling, and compliance tracking.",
+        tags: ["React", ".NET", "PostgreSQL", "Redux"],
+        gradient: "linear-gradient(135deg, #0f1f0a 0%, #1a3311 50%, #0a1a08 100%)",
+        href: "https://toptech.com",
+        image: "/projects/toptech.png"
+    },
+    {
+        id: 12,
+        number: "12",
+        featured: false,
+        title: "VMA Advisor: BG Products",
+        description: "Platform for BG Products, Inc. which manufactures and distributes professional-use additives, cleaners, specialty lubricants, and precision tools used to service vehicles in countries worldwide.",
+        tags: ["React", "Node.js", "TypeScript", "Material UI"],
+        gradient: "linear-gradient(135deg, #0a1020 0%, #0d2045 50%, #060c1a 100%)",
+        href: "https://bgprod.com/",
+        image: "/projects/bgproducts.png"
     }
 ];
 
@@ -246,14 +313,39 @@ export const certifications: Credential[] = [
         href: "https://www.credly.com/badges/9ac940fc-1dd9-4b30-98db-bb35e64f1e5f"
     },
     {
+        title: "Cisco: Introduction to Cybersecurity",
+        meta: "Sep 2026",
+        href: "https://www.credly.com/badges/82b24207-0c45-4910-970f-9cebc99da8d8/public_url"
+    },
+    {
         title: "Certified Cybersecurity Educator Professional (CCEP)",
         meta: "Dec 2025",
         href: "https://courses.redteamleaders.com/exam-completion/4b6458728d78b339"
     },
     {
+        title: "Microsoft: Student SOC Program Foundations",
+        meta: "Dec 2025"
+    },
+    {
         title: "HP LIFE: Data Science & Analytics",
         meta: "Nov 2025",
         href: "https://www.life-global.org/certificate/cf5a824e-9321-4809-a5ce-f7a370c78b9c"
+    },
+    {
+        title: "Oxford ELLT: English Language Level Test (CEFR C1)",
+        meta: "Jun 2025"
+    },
+    {
+        title: "LanguageCert: ESOL International B2 (Listening, Reading, Writing)",
+        meta: "May 2025"
+    },
+    {
+        title: "LanguageCert: ESOL International B2 (Speaking)",
+        meta: "May 2025"
+    },
+    {
+        title: "Scrimba: Frontend Career Path",
+        meta: "Mar 2018"
     }
 ];
 
@@ -268,5 +360,5 @@ export const stats: Stat[] = [
     { number: "8", label: "Years of Experience" },
     { number: "5", label: "Years Fully Remote" },
     { number: "10+", label: "Government Entities Served" },
-    { number: "7", label: "Junior Developers Mentored" }
+    { number: "27", label: "Junior Developers Mentored" }
 ];
