@@ -11,6 +11,8 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // One small stylesheet: inlining it removes the render-blocking request (and the white first paint)
+  experimental: { inlineCss: true },
   async headers() {
     return [{ source: '/(.*)', headers: securityHeaders }];
   },
