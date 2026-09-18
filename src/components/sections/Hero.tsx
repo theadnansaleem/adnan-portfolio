@@ -342,7 +342,7 @@ export default function Hero() {
               transition={{ delay: 1.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               style={{ display: 'flex' }}
             >
-              <ContactButton label="Download CV" href={profile.resume} download />
+              <ContactButton label="Download CV" href={profile.resume} newTab />
             </motion.div>
             <motion.a
               href="#contact"
