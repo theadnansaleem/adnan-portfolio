@@ -402,13 +402,12 @@ export default function Hero() {
           bottom: '88px',
           left: '50%',
           transform: 'translateX(-50%)',
-          display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           gap: '14px',
           zIndex: 4,
         }}
-        className="max-md:hidden [@media(max-height:850px)]:hidden"
+        className="flex max-md:hidden [@media(max-height:850px)]:hidden"
       >
         <span
           style={{

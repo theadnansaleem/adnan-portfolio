@@ -156,11 +156,10 @@ function JobItem({ job, index }: { job: Job; index: number }) {
         style={{
           fontSize: '22px',
           color: 'var(--muted)',
-          display: 'inline-block',
           transition: 'color 0.3s',
           paddingTop: '4px',
         }}
-        className="max-md:hidden"
+        className="inline-block max-md:hidden"
       >
         ↗
       </motion.span>
