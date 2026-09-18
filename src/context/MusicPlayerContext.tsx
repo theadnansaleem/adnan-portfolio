@@ -31,6 +31,8 @@ export const useMusicPlayer = (): MusicPlayerCtx => {
 
 export function MusicPlayerProvider({ children }: { children: React.ReactNode }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const pausedByVisibility = useRef(false);
+  const manuallyPaused = useRef(false);
   const [playing, setPlaying]   = useState(false);
   const [volume,  setVolume]    = useState(0.35);
   const [ready,   setReady]     = useState(false);
@@ -108,9 +110,6 @@ export function MusicPlayerProvider({ children }: { children: React.ReactNode })
   }, []);
 
   /* Pause when tab is hidden, resume when it becomes visible again */
-  const pausedByVisibility = useRef(false);
-  const manuallyPaused = useRef(false);
-
   useEffect(() => {
     const handleVisibilityChange = () => {
       const audio = audioRef.current;

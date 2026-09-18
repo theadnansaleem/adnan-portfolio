@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 
 declare module 'react' {
+  // eslint-disable-next-line @typescript-eslint/no-namespace -- augmenting React.JSX requires a namespace
   namespace JSX {
     interface IntrinsicElements {
       'spline-viewer': {
