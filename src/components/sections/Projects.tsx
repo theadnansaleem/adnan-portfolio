@@ -364,7 +364,7 @@ function ProjectItem({
         </motion.div>
 
         {/* Title — split-word mask reveal */}
-        <div
+        <h3
           style={{
             fontFamily: 'var(--font-display, "Bebas Neue"), cursive',
             fontSize: 'clamp(38px, 4.5vw, 68px)',
@@ -399,7 +399,7 @@ function ProjectItem({
               </motion.span>
             </span>
           ))}
-        </div>
+        </h3>
 
         {/* Description */}
         <motion.p
@@ -452,23 +452,25 @@ function ProjectItem({
           animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 8 }}
           transition={{ duration: 0.4, delay: 0.2 }}
         >
-          <a
-            href={project.href}
-            style={{
-              fontFamily: 'var(--font-mono, "DM Mono"), monospace',
-              fontSize: '12px',
-              color: 'var(--accent)',
-              textDecoration: 'none',
-              borderBottom: '1px solid rgba(232,255,71,0.35)',
-              letterSpacing: '0.08em',
-              paddingBottom: '3px',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-            }}
-          >
-            View Project ↗
-          </a>
+          {project.href && (
+            <a
+              href={project.href}
+              style={{
+                fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+                fontSize: '12px',
+                color: 'var(--accent)',
+                textDecoration: 'none',
+                borderBottom: '1px solid rgba(232,255,71,0.35)',
+                letterSpacing: '0.08em',
+                paddingBottom: '3px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              Visit {new URL(project.href).hostname} ↗
+            </a>
+          )}
         </motion.div>
       </div>
     </div>
@@ -569,7 +571,7 @@ function MobileProjectCard({
                 </span>
               ))}
             </div>
-            <div
+            <h3
               style={{
                 fontFamily: 'var(--font-display, "Bebas Neue"), cursive',
                 fontSize: 'clamp(24px, 6vw, 40px)',
@@ -579,7 +581,7 @@ function MobileProjectCard({
               }}
             >
               {project.title}
-            </div>
+            </h3>
             <p
               style={{
                 fontSize: '12px',
@@ -605,25 +607,25 @@ function MobileProjectCard({
               >
                 tap to preview
               </span>
-            ) : (
-              <a
-                href={project.href}
-                style={{
-                  fontFamily: 'var(--font-mono, "DM Mono"), monospace',
-                  fontSize: '11px',
-                  color: 'var(--accent)',
-                  textDecoration: 'none',
-                  borderBottom: '1px solid rgba(232,255,71,0.35)',
-                  letterSpacing: '0.08em',
-                  paddingBottom: '2px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '5px',
-                  marginTop: '16px',
-                }}
-              >
-                View Project ↗
-              </a>
+            ) : project.href && (
+                <a
+                  href={project.href}
+                  style={{
+                    fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+                    fontSize: '11px',
+                    color: 'var(--accent)',
+                    textDecoration: 'none',
+                    borderBottom: '1px solid rgba(232,255,71,0.35)',
+                    letterSpacing: '0.08em',
+                    paddingBottom: '2px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                    marginTop: '16px',
+                  }}
+                >
+                  Visit {new URL(project.href).hostname} ↗
+                </a>
             )}
           </div>
         </div>
@@ -694,25 +696,27 @@ function MobileProjectCard({
               }}>
                 {project.title}
               </span>
-              <a
-                href={project.href}
-                onClick={(e) => e.stopPropagation()}
-                style={{
-                  fontFamily: 'var(--font-mono, "DM Mono"), monospace',
-                  fontSize: '11px',
-                  color: 'var(--accent)',
-                  textDecoration: 'none',
-                  borderBottom: '1px solid rgba(232,255,71,0.35)',
-                  letterSpacing: '0.08em',
-                  paddingBottom: '2px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '5px',
-                  pointerEvents: 'auto',
-                }}
-              >
-                View Project ↗
-              </a>
+              {project.href && (
+                <a
+                  href={project.href}
+                  onClick={(e) => e.stopPropagation()}
+                  style={{
+                    fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+                    fontSize: '11px',
+                    color: 'var(--accent)',
+                    textDecoration: 'none',
+                    borderBottom: '1px solid rgba(232,255,71,0.35)',
+                    letterSpacing: '0.08em',
+                    paddingBottom: '2px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                    pointerEvents: 'auto',
+                  }}
+                >
+                  Visit {new URL(project.href).hostname} ↗
+                </a>
+              )}
             </div>
           </div>
         )}

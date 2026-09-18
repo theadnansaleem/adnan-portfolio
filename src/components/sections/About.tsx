@@ -4,7 +4,7 @@ import { useRef, useEffect } from 'react';
 import { motion, useInView, useMotionValue, useTransform, useSpring, animate } from 'framer-motion';
 import { useTilt } from '@/hooks/useTilt';
 import SectionLabel from '@/components/ui/SectionLabel';
-import { stats } from '@/lib/data';
+import { profile, stats } from '@/lib/data';
 import type { Stat } from '@/types';
 
 function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
@@ -168,26 +168,7 @@ export default function About() {
         >
           {/* Left — Bio */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-            {[
-              <>
-                I&apos;m a{' '}
-                <strong style={{ color: 'var(--text)', fontWeight: 600 }}>Senior Full-Stack Engineer</strong>{' '}
-                based in Lahore with 8 years of experience building production platforms across
-                government, fintech, cybersecurity, and AI.
-              </>,
-              <>
-                I work{' '}
-                <strong style={{ color: 'var(--text)', fontWeight: 600 }}>end to end</strong>{' '}
-                — React, Next.js, and TypeScript on the front, Node.js and C#/.NET Core behind it.
-                Most recently on Qatar&apos;s national event platforms at the Supreme Committee.
-              </>,
-              <>
-                Five of those eight years were{' '}
-                <strong style={{ color: 'var(--text)', fontWeight: 600 }}>fully remote</strong> with
-                US, UK, and German teams. Currently focused on AI-native tooling: agentic workflows,
-                multi-agent pipelines, and design-to-code automation.
-              </>,
-            ].map((para, i) => (
+            {profile.summary.map((para, i) => (
               <motion.p
                 key={i}
                 initial={{ opacity: 0, y: 24 }}

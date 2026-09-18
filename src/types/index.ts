@@ -3,7 +3,9 @@ export interface Job {
     period: string;
     company: string;
     role: string;
-    description: string;
+    location: string;
+    workMode: string;
+    bullets: string[];
     tags: string[];
 }
 
@@ -15,18 +17,13 @@ export interface Project {
     description: string;
     tags: string[];
     gradient: string;
-    href: string;
+    href?: string;
     image?: string;
 }
 
 export interface SkillCategory {
     category: string;
     tags: string[];
-}
-
-export interface SkillBar {
-    label: string;
-    value: number;
 }
 
 export interface Stat {
@@ -36,6 +33,7 @@ export interface Stat {
 
 export interface Credential {
     title: string;
-    issuer: string;
+    issuer?: string;
     meta: string;
+    href?: string;
 }

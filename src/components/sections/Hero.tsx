@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
 import { useMusicPlayer } from '@/context/MusicPlayerContext';
+import ContactButton from '@/components/ui/ContactButton';
+import { profile } from '@/lib/data';
 
 /**
  * Hero uses THREE layered parallax systems:
@@ -280,9 +282,9 @@ export default function Hero() {
           animate="visible"
           style={{ marginBottom: 'min(56px, 6vh)' }}
         >
-          {/* Semantic h1 wraps all title words — one per page for SEO */}
-          <h1 style={{ margin: 0, padding: 0, lineHeight: 0.92 }}>
-            {(['Senior', 'Fullstack', 'Engineer'] as const).map((word, i) => (
+          {/* Display title; the page's single h1 is the name in the bio below */}
+          <div style={{ margin: 0, padding: 0, lineHeight: 0.92 }}>
+            {(['Senior', 'Full-Stack', 'Engineer'] as const).map((word, i) => (
               <div key={word} style={{ overflow: 'hidden', lineHeight: 0.92 }}>
                 <motion.span
                   variants={lineVariants}
@@ -300,7 +302,7 @@ export default function Hero() {
                 </motion.span>
               </div>
             ))}
-          </h1>
+          </div>
         </motion.div>
 
         {/* Bottom row */}
@@ -315,7 +317,7 @@ export default function Hero() {
           className="max-md:flex-col max-md:items-start max-md:gap-6"
         >
           {/* Bio */}
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -328,56 +330,65 @@ export default function Hero() {
               lineHeight: 1.75,
             }}
           >
-            <strong style={{ fontWeight: 'inherit' }}>Muhammad Adnan Saleem</strong> — 8 years
-            shipping production platforms across government, fintech, cybersecurity, and AI.
-            Senior Full-Stack Engineer based in Lahore, Pakistan. Open to relocation.
-          </motion.p>
+            <h1 style={{ display: 'inline' }}>{profile.name}</h1> · {profile.headline}.{' '}
+            {profile.location}.
+          </motion.div>
 
-          {/* CTA */}
-          <motion.a
-            href="#contact"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              position: 'relative',
-              overflow: 'hidden',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: 'clamp(14px, 2vw, 20px) clamp(24px, 3.5vw, 40px)',
-              background: 'var(--accent-fill)',
-              color: '#000',
-              fontFamily: 'var(--font-mono, "DM Mono"), monospace',
-              fontSize: '13px',
-              letterSpacing: '0.12em',
-              textDecoration: 'none',
-              fontWeight: 500,
-              textTransform: 'uppercase' as const,
-            }}
-            whileHover="hovered"
-          >
-            <motion.span
-              variants={{ hovered: { x: '0%' } }}
-              initial={{ x: '-101%' }}
-              style={{ position: 'absolute', inset: 0, background: '#111' }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            />
-            <motion.span
-              style={{ position: 'relative', zIndex: 1 }}
-              variants={{ hovered: { color: 'var(--accent)' } }}
-              transition={{ duration: 0.2 }}
+          {/* CTAs */}
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' as const, alignItems: 'stretch' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              style={{ display: 'flex' }}
             >
-              Let&apos;s Build Together
-            </motion.span>
-            <motion.span
-              style={{ position: 'relative', zIndex: 1, fontSize: '18px' }}
-              variants={{ hovered: { color: 'var(--accent)', x: 4, y: -4 } }}
-              transition={{ duration: 0.2 }}
+              <ContactButton label="Download CV" href={profile.resume} download />
+            </motion.div>
+            <motion.a
+              href="#contact"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                position: 'relative',
+                overflow: 'hidden',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '12px',
+                padding: 'clamp(14px, 2vw, 20px) clamp(24px, 3.5vw, 40px)',
+                background: 'var(--accent-fill)',
+                color: '#000',
+                fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+                fontSize: '13px',
+                letterSpacing: '0.12em',
+                textDecoration: 'none',
+                fontWeight: 500,
+                textTransform: 'uppercase' as const,
+              }}
+              whileHover="hovered"
             >
-              ↗
-            </motion.span>
-          </motion.a>
+              <motion.span
+                variants={{ hovered: { x: '0%' } }}
+                initial={{ x: '-101%' }}
+                style={{ position: 'absolute', inset: 0, background: '#111' }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              />
+              <motion.span
+                style={{ position: 'relative', zIndex: 1 }}
+                variants={{ hovered: { color: 'var(--accent)' } }}
+                transition={{ duration: 0.2 }}
+              >
+                Let&apos;s Build Together
+              </motion.span>
+              <motion.span
+                style={{ position: 'relative', zIndex: 1, fontSize: '18px' }}
+                variants={{ hovered: { color: 'var(--accent)', x: 4, y: -4 } }}
+                transition={{ duration: 0.2 }}
+              >
+                ↗
+              </motion.span>
+            </motion.a>
+          </div>
         </div>
       </motion.div>
 

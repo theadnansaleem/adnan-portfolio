@@ -9,11 +9,11 @@ interface SectionLabelProps {
 }
 
 export default function SectionLabel({ number, text }: SectionLabelProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLHeadingElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-40px' });
 
   return (
-    <motion.div
+    <motion.h2
       ref={ref}
       initial={{ opacity: 0, y: 16 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -39,8 +39,8 @@ export default function SectionLabel({ number, text }: SectionLabelProps) {
           color: 'var(--accent)',
         }}
       >
-        {number} — {text}
+        <span aria-hidden="true">{number} — </span>{text}
       </span>
-    </motion.div>
+    </motion.h2>
   );
 }
