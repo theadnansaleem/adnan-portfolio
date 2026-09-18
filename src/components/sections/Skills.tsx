@@ -3,13 +3,13 @@
 import { useRef } from 'react';
 import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import SectionLabel from '@/components/ui/SectionLabel';
-import { skills, skillBars, education, certifications } from '@/lib/data';
+import { skills, education, certifications } from '@/lib/data';
 import type { Credential } from '@/types';
 
 function CredentialList({ heading, items, inView }: { heading: string; items: Credential[]; inView: boolean }) {
   return (
     <div>
-      <div
+      <h3
         style={{
           fontFamily: 'var(--font-mono, "DM Mono"), monospace',
           fontSize: '11px',
@@ -20,7 +20,7 @@ function CredentialList({ heading, items, inView }: { heading: string; items: Cr
         }}
       >
         {heading}
-      </div>
+      </h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
         {items.map((item, i) => (
           <motion.div
@@ -33,17 +33,19 @@ function CredentialList({ heading, items, inView }: { heading: string; items: Cr
             <div style={{ fontSize: 'clamp(15px, 2.5vw, 17px)', lineHeight: 1.4, marginBottom: '6px' }}>
               {item.title}
             </div>
-            <div
-              style={{
-                fontFamily: 'var(--font-mono, "DM Mono"), monospace',
-                fontSize: '12px',
-                color: 'var(--accent)',
-                letterSpacing: '0.05em',
-                marginBottom: '4px',
-              }}
-            >
-              {item.issuer}
-            </div>
+            {item.issuer && (
+              <div
+                style={{
+                  fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+                  fontSize: '12px',
+                  color: 'var(--accent)',
+                  letterSpacing: '0.05em',
+                  marginBottom: '4px',
+                }}
+              >
+                {item.issuer}
+              </div>
+            )}
             <div
               style={{
                 fontFamily: 'var(--font-mono, "DM Mono"), monospace',
@@ -54,6 +56,27 @@ function CredentialList({ heading, items, inView }: { heading: string; items: Cr
             >
               {item.meta}
             </div>
+            {item.href && (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Verify credential: ${item.title}`}
+                style={{
+                  fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+                  fontSize: '11px',
+                  color: 'var(--accent)',
+                  letterSpacing: '0.05em',
+                  textDecoration: 'none',
+                  borderBottom: '1px solid var(--accent-soft-line)',
+                  paddingBottom: '2px',
+                  display: 'inline-block',
+                  marginTop: '8px',
+                }}
+              >
+                Verify credential ↗
+              </a>
+            )}
           </motion.div>
         ))}
       </div>
@@ -62,8 +85,6 @@ function CredentialList({ heading, items, inView }: { heading: string; items: Cr
 }
 
 export default function Skills() {
-  const barsRef = useRef<HTMLDivElement>(null);
-  const barsInView = useInView(barsRef, { once: true, margin: '-80px' });
   const credsRef = useRef<HTMLDivElement>(null);
   const credsInView = useInView(credsRef, { once: true, margin: '-80px' });
   const containerRef = useRef<HTMLDivElement>(null);
@@ -168,7 +189,7 @@ export default function Skills() {
                 transition={{ duration: 0.4 }}
               />
 
-              <div
+              <h3
                 style={{
                   fontFamily: 'var(--font-display, "Bebas Neue"), cursive',
                   fontSize: 'clamp(18px, 3vw, 24px)',
@@ -178,7 +199,7 @@ export default function Skills() {
                 }}
               >
                 {cat.category}
-              </div>
+              </h3>
               <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '8px' }}>
                 {cat.tags.map((tag, tagIndex) => (
                   <motion.span
@@ -209,117 +230,6 @@ export default function Skills() {
               </div>
             </motion.div>
           ))}
-        </div>
-
-        {/* Skill Bars */}
-        <div ref={barsRef} style={{ width: '100%' }}>
-          {/* Accent line above label */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={barsInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            style={{ height: '1px', background: 'linear-gradient(90deg, var(--accent), transparent)', transformOrigin: 'left', marginBottom: '16px' }}
-          />
-          <div
-            style={{
-              fontFamily: 'var(--font-mono, "DM Mono"), monospace',
-              fontSize: '11px',
-              color: 'var(--muted)',
-              letterSpacing: '0.25em',
-              textTransform: 'uppercase' as const,
-              marginBottom: '40px',
-            }}
-          >
-            Proficiency Index
-          </div>
-          <div
-            style={{ display: 'grid', gap: '32px 48px' }}
-            className="grid-cols-2 max-sm:grid-cols-1"
-          >
-            {skillBars.map((bar, i) => (
-              <div key={bar.label}>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '10px',
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-mono, "DM Mono"), monospace',
-                      fontSize: '13px',
-                      color: 'var(--text)',
-                      opacity: 'var(--dim)',
-                      letterSpacing: '0.04em',
-                    }}
-                  >
-                    {bar.label}
-                  </span>
-                  <motion.span
-                    initial={{ opacity: 0 }}
-                    animate={barsInView ? { opacity: 1 } : { opacity: 0 }}
-                    transition={{ delay: i * 0.1 + 0.8, duration: 0.4 }}
-                    style={{
-                      fontFamily: 'var(--font-mono, "DM Mono"), monospace',
-                      fontSize: '13px',
-                      color: 'var(--accent)',
-                      letterSpacing: '0.04em',
-                    }}
-                  >
-                    {bar.value}%
-                  </motion.span>
-                </div>
-                {/* Track */}
-                <div
-                  style={{
-                    height: '2px',
-                    background: 'rgba(255,255,255,0.06)',
-                    position: 'relative' as const,
-                  }}
-                >
-                  {/* Fill bar */}
-                  <motion.div
-                    initial={{ scaleX: 0 }}
-                    animate={barsInView ? { scaleX: bar.value / 100 } : { scaleX: 0 }}
-                    transition={{
-                      duration: 1.4,
-                      delay: i * 0.12,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    style={{
-                      height: '100%',
-                      background: 'linear-gradient(90deg, var(--accent), rgba(232,255,71,0.6))',
-                      transformOrigin: 'left',
-                      position: 'absolute' as const,
-                      left: 0,
-                      right: 0,
-                    }}
-                  />
-                  {/* Glow dot at end of bar */}
-                  <motion.div
-                    initial={{ opacity: 0, left: `${bar.value}%` }}
-                    animate={
-                      barsInView
-                        ? { opacity: 1, left: `${bar.value}%` }
-                        : { opacity: 0 }
-                    }
-                    transition={{ delay: i * 0.12 + 1.2, duration: 0.4 }}
-                    style={{
-                      position: 'absolute' as const,
-                      top: '50%',
-                      transform: 'translate(-50%, -50%)',
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      background: 'var(--accent)',
-                      boxShadow: '0 0 8px rgba(232,255,71,0.8)',
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* Education & Certifications */}

@@ -75,7 +75,7 @@ function JobItem({ job, index }: { job: Job; index: number }) {
 
       {/* Content */}
       <div>
-        <div
+        <h3
           style={{
             fontFamily: 'var(--font-display, "Bebas Neue"), cursive',
             fontSize: 'clamp(22px, 4vw, 32px)',
@@ -85,7 +85,7 @@ function JobItem({ job, index }: { job: Job; index: number }) {
           }}
         >
           {job.company}
-        </div>
+        </h3>
         <div
           style={{
             fontFamily: 'var(--font-mono, "DM Mono"), monospace',
@@ -101,17 +101,35 @@ function JobItem({ job, index }: { job: Job; index: number }) {
         >
           {job.role}
         </div>
-        <p
+        <div
+          style={{
+            fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+            fontSize: '11px',
+            color: 'var(--muted)',
+            letterSpacing: '0.06em',
+            marginBottom: '16px',
+          }}
+        >
+          {job.location} · {job.workMode}
+        </div>
+        <ul
           style={{
             fontSize: '14px',
             opacity: 'var(--dim)',
             lineHeight: 1.75,
             marginBottom: '20px',
-            maxWidth: '560px',
+            maxWidth: '640px',
+            paddingLeft: '18px',
+            listStyle: 'disc',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '8px',
           }}
         >
-          {job.description}
-        </p>
+          {job.bullets.map((bullet) => (
+            <li key={bullet}>{bullet}</li>
+          ))}
+        </ul>
         <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '8px' }}>
           {job.tags.map((tag) => (
             <span
