@@ -44,7 +44,8 @@ export function MusicPlayerProvider({ children }: { children: React.ReactNode })
     const audio = new Audio("/audio/ambient.mp3");
     audio.loop    = true;
     audio.volume  = 0.35;
-    audio.preload = "metadata";
+    // No request until the first play: PageSpeed fetches "metadata" as the whole file and bills it to LCP
+    audio.preload = "none";
     audio.addEventListener("canplaythrough", () => setReady(true));
     audioRef.current = audio;
     return () => { audio.pause(); audio.src = ""; };
