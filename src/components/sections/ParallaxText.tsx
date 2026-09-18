@@ -16,6 +16,8 @@ export default function ParallaxText() {
 
   // ── In-view detection for stagger reveal ─────────────────────────────────
   const isInView = useInView(sectionRef, { once: true, margin: '-10%' });
+  // The band video is 12 MB; mount it a viewport early instead of on page load
+  const isNear = useInView(sectionRef, { once: true, margin: '100% 0px' });
 
   // ── Scroll-driven parallax ────────────────────────────────────────────────
   const { scrollYProgress } = useScroll({
@@ -117,29 +119,31 @@ export default function ParallaxText() {
         aria-hidden="true"
         style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
       >
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          onLoadedData={() => setVideoReady(true)}
-          onCanPlay={() => setVideoReady(true)}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center center',
-            opacity: videoReady ? 'var(--band-video)' : 0,
-            mixBlendMode: 'screen' as const,
-            transition: 'opacity 1.4s ease',
-            willChange: 'opacity',
-          }}
-        >
-          <source src="/Cinematic_abstract_seamless_1080p_20260221232.mp4" type="video/mp4" />
-        </video>
+        {isNear && (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            onLoadedData={() => setVideoReady(true)}
+            onCanPlay={() => setVideoReady(true)}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center center',
+              opacity: videoReady ? 'var(--band-video)' : 0,
+              mixBlendMode: 'screen' as const,
+              transition: 'opacity 1.4s ease',
+              willChange: 'opacity',
+            }}
+          >
+            <source src="/Cinematic_abstract_seamless_1080p_20260221232.mp4" type="video/mp4" />
+          </video>
+        )}
 
         {/* Top + bottom gradient fade */}
         <div

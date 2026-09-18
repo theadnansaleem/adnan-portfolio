@@ -358,7 +358,7 @@ function ProjectItem({
               background: 'rgba(255,255,255,0.18)',
             }}
           />
-          <span style={{ color: 'rgba(255,255,255,0.45)' }}>
+          <span style={{ color: 'var(--muted)' }}>
             {project.tags.join(' · ')}
           </span>
         </motion.div>
@@ -901,36 +901,45 @@ export default function Projects() {
         <div
           style={{
             position: 'absolute',
-            right: 'clamp(14px, 2vw, 28px)',
+            // Minus half of the 24px hit box, so the 2px tick keeps its old position
+            right: 'calc(clamp(14px, 2vw, 28px) - 11px)',
             top: '50%',
             transform: 'translateY(-50%)',
             display: 'flex',
             flexDirection: 'column',
-            gap: '8px',
             alignItems: 'center',
             zIndex: 10,
           }}
         >
           {projects.map((_, i) => (
-            <motion.button
+            <button
               key={i}
               onClick={() => scrollToProject(i)}
-              animate={{
-                height: i === activeIndex ? 24 : 8,
-                background:
-                  i === activeIndex ? 'var(--accent)' : 'var(--muted)',
-                opacity: i === activeIndex ? 1 : 0.5,
-              }}
-              transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+              // 24x24 hit box meets the WCAG 2.2 target size; the visible tick stays 2px wide
               style={{
-                width: '2px',
-                borderRadius: '1px',
+                width: '24px',
+                height: '24px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'none',
                 border: 'none',
                 cursor: 'pointer',
                 padding: 0,
               }}
               aria-label={`Go to project ${i + 1}: ${projects[i].title}`}
-            />
+            >
+              <motion.span
+                animate={{
+                  height: i === activeIndex ? 24 : 8,
+                  background:
+                    i === activeIndex ? 'var(--accent)' : 'var(--muted)',
+                  opacity: i === activeIndex ? 1 : 0.5,
+                }}
+                transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+                style={{ width: '2px', borderRadius: '1px' }}
+              />
+            </button>
           ))}
         </div>
       </div>
