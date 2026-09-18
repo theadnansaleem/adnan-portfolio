@@ -303,6 +303,11 @@ export const education: Credential[] = [
 
 export const certifications: Credential[] = [
     {
+        title: "Cisco: Introduction to Modern AI",
+        meta: "Sep 2026",
+        href: "https://www.credly.com/badges/bde8c946-d3d2-4173-87b3-52af3dd5e6c5"
+    },
+    {
         title: "Cisco: Python Essentials",
         meta: "Sep 2026",
         href: "https://www.credly.com/badges/840bb802-3fb6-4dcb-959c-7821ec31564e"
