@@ -43,7 +43,7 @@ export default function Contact() {
     { label: 'Email Me',    href: `mailto:${profile.email}`, isEmail: true },
     { label: 'LinkedIn',    href: profile.linkedin },
     { label: 'GitHub',      href: profile.github },
-    { label: 'Download CV', href: profile.resume, download: true },
+    { label: 'Download CV', href: profile.resume, newTab: true },
   ];
 
   return (

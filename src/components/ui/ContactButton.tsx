@@ -7,18 +7,18 @@ interface ContactButtonProps {
   label: string;
   href: string;
   isEmail?: boolean;
-  download?: boolean;
+  newTab?: boolean;
 }
 
-export default function ContactButton({ label, href, isEmail, download }: ContactButtonProps) {
+export default function ContactButton({ label, href, isEmail, newTab }: ContactButtonProps) {
   const [hovered, setHovered] = useState(false);
+  const opensNewTab = newTab || href.startsWith('http');
 
   return (
     <motion.a
       href={href}
-      download={download || undefined}
-      target={href.startsWith('http') ? '_blank' : undefined}
-      rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+      target={opensNewTab ? '_blank' : undefined}
+      rel={opensNewTab ? 'noopener noreferrer' : undefined}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       style={{
