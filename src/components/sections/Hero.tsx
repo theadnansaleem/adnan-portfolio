@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useEffect, useEffectEvent, useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
 import { useMusicPlayer } from '@/context/MusicPlayerContext';
@@ -20,6 +20,25 @@ export default function Hero() {
   const [videoReady, setVideoReady] = useState(false);
   const scrollY = useScrollProgress();
   const { triggerPlay } = useMusicPlayer();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const onVideoPlayable = useEffectEvent(() => {
+    setVideoReady(true);
+    triggerPlay();
+  });
+
+  // The video can reach HAVE_FUTURE_DATA before hydration, in which case React never sees canplay
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+      onVideoPlayable();
+      return;
+    }
+    const handleCanPlay = () => onVideoPlayable();
+    video.addEventListener('canplay', handleCanPlay, { once: true });
+    return () => video.removeEventListener('canplay', handleCanPlay);
+  }, []);
 
   // ── Mouse parallax setup ─────────────────────────────────────────────────
   // Normalized 0→1, centred at 0.5
@@ -95,13 +114,13 @@ export default function Hero() {
       >
         {/* Raw video — fills the frame */}
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
           onLoadedData={() => setVideoReady(true)}
-          onCanPlay={() => { setVideoReady(true); triggerPlay(); }}
           style={{
             position: 'absolute',
             inset: 0,

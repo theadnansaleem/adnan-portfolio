@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -38,8 +39,8 @@ export function MusicPlayerProvider({ children }: { children: React.ReactNode })
   const [ready,   setReady]     = useState(false);
   const [pending, setPending]   = useState(false);
 
-  /* Init audio once */
-  useEffect(() => {
+  /* Init audio once. Layout effect so it exists before Hero's mount effect calls triggerPlay */
+  useLayoutEffect(() => {
     const audio = new Audio("/audio/ambient.mp3");
     audio.loop    = true;
     audio.volume  = 0.35;
@@ -72,7 +73,7 @@ export function MusicPlayerProvider({ children }: { children: React.ReactNode })
     };
   }, [pending]);
 
-  /* Called by Hero's onCanPlay — attempts autoplay, queues if blocked */
+  /* Called by Hero once its video is playable; attempts autoplay, queues if blocked */
   const triggerPlay = useCallback(async () => {
     const audio = audioRef.current;
     if (!audio || playing || pending) return;
