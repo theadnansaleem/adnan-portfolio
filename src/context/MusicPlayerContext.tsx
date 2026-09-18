@@ -14,10 +14,10 @@ interface MusicPlayerCtx {
   playing: boolean;
   volume: number;
   ready: boolean;
-  /** true = autoplay was blocked; will start on next user interaction */
+  /** true = queued; starts on the next user interaction */
   pending: boolean;
   toggle: () => void;
-  /** Called by Hero when the video becomes playable */
+  /** Called by Hero when the video becomes playable; queues playback for the first gesture */
   triggerPlay: () => void;
   changeVolume: (v: number) => void;
 }
@@ -50,7 +50,7 @@ export function MusicPlayerProvider({ children }: { children: React.ReactNode })
     return () => { audio.pause(); audio.src = ""; };
   }, []);
 
-  /* When autoplay was blocked, retry on the very first user gesture */
+  /* Start on the very first user gesture */
   useEffect(() => {
     if (!pending) return;
 
@@ -66,25 +66,21 @@ export function MusicPlayerProvider({ children }: { children: React.ReactNode })
     };
 
     window.addEventListener("pointerdown", start, { once: true });
+    // A touch tap only counts as a user gesture on release, so pointerdown alone never starts audio on phones
+    window.addEventListener("pointerup",   start, { once: true });
     window.addEventListener("scroll",      start, { once: true, passive: true });
     return () => {
       window.removeEventListener("pointerdown", start);
+      window.removeEventListener("pointerup",   start);
       window.removeEventListener("scroll",      start);
     };
   }, [pending]);
 
-  /* Called by Hero once its video is playable; attempts autoplay, queues if blocked */
-  const triggerPlay = useCallback(async () => {
-    const audio = audioRef.current;
-    if (!audio || playing || pending) return;
-    try {
-      await audio.play();
-      setPlaying(true);
-      manuallyPaused.current = false;
-    } catch {
-      setPending(true); // browser blocked — will resume on first interaction
-    }
-  }, [playing, pending]);
+  /* Called by Hero once its video is playable. No autoplay attempt: where a browser allows it,
+     the whole track downloads during first paint, so playback waits for the first gesture. */
+  const triggerPlay = useCallback(() => {
+    if (!playing) setPending(true);
+  }, [playing]);
 
   const toggle = useCallback(async () => {
     const audio = audioRef.current;

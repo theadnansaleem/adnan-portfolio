@@ -30,7 +30,7 @@ export default function PageLoader() {
   );
 
   useEffect(() => {
-    const MIN_MS = 1500; // bar animation completes at ~1.4s; 1.5s closes the dead pause
+    const MIN_MS = 600; // bar animation completes at ~0.55s; 0.6s closes the dead pause
     const MAX_MS = 3000; // safety cap — never hang forever
     const start = Date.now();
     let dismissed = false;
@@ -74,7 +74,7 @@ export default function PageLoader() {
           exit={
             reduceMotion
               ? { opacity: 0, transition: { duration: 0.4 } }
-              : { opacity: 0, scale: 1.1, filter: 'blur(16px)', transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] } }
+              : { opacity: 0, scale: 1.1, filter: 'blur(16px)', transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
           }
           style={{
             position: 'fixed',
@@ -92,7 +92,7 @@ export default function PageLoader() {
           <motion.div
             initial={{ opacity: 0, scale: 0.85, letterSpacing: '0.6em' }}
             animate={{ opacity: 1, scale: 1, letterSpacing: '0.25em' }}
-            transition={{ delay: 0.1, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 0.05, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             style={{
               fontFamily: 'var(--font-display, "Bebas Neue"), cursive',
               fontSize: 'clamp(32px, 5vw, 52px)',
@@ -114,7 +114,7 @@ export default function PageLoader() {
             <motion.div
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
-              transition={{ delay: 0.3, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ delay: 0.1, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 height: '100%',
                 background: 'linear-gradient(90deg, var(--accent), rgba(232,255,71,0.5))',
@@ -127,7 +127,7 @@ export default function PageLoader() {
           <motion.p
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 0.55, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
+            transition={{ delay: 0.2, duration: 0.25 }}
             style={{
               fontFamily: 'var(--font-mono, "DM Mono"), monospace',
               fontSize: '10px',
