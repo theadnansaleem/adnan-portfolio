@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Bebas_Neue, Bricolage_Grotesque, DM_Mono } from 'next/font/google';
 import Script from 'next/script';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import SmoothScrollProvider from '@/components/SmoothScrollProvider';
 import { MusicPlayerProvider } from '@/context/MusicPlayerContext';
@@ -205,6 +206,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
           </MusicPlayerProvider>
         </SmoothScrollProvider>
+        <Analytics />
       </body>
     </html>
   );
