@@ -145,6 +145,7 @@ const jsonLd = {
       inLanguage: 'en',
       isPartOf: { '@id': `${SITE_URL}/#website` },
       mainEntity: { '@id': `${SITE_URL}/#person` },
+      dateModified: new Date().toISOString(),
     },
   ],
 };
