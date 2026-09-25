@@ -19,6 +19,7 @@ export interface Project {
     gradient: string;
     href?: string;
     image?: string;
+    caseStudy?: string;
 }
 
 export interface SkillCategory {
@@ -36,4 +37,20 @@ export interface Credential {
     issuer?: string;
     meta: string;
     href?: string;
+}
+
+export interface CaseStudy {
+    slug: string;
+    title: string;
+    metaTitle: string;
+    description: string;
+    summary: string;
+    highlights: string[];
+    stack: string[];
+    live?: string;
+    image?: string;
+    company: string;
+    role: string;
+    period: string;
+    location: string;
 }

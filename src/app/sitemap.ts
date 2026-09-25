@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { profile } from "@/lib/data";
+import { caseStudies } from "@/lib/case-studies";
 
-// Single page site: section anchors (#about etc.) are not separate URLs to crawlers.
+// Home plus one URL per case study; section anchors (#about etc.) are not separate URLs.
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
@@ -10,5 +11,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
+    ...caseStudies.map((study) => ({
+      url: `${profile.url}/work/${study.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "yearly" as const,
+      priority: 0.8,
+    })),
   ];
 }

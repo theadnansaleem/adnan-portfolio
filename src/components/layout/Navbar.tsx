@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from '@/components/ui/ThemeToggle';
 
@@ -13,6 +14,9 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  // On a case study page the section anchors have to point back at the home page.
+  const sectionHref = (hash: string) => (pathname === '/' ? hash : `/${hash}`);
   const [activeSection, setActiveSection] = useState('home');
   const [menuOpen, setMenuOpen] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
@@ -82,7 +86,7 @@ export default function Navbar() {
             return (
               <motion.a
                 key={link.href}
-                href={link.href}
+                href={sectionHref(link.href)}
                 onHoverStart={() => setHoveredLink(id)}
                 onHoverEnd={() => setHoveredLink(null)}
                 style={{
@@ -175,7 +179,7 @@ export default function Navbar() {
             {navLinks.map((link, i) => (
               <motion.a
                 key={link.href}
-                href={link.href}
+                href={sectionHref(link.href)}
                 onClick={() => setMenuOpen(false)}
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
