@@ -14,9 +14,9 @@ export const profile = {
     github: "https://github.com/theadnansaleem",
     url: "https://theadnansaleem.com",
     resume: "/Adnan-Saleem-Resume.pdf",
-    // The CV summary, split into paragraphs without rewording.
+    // The CV summary, split into paragraphs; only the name was added to the opening sentence.
     summary: [
-        "Senior full-stack software engineer with 8 years of enterprise application development experience, including 8 years of hands-on Amazon Web Services (AWS) experience. Builds frontends in React, Next.js, and Angular with TypeScript and JavaScript, and backends in Node.js, C#, .NET 6/8, ASP.NET Core Web APIs, and Blazor, with REST and GraphQL APIs and microservices.",
+        "M. Adnan Saleem is a senior full-stack software engineer with 8 years of enterprise application development experience, including 8 years of hands-on Amazon Web Services (AWS) experience. Builds frontends in React, Next.js, and Angular with TypeScript and JavaScript, and backends in Node.js, C#, .NET 6/8, ASP.NET Core Web APIs, and Blazor, with REST and GraphQL APIs and microservices.",
         "Delivered production platforms for government, fintech, and cybersecurity clients, owning features across UI, APIs, databases (SQL Server with T-SQL and stored procedures, PostgreSQL), Azure OpenAI (GPT) integrations, testing, and CI/CD (Azure DevOps, Jenkins, GitLab CI/CD, GitHub Actions). Rearchitected a monolithic frontend into micro frontends with Module Federation, cutting release cycle time by about 40%, and designed .NET domain layers with Entity Framework Core, Domain-Driven Design, and CQRS.",
         "Leads code reviews and mentors engineers in Agile/Scrum teams; five years fully remote with US, UK, and German teams; available immediately.",
     ],

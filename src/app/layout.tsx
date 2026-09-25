@@ -108,7 +108,7 @@ const jsonLd = {
       alternateName: profile.alternateNames,
       jobTitle: profile.jobTitle,
       description: profile.summary[0],
-      url: SITE_URL,
+      url: `${SITE_URL}/`,
       image: `${SITE_URL}/opengraph-image`,
       email: `mailto:${profile.email}`,
       sameAs: [profile.linkedin, profile.github],
@@ -122,6 +122,13 @@ const jsonLd = {
         addressLocality: 'Lahore',
         addressCountry: 'PK',
       },
+      hasOccupation: {
+        '@type': 'Occupation',
+        name: profile.jobTitle,
+        occupationalCategory: '15-1252.00',
+        skills: skills.flatMap((group) => group.tags).join(', '),
+        occupationLocation: { '@type': 'City', name: 'Lahore' },
+      },
       hasCredential: certifications.map((cert) => ({
         '@type': 'EducationalOccupationalCredential',
         name: cert.title,
@@ -131,7 +138,7 @@ const jsonLd = {
     {
       '@type': 'WebSite',
       '@id': `${SITE_URL}/#website`,
-      url: SITE_URL,
+      url: `${SITE_URL}/`,
       name: profile.name,
       inLanguage: 'en',
       publisher: { '@id': `${SITE_URL}/#person` },
@@ -139,7 +146,7 @@ const jsonLd = {
     {
       '@type': 'ProfilePage',
       '@id': `${SITE_URL}/#profilepage`,
-      url: SITE_URL,
+      url: `${SITE_URL}/`,
       name: TITLE,
       description: DESCRIPTION,
       inLanguage: 'en',
