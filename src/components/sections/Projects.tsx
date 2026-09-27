@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   motion,
   AnimatePresence,
@@ -451,7 +452,27 @@ function ProjectItem({
         <motion.div
           animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 8 }}
           transition={{ duration: 0.4, delay: 0.2 }}
+          style={{ display: 'flex', flexWrap: 'wrap', gap: '24px', alignItems: 'center' }}
         >
+          {project.caseStudy && (
+            <Link
+              href={`/work/${project.caseStudy}`}
+              style={{
+                fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+                fontSize: '12px',
+                color: 'var(--accent)',
+                textDecoration: 'none',
+                borderBottom: '1px solid rgba(232,255,71,0.35)',
+                letterSpacing: '0.08em',
+                paddingBottom: '3px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              Read case study →
+            </Link>
+          )}
           {project.href && (
             <a
               href={project.href}
@@ -593,6 +614,25 @@ function MobileProjectCard({
             >
               {project.description}
             </p>
+            {project.caseStudy && (
+              <Link
+                href={`/work/${project.caseStudy}`}
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  fontFamily: 'var(--font-mono, "DM Mono"), monospace',
+                  fontSize: '11px',
+                  color: 'var(--accent)',
+                  textDecoration: 'none',
+                  borderBottom: '1px solid rgba(232,255,71,0.35)',
+                  letterSpacing: '0.08em',
+                  paddingBottom: '2px',
+                  display: 'inline-flex',
+                  marginTop: '16px',
+                }}
+              >
+                Read case study →
+              </Link>
+            )}
             {project.image ? (
               <span
                 style={{

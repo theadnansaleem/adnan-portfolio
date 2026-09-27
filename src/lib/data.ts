@@ -12,6 +12,7 @@ export const profile = {
     email: "heyadnansaleem@gmail.com",
     linkedin: "https://www.linkedin.com/in/theadnan",
     github: "https://github.com/theadnansaleem",
+    x: "https://x.com/adnan_muhamadi",
     url: "https://theadnansaleem.com",
     resume: "/Adnan-Saleem-Resume.pdf",
     // The CV summary, split into paragraphs; only the name was added to the opening sentence.
@@ -125,7 +126,8 @@ export const projects: Project[] = [
         tags: ["Next.js", "React", "TypeScript", "Redux", "Node.js", "Tailwind CSS"],
         gradient: "linear-gradient(135deg, #1a0a1f 0%, #2d1145 50%, #110820 100%)",
         href: "https://hayya.qa",
-        image: "/projects/hayya.png"
+        image: "/projects/hayya.png",
+        caseStudy: "hayya-qatar-evisa-platform"
     },
     {
         id: 2,
@@ -136,7 +138,8 @@ export const projects: Project[] = [
         tags: ["React", "TypeScript", "Redux Toolkit", "Micro Frontends (Module Federation)", "React Router", ".NET"],
         gradient: "linear-gradient(135deg, #0a1a20 0%, #0d3045 50%, #050f18 100%)",
         href: "https://qep.sc.qa",
-        image: "/projects/qep.png"
+        image: "/projects/qep.png",
+        caseStudy: "qatar-events-platform-module-federation"
     },
     {
         id: 3,
@@ -157,7 +160,8 @@ export const projects: Project[] = [
         tags: ["React", "TypeScript", "Zustand", "Ant Design", "Node.js", "PHP"],
         gradient: "linear-gradient(135deg, #0f1f0a 0%, #1a3311 50%, #0a1a08 100%)",
         href: "https://volopa.com",
-        image: "/projects/volopa.png"
+        image: "/projects/volopa.png",
+        caseStudy: "volopa-react-performance"
     },
     {
         id: 5,

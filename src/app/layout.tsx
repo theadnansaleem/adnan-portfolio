@@ -78,6 +78,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
+    creator: '@adnan_muhamadi',
     title: TITLE,
     description: DESCRIPTION,
   },
@@ -111,7 +112,7 @@ const jsonLd = {
       url: `${SITE_URL}/`,
       image: `${SITE_URL}/opengraph-image`,
       email: `mailto:${profile.email}`,
-      sameAs: [profile.linkedin, profile.github],
+      sameAs: [profile.linkedin, profile.github, profile.x],
       knowsAbout: [...new Set(skills.flatMap((group) => group.tags))],
       alumniOf: [
         { '@type': 'CollegeOrUniversity', name: 'Iqra University' },
