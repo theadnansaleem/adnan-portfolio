@@ -46,6 +46,7 @@ export default async function CaseStudyPage({
   const study = caseStudyBySlug(slug);
   if (!study) notFound();
 
+  const others = caseStudies.filter((other) => other.slug !== study.slug);
   const pageUrl = `${SITE_URL}/work/${study.slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
@@ -66,7 +67,8 @@ export default async function CaseStudyPage({
         "@id": `${pageUrl}#breadcrumb`,
         itemListElement: [
           { "@type": "ListItem", position: 1, name: profile.name, item: `${SITE_URL}/` },
-          { "@type": "ListItem", position: 2, name: study.title, item: pageUrl },
+          { "@type": "ListItem", position: 2, name: "Case studies", item: `${SITE_URL}/work` },
+          { "@type": "ListItem", position: 3, name: study.title, item: pageUrl },
         ],
       },
     ],
@@ -88,18 +90,15 @@ export default async function CaseStudyPage({
         }}
       />
 
-      <Link
-        href="/#projects"
-        style={{
-          ...mono,
-          fontSize: "12px",
-          color: "var(--accent)",
-          textDecoration: "none",
-          textTransform: "uppercase",
-        }}
-      >
-        ← All projects
-      </Link>
+      <nav aria-label="Breadcrumb" style={{ ...mono, fontSize: "12px" }}>
+        <Link href="/" style={{ color: "var(--accent)", textDecoration: "none" }}>
+          {profile.name}
+        </Link>
+        <span style={{ color: "var(--muted)" }}> / </span>
+        <Link href="/work" style={{ color: "var(--accent)", textDecoration: "none" }}>
+          Case studies
+        </Link>
+      </nav>
 
       <h1
         style={{
@@ -187,6 +186,42 @@ export default async function CaseStudyPage({
           </span>
         ))}
       </div>
+
+      {others.length > 0 && (
+        <>
+          <h2
+            style={{
+              ...mono,
+              fontSize: "11px",
+              color: "var(--accent)",
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              margin: "48px 0 20px",
+            }}
+          >
+            More case studies
+          </h2>
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            {others.map((other) => (
+              <Link
+                key={other.slug}
+                href={`/work/${other.slug}`}
+                style={{
+                  fontSize: "15px",
+                  lineHeight: 1.6,
+                  color: "var(--text)",
+                  opacity: "var(--dim)",
+                  textDecoration: "none",
+                  borderLeft: "1px solid var(--border)",
+                  paddingLeft: "16px",
+                }}
+              >
+                {other.title} →
+              </Link>
+            ))}
+          </div>
+        </>
+      )}
 
       <div
         style={{
