@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Agent worktrees hold full copies of src, so eslint lints the same files
+    // three times over and buries real findings under thousands of duplicates.
+    ".claude/**",
   ]),
 ]);
 
