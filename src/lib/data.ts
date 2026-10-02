@@ -216,7 +216,8 @@ export const projects: Project[] = [
         tags: ["React", "TypeScript", "C#", "Blazor Server", ".NET"],
         gradient: "linear-gradient(135deg, #0a1020 0%, #0d2045 50%, #060c1a 100%)",
         href: "https://primary-target.com/",
-        image: "/projects/codex.png"
+        image: "/projects/codex.png",
+        caseStudy: "codex-vehicle-cybersecurity-platform"
     },
     {
         id: 10,

@@ -37,6 +37,15 @@ const mono = {
   letterSpacing: "0.06em",
 } as const;
 
+const accentLink = {
+  ...mono,
+  fontSize: "12px",
+  color: "var(--accent)",
+  textDecoration: "none",
+  borderBottom: "1px solid var(--accent-soft-line)",
+  paddingBottom: "2px",
+} as const;
+
 export default async function CaseStudyPage({
   params,
 }: {
@@ -223,6 +232,38 @@ export default async function CaseStudyPage({
         </>
       )}
 
+      <h2
+        style={{
+          ...mono,
+          fontSize: "11px",
+          color: "var(--accent)",
+          letterSpacing: "0.25em",
+          textTransform: "uppercase",
+          margin: "48px 0 20px",
+        }}
+      >
+        Work with me
+      </h2>
+      <p style={{ fontSize: "15px", lineHeight: 1.75, opacity: "var(--dim)", margin: "0 0 20px" }}>
+        Available immediately. Based in Lahore, Pakistan, open to remote work and relocation.
+      </p>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "24px" }}>
+        {[
+          { label: "Email me", href: `mailto:${profile.email}` },
+          { label: "LinkedIn ↗", href: profile.linkedin, newTab: true },
+          { label: "Download CV ↗", href: profile.resume, newTab: true },
+        ].map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            {...(link.newTab && { target: "_blank", rel: "noopener noreferrer" })}
+            style={accentLink}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+
       <div
         style={{
           display: "flex",
@@ -239,14 +280,7 @@ export default async function CaseStudyPage({
             href={study.live}
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              ...mono,
-              fontSize: "12px",
-              color: "var(--accent)",
-              textDecoration: "none",
-              borderBottom: "1px solid var(--accent-soft-line)",
-              paddingBottom: "2px",
-            }}
+            style={accentLink}
           >
             Visit {new URL(study.live).hostname} ↗
           </a>

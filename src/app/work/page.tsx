@@ -6,7 +6,7 @@ import { profile } from "@/lib/data";
 const SITE_URL = profile.url;
 const TITLE = "Case studies: government, fintech and cybersecurity platforms";
 const DESCRIPTION =
-  "Case studies by M. Adnan Saleem: Module Federation micro frontends on the Qatar Events Platform, the Hayya eVisa platform, and React performance work at Volopa.";
+  "Case studies by M. Adnan Saleem: Module Federation micro frontends, the Hayya eVisa platform, React performance, a Visual FoxPro to .NET migration, and more.";
 
 export const metadata: Metadata = {
   title: TITLE,

@@ -4,10 +4,14 @@ import type { CaseStudy } from "@/types";
 // Case studies reuse the CV bullets and project copy already in data.ts.
 // Nothing here is written fresh: pick() selects bullets from the role and
 // throws at build time if the CV wording changed and a filter stopped matching.
+function job(company: string) {
+  const found = jobs.find((j) => j.company === company);
+  if (!found) throw new Error(`case-studies: no job for "${company}"`);
+  return found;
+}
+
 function pick(company: string, match: RegExp): string[] {
-  const job = jobs.find((j) => j.company === company);
-  if (!job) throw new Error(`case-studies: no job for "${company}"`);
-  const bullets = job.bullets.filter((b) => match.test(b));
+  const bullets = job(company).bullets.filter((b) => match.test(b));
   if (bullets.length === 0) {
     throw new Error(`case-studies: ${match} matched no bullet of "${company}"`);
   }
@@ -21,13 +25,14 @@ function project(title: string) {
 }
 
 function role(company: string) {
-  const job = jobs.find((j) => j.company === company);
-  if (!job) throw new Error(`case-studies: no job for "${company}"`);
-  return { company: job.company, role: job.role, period: job.period, location: job.location };
+  const { role, period, location } = job(company);
+  return { company, role, period, location };
 }
 
 const SC = "Supreme Committee for Delivery & Legacy";
 const VOLOPA = "Volopa Financial Services";
+const BENINGTON = "Benington Financials Canada";
+const PRIMARY_TARGET = "Primary Target GmbH";
 
 export const caseStudies: CaseStudy[] = [
   {
@@ -68,6 +73,31 @@ export const caseStudies: CaseStudy[] = [
     live: project("Volopa Financial Services").href,
     image: project("Volopa Financial Services").image,
     ...role(VOLOPA),
+  },
+  {
+    slug: "visual-foxpro-to-dotnet-migration",
+    title: "Migrating 42 financial workflows from Visual FoxPro to .NET",
+    metaTitle: "Visual FoxPro to .NET Core migration: 42 financial workflows",
+    description:
+      "A 2.5-year solo migration of 42 financial workflows from Visual FoxPro to C#/.NET Core, Entity Framework Core, SQL Server, Angular and Blazor.",
+    // No project card for this engagement, so the opening CV bullet is the summary.
+    summary: pick(BENINGTON, /Independently migrated/)[0],
+    highlights: pick(BENINGTON, /Redesigned|Rebuilt|Replaced/),
+    stack: job(BENINGTON).tags,
+    ...role(BENINGTON),
+  },
+  {
+    slug: "codex-vehicle-cybersecurity-platform",
+    title: "Real-time threat dashboards on a vehicle cybersecurity platform",
+    metaTitle: "Codex vehicle cybersecurity platform: React, .NET and RBAC",
+    description:
+      "Codex assesses attack surfaces across 60M+ lines of vehicle software: real-time React dashboards over WebSockets, a Blazor Server module, and 4-tier RBAC.",
+    summary: project("Codex: Cybersecurity Platform").description,
+    highlights: pick(PRIMARY_TARGET, /./),
+    stack: job(PRIMARY_TARGET).tags,
+    live: project("Codex: Cybersecurity Platform").href,
+    image: project("Codex: Cybersecurity Platform").image,
+    ...role(PRIMARY_TARGET),
   },
 ];
 
