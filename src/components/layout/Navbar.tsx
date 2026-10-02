@@ -66,7 +66,7 @@ export default function Navbar() {
       >
         {/* Logo */}
         <a
-          href="#home"
+          href={sectionHref('#home')}
           style={{
             fontFamily: 'var(--font-display, "Bebas Neue"), cursive',
             fontSize: '22px',
