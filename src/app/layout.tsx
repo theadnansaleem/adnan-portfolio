@@ -76,11 +76,10 @@ export const metadata: Metadata = {
     firstName: 'Adnan',
     lastName: 'Saleem',
   },
+  // No title or description here: each page's card falls back to its own Open Graph values.
   twitter: {
     card: 'summary_large_image',
     creator: '@adnan_muhamadi',
-    title: TITLE,
-    description: DESCRIPTION,
   },
   icons: {
     icon: [
@@ -143,17 +142,6 @@ const jsonLd = {
       name: profile.name,
       inLanguage: 'en',
       publisher: { '@id': `${SITE_URL}/#person` },
-    },
-    {
-      '@type': 'ProfilePage',
-      '@id': `${SITE_URL}/#profilepage`,
-      url: `${SITE_URL}/`,
-      name: TITLE,
-      description: DESCRIPTION,
-      inLanguage: 'en',
-      isPartOf: { '@id': `${SITE_URL}/#website` },
-      mainEntity: { '@id': `${SITE_URL}/#person` },
-      dateModified: new Date().toISOString(),
     },
   ],
 };

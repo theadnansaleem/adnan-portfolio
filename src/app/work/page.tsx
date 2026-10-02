@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     url: "/work",
     title: `${TITLE} | ${profile.name}`,
     description: DESCRIPTION,
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: profile.name }],
   },
 };
 
@@ -57,7 +58,7 @@ export default function WorkIndexPage() {
   };
 
   return (
-    <main
+    <div
       style={{
         padding: "clamp(120px, 18vh, 200px) clamp(20px, 4vw, 48px) clamp(60px, 10vw, 120px)",
         maxWidth: "860px",
@@ -160,6 +161,6 @@ export default function WorkIndexPage() {
       >
         ← {profile.name}
       </Link>
-    </main>
+    </div>
   );
 }

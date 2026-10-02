@@ -396,7 +396,9 @@ function ProjectItem({
                   ease: [0.76, 0, 0.24, 1],
                 }}
               >
-                {word}
+                {/* Trailing space keeps the words separate for crawlers and screen
+                    readers; it collapses at the end of the inline-block, so nothing moves. */}
+                {`${word} `}
               </motion.span>
             </span>
           ))}

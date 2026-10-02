@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export default function Footer() {
   const [time, setTime] = useState<string | null>(null);
@@ -59,6 +60,9 @@ export default function Footer() {
 
       <span style={monoStyle}>© {year} M. Adnan Saleem. All rights reserved.</span>
       <span style={monoStyle}>Senior Full-Stack Software Engineer · Lahore, Pakistan</span>
+      <Link href="/work" style={{ ...monoStyle, color: 'var(--accent)' }}>
+        Case studies
+      </Link>
       {/* key={time} remounts span on each tick → restarts clockGlow animation */}
       <span
         key={time}
