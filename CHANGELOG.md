@@ -7,7 +7,7 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
-## Unreleased
+## 2.1.0 - 2026-10-04
 
 ### Added
 - `/about`: photo wall with a full-size viewer, quick answers, the route so far, team clocks, a contact card download and a share button.
