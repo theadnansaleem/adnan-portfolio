@@ -33,6 +33,8 @@ const SC = "Supreme Committee for Delivery & Legacy";
 const VOLOPA = "Volopa Financial Services";
 const BENINGTON = "Benington Financials Canada";
 const PRIMARY_TARGET = "Primary Target GmbH";
+const TURING = "Turing Enterprises Inc.";
+const TECHSURGE = "TechSurge Inc";
 
 export const caseStudies: CaseStudy[] = [
   {
@@ -98,6 +100,29 @@ export const caseStudies: CaseStudy[] = [
     live: project("Codex: Cybersecurity Platform").href,
     image: project("Codex: Cybersecurity Platform").image,
     ...role(PRIMARY_TARGET),
+  },
+  {
+    slug: "ai-evaluation-training-interfaces",
+    title: "Evaluation and training interfaces used by 100,000+ people",
+    metaTitle: "AI evaluation and data-labeling interfaces: React, Node.js, AWS",
+    description:
+      "Full-stack evaluation, human feedback and data-labeling interfaces used by 100,000+ people, built with React, Angular, TypeScript and Node.js and deployed on AWS.",
+    // No project card is tied to this role, so the opening CV bullet is the summary.
+    summary: pick(TURING, /100,000\+ people/)[0],
+    highlights: pick(TURING, /evaluation dashboards|AWS EC2/),
+    stack: job(TURING).tags,
+    ...role(TURING),
+  },
+  {
+    slug: "reusable-ui-component-libraries",
+    title: "Reusable UI component libraries across two products",
+    metaTitle: "Reusable React and Angular component libraries",
+    description:
+      "Responsive, cross-browser React and Angular applications with reusable UI component libraries adopted across 2 internal projects, and a promotion within 6 months.",
+    summary: pick(TECHSURGE, /component libraries/)[0],
+    highlights: pick(TECHSURGE, /Promoted/),
+    stack: job(TECHSURGE).tags,
+    ...role(TECHSURGE),
   },
 ];
 

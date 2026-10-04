@@ -1,163 +1,26 @@
-/* Tailwind v4 */
+/* Tailwind v4: used for its base reset. Page styles live in components/home/home.css. */
 @import "tailwindcss";
 
-@theme {
-  /* Font families — CSS variables injected by next/font/google on <html> */
-  --font-family-display: var(--font-display);
-  --font-family-body:    var(--font-body);
-  --font-family-mono:    var(--font-mono);
-
-  /* Brand colors — now usable as text-accent, bg-accent, border-accent2, etc. */
-  --color-accent:  #e8ff47;
-  --color-accent2: #ff4747;
-  --color-muted:   #555555;
-
-  /* Animations */
-  --animate-marquee:     marquee 20s linear infinite;
-  --animate-pulse-dot:   pulse-dot 2s ease-in-out infinite;
-  --animate-scroll-line: scrollLine 2s ease-in-out infinite;
-}
-
-/* ─── Design Tokens ─────────────────────────────────────────────────────── */
-/* --accent is the readable accent (text, lines, dots). --accent-fill is the  */
-/* bright lime reserved for filled surfaces that carry black text, so it must */
-/* stay light in both themes.                                                 */
+/* ─── Page colour ───────────────────────────────────────────────────────── */
+/* Only what shows before and behind the page frame. Dark is the default;    */
+/* data-theme on <html> is set by the inline script in layout.tsx.           */
 :root {
-  --bg:            #050505;
-  --bg2:           #0a0a0a;
-  --accent:        #e8ff47;
-  --accent-fill:   #e8ff47;
-  --accent2:       #ff4747;
-  --text:          #f0f0f0;
-  /* Secondary text. #808080 keeps WCAG AA (4.5:1) on --bg, --bg2 and glass cards */
-  --muted:         #808080;
-  --border:        rgba(255, 255, 255, 0.06);
-  --glass:         rgba(255, 255, 255, 0.03);
-  --dot:           rgba(255, 255, 255, 0.07);
-  --ghost:         rgba(255, 255, 255, 0.04);
-  --stroke:        rgba(255, 255, 255, 0.55);
-  --stroke-strong: rgba(240, 240, 240, 0.9);
-  --hero-video:    0.38;
-  --band-video:    0.65;
-  --nav-blend:     difference;
-  --accent-soft:      rgba(232, 255, 71, 0.04);
-  --accent-soft-line: rgba(232, 255, 71, 0.18);
-  /* Opacity for de-emphasised copy. Low values read fine as light-on-black but
-     turn to mush on paper, so the light theme pushes them much closer to 1. */
-  --dim:           0.55;
-  /* Tag chips and outline buttons need a firmer edge than the hairline used
-     for cards and dividers — a 6%-alpha line reads on black but not on paper. */
-  --chip-line:     rgba(255, 255, 255, 0.06);
-  --chip-bg:       transparent;
-  --hover-line:    rgba(232, 255, 71, 0.25);
-  /* Scrim colour behind the hero video, as bare RGB channels so the overlays
-     can vary alpha. Must match --bg or the gradients tint the page. */
-  --scrim-rgb:     5, 5, 5;
-  /* Orb hues as bare channels so each section keeps its own alpha. Bright lime
-     glows on black; on paper it needs a dark hue to register as a tint at all. */
-  --orb-a-rgb:     232, 255, 71;
-  --orb-b-rgb:     255, 71, 71;
-  /* Frosted surface for the floating music controls. Paired with the existing
-     backdrop-filter, the light value reads as glass over paper. */
-  --panel:         rgba(10, 10, 10, 0.85);
-  --panel-shadow:  0 4px 24px rgba(0, 0, 0, 0.4);
-  /* Nav links brighten on hover. White pops against the dark theme but is
-     invisible on paper, so light goes the other way and deepens the ink. */
-  --nav-hover:     #ffffff;
+  --bg:   #0d0e0b;
+  --text: #f4f3ee;
 }
-
-/* ─── Light theme ───────────────────────────────────────────────────────── */
-/* Warm paper rather than pure white — keeps the film-grain overlay readable  */
-/* and stops the accent from glaring. Applied via data-theme on <html>.       */
 [data-theme="light"] {
-  --bg:            #f4f3ee;
-  --bg2:           #eae8e0;
-  --accent:        #5c6900;
-  --accent2:       #c62f2f;
-  --text:          #12120f;
-  --muted:         #565550;
-  --border:        rgba(0, 0, 0, 0.16);
-  --glass:         rgba(255, 255, 255, 0.5);
-  --dot:           rgba(0, 0, 0, 0.08);
-  --ghost:         rgba(0, 0, 0, 0.05);
-  --stroke:        rgba(0, 0, 0, 0.45);
-  --stroke-strong: rgba(18, 18, 15, 0.9);
-  /* The background footage is dark cinematic grade — at any opacity it greys
-     out the paper. The light theme drops it and leans on the orbs + dot grid. */
-  --hero-video:    0;
-  --band-video:    0;
-  --nav-blend:     normal;
-  --accent-soft:      rgba(92, 105, 0, 0.10);
-  --accent-soft-line: rgba(92, 105, 0, 0.75);
-  --dim:           0.85;
-  --chip-line:     rgba(0, 0, 0, 0.45);
-  --chip-bg:       rgba(0, 0, 0, 0.035);
-  --hover-line:    rgba(92, 105, 0, 0.55);
-  --scrim-rgb:     244, 243, 238;
-  --orb-a-rgb:     92, 105, 0;
-  --orb-b-rgb:     198, 47, 47;
-  --panel:         rgba(255, 255, 255, 0.55);
-  --panel-shadow:  0 4px 20px rgba(0, 0, 0, 0.10);
-  --nav-hover:     #000000;
+  --bg:   #f7f6f2;
+  --text: #12130f;
 }
 
-/* ─── Reset & Base ───────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; position: relative; }
+html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--text);
-  transition: background 0.4s ease, color 0.4s ease;
-  font-family: var(--font-body);
   overflow-x: hidden;
-  cursor: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* ─── Keyframes ─────────────────────────────────────────────────────────── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes slideUp {
-  from { transform: translateY(105%); }
-  to   { transform: translateY(0); }
-}
-@keyframes zoomIn {
-  from { opacity: 0; transform: scale(0.92); }
-  to   { opacity: 1; transform: scale(1); }
-}
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.4; transform: scale(0.7); }
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-@keyframes scrollLine {
-  0%     { transform: scaleY(0); transform-origin: top; }
-  50%    { transform: scaleY(1); transform-origin: top; }
-  50.01% { transform-origin: bottom; }
-  100%   { transform: scaleY(0); transform-origin: bottom; }
-}
-@keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position:  200% center; }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-12px); }
-}
-@keyframes rotateSlowly {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-@keyframes clockGlow {
-  0%   { text-shadow: 0 0 8px rgba(232,255,71,0.7), 0 0 16px rgba(232,255,71,0.3); color: var(--accent); }
-  60%  { text-shadow: 0 0 4px rgba(232,255,71,0.3); color: var(--muted); }
-  100% { text-shadow: none; color: var(--muted); }
 }
 
 /* ─── Theme toggle icon ──────────────────────────────────────────────────── */
@@ -167,170 +30,12 @@ body {
 [data-theme="light"] .theme-sun  { display: none; }
 [data-theme="light"] .theme-moon { display: inline-flex; }
 
-/* ─── Band aurora (light theme only) ─────────────────────────────────────── */
-/* The dark section gets its motion from video footage, which reads as a washed
-   out grey smear on paper whatever the blend mode. Light swaps it for a slow
-   drifting colour field built from the same orb hues. */
-.band-aurora { display: none; }
-[data-theme="light"] .band-aurora {
-  display: block;
-  position: absolute;
-  inset: -15%;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 42% 52% at 68% 32%, rgba(var(--orb-a-rgb), 0.22) 0%, transparent 62%),
-    radial-gradient(ellipse 38% 46% at 84% 68%, rgba(var(--orb-b-rgb), 0.13) 0%, transparent 64%),
-    radial-gradient(ellipse 46% 42% at 58% 82%, rgba(var(--orb-a-rgb), 0.14) 0%, transparent 66%);
-  filter: blur(40px);
-  animation: auroraDrift 22s ease-in-out infinite alternate;
-  will-change: transform;
-}
-@keyframes auroraDrift {
-  0%   { transform: translate3d(0, 0, 0) scale(1); }
-  50%  { transform: translate3d(-4%, 3%, 0) scale(1.1); }
-  100% { transform: translate3d(3%, -3%, 0) scale(1.04); }
-}
-
-/* ─── Navbar blend ───────────────────────────────────────────────────────── */
-/* Difference blend keeps nav text legible over the dark hero video. On the   */
-/* light theme it inverts the ink to near-white, so the theme turns it off.   */
-.nav-blend { mix-blend-mode: var(--nav-blend); }
-
-/* ─── Custom Cursor ──────────────────────────────────────────────────────── */
-.cursor-dot {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--accent);
-  pointer-events: none;
-  mix-blend-mode: difference;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.25s;
-  will-change: transform;
-}
-.cursor-dot.hovered {
-  width: 40px;
-  height: 40px;
-  background: var(--accent2);
-}
-.cursor-ring {
-  position: fixed;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(232, 255, 71, 0.6);
-  pointer-events: none;
-  mix-blend-mode: difference;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.25s, border-color 0.25s;
-  will-change: transform;
-}
-.cursor-ring.hovered {
-  opacity: 0;
-}
-
-/* No blend mode on paper: difference inverts to a garish cyan and multiply
-   still paints a solid disc over whatever is under it. The hover state becomes
-   an outline instead, so it can never occlude the thing it is pointing at. */
-[data-theme="light"] .cursor-dot,
-[data-theme="light"] .cursor-ring { mix-blend-mode: normal; }
-[data-theme="light"] .cursor-ring { border-color: var(--accent); }
-[data-theme="light"] .cursor-dot.hovered {
-  background: transparent;
-  border: 2px solid var(--accent2);
-}
-
-@media (pointer: coarse) {
-  .cursor-dot, .cursor-ring { display: none; }
-  body { cursor: auto; }
-}
-
-/* ─── Marquee ────────────────────────────────────────────────────────────── */
-.marquee-inner {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  animation: marquee 25s linear infinite;
-  width: max-content;
-  will-change: transform;
-}
-.marquee-inner:hover {
-  animation-play-state: paused;
-}
-
-/* ─── Section Label line ─────────────────────────────────────────────────── */
-.section-label-line {
-  background: linear-gradient(90deg, var(--accent), transparent);
-}
-
-/* ─── Scroll indicator ───────────────────────────────────────────────────── */
-.scroll-line {
-  animation: scrollLine 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  will-change: transform;
-}
-
-/* ─── Glass card ─────────────────────────────────────────────────────────── */
-.glass-card {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-/* ─── Glow text ──────────────────────────────────────────────────────────── */
-.text-glow {
-  text-shadow: 0 0 40px rgba(232, 255, 71, 0.4),
-               0 0 80px rgba(232, 255, 71, 0.15);
-}
-
-/* ─── Shimmer effect ─────────────────────────────────────────────────────── */
-.shimmer {
-  background: linear-gradient(
-    105deg,
-    transparent 40%,
-    rgba(255, 255, 255, 0.06) 50%,
-    transparent 60%
-  );
-  background-size: 200% auto;
-  animation: shimmer 3s linear infinite;
-}
-
-/* ─── Selection color ────────────────────────────────────────────────────── */
 ::selection {
-  background: var(--accent-fill);
-  color: #000;
-}
-
-/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 2px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--muted);
-}
-
-/* ─── Hero — Nest Hub (1024×600) font fix ───────────────────────────────── */
-/* The badge overlaps the fixed navbar at 600 px height because the title    */
-/* stack is too tall. Shrinking from 22vh→18vh at ≤650 px moves content top  */
-/* to ~106 px — safely clear of the ~70 px navbar. !important is required to */
-/* override the React inline style. Nest Hub Max (800 px) is unaffected.     */
-@media (max-height: 650px) {
-  .hero-title-word {
-    font-size: clamp(52px, min(14vw, 18vh), 210px) !important;
-  }
+  background: #d2ff00;
+  color: #0d0e0b;
 }
 
 /* ─── Reduced motion ─────────────────────────────────────────────────────── */
-/* Collapses all CSS animations/transitions for users who opt out of motion.  */
-/* Framer Motion honours this automatically via its own media-query check.    */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -340,11 +45,18 @@ body {
   }
 }
 
-/* ─── Focus visible ring ─────────────────────────────────────────────────── */
-/* Keyboard nav: shows accent-coloured ring on any focused interactive elem.  */
-/* Using :focus-visible so mouse clicks do NOT show the ring (UX-clean).      */
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 2px;
+/* ─── Page-change curtain ────────────────────────────────────────────────── */
+/* Driven by PageTransition: "cover" slides it up over the page, "lift" carries
+   it off the top once the next route is in place. */
+.pt-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  background: #d2ff00;
+  transform: translateY(101%);
+  pointer-events: none;
+  visibility: hidden; /* parked: nothing to paint until a navigation starts */
 }
+.pt-curtain[data-state] { visibility: visible; }
+.pt-curtain[data-state="cover"] { transform: none; transition: transform 0.45s cubic-bezier(0.7, 0, 0.2, 1); }
+.pt-curtain[data-state="lift"] { transform: translateY(-101%); transition: transform 0.6s cubic-bezier(0.7, 0, 0.2, 1) 0.1s; }

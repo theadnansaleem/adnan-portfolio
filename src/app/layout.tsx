@@ -1,38 +1,9 @@
 import type { Metadata, Viewport } from 'next';
-import { Bebas_Neue, Bricolage_Grotesque, DM_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
-import SmoothScrollProvider from '@/components/SmoothScrollProvider';
-import { MusicPlayerProvider } from '@/context/MusicPlayerContext';
-import PageLoader from '@/components/PageLoader';
-import CustomCursor from '@/components/ui/CustomCursor';
-import NoiseOverlay from '@/components/ui/NoiseOverlay';
-import MusicPlayer from '@/components/ui/MusicPlayer';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
+import SiteShell from '@/components/layout/SiteShell';
 import { certifications, profile, skills } from '@/lib/data';
-
-const bebasNeue = Bebas_Neue({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-display',
-  display: 'swap',
-});
-
-const bricolage = Bricolage_Grotesque({
-  subsets: ['latin'],
-  variable: '--font-body',
-  display: 'swap',
-});
-
-const dmMono = DM_Mono({
-  weight: ['300', '400'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-});
 
 const SITE_URL = profile.url;
 const TITLE = `${profile.name} | ${profile.jobTitle}`;
@@ -42,7 +13,7 @@ const DESCRIPTION =
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#050505',
+  themeColor: '#0d0e0b',
 };
 
 export const metadata: Metadata = {
@@ -150,7 +121,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${bebasNeue.variable} ${bricolage.variable} ${dmMono.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -169,46 +139,36 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <SmoothScrollProvider>
-          <MusicPlayerProvider>
-            <PageLoader />
-            <CustomCursor />
-            <NoiseOverlay />
-            {/* Google Analytics */}
-            {process.env.NEXT_PUBLIC_GA_ID && (
-              <>
-                <Script
-                  src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-                  strategy="afterInteractive"
-                />
-                <Script id="google-analytics" strategy="afterInteractive">
-                  {`
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-                  `}
-                </Script>
-              </>
-            )}
-            {/* Microsoft Clarity */}
-            {process.env.NEXT_PUBLIC_CLARITY_ID && (
-              <Script id="microsoft-clarity" strategy="afterInteractive">
-                {`
-                  (function(c,l,a,r,i,t,y){
-                    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-                  })(window, document, "clarity", "script", '${process.env.NEXT_PUBLIC_CLARITY_ID}');
-                `}
-              </Script>
-            )}
-            <MusicPlayer />
-            <Navbar />
-            <main id="main-content">{children}</main>
-            <Footer />
-          </MusicPlayerProvider>
-        </SmoothScrollProvider>
+        {/* Google Analytics */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+              `}
+            </Script>
+          </>
+        )}
+        {/* Microsoft Clarity */}
+        {process.env.NEXT_PUBLIC_CLARITY_ID && (
+          <Script id="microsoft-clarity" strategy="afterInteractive">
+            {`
+              (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", '${process.env.NEXT_PUBLIC_CLARITY_ID}');
+            `}
+          </Script>
+        )}
+        <SiteShell>{children}</SiteShell>
         <Analytics />
       </body>
     </html>

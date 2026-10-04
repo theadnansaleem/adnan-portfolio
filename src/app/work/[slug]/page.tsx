@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import PageFrame from "@/components/home/PageFrame";
 import { caseStudies, caseStudyBySlug } from "@/lib/case-studies";
 import { profile } from "@/lib/data";
 
@@ -32,20 +34,6 @@ export async function generateMetadata({
   };
 }
 
-const mono = {
-  fontFamily: 'var(--font-mono, "DM Mono"), monospace',
-  letterSpacing: "0.06em",
-} as const;
-
-const accentLink = {
-  ...mono,
-  fontSize: "12px",
-  color: "var(--accent)",
-  textDecoration: "none",
-  borderBottom: "1px solid var(--accent-soft-line)",
-  paddingBottom: "2px",
-} as const;
-
 export default async function CaseStudyPage({
   params,
 }: {
@@ -55,7 +43,8 @@ export default async function CaseStudyPage({
   const study = caseStudyBySlug(slug);
   if (!study) notFound();
 
-  const others = caseStudies.filter((other) => other.slug !== study.slug);
+  const index = caseStudies.indexOf(study);
+  const next = caseStudies[(index + 1) % caseStudies.length];
   const pageUrl = `${SITE_URL}/work/${study.slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
@@ -84,219 +73,83 @@ export default async function CaseStudyPage({
   };
 
   return (
-    <article
-      style={{
-        padding:
-          "clamp(120px, 18vh, 200px) clamp(20px, 4vw, 48px) clamp(60px, 10vw, 120px)",
-        maxWidth: "860px",
-        margin: "0 auto",
-      }}
-    >
+    <PageFrame>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
       />
+      <article className="hx-study">
+        <header className="hx-head">
+          <nav aria-label="Breadcrumb" className="hx-cap hx-crumbs">
+            <Link href="/">{profile.name}</Link> / <Link href="/work">Case studies</Link> / <b>{String(index + 1).padStart(2, "0")}</b>
+          </nav>
+          <h1>{study.title}</h1>
+          <p>{study.summary}</p>
+        </header>
 
-      <nav aria-label="Breadcrumb" style={{ ...mono, fontSize: "12px" }}>
-        <Link href="/" style={{ color: "var(--accent)", textDecoration: "none" }}>
-          {profile.name}
-        </Link>
-        <span style={{ color: "var(--muted)" }}> / </span>
-        <Link href="/work" style={{ color: "var(--accent)", textDecoration: "none" }}>
-          Case studies
-        </Link>
-      </nav>
+        <dl className="hx-stats hx-card">
+          <div><dt>{study.company}</dt><dd>Company</dd></div>
+          <div><dt>{study.role}</dt><dd>Role</dd></div>
+          <div><dt>{study.period}</dt><dd>Period</dd></div>
+          <div><dt>{study.location}</dt><dd>Location</dd></div>
+        </dl>
 
-      <h1
-        style={{
-          fontFamily: 'var(--font-display, "Bebas Neue"), cursive',
-          fontSize: "clamp(34px, 6vw, 64px)",
-          lineHeight: 1,
-          letterSpacing: "0.01em",
-          margin: "28px 0 16px",
-        }}
-      >
-        {study.title}
-      </h1>
-
-      <p style={{ ...mono, fontSize: "12px", color: "var(--muted)", margin: 0 }}>
-        {study.role} · {study.company} · {study.period} · {study.location}
-      </p>
-
-      <p
-        style={{
-          fontSize: "clamp(15px, 2.5vw, 18px)",
-          lineHeight: 1.8,
-          opacity: "var(--dim)",
-          margin: "32px 0 0",
-        }}
-      >
-        {study.summary}
-      </p>
-
-      <h2
-        style={{
-          ...mono,
-          fontSize: "11px",
-          color: "var(--accent)",
-          letterSpacing: "0.25em",
-          textTransform: "uppercase",
-          margin: "48px 0 20px",
-        }}
-      >
-        What I did
-      </h2>
-      <ul
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "12px",
-          paddingLeft: "18px",
-          margin: 0,
-          fontSize: "15px",
-          lineHeight: 1.75,
-          opacity: "var(--dim)",
-          listStyle: "disc",
-        }}
-      >
-        {study.highlights.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-
-      <h2
-        style={{
-          ...mono,
-          fontSize: "11px",
-          color: "var(--accent)",
-          letterSpacing: "0.25em",
-          textTransform: "uppercase",
-          margin: "48px 0 20px",
-        }}
-      >
-        Stack
-      </h2>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-        {study.stack.map((tag) => (
-          <span
-            key={tag}
-            style={{
-              ...mono,
-              fontSize: "11px",
-              padding: "4px 12px",
-              border: "1px solid var(--chip-line)",
-              background: "var(--chip-bg)",
-              color: "var(--muted)",
-            }}
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-
-      {others.length > 0 && (
-        <>
-          <h2
-            style={{
-              ...mono,
-              fontSize: "11px",
-              color: "var(--accent)",
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              margin: "48px 0 20px",
-            }}
-          >
-            More case studies
-          </h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-            {others.map((other) => (
-              <Link
-                key={other.slug}
-                href={`/work/${other.slug}`}
-                style={{
-                  fontSize: "15px",
-                  lineHeight: 1.6,
-                  color: "var(--text)",
-                  opacity: "var(--dim)",
-                  textDecoration: "none",
-                  borderLeft: "1px solid var(--border)",
-                  paddingLeft: "16px",
-                }}
-              >
-                {other.title} →
-              </Link>
-            ))}
+        {study.image && (
+          <div className="hx-study-shot hx-card">
+            <Image src={study.image} alt={`${study.title} screenshot`} fill sizes="(max-width: 1280px) 100vw, 1180px" priority />
           </div>
-        </>
-      )}
-
-      <h2
-        style={{
-          ...mono,
-          fontSize: "11px",
-          color: "var(--accent)",
-          letterSpacing: "0.25em",
-          textTransform: "uppercase",
-          margin: "48px 0 20px",
-        }}
-      >
-        Work with me
-      </h2>
-      <p style={{ fontSize: "15px", lineHeight: 1.75, opacity: "var(--dim)", margin: "0 0 20px" }}>
-        Available immediately. Based in Lahore, Pakistan, open to remote work and relocation.
-      </p>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "24px" }}>
-        {[
-          { label: "Email me", href: `mailto:${profile.email}` },
-          { label: "LinkedIn ↗", href: profile.linkedin, newTab: true },
-          { label: "Download CV ↗", href: profile.resume, newTab: true },
-        ].map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            {...(link.newTab && { target: "_blank", rel: "noopener noreferrer" })}
-            style={accentLink}
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "24px",
-          alignItems: "center",
-          marginTop: "48px",
-          paddingTop: "24px",
-          borderTop: "1px solid var(--border)",
-        }}
-      >
-        {study.live && (
-          <a
-            href={study.live}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={accentLink}
-          >
-            Visit {new URL(study.live).hostname} ↗
-          </a>
         )}
-        <Link
-          href="/"
-          style={{
-            ...mono,
-            fontSize: "12px",
-            color: "var(--muted)",
-            textDecoration: "none",
-          }}
-        >
-          ← {profile.name}
+
+        <section className="hx-lab">
+          <div>
+            <p className="hx-cap"><b>01</b> The work</p>
+            <h2>What I did</h2>
+          </div>
+          <ol className="hx-steps">
+            {study.highlights.map((item, i) => (
+              <li key={item} className="hx-card">
+                <span className="hx-serif">{String(i + 1).padStart(2, "0")}</span>
+                <p>{item}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="hx-lab">
+          <div>
+            <p className="hx-cap"><b>02</b> Tools</p>
+            <h2>Stack</h2>
+          </div>
+          <ul className="hx-tags is-large">
+            {study.stack.map((tag) => <li key={tag}>{tag}</li>)}
+          </ul>
+        </section>
+
+        <section className="hx-study-cta hx-card">
+          <div>
+            <p className="hx-cap">Work with me</p>
+            <h2>Available immediately</h2>
+            <p>Based in Lahore, Pakistan, open to remote work and relocation.</p>
+          </div>
+          <div className="hx-actions">
+            <a className="hx-pill is-solid is-big" href={profile.resume} target="_blank" rel="noopener noreferrer">Download CV ↓</a>
+            <a className="hx-pill is-big" href={`mailto:${profile.email}`}>Email me</a>
+            <a className="hx-pill is-big" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            {study.live && (
+              <a className="hx-pill is-big" href={study.live} target="_blank" rel="noopener noreferrer">
+                Visit {new URL(study.live).hostname} ↗
+              </a>
+            )}
+          </div>
+        </section>
+
+        <Link className="hx-next" href={`/work/${next.slug}`}>
+          <span className="hx-cap">Next case study</span>
+          <strong>{next.title} <span aria-hidden="true">→</span></strong>
         </Link>
-      </div>
-    </article>
+      </article>
+    </PageFrame>
   );
 }

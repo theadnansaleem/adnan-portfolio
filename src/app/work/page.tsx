@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import PageFrame from "@/components/home/PageFrame";
 import { caseStudies } from "@/lib/case-studies";
 import { profile } from "@/lib/data";
 
@@ -20,11 +22,6 @@ export const metadata: Metadata = {
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: profile.name }],
   },
 };
-
-const mono = {
-  fontFamily: 'var(--font-mono, "DM Mono"), monospace',
-  letterSpacing: "0.06em",
-} as const;
 
 export default function WorkIndexPage() {
   const jsonLd = {
@@ -58,109 +55,41 @@ export default function WorkIndexPage() {
   };
 
   return (
-    <div
-      style={{
-        padding: "clamp(120px, 18vh, 200px) clamp(20px, 4vw, 48px) clamp(60px, 10vw, 120px)",
-        maxWidth: "860px",
-        margin: "0 auto",
-      }}
-    >
+    <PageFrame>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
       />
+      <header className="hx-head">
+        <nav aria-label="Breadcrumb" className="hx-cap hx-crumbs">
+          <Link href="/">{profile.name}</Link> / <b>Case studies</b>
+        </nav>
+        <h1>Case <em>studies</em></h1>
+        <p>Deeper write-ups of production work: the platforms, what I built, and the numbers from my CV.</p>
+      </header>
 
-      <nav aria-label="Breadcrumb" style={{ ...mono, fontSize: "12px" }}>
-        <Link href="/" style={{ color: "var(--accent)", textDecoration: "none" }}>
-          {profile.name}
-        </Link>
-        <span style={{ color: "var(--muted)" }}> / Case studies</span>
-      </nav>
-
-      <h1
-        style={{
-          fontFamily: 'var(--font-display, "Bebas Neue"), cursive',
-          fontSize: "clamp(34px, 6vw, 64px)",
-          lineHeight: 1,
-          letterSpacing: "0.01em",
-          margin: "28px 0 16px",
-        }}
-      >
-        Case studies
-      </h1>
-
-      <p
-        style={{
-          fontSize: "clamp(15px, 2.5vw, 18px)",
-          lineHeight: 1.8,
-          opacity: "var(--dim)",
-          margin: "0 0 48px",
-        }}
-      >
-        Deeper write-ups of production work: the platforms, what I built, and the numbers from my CV.
-      </p>
-
-      <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-        {caseStudies.map((study) => (
-          <Link
-            key={study.slug}
-            href={`/work/${study.slug}`}
-            style={{
-              display: "block",
-              border: "1px solid var(--border)",
-              background: "var(--glass)",
-              padding: "clamp(20px, 3vw, 32px)",
-              textDecoration: "none",
-              color: "inherit",
-            }}
-          >
-            <h2
-              style={{
-                fontFamily: 'var(--font-display, "Bebas Neue"), cursive',
-                fontSize: "clamp(20px, 3vw, 28px)",
-                letterSpacing: "0.03em",
-                lineHeight: 1.1,
-                margin: "0 0 10px",
-              }}
-            >
-              {study.title}
-            </h2>
-            <p style={{ ...mono, fontSize: "11px", color: "var(--muted)", margin: "0 0 12px" }}>
-              {study.company} · {study.period}
-            </p>
-            <p style={{ fontSize: "14px", lineHeight: 1.7, opacity: "var(--dim)", margin: 0 }}>
-              {study.description}
-            </p>
-            <span
-              style={{
-                ...mono,
-                fontSize: "12px",
-                color: "var(--accent)",
-                display: "inline-block",
-                marginTop: "16px",
-              }}
-            >
-              Read case study →
-            </span>
-          </Link>
+      <ol className="hx-studies">
+        {caseStudies.map((study, i) => (
+          <li key={study.slug} className="hx-card hx-tilt">
+            <Link href={`/work/${study.slug}`}>
+              <span className="hx-serif hx-studies-n">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <span className="hx-cap">{study.company} · {study.period}</span>
+                <h2>{study.title}</h2>
+                <p>{study.description}</p>
+                <span className="hx-pill">Read case study ↘</span>
+              </div>
+              {study.image && (
+                <div className="hx-shot">
+                  <Image src={study.image} alt="" fill sizes="(max-width: 1000px) 100vw, 420px" />
+                </div>
+              )}
+            </Link>
+          </li>
         ))}
-      </div>
-
-      <Link
-        href="/"
-        style={{
-          ...mono,
-          fontSize: "12px",
-          color: "var(--muted)",
-          textDecoration: "none",
-          display: "inline-block",
-          marginTop: "48px",
-        }}
-      >
-        ← {profile.name}
-      </Link>
-    </div>
+      </ol>
+    </PageFrame>
   );
 }
