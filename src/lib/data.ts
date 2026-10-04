@@ -140,7 +140,8 @@ export const projects: Project[] = [
         tags: ["React", "TypeScript", "Redux Toolkit", "Micro Frontends (Module Federation)", "React Router", ".NET"],
         gradient: "linear-gradient(135deg, #0a1a20 0%, #0d3045 50%, #050f18 100%)",
         href: "https://qep.sc.qa",
-        image: "/projects/qep.png",
+        // Blurred on purpose: the originals are logged-in views with names and figures
+        image: "/projects/qep-blurred.png",
         caseStudy: "qatar-events-platform-module-federation"
     },
     {
@@ -162,7 +163,7 @@ export const projects: Project[] = [
         tags: ["React", "TypeScript", "Zustand", "Ant Design", "Node.js", "PHP"],
         gradient: "linear-gradient(135deg, #0f1f0a 0%, #1a3311 50%, #0a1a08 100%)",
         href: "https://volopa.com",
-        image: "/projects/volopa.png",
+        image: "/projects/volopa-blurred.png",
         caseStudy: "volopa-react-performance"
     },
     {

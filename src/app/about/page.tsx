@@ -66,10 +66,7 @@ export default function AboutPage() {
                     <path d="M40 52C22 50 10 38 14 10" />
                     <path d="M4 20 14 8l9 13" />
                   </svg>
-                  <span>
-                    {moment.note}
-                    {moment.place && <small>{moment.place}</small>}
-                  </span>
+                  <span>{moment.note}</span>
                 </figcaption>
               </figure>
             </li>

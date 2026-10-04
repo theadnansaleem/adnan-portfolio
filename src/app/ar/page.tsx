@@ -42,7 +42,7 @@ const PLACES: Record<string, string> = {
 const IMPACT = [
   ['~40%', 'دورة إصدار أسرع', 'إعادة هيكلة واجهة React متجانسة إلى واجهات مصغّرة (Micro Frontends) باستخدام Module Federation.', 'Supreme Committee for Delivery & Legacy'],
   ['~70%', 'زمن عرض أقل', 'العرض الافتراضي (virtualization) والتخزين المؤقت لجداول تتجاوز 20,000 صف.', 'Volopa Financial Services'],
-  ['42', 'سير عمل مالي تم ترحيله', 'من Visual FoxPro إلى C#/.NET Core مع واجهات Angular و Blazor، كمهندس وحيد على المشروع.', 'Benington Financials Canada'],
+  ['42', 'مسار عمل مالي تم ترحيله', 'من Visual FoxPro إلى C#/.NET Core مع واجهات Angular و Blazor، كمهندس وحيد على المشروع.', 'Benington Financials Canada'],
   ['~35%', 'تحسّن في LCP', 'استيفاء معايير Core Web Vitals عبر التحميل المؤجّل وتقسيم الشيفرة.', 'Supreme Committee for Delivery & Legacy'],
   ['60M+', 'سطر من برمجيات المركبات', 'لوحات لحظية لرصد التهديدات عبر WebSocket لمنصة Codex للأمن السيبراني.', 'Primary Target GmbH'],
   ['180+', 'دولة', 'منصة مدفوعات وبطاقات متعددة العملات متوافقة مع WCAG 2.1 ولوائح التقنية المالية البريطانية.', 'Volopa Financial Services'],
@@ -58,8 +58,8 @@ export default function ArabicPage() {
           <h1>محمد عدنان سليم<br /><em>مهندس برمجيات أول</em></h1>
           <p>
             ثماني سنوات في بناء منصات مؤسسية لجهات حكومية وشركات تقنية مالية وأمن سيبراني.
-            الواجهات باستخدام <span dir="ltr">React</span> و <span dir="ltr">Next.js</span> و <span dir="ltr">Angular</span>،
-            والخوادم باستخدام <span dir="ltr">Node.js</span> و <span dir="ltr">C#</span> و <span dir="ltr">.NET</span> و <span dir="ltr">AWS</span>.
+            الواجهات الأمامية باستخدام <span dir="ltr">React</span> و <span dir="ltr">Next.js</span> و <span dir="ltr">Angular</span>،
+            والواجهات الخلفية باستخدام <span dir="ltr">Node.js</span> و <span dir="ltr">C#</span> و <span dir="ltr">.NET</span> و <span dir="ltr">AWS</span>.
           </p>
           <div className="hx-actions">
             <a className="hx-pill is-solid is-big" href={profile.resume} target="_blank" rel="noopener noreferrer">تحميل السيرة الذاتية</a>
