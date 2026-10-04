@@ -15,6 +15,8 @@ export const profile = {
     x: "https://x.com/adnan_muhamadi",
     url: "https://theadnansaleem.com",
     resume: "/Adnan-Saleem-Resume.pdf",
+    // Calendly (or Cal.com) scheduling link. Empty hides every "Book a call" button.
+    booking: "https://calendly.com/heyadnansaleem/30min",
     // The CV summary, split into paragraphs; only the name was added to the opening sentence.
     summary: [
         "M. Adnan Saleem is a senior full-stack software engineer with 8 years of enterprise application development experience, including 8 years of hands-on Amazon Web Services (AWS) experience. Builds frontends in React, Next.js, and Angular with TypeScript and JavaScript, and backends in Node.js, C#, .NET 6/8, ASP.NET Core Web APIs, and Blazor, with REST and GraphQL APIs and microservices.",

@@ -1,12 +1,6 @@
-import Hero from '@/components/sections/Hero';
-import MarqueeStrip from '@/components/ui/MarqueeStrip';
-import About from '@/components/sections/About';
-import Experience from '@/components/sections/Experience';
-import ParallaxText from '@/components/sections/ParallaxText';
-import Skills from '@/components/sections/Skills';
-import Projects from '@/components/sections/Projects';
-import Contact from '@/components/sections/Contact';
-import { marqueeItems, profile } from '@/lib/data';
+import HomeExperience from '@/components/home/HomeExperience';
+import { hxFonts } from '@/components/home/fonts';
+import { profile } from '@/lib/data';
 
 // Only the home page is the profile page; Person and WebSite come from the layout.
 const profilePageJsonLd = {
@@ -30,14 +24,7 @@ export default function Home() {
           __html: JSON.stringify(profilePageJsonLd).replace(/</g, '\\u003c'),
         }}
       />
-      <Hero />
-      <MarqueeStrip items={marqueeItems} />
-      <About />
-      <Experience />
-      <ParallaxText />
-      <Skills />
-      <Projects />
-      <Contact />
+      <HomeExperience fontClass={hxFonts} />
     </>
   );
 }
