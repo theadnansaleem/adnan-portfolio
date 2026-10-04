@@ -10,7 +10,7 @@ import ExperienceReel from './ExperienceReel';
 import CommandPalette, { openPalette } from './CommandPalette';
 import FitMatcher from './FitMatcher';
 import Terminal from './Terminal';
-import { PHOTOS } from './photos';
+import { MOMENTS } from './photos';
 import './home.css';
 
 // Preview images published by each credential page, saved under public/certs
@@ -550,8 +550,8 @@ export default function HomeExperience({ fontClass }: { fontClass: string }) {
         <div className="hx-film">
           <ul>
             {/* The row is doubled so the loop has no seam; the copy is decorative */}
-            {[...PHOTOS, ...PHOTOS].map(([file, alt], i) => (
-              <li key={i}><Image src={'/me/' + file} alt={i < PHOTOS.length ? alt : ''} fill sizes="260px" /></li>
+            {[...MOMENTS, ...MOMENTS].map((moment, i) => (
+              <li key={i}><Image src={`/me/m/${moment.file}.webp`} alt={i < MOMENTS.length ? moment.alt : ''} fill unoptimized /></li>
             ))}
           </ul>
         </div>

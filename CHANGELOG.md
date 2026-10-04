@@ -7,6 +7,17 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## Unreleased
+
+### Added
+- `/about`: a scrapbook of sixteen photos, each with a handwritten note and an animated arrow.
+
+### Changed
+- The home page photo row shows the new photos.
+
+### Removed
+- The older gallery photos and the photo wall with its viewer.
+
 ## 2.1.1 - 2026-10-04
 
 ### Fixed

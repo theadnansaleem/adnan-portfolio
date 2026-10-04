@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import PageFrame from '@/components/home/PageFrame';
 import Clocks from '@/components/home/Clocks';
-import { PhotoWall, ShareButton } from '@/components/home/AboutBits';
+import { ShareButton } from '@/components/home/AboutBits';
+import { hxHand } from '@/components/home/fonts';
+import { MOMENTS } from '@/components/home/photos';
 import { education, jobs, profile } from '@/lib/data';
 import { pageJsonLd } from '@/lib/seo';
 
@@ -49,9 +52,29 @@ export default function AboutPage() {
         </div>
       </header>
 
-      <section>
-        <p className="hx-cap"><b>01</b> Photos · tap one to open it</p>
-        <PhotoWall />
+      <section className={hxHand}>
+        <p className="hx-cap"><b>01</b> Off the clock</p>
+        <h2 className="hx-moments-title">Conferences, coffee and the <em>odd lake</em></h2>
+        <ul className="hx-moments">
+          {MOMENTS.map((moment) => (
+            <li key={moment.file}>
+              <figure>
+                <Image src={`/me/m/${moment.file}.webp`} alt={moment.alt} width={720} height={moment.height} unoptimized />
+                <figcaption>
+                  {/* Hand-drawn arrow that keeps nudging up at the photo */}
+                  <svg viewBox="0 0 48 56" aria-hidden="true">
+                    <path d="M40 52C22 50 10 38 14 10" />
+                    <path d="M4 20 14 8l9 13" />
+                  </svg>
+                  <span>
+                    {moment.note}
+                    {moment.place && <small>{moment.place}</small>}
+                  </span>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="hx-grid-2">
