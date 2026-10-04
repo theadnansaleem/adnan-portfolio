@@ -10,7 +10,7 @@ import ExperienceReel from './ExperienceReel';
 import CommandPalette, { openPalette } from './CommandPalette';
 import FitMatcher from './FitMatcher';
 import Terminal from './Terminal';
-import { PHOTOS } from './photos';
+import { MOMENTS } from './photos';
 import './home.css';
 
 // Preview images published by each credential page, saved under public/certs
@@ -95,17 +95,29 @@ function Roll({ parts }: { parts: [string, boolean?][] }) {
   );
 }
 
+// Hero portraits: 1100px cutouts with transparency, bottom-aligned so they swap in place
+const HERO = ['/me/adnan-soft.webp', '/me/hero/tie.webp', '/me/hero/polo.webp', '/me/hero/conference.webp', '/me/hero/waistcoat.webp', '/me/hero/laptop.webp'];
+
 export default function HomeExperience({ fontClass }: { fontClass: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [current, setCurrent] = useState('home');
   const [look, setLook] = useState<(typeof projects)[number] | null>(null);
   const [nudge, setNudge] = useState<'idle' | 'shown' | 'closed'>('idle');
+  const [slide, setSlide] = useState(0);
+  // Picking a portrait by hand stops the rotation
+  const [autoplay, setAutoplay] = useState(true);
   const lookRef = useRef<HTMLDialogElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const portraitRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const railRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    if (!autoplay || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const id = setInterval(() => setSlide((n) => (n + 1) % HERO.length), 4500);
+    return () => clearInterval(id);
+  }, [autoplay]);
 
   useEffect(() => {
     const root = rootRef.current, portrait = portraitRef.current, rail = railRef.current, track = trackRef.current;
@@ -318,13 +330,21 @@ export default function HomeExperience({ fontClass }: { fontClass: string }) {
       <div className="hx-curtain" aria-hidden="true"><span>adnan<i>saleem</i></span></div>
 
       {/* Name and portrait sit beside the stage: the cutout stands in front of the giant name.
-          The portrait is a pre-built 97 KB WebP with transparency, so it skips the optimizer. */}
+          The portraits are pre-built WebP cutouts with transparency, so they skip the optimizer. */}
       <p className="hx-giant" aria-hidden="true"><span>Adnan</span> <span><em>Saleem</em></span></p>
       <div className="hx-portrait" ref={portraitRef}>
-        <Image src="/me/adnan-soft.webp" alt={`Portrait of ${profile.name}`} fill priority unoptimized />
-        <div className="hx-code" aria-hidden="true">
-          <div><Image src="/me/adnan-soft.webp" alt="" fill unoptimized /></div>
+        {HERO.map((src, i) => (
+          <Image key={src} className={i === slide ? 'is-on' : undefined} src={src} alt={i === slide ? `Portrait of ${profile.name}` : ''} fill priority={i === 0} unoptimized />
+        ))}
+        {/* The reveal layer takes the showing portrait as both its picture and its silhouette */}
+        <div className="hx-code" aria-hidden="true" style={{ WebkitMaskImage: `url(${HERO[slide]})`, maskImage: `url(${HERO[slide]})` }}>
+          <div><Image src={HERO[slide]} alt="" fill unoptimized /></div>
         </div>
+      </div>
+      <div className="hx-slides" role="group" aria-label="Choose a portrait">
+        {HERO.map((src, i) => (
+          <button key={src} type="button" aria-label={`Portrait ${i + 1} of ${HERO.length}`} aria-pressed={i === slide} onClick={() => { setSlide(i); setAutoplay(false); }} />
+        ))}
       </div>
 
       <header className="hx-top">
@@ -550,8 +570,8 @@ export default function HomeExperience({ fontClass }: { fontClass: string }) {
         <div className="hx-film">
           <ul>
             {/* The row is doubled so the loop has no seam; the copy is decorative */}
-            {[...PHOTOS, ...PHOTOS].map(([file, alt], i) => (
-              <li key={i}><Image src={'/me/' + file} alt={i < PHOTOS.length ? alt : ''} fill sizes="260px" /></li>
+            {[...MOMENTS, ...MOMENTS].map((moment, i) => (
+              <li key={i}><Image src={`/me/m/${moment.file}.webp`} alt={i < MOMENTS.length ? moment.alt : ''} fill unoptimized /></li>
             ))}
           </ul>
         </div>
