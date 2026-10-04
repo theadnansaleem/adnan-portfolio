@@ -26,7 +26,7 @@ export default function PageFrame({ children }: { children: React.ReactNode }) {
           adnan<span className="hx-serif">saleem</span>
         </Link>
         <nav className="hx-nav" aria-label="Primary">
-          {[['/', 'Home'], ['/#projects', 'Work'], ['/lab', 'Lab'], ['/hire', 'Hire'], ['/work', 'Case studies']].map(([href, label]) => (
+          {[['/', 'Home'], ['/#projects', 'Work'], ['/work', 'Case studies'], ['/lab', 'Lab'], ['/about', 'About'], ['/hire', 'Hire']].map(([href, label]) => (
             <Link key={href} href={href} data-text={label}><span>{label}</span></Link>
           ))}
         </nav>
@@ -58,7 +58,13 @@ export default function PageFrame({ children }: { children: React.ReactNode }) {
       <footer className="hx-foot hx-cap">
         <span>©{new Date().getFullYear()} {profile.name}</span>
         <a href={`mailto:${profile.email}`}>{profile.email}</a>
-        <Link href="/">Home</Link>
+        <nav aria-label="Footer">
+          <Link href="/">Home</Link>
+          <Link href="/about">About</Link>
+          <Link href="/work">Case studies</Link>
+          <Link href="/hire">Hire</Link>
+          <Link href="/lab">Lab</Link>
+        </nav>
       </footer>
       <CommandPalette />
     </div>

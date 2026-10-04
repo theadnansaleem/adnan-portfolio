@@ -211,6 +211,7 @@ body:has(.hx) { cursor: auto; }
 .hx-contact .hx-actions { justify-content: center; margin-top: 10px; }
 .hx-foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 22px var(--gut); border-top: 1px solid var(--line); background: var(--bg); }
 .hx-foot a:hover { color: var(--mark); }
+.hx-foot nav { display: flex; flex-wrap: wrap; gap: 6px 18px; }
 
 /* ── Reveal on scroll. Only armed once JS runs, so content never depends on it */
 .hx.is-armed .hx-rv { opacity: 0; translate: 0 28px; transition: opacity 0.9s var(--ease), translate 0.9s var(--ease); transition-delay: calc(var(--d, 0) * 90ms); }
@@ -547,4 +548,30 @@ button.hx-shot:hover .hx-shot-cue, button.hx-shot:focus-visible .hx-shot-cue { o
 .hx-linkedin > span:first-of-type { flex: 1; }
 @media (max-width: 760px) {
   .hx-linkedin { flex-direction: column; align-items: flex-start; }
+}
+
+/* About page: photo wall, photo dialog, quick answers */
+.hx-wall { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+.hx-wall button { position: relative; display: block; width: 100%; aspect-ratio: 3 / 4; border-radius: 14px; overflow: hidden; background: var(--line); cursor: zoom-in; transition: transform 0.3s var(--ease); }
+.hx-wall button:hover, .hx-wall button:focus-visible { transform: scale(1.03); }
+.hx-wall img, .hx-photo img { object-position: top; }
+.hx-wall img { object-fit: cover; }
+.hx-photo figure > div { position: relative; height: min(74svh, 860px); background: var(--line); }
+.hx-photo img { object-fit: contain; }
+.hx-photo figcaption { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 18px; }
+.hx-photo .hx-actions { margin-top: 0; }
+.hx-qa { padding: 6px 26px; }
+.hx-qa details { padding: 16px 0; border-top: 1px solid var(--line); }
+.hx-qa details:first-child { border-top: 0; }
+.hx-qa summary { display: flex; justify-content: space-between; gap: 16px; cursor: pointer; list-style: none; font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px); line-height: 1.15; }
+.hx-qa summary::-webkit-details-marker { display: none; }
+.hx-qa summary::after { content: '+'; color: var(--mark); }
+.hx-qa details[open] summary::after { content: '\2212'; }
+.hx-qa details p { margin-top: 8px; color: var(--ink-2); max-width: 640px; }
+@media (max-width: 760px) {
+  .hx-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hx-qa { padding: 6px 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hx-wall button { transition: none; }
 }

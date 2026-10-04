@@ -83,6 +83,7 @@ const jsonLd = {
       image: `${SITE_URL}/opengraph-image`,
       email: `mailto:${profile.email}`,
       sameAs: [profile.linkedin, profile.github, profile.x],
+      knowsLanguage: 'en',
       knowsAbout: [...new Set(skills.flatMap((group) => group.tags))],
       alumniOf: [
         { '@type': 'CollegeOrUniversity', name: 'Iqra University' },

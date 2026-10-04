@@ -1,6 +1,11 @@
+import type { Metadata } from 'next';
 import HomeExperience from '@/components/home/HomeExperience';
 import { hxFonts } from '@/components/home/fonts';
 import { profile } from '@/lib/data';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/', languages: { en: '/', ar: '/ar', 'x-default': '/' } },
+};
 
 // Only the home page is the profile page; Person and WebSite come from the layout.
 const profilePageJsonLd = {

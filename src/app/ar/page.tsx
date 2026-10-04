@@ -3,6 +3,7 @@ import Link from 'next/link';
 import PageFrame from '@/components/home/PageFrame';
 import { hxArabic } from '@/components/home/fonts';
 import { jobs, profile, skills, stats } from '@/lib/data';
+import { pageJsonLd } from '@/lib/seo';
 
 const TITLE = 'محمد عدنان سليم | مهندس برمجيات أول Full-Stack';
 const DESCRIPTION =
@@ -11,7 +12,7 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
-  alternates: { canonical: '/ar', languages: { en: '/', ar: '/ar' } },
+  alternates: { canonical: '/ar', languages: { en: '/', ar: '/ar', 'x-default': '/' } },
   openGraph: { title: TITLE, description: DESCRIPTION, url: '/ar', locale: 'ar_AR', images: ['/opengraph-image'] },
 };
 
@@ -50,6 +51,7 @@ const IMPACT = [
 export default function ArabicPage() {
   return (
     <PageFrame>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageJsonLd('/ar', TITLE, DESCRIPTION, 'WebPage', 'ar') }} />
       <div className={`hx-ar ${hxArabic}`} dir="rtl" lang="ar">
         <header className="hx-head">
           <p className="hx-cap"><b>النسخة العربية</b> متاح فورًا · منفتح على الانتقال</p>

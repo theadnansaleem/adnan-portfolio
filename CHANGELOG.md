@@ -7,6 +7,13 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## Unreleased
+
+### Added
+- `/about`: photo wall with a full-size viewer, quick answers, the route so far, team clocks, a contact card download and a share button.
+- Breadcrumb and page structured data on `/about`, `/hire`, `/lab` and `/ar`; language alternates on the home page and in the sitemap.
+- Footer links to every top-level page.
+
 ## 2.0.0 - 2026-10-04
 
 ### Added
