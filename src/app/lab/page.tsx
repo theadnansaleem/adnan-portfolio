@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import PageFrame from '@/components/home/PageFrame';
+import { pageJsonLd } from '@/lib/seo';
 import VirtualRows from '@/components/home/lab/VirtualRows';
 import ThreatFeed from '@/components/home/lab/ThreatFeed';
 
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 export default function LabPage() {
   return (
     <PageFrame>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageJsonLd('/lab', 'Lab', DESCRIPTION) }} />
       <header className="hx-head">
         <p className="hx-cap"><b>Lab</b> Live demos</p>
         <h1>Claims you can <em>click</em></h1>

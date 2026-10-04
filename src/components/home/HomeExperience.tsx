@@ -10,19 +10,8 @@ import ExperienceReel from './ExperienceReel';
 import CommandPalette, { openPalette } from './CommandPalette';
 import FitMatcher from './FitMatcher';
 import Terminal from './Terminal';
+import { PHOTOS } from './photos';
 import './home.css';
-
-// Gallery photos: one row that drifts sideways
-const PHOTOS: [string, string][] = [
-  ['g/28.jpg', 'Adnan standing in an office, hands in pockets'],
-  ['g/mwc-google.jpg', 'Adnan at the Google Cloud stand at the MWC exhibition'],
-  ['g/hoodie.jpg', 'Adnan at his desk in a hoodie, code on the screen behind'],
-  ['g/18.jpg', 'Adnan writing Plan, Build, Deploy, Iterate, Grow on a whiteboard'],
-  ['suit.jpg', 'Adnan in a dark suit and red tie'],
-  ['g/mwc-floor.jpg', 'Adnan on the exhibition floor at MWC'],
-  ['g/cafe.jpg', 'Adnan at a table with a laptop and a mug'],
-  ['formal.jpg', 'Adnan in a black suit and tie'],
-];
 
 // Preview images published by each credential page, saved under public/certs
 const CERT_PREVIEW: Record<string, string> = {
@@ -574,6 +563,7 @@ export default function HomeExperience({ fontClass }: { fontClass: string }) {
           <div><dt className="hx-cap">Mentoring</dt><dd>27 junior developers</dd></div>
           <div><dt className="hx-cap">Relocation</dt><dd>Open to it</dd></div>
         </dl>
+        <p className="hx-more hx-rv"><Link className="hx-pill hx-mag" href="/about">More about me ↘</Link></p>
       </section>
 
       <section className="hx-section" id="terminal">
@@ -627,7 +617,13 @@ export default function HomeExperience({ fontClass }: { fontClass: string }) {
       <footer className="hx-foot hx-cap">
         <span>©{new Date().getFullYear()} {profile.name}</span>
         <span>Lahore, Pakistan</span>
-        <Link href="/work">Case studies</Link>
+        <nav aria-label="Footer">
+          <Link href="/about">About</Link>
+          <Link href="/work">Case studies</Link>
+          <Link href="/hire">Hire</Link>
+          <Link href="/lab">Lab</Link>
+          <Link href="/ar" lang="ar">العربية</Link>
+        </nav>
       </footer>
 
       <dialog

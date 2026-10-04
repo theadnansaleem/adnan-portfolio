@@ -17,6 +17,7 @@ const ACTIONS: Action[] = [
   ...(profile.booking ? [{ label: 'Book a call', hint: 'Calendar', run: open(profile.booking) }] : []),
   { label: 'Check a job description against my stack', hint: 'Page', run: go('/hire') },
   { label: 'Open the lab: live demos', hint: 'Page', run: go('/lab') },
+  { label: 'About Adnan: photos and quick answers', hint: 'Page', run: go('/about') },
   { label: 'Home', hint: 'Page', run: go('/') },
   { label: 'Impact', hint: 'Section', run: go('/#about') },
   { label: 'Selected work', hint: 'Section', run: go('/#projects') },

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import PageFrame from '@/components/home/PageFrame';
+import { pageJsonLd } from '@/lib/seo';
 import FitMatcher from '@/components/home/FitMatcher';
 import { jobs, profile, stats } from '@/lib/data';
 
@@ -25,6 +26,7 @@ const FACTS = [
 export default function HirePage() {
   return (
     <PageFrame>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageJsonLd('/hire', 'Hire', DESCRIPTION) }} />
       <header className="hx-head">
         <p className="hx-cap"><b>Hire</b> For recruiters and hiring managers</p>
         <h1>The two-minute <em>version</em></h1>
