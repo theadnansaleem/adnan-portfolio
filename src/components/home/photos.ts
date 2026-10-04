@@ -1,8 +1,7 @@
-export interface Moment { file: string; height: number; alt: string; note: string; place?: string }
+export interface Moment { file: string; height: number; alt: string; note: string }
 
 // The scrapbook on the about page and the photo row on the home page. Files are 720 wide WebP under public/me/m,
 // served as they are (`unoptimized`): the Next image optimizer stalled on some of them.
-// `place` shows a pin line under the note; leave it out until Adnan confirms where the photo is from.
 export const MOMENTS: Moment[] = [
   { file: 'skyline', height: 683, alt: 'Adnan in a white shirt by the water with a city skyline at sunset behind', note: 'Skyline at sunset' },
   { file: 'conference', height: 870, alt: 'Adnan with a red lanyard on a conference floor', note: 'Conference floor' },

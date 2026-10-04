@@ -7,6 +7,12 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## Unreleased
+
+### Changed
+- The Qatar Events Platform and Volopa screenshots are blurred: the originals were logged-in views with names and figures.
+- Arabic page: clearer wording for front end, back end and migrated workflows.
+
 ## 2.3.0 - 2026-10-04
 
 ### Added
