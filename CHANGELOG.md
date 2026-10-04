@@ -11,6 +11,7 @@ That bumps `package.json`, commits, and tags in one step.
 
 ### Added
 - `/about`: a scrapbook of sixteen photos, each with a handwritten note and an animated arrow.
+- Home page hero: six portraits that swap in place every few seconds, with dots to pick one.
 
 ### Changed
 - The home page photo row shows the new photos.

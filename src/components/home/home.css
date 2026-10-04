@@ -112,10 +112,18 @@ body:has(.hx) { cursor: auto; }
   animation: hx-rise 1.2s var(--ease) 1.05s both;
 }
 .hx-portrait img { object-fit: contain; object-position: bottom; }
+/* Portraits swap in place: the next one settles in from slightly large and soft while the last one fades */
+.hx-portrait > img { opacity: 0; transform: scale(1.06) translateY(2%); filter: blur(10px); transition: opacity 0.9s var(--ease), transform 1.3s var(--ease), filter 0.9s var(--ease); }
+.hx-portrait > img.is-on { opacity: 1; transform: none; filter: none; }
+.hx-slides { position: absolute; z-index: 4; left: 50%; top: calc(100svh - 84px); translate: -50% 0; display: flex; gap: 2px; animation: hx-rise 1s var(--ease) 1.5s both; }
+.hx-slides button { display: grid; place-items: center; width: 24px; height: 24px; }
+.hx-slides button::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ink-2); opacity: 0.5; transition: width 0.3s var(--ease), opacity 0.3s, background 0.3s; }
+.hx-slides button:hover::before { opacity: 1; }
+.hx-slides button[aria-pressed="true"]::before { width: 22px; border-radius: 4px; background: var(--mark); opacity: 1; }
 /* The layer the cursor uncovers, clipped to the portrait's silhouette and
    shown only inside the liquid shape that trails the pointer. It is the same
    portrait printed in lime with a dot screen, so it lines up exactly. */
-.hx-code { position: absolute; inset: 0; -webkit-mask: url(/me/adnan-mask.png) center bottom / contain no-repeat; mask: url(/me/adnan-mask.png) center bottom / contain no-repeat; }
+.hx-code { position: absolute; inset: 0; -webkit-mask: center bottom / contain no-repeat; mask: center bottom / contain no-repeat; /* the image is set inline to the showing portrait */ }
 .hx-code > div { position: absolute; inset: 0; background: var(--accent); clip-path: circle(0); /* JS replaces this with the liquid outline that follows the cursor */ }
 .hx-code img { object-fit: contain; object-position: bottom; mix-blend-mode: multiply; filter: grayscale(1) contrast(1.45) brightness(1.08); }
 .hx-code > div::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(13, 14, 11, 0.5) 1px, transparent 1.5px); background-size: 6px 6px; mix-blend-mode: multiply; }
@@ -249,6 +257,8 @@ body:has(.hx) { cursor: auto; }
   /* Phone: name and portrait fill the top, the copy follows underneath */
   .hx-giant { top: 84px; font-size: 21vw; }
   .hx-portrait { --size: min(100vw, 56svh); top: calc(62svh - var(--size)); }
+  /* Sits on the faded foot of the portrait, clear of the badge and the text below */
+  .hx-slides { top: calc(57svh - 40px); }
   .hx-hero { height: auto; min-height: 0; display: block; padding: 57svh var(--gut) 34px; }
   .hx-hero-left, .hx-hero-right { max-width: none; justify-self: auto; }
   .hx-hero-right { margin-top: 18px; }
