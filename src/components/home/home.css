@@ -554,7 +554,7 @@ button.hx-shot:hover .hx-shot-cue, button.hx-shot:focus-visible .hx-shot-cue { o
 }
 
 /* About page: photo wall, photo dialog, quick answers */
-.hx-wall { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+.hx-wall { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
 .hx-wall button { position: relative; display: block; width: 100%; aspect-ratio: 3 / 4; border-radius: 14px; overflow: hidden; background: var(--line); cursor: zoom-in; transition: transform 0.3s var(--ease); }
 .hx-wall button:hover, .hx-wall button:focus-visible { transform: scale(1.03); }
 .hx-wall img, .hx-photo img { object-position: top; }
@@ -573,6 +573,8 @@ button.hx-shot:hover .hx-shot-cue, button.hx-shot:focus-visible .hx-shot-cue { o
 .hx-qa details p { margin-top: 8px; color: var(--ink-2); max-width: 640px; }
 @media (max-width: 760px) {
   .hx-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* With an odd count the first photo takes the full row, so the grid has no hole */
+  .hx-wall li:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
   .hx-qa { padding: 6px 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
