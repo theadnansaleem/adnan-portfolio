@@ -112,10 +112,18 @@ body:has(.hx) { cursor: auto; }
   animation: hx-rise 1.2s var(--ease) 1.05s both;
 }
 .hx-portrait img { object-fit: contain; object-position: bottom; }
+/* Portraits swap in place: the next one settles in from slightly large and soft while the last one fades */
+.hx-portrait > img { opacity: 0; transform: scale(1.06) translateY(2%); filter: blur(10px); transition: opacity 0.9s var(--ease), transform 1.3s var(--ease), filter 0.9s var(--ease); }
+.hx-portrait > img.is-on { opacity: 1; transform: none; filter: none; }
+.hx-slides { position: absolute; z-index: 4; left: 50%; top: calc(100svh - 84px); translate: -50% 0; display: flex; gap: 2px; animation: hx-rise 1s var(--ease) 1.5s both; }
+.hx-slides button { display: grid; place-items: center; width: 24px; height: 24px; }
+.hx-slides button::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ink-2); opacity: 0.5; transition: width 0.3s var(--ease), opacity 0.3s, background 0.3s; }
+.hx-slides button:hover::before { opacity: 1; }
+.hx-slides button[aria-pressed="true"]::before { width: 22px; border-radius: 4px; background: var(--mark); opacity: 1; }
 /* The layer the cursor uncovers, clipped to the portrait's silhouette and
    shown only inside the liquid shape that trails the pointer. It is the same
    portrait printed in lime with a dot screen, so it lines up exactly. */
-.hx-code { position: absolute; inset: 0; -webkit-mask: url(/me/adnan-mask.png) center bottom / contain no-repeat; mask: url(/me/adnan-mask.png) center bottom / contain no-repeat; }
+.hx-code { position: absolute; inset: 0; -webkit-mask: center bottom / contain no-repeat; mask: center bottom / contain no-repeat; /* the image is set inline to the showing portrait */ }
 .hx-code > div { position: absolute; inset: 0; background: var(--accent); clip-path: circle(0); /* JS replaces this with the liquid outline that follows the cursor */ }
 .hx-code img { object-fit: contain; object-position: bottom; mix-blend-mode: multiply; filter: grayscale(1) contrast(1.45) brightness(1.08); }
 .hx-code > div::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(13, 14, 11, 0.5) 1px, transparent 1.5px); background-size: 6px 6px; mix-blend-mode: multiply; }
@@ -249,6 +257,8 @@ body:has(.hx) { cursor: auto; }
   /* Phone: name and portrait fill the top, the copy follows underneath */
   .hx-giant { top: 84px; font-size: 21vw; }
   .hx-portrait { --size: min(100vw, 56svh); top: calc(62svh - var(--size)); }
+  /* Sits on the faded foot of the portrait, clear of the badge and the text below */
+  .hx-slides { top: calc(57svh - 40px); }
   .hx-hero { height: auto; min-height: 0; display: block; padding: 57svh var(--gut) 34px; }
   .hx-hero-left, .hx-hero-right { max-width: none; justify-self: auto; }
   .hx-hero-right { margin-top: 18px; }
@@ -449,7 +459,7 @@ button.hx-shot:hover .hx-shot-cue, button.hx-shot:focus-visible .hx-shot-cue { o
 
 /* ── Gallery: two rows of photos drifting in opposite directions ─────────── */
 .hx-film { display: block; margin: 0 calc(var(--gut) * -1); overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-.hx-film ul { display: flex; gap: 14px; width: max-content; animation: hx-film 45s linear infinite; }
+.hx-film ul { display: flex; gap: 14px; width: max-content; animation: hx-film 90s linear infinite; }
 .hx-film:hover ul { animation-play-state: paused; }
 .hx-film li { position: relative; flex: none; width: clamp(150px, 16vw, 240px); aspect-ratio: 3 / 4; border-radius: 14px; overflow: hidden; background: var(--line); transition: transform 0.5s var(--ease); }
 .hx-film li:hover { transform: scale(1.06); z-index: 1; }
@@ -553,16 +563,7 @@ button.hx-shot:hover .hx-shot-cue, button.hx-shot:focus-visible .hx-shot-cue { o
   .hx-linkedin { flex-direction: column; align-items: flex-start; }
 }
 
-/* About page: photo wall, photo dialog, quick answers */
-.hx-wall { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
-.hx-wall button { position: relative; display: block; width: 100%; aspect-ratio: 3 / 4; border-radius: 14px; overflow: hidden; background: var(--line); cursor: zoom-in; transition: transform 0.3s var(--ease); }
-.hx-wall button:hover, .hx-wall button:focus-visible { transform: scale(1.03); }
-.hx-wall img, .hx-photo img { object-position: top; }
-.hx-wall img { object-fit: cover; }
-.hx-photo figure > div { position: relative; height: min(74svh, 860px); background: var(--line); }
-.hx-photo img { object-fit: contain; }
-.hx-photo figcaption { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 18px; }
-.hx-photo .hx-actions { margin-top: 0; }
+/* About page: quick answers */
 .hx-qa { padding: 6px 26px; }
 .hx-qa details { padding: 16px 0; border-top: 1px solid var(--line); }
 .hx-qa details:first-child { border-top: 0; }
@@ -571,12 +572,32 @@ button.hx-shot:hover .hx-shot-cue, button.hx-shot:focus-visible .hx-shot-cue { o
 .hx-qa summary::after { content: '+'; color: var(--mark); }
 .hx-qa details[open] summary::after { content: '\2212'; }
 .hx-qa details p { margin-top: 8px; color: var(--ink-2); max-width: 640px; }
+/* Scrapbook: tilted photo cards, each with a handwritten note and an arrow that keeps pointing at it */
+.hx-moments-title { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 3.6vw, 56px); line-height: 1.02; margin: 10px 0 28px; }
+/* A grid, not CSS columns: lazy images inside multi-column boxes can fail to load */
+.hx-moments { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px 20px; }
+.hx-moments li { padding: 10px 10px 12px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); rotate: -1.6deg; transition: rotate 0.3s var(--ease), scale 0.3s var(--ease); }
+.hx-moments li:nth-child(even) { rotate: 1.4deg; }
+.hx-moments li:nth-child(3n) { rotate: 2.2deg; }
+.hx-moments li:hover { rotate: 0deg; scale: 1.04; position: relative; z-index: 1; }
+.hx-moments img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; border-radius: 8px; }
+.hx-moments figcaption { display: flex; align-items: flex-end; gap: 8px; padding: 8px 4px 0; font-family: var(--hx-hand), cursive; font-size: 26px; line-height: 1; }
+.hx-moments small { display: block; margin-top: 4px; font-family: var(--sans); font-size: 12px; letter-spacing: 0.04em; color: var(--ink-2); }
+.hx-moments svg { flex: none; width: 34px; height: 40px; fill: none; stroke: var(--mark); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; transform-origin: 80% 100%; animation: hx-point 1.5s ease-in-out infinite; }
+.hx-moments li:nth-child(even) svg { animation-delay: -0.5s; }
+.hx-moments li:nth-child(3n) svg { animation-delay: -1s; }
+@keyframes hx-point { 0%, 100% { transform: translateY(2px) rotate(4deg); } 50% { transform: translateY(-7px) rotate(-8deg); } }
+@media (max-width: 1000px) {
+  .hx-moments { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 @media (max-width: 760px) {
-  .hx-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  /* With an odd count the first photo takes the full row, so the grid has no hole */
-  .hx-wall li:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
+  .hx-moments { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; }
+  .hx-moments li { padding: 6px 6px 8px; }
+  .hx-moments figcaption { font-size: 20px; gap: 4px; }
+  .hx-moments svg { width: 24px; height: 28px; }
   .hx-qa { padding: 6px 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hx-wall button { transition: none; }
+  .hx-moments svg { animation: none; }
+  .hx-moments li { transition: none; }
 }
