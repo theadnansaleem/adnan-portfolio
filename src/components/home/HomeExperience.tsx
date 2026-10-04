@@ -652,7 +652,8 @@ export default function HomeExperience({ fontClass }: { fontClass: string }) {
         )}
       </dialog>
 
-      {nudge === 'shown' && (
+      {/* Hidden from the stack section down, where it would sit on the certificate list and the footer links */}
+      {nudge === 'shown' && current !== 'skills' && current !== 'contact' && (
         <aside className="hx-nudge" aria-label="For recruiters">
           <button type="button" className="hx-nudge-x" onClick={() => setNudge('closed')} aria-label="Dismiss">×</button>
           <p className="hx-cap">Hiring?</p>

@@ -351,6 +351,9 @@ body:has(.hx) { cursor: auto; }
 .hx-vrow span { overflow: hidden; text-overflow: ellipsis; }
 [data-state="Failed"] { color: #e5484d; }
 [data-state="Review"] { color: #c98a00; }
+/* Darker on the light theme so both clear 4.5:1 against the card */
+[data-theme="light"] [data-state="Failed"] { color: #c4262e; }
+[data-theme="light"] [data-state="Review"] { color: #8a5a00; }
 [data-state="Settled"] { color: var(--ink-2); }
 .hx-demo-note { color: var(--ink-2); font-size: 13px; padding: 2px 4px; }
 .hx-spark { width: 100%; height: 62px; }

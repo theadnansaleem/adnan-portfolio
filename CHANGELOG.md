@@ -7,6 +7,12 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.1.1 - 2026-10-04
+
+### Fixed
+- The recruiter pop-out on the home page no longer covers the certificate list and the footer links.
+- Light theme: the "Failed" and "Review" status colours on `/lab` now meet the 4.5:1 contrast minimum.
+
 ## 2.1.0 - 2026-10-04
 
 ### Added
