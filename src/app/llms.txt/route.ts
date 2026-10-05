@@ -17,6 +17,8 @@ export function GET() {
     link('About: background, education and quick answers', '/about'),
     link('Hire: role, availability and work history at a glance', '/hire'),
     link('Lab: live demos of table virtualization and a real-time dashboard', '/lab'),
+    link('Frontend developer: React, Next.js and Angular experience', '/frontend-developer'),
+    link('.NET developer: C#, ASP.NET Core and Blazor experience', '/dotnet-developer'),
     link('Arabic version', '/ar'),
     link('CV (PDF)', profile.resume),
     '',

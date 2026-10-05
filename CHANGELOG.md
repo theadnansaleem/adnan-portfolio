@@ -7,7 +7,13 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
-## Unreleased
+## 2.4.0 - 2026-10-05
+
+### Added
+- `/frontend-developer` and `/dotnet-developer`: role pages that list the CV bullets, skills and case studies matching each role.
+
+### Changed
+- The site description now says "full-stack developer" as well as "software engineer".
 
 ### Fixed
 - Home page H1 no longer reads as one run-on phrase to crawlers.

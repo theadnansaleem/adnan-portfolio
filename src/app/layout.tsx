@@ -8,7 +8,7 @@ import { certifications, profile, skills } from '@/lib/data';
 const SITE_URL = profile.url;
 const TITLE = `${profile.name} | ${profile.jobTitle}`;
 const DESCRIPTION =
-  'M. Adnan Saleem, Senior Full-Stack Software Engineer: React, Next.js, Angular, .NET and Node.js. Working remote from Lahore, Pakistan.';
+  'M. Adnan Saleem, senior full-stack developer and software engineer: 8 years of React, Next.js, Angular, .NET and Node.js. Remote from Lahore, Pakistan.';
 
 export const viewport: Viewport = {
   width: 'device-width',
