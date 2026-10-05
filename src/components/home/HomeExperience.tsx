@@ -96,7 +96,14 @@ function Roll({ parts }: { parts: [string, boolean?][] }) {
 }
 
 // Hero portraits: 1100px cutouts with transparency, bottom-aligned so they swap in place
-const HERO = ['/me/adnan-soft.webp', '/me/hero/tie.webp', '/me/hero/polo.webp', '/me/hero/conference.webp', '/me/hero/waistcoat.webp', '/me/hero/laptop.webp'];
+const HERO: [string, string][] = [
+  ['/me/adnan-soft.webp', 'in a dark suit and red tie, chin resting on his hand'],
+  ['/me/hero/tie.webp', 'in a dark suit and red tie'],
+  ['/me/hero/polo.webp', 'in a beige polo shirt'],
+  ['/me/hero/conference.webp', 'in a black sweater with a conference lanyard'],
+  ['/me/hero/waistcoat.webp', 'in a white kurta and black waistcoat'],
+  ['/me/hero/laptop.webp', 'in a grey sweater, working on a laptop'],
+];
 
 export default function HomeExperience({ fontClass, updated }: { fontClass: string; updated: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -333,16 +340,17 @@ export default function HomeExperience({ fontClass, updated }: { fontClass: stri
           The portraits are pre-built WebP cutouts with transparency, so they skip the optimizer. */}
       <p className="hx-giant" aria-hidden="true"><span>Adnan</span> <span><em>Saleem</em></span></p>
       <div className="hx-portrait" ref={portraitRef}>
-        {HERO.map((src, i) => (
-          <Image key={src} className={i === slide ? 'is-on' : undefined} src={src} alt={i === slide ? `Portrait of ${profile.name}` : ''} fill priority={i === 0} unoptimized />
+        {/* Only the showing portrait is described; the hidden ones stay silent for screen readers */}
+        {HERO.map(([src, wearing], i) => (
+          <Image key={src} className={i === slide ? 'is-on' : undefined} src={src} alt={i === slide ? `Portrait of ${profile.name} ${wearing}` : ''} fill priority={i === 0} unoptimized />
         ))}
         {/* The reveal layer takes the showing portrait as both its picture and its silhouette */}
-        <div className="hx-code" aria-hidden="true" style={{ WebkitMaskImage: `url(${HERO[slide]})`, maskImage: `url(${HERO[slide]})` }}>
-          <div><Image src={HERO[slide]} alt="" fill unoptimized /></div>
+        <div className="hx-code" aria-hidden="true" style={{ WebkitMaskImage: `url(${HERO[slide][0]})`, maskImage: `url(${HERO[slide][0]})` }}>
+          <div><Image src={HERO[slide][0]} alt="" fill unoptimized /></div>
         </div>
       </div>
       <div className="hx-slides" role="group" aria-label="Choose a portrait">
-        {HERO.map((src, i) => (
+        {HERO.map(([src], i) => (
           <button key={src} type="button" aria-label={`Portrait ${i + 1} of ${HERO.length}`} aria-pressed={i === slide} onClick={() => { setSlide(i); setAutoplay(false); }} />
         ))}
       </div>
@@ -459,7 +467,7 @@ export default function HomeExperience({ fontClass, updated }: { fontClass: stri
                 <li key={p.id} className="hx-card hx-project hx-tilt">
                   {p.image && (
                     <button type="button" className="hx-shot" onClick={() => setLook(p)} aria-label={'Quick look: ' + p.title}>
-                      <Image src={p.image} alt="" fill sizes="(max-width: 1000px) 100vw, 560px" />
+                      <Image src={p.image} alt={p.title + ' screenshot'} fill sizes="(max-width: 1000px) 100vw, 560px" />
                       <span className="hx-shot-cue">Quick look</span>
                     </button>
                   )}
@@ -549,7 +557,7 @@ export default function HomeExperience({ fontClass, updated }: { fontClass: stri
                   <li key={item.title} className={preview ? 'has-preview' : undefined}>
                     <h3>{item.href ? <a className="hx-out" href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a> : item.title}</h3>
                     <p>{item.meta}</p>
-                    {preview && <Image className="hx-cert" src={'/certs/' + preview} alt="" width={672} height={352} sizes="340px" />}
+                    {preview && <Image className="hx-cert" src={'/certs/' + preview} alt={item.title + ' certificate'} width={672} height={352} sizes="340px" />}
                   </li>
                 );
               })}
