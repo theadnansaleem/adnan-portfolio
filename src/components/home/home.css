@@ -87,8 +87,14 @@ body:has(.hx) { cursor: auto; }
 .hx-nav a::after { content: attr(data-text); position: absolute; left: 0; top: 100%; color: var(--ink); transition: transform 0.45s var(--ease); }
 .hx-nav a:hover span, .hx-nav a:hover::after, .hx-nav a:focus-visible span, .hx-nav a:focus-visible::after { transform: translateY(-100%); }
 .hx-nav a[aria-current] { color: var(--ink); }
+/* Nine links need about 1240px beside the wordmark and tools; below that the menu button takes over */
+.hx-nav a { white-space: nowrap; }
 .hx-tools { display: flex; align-items: center; gap: 8px; }
 .hx-menu-btn { display: none; }
+@media (max-width: 1240px) {
+  .hx-nav { display: none; }
+  .hx-menu-btn { display: grid; }
+}
 .hx.is-menu .hx-top { color: #f4f3ee; background: none; border-color: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
 
 /* ── Hero: a large cutout portrait stands in front of the giant name ───── */
@@ -375,6 +381,8 @@ body:has(.hx) { cursor: auto; }
 .hx-facts { padding: 10px 26px; }
 .hx-facts > div, .hx-facts li { display: grid; gap: 2px; padding: 14px 0; border-top: 1px solid var(--line); }
 .hx-facts > div:first-child { border-top: 0; }
+/* A list that opens the card has no heading above it, so its first row needs no rule */
+.hx-facts > ol:first-child > li:first-child { border-top: 0; }
 .hx-facts > p { padding: 14px 0 4px; }
 .hx-facts dd { font-size: 17px; overflow-wrap: anywhere; }
 .hx-facts li span { color: var(--ink-2); font-size: 14px; }
@@ -619,3 +627,43 @@ button.hx-shot:hover .hx-shot-cue, button.hx-shot:focus-visible .hx-shot-cue { o
 .hx-prose code { font: 0.88em ui-monospace, SFMono-Regular, Menlo, monospace; padding: 0.1em 0.35em; border-radius: 5px; background: var(--card); border: 1px solid var(--line); color: var(--ink); }
 .hx-prose pre { overflow-x: auto; padding: 16px 18px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); line-height: 1.5; }
 .hx-prose pre code { padding: 0; border: 0; background: none; font-size: 13.5px; white-space: pre; }
+
+/* ── Hover feedback for links, one pattern used everywhere ─────────────── */
+/* Link row: the whole row is the target, the text eases right and an arrow slides in on the right */
+/* The indent is animated, not the children: a transformed child would become the anchor for the stretched link */
+.hx-go { position: relative; transition: padding-left 0.3s var(--ease); }
+/* Two classes, so the room for the arrow outranks the list's own padding rule */
+.hx-facts .hx-go { padding-right: 56px; }
+.hx-go strong { transition: color 0.25s var(--ease); }
+.hx-go-link::before { content: ""; position: absolute; inset: 0; }
+.hx-go::after { content: "\2192"; position: absolute; right: 6px; top: 50%; translate: -14px -50%; opacity: 0; font-size: 24px; line-height: 1; color: var(--mark); pointer-events: none; transition: translate 0.3s var(--ease), opacity 0.25s var(--ease); }
+.hx-facts .hx-go:hover, .hx-facts .hx-go:focus-within { padding-left: 10px; }
+.hx-go:hover strong, .hx-go:focus-within strong { color: var(--mark); }
+.hx-go:hover::after, .hx-go:focus-within::after { translate: 0 -50%; opacity: 1; }
+/* The stretched link already covers the row, so the ring goes on the row */
+.hx-go-link:focus-visible { outline: none; }
+.hx-go:has(.hx-go-link:focus-visible) { outline: 2px solid var(--mark); outline-offset: 4px; border-radius: 8px; }
+/* No hover on touch screens: show the arrow at rest so the row still reads as a link */
+@media (hover: none) {
+  .hx-go::after { translate: 0 -50%; opacity: 0.6; }
+}
+
+/* Text links: colour eases, and the out arrow lifts */
+.hx-rows h3 a, .hx-creds a, .hx-foot a, .hx-crumbs a, .hx-prose a, .hx-wordmark .hx-serif { transition: color 0.25s var(--ease); }
+.hx-wordmark:hover .hx-serif { color: var(--mark); }
+.hx-prose a:hover { color: var(--ink); }
+.hx-out::after { display: inline-block; transition: translate 0.3s var(--ease); }
+.hx-out:hover::after, .hx-out:focus-visible::after { translate: 3px -3px; }
+
+/* Case study cards: the number shifts, the screenshot grows a little and the button fills */
+.hx-studies-n { transition: translate 0.4s var(--ease); }
+.hx-studies .hx-shot img { transition: scale 0.6s var(--ease); }
+.hx-studies a:hover .hx-studies-n, .hx-studies a:focus-visible .hx-studies-n { translate: 8px 0; }
+.hx-studies a:hover .hx-shot img, .hx-studies a:focus-visible .hx-shot img { scale: 1.05; }
+.hx-studies a:hover .hx-pill, .hx-studies a:focus-visible .hx-pill { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+/* Quick answers: the question takes the accent and the plus turns */
+.hx-qa summary { transition: color 0.25s var(--ease); }
+.hx-qa summary::after { transition: rotate 0.3s var(--ease); }
+.hx-qa summary:hover { color: var(--mark); }
+.hx-qa details:not([open]) summary:hover::after { rotate: 90deg; }
