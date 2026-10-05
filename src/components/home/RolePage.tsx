@@ -74,8 +74,8 @@ export default function RolePage({ role }: { role: Role }) {
         <div className="hx-facts hx-card">
           <ol>
             {roleStudies(role).map((study) => (
-              <li key={study.slug}>
-                <strong><Link href={`/work/${study.slug}`}>{study.title}</Link></strong>
+              <li key={study.slug} className="hx-go">
+                <strong><Link className="hx-go-link" href={`/work/${study.slug}`}>{study.title}</Link></strong>
                 <span>{study.summary}</span>
               </li>
             ))}

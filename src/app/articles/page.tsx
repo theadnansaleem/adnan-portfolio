@@ -26,8 +26,8 @@ export default function ArticlesPage() {
       <div className="hx-facts hx-card">
         <ol className="hx-role">
           {articles.map((a) => (
-            <li key={a.slug}>
-              <strong><Link href={`/articles/${a.slug}`}>{a.title}</Link></strong>
+            <li key={a.slug} className="hx-go">
+              <strong><Link className="hx-go-link" href={`/articles/${a.slug}`}>{a.title}</Link></strong>
               <span>{a.description}</span>
               <span className="hx-cap">{a.minutes} min read</span>
             </li>

@@ -13,6 +13,9 @@ That bumps `package.json`, commits, and tags in one step.
 - Header: Case studies, Articles and About are in the top menu on the home page, and Articles on every other page.
 - The phone menu lists the pages as well as the home page sections, and opens below 1240px so the link row never crowds.
 
+- Hover feedback on links across the site: list rows ease right and show an arrow, case study cards respond, and text links, quick answers and footer links change smoothly.
+- Article and case study rows are clickable across their full width.
+
 ### Fixed
 - The arrow before the email, GitHub and CV links in the phone menu no longer shows as an empty box.
 - No stray rule above the first row of the article list and the role page lists.
