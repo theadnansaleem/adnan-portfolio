@@ -17,6 +17,7 @@ That bumps `package.json`, commits, and tags in one step.
 - Alt text on project screenshots and certificate previews; each hero portrait is described while it shows.
 - `/llms.txt`: a plain-text map of the site built from the same data as the pages.
 - Two more quick answers on `/about` (stack and availability).
+- Faster first paint: the Arabic and handwriting fonts are no longer preloaded on pages that do not use them.
 
 ## 2.3.1 - 2026-10-04
 
