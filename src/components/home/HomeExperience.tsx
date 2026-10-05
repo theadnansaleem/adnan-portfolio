@@ -647,6 +647,7 @@ export default function HomeExperience({ fontClass, updated }: { fontClass: stri
         <nav aria-label="Footer">
           <Link href="/about">About</Link>
           <Link href="/work">Case studies</Link>
+          <Link href="/articles">Articles</Link>
           <Link href="/hire">Hire</Link>
           <Link href="/lab">Lab</Link>
           <Link href="/frontend-developer">Frontend developer</Link>
