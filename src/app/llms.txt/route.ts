@@ -20,6 +20,8 @@ export function GET() {
     link('Lab: live demos of table virtualization and a real-time dashboard', '/lab'),
     link('Frontend developer: React, Next.js and Angular experience', '/frontend-developer'),
     link('.NET developer: C#, ASP.NET Core and Blazor experience', '/dotnet-developer'),
+    link('AI engineer: LLM integration, agent harness and evaluation tooling', '/ai-engineer'),
+    link('Azure developer: Azure Functions, App Service and Azure OpenAI', '/azure-developer'),
     link('Arabic version', '/ar'),
     link('CV (PDF)', profile.resume),
     '',

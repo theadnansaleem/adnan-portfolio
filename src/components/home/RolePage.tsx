@@ -12,8 +12,8 @@ export const roleMetadata = (role: Role): Metadata => ({
   openGraph: { title: role.title, description: role.description, url: role.path, images: ['/opengraph-image'] },
 });
 
-/** One role, shown through the CV bullets, skills and case studies that match it. */
-export default function RolePage({ role }: { role: Role }) {
+/** One role, shown through the CV bullets, skills and case studies that match it. Children sit under the header. */
+export default function RolePage({ role, children }: { role: Role; children?: React.ReactNode }) {
   const [before, strong, after] = role.heading;
   return (
     <PageFrame>
@@ -29,6 +29,8 @@ export default function RolePage({ role }: { role: Role }) {
           <a className="hx-pill is-big" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
         </div>
       </header>
+
+      {children}
 
       <section className="hx-lab">
         <div>
