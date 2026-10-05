@@ -7,12 +7,18 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.9.0 - 2026-10-05
+
+### Added
+- `/ai-engineer`: three headline numbers, an animated six-step pipeline, a terminal view of the harness, and dates on the timeline.
+- `/azure-developer`: service cards and a commit-to-production flow.
+- Home page: two cards that lead to the AI and Azure pages.
+
 ## 2.8.0 - 2026-10-05
 
 ### Added
-- `/ai-engineer`: three headline numbers, the six AI model families I work with, an animated six-step pipeline, a terminal view of the harness, and my LLM evaluation and integration work.
-- `/azure-developer`: the Azure services I deploy on, a commit-to-production flow, and the platforms it was used on.
-- Home page: two cards that lead to the AI and Azure pages.
+- `/ai-engineer`: the AI models and tools I work with, my agent harness, and my LLM evaluation and integration work.
+- `/azure-developer`: Azure experience, services and the platforms it was used on.
 - Microsoft Azure services in the skills list.
 
 ## 2.7.0 - 2026-10-05
