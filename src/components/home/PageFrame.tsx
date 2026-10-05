@@ -22,7 +22,7 @@ export default function PageFrame({ children }: { children: React.ReactNode }) {
         </svg>
       </div>
       <header className="hx-top">
-        <Link className="hx-wordmark" href="/" aria-label={`${profile.name}, home`}>
+        <Link className="hx-wordmark" href="/" title="Home">
           adnan<span className="hx-serif">saleem</span>
         </Link>
         <nav className="hx-nav" aria-label="Primary">

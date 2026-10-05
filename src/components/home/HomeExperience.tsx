@@ -98,7 +98,7 @@ function Roll({ parts }: { parts: [string, boolean?][] }) {
 // Hero portraits: 1100px cutouts with transparency, bottom-aligned so they swap in place
 const HERO = ['/me/adnan-soft.webp', '/me/hero/tie.webp', '/me/hero/polo.webp', '/me/hero/conference.webp', '/me/hero/waistcoat.webp', '/me/hero/laptop.webp'];
 
-export default function HomeExperience({ fontClass }: { fontClass: string }) {
+export default function HomeExperience({ fontClass, updated }: { fontClass: string; updated: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [current, setCurrent] = useState('home');
   const [look, setLook] = useState<(typeof projects)[number] | null>(null);
@@ -348,7 +348,7 @@ export default function HomeExperience({ fontClass }: { fontClass: string }) {
       </div>
 
       <header className="hx-top">
-        <a className="hx-wordmark" href="#home" aria-label={`${profile.name}, back to top`} onClick={closeMenu}>
+        <a className="hx-wordmark" href="#home" title="Back to top" onClick={closeMenu}>
           adnan<span className="hx-serif">saleem</span>
         </a>
         <nav className="hx-nav" aria-label="Primary">
@@ -391,7 +391,7 @@ export default function HomeExperience({ fontClass }: { fontClass: string }) {
         <div className="hx-hero-left">
           <p className="hx-badge"><span aria-hidden="true" />{profile.availability} · Open to relocation</p>
           <h1>
-            <span className="hx-name">{profile.name}</span>
+            <span className="hx-name">{profile.name}</span>{' '}
             Senior <em>Full-Stack</em> Engineer
           </h1>
         </div>
@@ -434,8 +434,7 @@ export default function HomeExperience({ fontClass }: { fontClass: string }) {
         <ul className="hx-grid-3">
           {IMPACT.map((item, i) => (
             <li key={item.label} className="hx-card hx-tilt hx-rv" style={{ '--d': i } as React.CSSProperties}>
-              <strong>{item.figure}</strong>
-              <h3>{item.label}</h3>
+              <h3><strong>{item.figure}</strong> {item.label}</h3>
               <p>{item.detail}</p>
               <span className="hx-cap">{item.where}</span>
             </li>
@@ -486,7 +485,7 @@ export default function HomeExperience({ fontClass }: { fontClass: string }) {
               <li key={p.id}>
                 <div className="hx-when">{p.number}</div>
                 <div>
-                  <h3>{href ? <ProjectLink href={href}>{p.title} ↗</ProjectLink> : p.title}</h3>
+                  <h3>{href ? <ProjectLink className="hx-out" href={href}>{p.title}</ProjectLink> : p.title}</h3>
                   <p>{p.description}</p>
                 </div>
               </li>
@@ -548,7 +547,7 @@ export default function HomeExperience({ fontClass }: { fontClass: string }) {
                 const preview = CERT_PREVIEW[item.title];
                 return (
                   <li key={item.title} className={preview ? 'has-preview' : undefined}>
-                    <h3>{item.href ? <a href={item.href} target="_blank" rel="noopener noreferrer">{item.title} ↗</a> : item.title}</h3>
+                    <h3>{item.href ? <a className="hx-out" href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a> : item.title}</h3>
                     <p>{item.meta}</p>
                     {preview && <Image className="hx-cert" src={'/certs/' + preview} alt="" width={672} height={352} sizes="340px" />}
                   </li>
@@ -636,7 +635,7 @@ export default function HomeExperience({ fontClass }: { fontClass: string }) {
 
       <footer className="hx-foot hx-cap">
         <span>©{new Date().getFullYear()} {profile.name}</span>
-        <span>Lahore, Pakistan</span>
+        <span>Lahore, Pakistan · Updated {updated}</span>
         <nav aria-label="Footer">
           <Link href="/about">About</Link>
           <Link href="/work">Case studies</Link>

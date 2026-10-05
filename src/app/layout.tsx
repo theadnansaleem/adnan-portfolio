@@ -51,6 +51,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     creator: '@adnan_muhamadi',
+    site: '@adnan_muhamadi',
   },
   icons: {
     icon: [

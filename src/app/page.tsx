@@ -29,7 +29,7 @@ export default function Home() {
           __html: JSON.stringify(profilePageJsonLd).replace(/</g, '\\u003c'),
         }}
       />
-      <HomeExperience fontClass={hxFonts} />
+      <HomeExperience fontClass={hxFonts} updated={new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })} />
     </>
   );
 }

@@ -30,6 +30,11 @@ body {
 [data-theme="light"] .theme-sun  { display: none; }
 [data-theme="light"] .theme-moon { display: inline-flex; }
 
+/* ─── Skip link ──────────────────────────────────────────────────────────── */
+/* Off screen until a keyboard user tabs to it. */
+.skip-link { position: fixed; top: 10px; left: 10px; z-index: 100; padding: 10px 16px; border-radius: 8px; background: #d2ff00; color: #0d0e0b; font: 600 14px/1 system-ui, sans-serif; transform: translateY(-200%); }
+.skip-link:focus { transform: none; }
+
 ::selection {
   background: #d2ff00;
   color: #0d0e0b;

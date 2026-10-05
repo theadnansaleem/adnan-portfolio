@@ -37,10 +37,22 @@ const QUESTIONS = [
   ['What is the quickest way to reach you?', `Email ${profile.email}, or message me on LinkedIn.`],
 ];
 
+// The quick answers, marked up as questions and answers
+const FAQ_JSON_LD = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: QUESTIONS.map(([question, answer]) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+}).replace(/</g, '\\u003c');
+
 export default function AboutPage() {
   return (
     <PageFrame>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageJsonLd('/about', 'About', DESCRIPTION, 'AboutPage') }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: FAQ_JSON_LD }} />
       <header className="hx-head">
         <p className="hx-cap"><b>About</b> The person</p>
         <h1>More than a <em>CV</em></h1>
