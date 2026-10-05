@@ -381,6 +381,8 @@ body:has(.hx) { cursor: auto; }
 .hx-facts { padding: 10px 26px; }
 .hx-facts > div, .hx-facts li { display: grid; gap: 2px; padding: 14px 0; border-top: 1px solid var(--line); }
 .hx-facts > div:first-child { border-top: 0; }
+/* A list that opens the card has no heading above it, so its first row needs no rule */
+.hx-facts > ol:first-child > li:first-child { border-top: 0; }
 .hx-facts > p { padding: 14px 0 4px; }
 .hx-facts dd { font-size: 17px; overflow-wrap: anywhere; }
 .hx-facts li span { color: var(--ink-2); font-size: 14px; }

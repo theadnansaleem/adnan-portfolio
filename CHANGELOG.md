@@ -15,6 +15,7 @@ That bumps `package.json`, commits, and tags in one step.
 
 ### Fixed
 - The arrow before the email, GitHub and CV links in the phone menu no longer shows as an empty box.
+- No stray rule above the first row of the article list and the role page lists.
 
 ## 2.6.0 - 2026-10-05
 
