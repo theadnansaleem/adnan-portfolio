@@ -33,6 +33,8 @@ const QUESTIONS = [
   ['Would you move for the right thing?', 'Yes. I am open to relocation, and the Arabic version of this site is there for the Gulf.'],
   ['How is your English?', 'CEFR C1 on the Oxford ELLT, and five years of daily work with US, UK and German teams.'],
   ['What did you study?', `${education[0].title} at ${education[0].issuer} in Karachi, then an ${education[1].title} from ${education[1].issuer} in London, finished in April 2025 while working full time.`],
+  ['What do you build with?', 'React, Next.js and Angular on the front end, and Node.js, C#, .NET and AWS behind it. Eight years of it, for government, fintech and cybersecurity clients.'],
+  ['Are you available?', `${profile.availability}, and open to relocation.`],
   ['What are you like to work with?', 'I lead code reviews and have mentored 27 junior developers.'],
   ['What is the quickest way to reach you?', `Email ${profile.email}, or message me on LinkedIn.`],
 ];

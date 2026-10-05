@@ -14,6 +14,9 @@ That bumps `package.json`, commits, and tags in one step.
 - Impact headings carry their figure ("~40% faster release cycle"); arrow glyphs are out of heading text.
 - Added a skip link, `twitter:site`, a visible "Updated" date in the home footer, and FAQ structured data on `/about`.
 - The wordmark's accessible name now matches its visible text.
+- Alt text on project screenshots and certificate previews; each hero portrait is described while it shows.
+- `/llms.txt`: a plain-text map of the site built from the same data as the pages.
+- Two more quick answers on `/about` (stack and availability).
 
 ## 2.3.1 - 2026-10-04
 
