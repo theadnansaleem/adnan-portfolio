@@ -95,6 +95,9 @@ function Roll({ parts }: { parts: [string, boolean?][] }) {
   );
 }
 
+// Pages listed in the header after the section links, and in the phone menu
+const PAGES = [['/work', 'Case studies'], ['/articles', 'Articles'], ['/lab', 'Lab'], ['/about', 'About']];
+
 // Hero portraits: 1100px cutouts with transparency, bottom-aligned so they swap in place
 const HERO: [string, string][] = [
   ['/me/adnan-soft.webp', 'in a dark suit and red tie, chin resting on his hand'],
@@ -365,7 +368,9 @@ export default function HomeExperience({ fontClass, updated }: { fontClass: stri
               <span>{s.label}</span>
             </a>
           ))}
-          <Link href="/lab" data-text="Lab"><span>Lab</span></Link>
+          {PAGES.map(([href, label]) => (
+            <Link key={href} href={href} data-text={label}><span>{label}</span></Link>
+          ))}
           <Link href="/hire" data-text="Hire me" className="is-hot"><span>Hire me</span></Link>
         </nav>
         <div className="hx-tools">
@@ -703,10 +708,15 @@ export default function HomeExperience({ fontClass, updated }: { fontClass: stri
           ))}
         </ol>
         <ul>
-          <li><a href={`mailto:${profile.email}`}>⮡ {profile.email}</a></li>
+          {[...PAGES, ['/hire', 'Hire me']].map(([href, label]) => (
+            <li key={href}><Link href={href}>{label}</Link></li>
+          ))}
+        </ul>
+        <ul>
+          <li><a href={`mailto:${profile.email}`}>↳ {profile.email}</a></li>
           <li><a href={profile.linkedin} target="_blank" rel="noopener noreferrer"><LinkedInMark size={14} /> LinkedIn</a></li>
-          <li><a href={profile.github} target="_blank" rel="noopener noreferrer">⮡ GitHub</a></li>
-          <li><a href={profile.resume} target="_blank" rel="noopener noreferrer">⮡ CV</a></li>
+          <li><a href={profile.github} target="_blank" rel="noopener noreferrer">↳ GitHub</a></li>
+          <li><a href={profile.resume} target="_blank" rel="noopener noreferrer">↳ CV</a></li>
         </ul>
       </div>
     </div>

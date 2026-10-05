@@ -87,8 +87,14 @@ body:has(.hx) { cursor: auto; }
 .hx-nav a::after { content: attr(data-text); position: absolute; left: 0; top: 100%; color: var(--ink); transition: transform 0.45s var(--ease); }
 .hx-nav a:hover span, .hx-nav a:hover::after, .hx-nav a:focus-visible span, .hx-nav a:focus-visible::after { transform: translateY(-100%); }
 .hx-nav a[aria-current] { color: var(--ink); }
+/* Nine links need about 1240px beside the wordmark and tools; below that the menu button takes over */
+.hx-nav a { white-space: nowrap; }
 .hx-tools { display: flex; align-items: center; gap: 8px; }
 .hx-menu-btn { display: none; }
+@media (max-width: 1240px) {
+  .hx-nav { display: none; }
+  .hx-menu-btn { display: grid; }
+}
 .hx.is-menu .hx-top { color: #f4f3ee; background: none; border-color: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
 
 /* ── Hero: a large cutout portrait stands in front of the giant name ───── */

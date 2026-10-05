@@ -7,6 +7,15 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.6.1 - 2026-10-05
+
+### Changed
+- Header: Case studies, Articles and About are in the top menu on the home page, and Articles on every other page.
+- The phone menu lists the pages as well as the home page sections, and opens below 1240px so the link row never crowds.
+
+### Fixed
+- The arrow before the email, GitHub and CV links in the phone menu no longer shows as an empty box.
+
 ## 2.6.0 - 2026-10-05
 
 ### Added

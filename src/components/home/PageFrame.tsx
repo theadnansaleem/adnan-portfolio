@@ -26,7 +26,7 @@ export default function PageFrame({ children }: { children: React.ReactNode }) {
           adnan<span className="hx-serif">saleem</span>
         </Link>
         <nav className="hx-nav" aria-label="Primary">
-          {[['/', 'Home'], ['/#projects', 'Work'], ['/work', 'Case studies'], ['/lab', 'Lab'], ['/about', 'About'], ['/hire', 'Hire']].map(([href, label]) => (
+          {[['/', 'Home'], ['/#projects', 'Work'], ['/work', 'Case studies'], ['/articles', 'Articles'], ['/lab', 'Lab'], ['/about', 'About'], ['/hire', 'Hire']].map(([href, label]) => (
             <Link key={href} href={href} data-text={label}><span>{label}</span></Link>
           ))}
         </nav>
