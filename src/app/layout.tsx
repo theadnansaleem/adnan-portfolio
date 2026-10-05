@@ -13,7 +13,11 @@ const DESCRIPTION =
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0d0e0b',
+  // The browser bar follows the system theme, like the page does by default
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f7f6f2' },
+    { media: '(prefers-color-scheme: dark)', color: '#0d0e0b' },
+  ],
 };
 
 export const metadata: Metadata = {
@@ -126,12 +130,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
-        {/* Theme — runs before paint so a saved light preference never flashes
-            dark. Defaults to dark; the system preference is not auto-applied
-            because the dark treatment is the intended default presentation. */}
+        {/* Theme: runs before paint so the wrong theme never flashes. A choice made
+            with the toggle wins; otherwise the page follows the system setting,
+            and keeps following it if that changes while the page is open. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}})()`,
+            __html: `(function(){var d=document.documentElement,m=window.matchMedia('(prefers-color-scheme: light)');function saved(){try{var t=localStorage.getItem('theme');return t==='light'||t==='dark'?t:null}catch(e){return null}}d.dataset.theme=saved()||(m.matches?'light':'dark');m.addEventListener('change',function(e){if(!saved())d.dataset.theme=e.matches?'light':'dark'})})()`,
           }}
         />
         {/* Structured data */}

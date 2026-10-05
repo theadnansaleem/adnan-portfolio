@@ -7,6 +7,12 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.7.0 - 2026-10-05
+
+### Changed
+- The colour theme follows the visitor's system setting by default. A choice made with the toggle still wins, and toggling back to the system's theme hands control back to the system.
+- The browser bar colour and native controls match the active theme.
+
 ## 2.6.1 - 2026-10-05
 
 ### Changed
