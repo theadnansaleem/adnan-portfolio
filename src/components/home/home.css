@@ -672,5 +672,29 @@ button.hx-shot:hover .hx-shot-cue, button.hx-shot:focus-visible .hx-shot-cue { o
 .hx-tools { align-items: stretch; }
 .hx-tools > li { gap: 6px; }
 .hx-tools img { width: 48px; height: 48px; padding: 9px; border-radius: 12px; background: white; margin-bottom: 10px; }
+.hx-flow-logos { display: flex; flex-wrap: wrap; gap: 6px; }
+.hx-flow-logos img { width: 24px; height: 24px; padding: 4px; border-radius: 6px; background: white; }
+.hx-h2-logo { display: inline-block; vertical-align: -0.12em; width: 0.9em; height: 0.9em; margin-right: 0.15em; }
+.hx-stack { display: grid; gap: 16px; }
+.hx-term-log.is-static { height: auto; padding-bottom: 16px; }
 .hx-facts li span a { text-decoration: underline; text-decoration-color: var(--mark); text-underline-offset: 4px; }
 .hx-facts li span a:hover { color: var(--mark); }
+
+/* Flow: numbered steps on one line, with a dot travelling along it */
+.hx-flow { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 20px; padding: 28px; counter-reset: flow; }
+.hx-flow::before { content: ""; position: absolute; left: 46px; right: 46px; top: 46px; height: 1px; background: var(--line); }
+.hx-flow::after { content: ""; position: absolute; top: 42px; left: 46px; width: 9px; height: 9px; border-radius: 50%; background: var(--mark); animation: hx-flow 7s linear infinite; }
+@keyframes hx-flow { to { left: calc(100% - 55px); } }
+.hx-flow li { position: relative; z-index: 1; display: grid; gap: 6px; align-content: start; padding-top: 52px; counter-increment: flow; }
+.hx-flow li::before { content: counter(flow); position: absolute; top: 0; left: 0; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 1px solid var(--line); color: var(--mark); font-size: 13px; font-weight: 600; }
+.hx-flow strong { font-size: 16px; }
+.hx-flow li > span { color: var(--ink-2); font-size: 14px; }
+@media (max-width: 1000px) {
+  .hx-flow { grid-template-columns: 1fr; }
+  .hx-flow::before { left: 46px; right: auto; top: 46px; bottom: 46px; width: 1px; height: auto; }
+  .hx-flow::after { display: none; }
+  .hx-flow li { padding: 6px 0 6px 56px; min-height: 36px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hx-flow::after { display: none; }
+}
