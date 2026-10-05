@@ -7,6 +7,11 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.6.0 - 2026-10-05
+
+### Added
+- Three more articles: Core Web Vitals in a React app, role-based access control with data redaction in ASP.NET Core, and a React dashboard on a WebSocket feed.
+
 ## 2.5.0 - 2026-10-05
 
 ### Added

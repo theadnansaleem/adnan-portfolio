@@ -4,8 +4,8 @@ import PageFrame from '@/components/home/PageFrame';
 import { articles } from '@/lib/articles';
 import { pageJsonLd } from '@/lib/seo';
 
-const TITLE = 'Articles: micro frontends, React performance and legacy migration';
-const DESCRIPTION = 'Practical write-ups by M. Adnan Saleem on Module Federation micro frontends, rendering large tables in React, and migrating Visual FoxPro systems to .NET.';
+const TITLE = 'Articles: React performance, micro frontends, .NET and legacy migration';
+const DESCRIPTION = 'Practical write-ups by M. Adnan Saleem on micro frontends, React performance, Core Web Vitals, real-time dashboards, access control in .NET and legacy migration.';
 
 export const metadata: Metadata = {
   title: TITLE,
