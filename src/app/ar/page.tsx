@@ -88,8 +88,7 @@ export default function ArabicPage() {
           <ul className="hx-grid-3" style={{ marginTop: 18 }}>
             {IMPACT.map(([figure, label, detail, where]) => (
               <li key={label} className="hx-card">
-                <strong>{figure}</strong>
-                <h3>{label}</h3>
+                <h3><strong>{figure}</strong> {label}</h3>
                 <p>{detail}</p>
                 <span className="hx-cap" dir="ltr">{where}</span>
               </li>

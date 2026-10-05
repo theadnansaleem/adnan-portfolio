@@ -7,6 +7,14 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## Unreleased
+
+### Fixed
+- Home page H1 no longer reads as one run-on phrase to crawlers.
+- Impact headings carry their figure ("~40% faster release cycle"); arrow glyphs are out of heading text.
+- Added a skip link, `twitter:site`, a visible "Updated" date in the home footer, and FAQ structured data on `/about`.
+- The wordmark's accessible name now matches its visible text.
+
 ## 2.3.1 - 2026-10-04
 
 ### Changed

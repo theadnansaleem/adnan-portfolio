@@ -7,6 +7,7 @@ import PageTransition from '@/components/layout/PageTransition';
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <SmoothScrollProvider>
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <main id="main-content">{children}</main>
       <PageTransition />
     </SmoothScrollProvider>
