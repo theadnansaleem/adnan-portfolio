@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { articles } from '@/lib/articles';
 import { caseStudies } from '@/lib/case-studies';
 import { profile } from '@/lib/data';
 import { toggleTheme } from '@/components/ui/ThemeToggle';
@@ -28,6 +29,7 @@ const ACTIONS: Action[] = [
   { label: 'Terminal', hint: 'Section', run: go('/#terminal') },
   { label: 'Contact', hint: 'Section', run: go('/#contact') },
   ...caseStudies.map((study) => ({ label: study.title, hint: 'Case study', run: go(`/work/${study.slug}`) })),
+  ...articles.map((a) => ({ label: a.title, hint: 'Article', run: go(`/articles/${a.slug}`) })),
   { label: 'LinkedIn', hint: 'Opens in a new tab', run: open(profile.linkedin) },
   { label: 'GitHub', hint: 'Opens in a new tab', run: open(profile.github) },
   { label: 'Switch light and dark theme', hint: 'Theme', run: toggleTheme },

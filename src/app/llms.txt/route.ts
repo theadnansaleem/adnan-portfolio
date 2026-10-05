@@ -1,3 +1,4 @@
+import { articles } from '@/lib/articles';
 import { caseStudies } from '@/lib/case-studies';
 import { profile } from '@/lib/data';
 
@@ -26,6 +27,11 @@ export function GET() {
     '',
     link('All case studies', '/work'),
     ...caseStudies.map((study) => link(study.title, `/work/${study.slug}`)),
+    '',
+    '## Articles',
+    '',
+    link('All articles', '/articles'),
+    ...articles.map((a) => link(a.title, `/articles/${a.slug}`)),
     '',
     '## Contact',
     '',

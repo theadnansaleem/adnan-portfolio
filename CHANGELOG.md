@@ -7,6 +7,11 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.5.0 - 2026-10-05
+
+### Added
+- `/articles`: three write-ups (Module Federation micro frontends, rendering 20,000 rows in React, migrating Visual FoxPro to .NET), each linked to its case study.
+
 ## 2.4.0 - 2026-10-05
 
 ### Added
