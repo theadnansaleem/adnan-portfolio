@@ -622,6 +622,27 @@ export default function HomeExperience({ fontClass, updated }: { fontClass: stri
               <span className="hx-pill">Open the demo ↘</span>
             </Link>
           </li>
+          <li className="hx-card hx-tilt hx-rv">
+            <Link href="/ai-engineer">
+              <span className="hx-cap">AI · Agents and models</span>
+              <h3>I build with AI and build AI into products</h3>
+              <p>Six model families, an agent harness I built myself, and LLM evaluation work since 2020.</p>
+              <span className="hx-flow-logos">
+                {['claude', 'codex', 'gemini', 'kimi', 'deepseek', 'groq'].map((file) => (
+                  <Image key={file} src={`/ai/${file}.svg`} alt={file} width={24} height={24} unoptimized />
+                ))}
+              </span>
+              <span className="hx-pill">See how I work ↘</span>
+            </Link>
+          </li>
+          <li className="hx-card hx-tilt hx-rv" style={{ '--d': 1 } as React.CSSProperties}>
+            <Link href="/azure-developer">
+              <span className="hx-cap">Cloud · Azure</span>
+              <h3>.NET and React, shipped on Azure</h3>
+              <p>Functions, App Service, Azure SQL and Azure OpenAI, with Azure DevOps pipelines on Qatar&apos;s government platforms.</p>
+              <span className="hx-pill">See the Azure work ↘</span>
+            </Link>
+          </li>
         </ul>
       </section>
 
