@@ -36,6 +36,30 @@ export const articles: Article[] = [
     caseStudy: 'visual-foxpro-to-dotnet-migration',
     minutes: 3,
   },
+  {
+    slug: 'core-web-vitals-react-lcp-code-splitting',
+    title: 'Passing Core Web Vitals in a React app: what moves LCP',
+    description: 'How to find the element that sets your LCP, ship less before the first paint with code splitting, preload only what matters, and measure the change properly.',
+    published: '2026-10-05',
+    caseStudy: 'hayya-qatar-evisa-platform',
+    minutes: 3,
+  },
+  {
+    slug: 'role-based-access-control-data-redaction-dotnet',
+    title: 'Role-based access control with data redaction in ASP.NET Core',
+    description: 'Authorization decides who may call an endpoint. Redaction decides what they get back. How to do both in ASP.NET Core, and where data still leaks.',
+    published: '2026-10-05',
+    caseStudy: 'codex-vehicle-cybersecurity-platform',
+    minutes: 3,
+  },
+  {
+    slug: 'real-time-dashboard-react-websocket',
+    title: 'A React dashboard that keeps up with a WebSocket feed',
+    description: 'Why a live dashboard slows down over time, and the fixes: render once per frame, cap the list, aggregate as events arrive, and plan for reconnects.',
+    published: '2026-10-05',
+    caseStudy: 'codex-vehicle-cybersecurity-platform',
+    minutes: 3,
+  },
 ];
 
 export const article = (slug: string) => {
