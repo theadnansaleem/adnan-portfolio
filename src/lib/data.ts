@@ -276,7 +276,7 @@ export const skills: SkillCategory[] = [
     },
     {
         category: "Cloud & DevOps",
-        tags: ["Amazon Web Services (AWS, 8 years)", "EC2", "S3", "Lambda", "Azure DevOps", "Jenkins", "CI/CD (Continuous Integration / Continuous Deployment)", "GitHub Actions", "GitLab CI/CD", "Docker", "Kubernetes", "Terraform (Infrastructure as Code)", "Google Cloud Platform", "Vite", "Webpack", "Git / GitFlow"]
+        tags: ["Amazon Web Services (AWS, 8 years)", "EC2", "S3", "Lambda", "Microsoft Azure (Functions, App Service, Azure SQL, Blob Storage, Key Vault, Application Insights)", "Azure DevOps", "Jenkins", "CI/CD (Continuous Integration / Continuous Deployment)", "GitHub Actions", "GitLab CI/CD", "Docker", "Kubernetes", "Terraform (Infrastructure as Code)", "Google Cloud Platform", "Vite", "Webpack", "Git / GitFlow"]
     },
     {
         category: "UI, Mobile & Accessibility",

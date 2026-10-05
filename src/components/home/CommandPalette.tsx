@@ -21,6 +21,8 @@ const ACTIONS: Action[] = [
   { label: 'About Adnan: photos and quick answers', hint: 'Page', run: go('/about') },
   { label: 'Frontend developer: React, Next.js, Angular', hint: 'Page', run: go('/frontend-developer') },
   { label: '.NET developer: C#, ASP.NET Core, Blazor', hint: 'Page', run: go('/dotnet-developer') },
+  { label: 'AI engineer: LLMs, agents, evaluation', hint: 'Page', run: go('/ai-engineer') },
+  { label: 'Azure developer: Functions, App Service, OpenAI', hint: 'Page', run: go('/azure-developer') },
   { label: 'Home', hint: 'Page', run: go('/') },
   { label: 'Impact', hint: 'Section', run: go('/#about') },
   { label: 'Selected work', hint: 'Section', run: go('/#projects') },

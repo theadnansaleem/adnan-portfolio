@@ -667,3 +667,10 @@ button.hx-shot:hover .hx-shot-cue, button.hx-shot:focus-visible .hx-shot-cue { o
 .hx-qa summary::after { transition: rotate 0.3s var(--ease); }
 .hx-qa summary:hover { color: var(--mark); }
 .hx-qa details:not([open]) summary:hover::after { rotate: 90deg; }
+
+/* ── AI tools: each logo sits on a white tile so it reads the same in both themes ── */
+.hx-tools { align-items: stretch; }
+.hx-tools > li { gap: 6px; }
+.hx-tools img { width: 48px; height: 48px; padding: 9px; border-radius: 12px; background: white; margin-bottom: 10px; }
+.hx-facts li span a { text-decoration: underline; text-decoration-color: var(--mark); text-underline-offset: 4px; }
+.hx-facts li span a:hover { color: var(--mark); }

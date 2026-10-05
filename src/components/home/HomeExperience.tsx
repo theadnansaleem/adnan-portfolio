@@ -657,6 +657,8 @@ export default function HomeExperience({ fontClass, updated }: { fontClass: stri
           <Link href="/lab">Lab</Link>
           <Link href="/frontend-developer">Frontend developer</Link>
           <Link href="/dotnet-developer">.NET developer</Link>
+          <Link href="/ai-engineer">AI engineer</Link>
+          <Link href="/azure-developer">Azure developer</Link>
           <Link href="/ar" lang="ar">العربية</Link>
         </nav>
       </footer>
