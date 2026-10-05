@@ -1,6 +1,6 @@
 /* Home page. Everything is scoped under .hx so the case study pages keep the
-   tokens and chrome from globals.css. Dark is the default, as on the rest of
-   the site; [data-theme="light"] swaps the tokens.
+   tokens and chrome from globals.css. The dark tokens are the base, as on the
+   rest of the site; [data-theme="light"] swaps them.
    --accent is the lime fill that always carries dark text. --mark is the accent
    used as a text colour, so it has to stay readable on each theme's page. */
 .hx {

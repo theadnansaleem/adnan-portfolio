@@ -2,15 +2,18 @@
 @import "tailwindcss";
 
 /* ─── Page colour ───────────────────────────────────────────────────────── */
-/* Only what shows before and behind the page frame. Dark is the default;    */
-/* data-theme on <html> is set by the inline script in layout.tsx.           */
+/* Only what shows before and behind the page frame. data-theme on <html> is */
+/* set by the inline script in layout.tsx: the visitor's choice, or failing   */
+/* that the system setting. These dark values apply until that script runs.  */
 :root {
   --bg:   #0d0e0b;
   --text: #f4f3ee;
+  color-scheme: dark;
 }
 [data-theme="light"] {
   --bg:   #f7f6f2;
   --text: #12130f;
+  color-scheme: light;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
