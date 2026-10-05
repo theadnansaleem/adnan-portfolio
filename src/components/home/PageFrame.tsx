@@ -64,6 +64,8 @@ export default function PageFrame({ children }: { children: React.ReactNode }) {
           <Link href="/work">Case studies</Link>
           <Link href="/hire">Hire</Link>
           <Link href="/lab">Lab</Link>
+          <Link href="/frontend-developer">Frontend developer</Link>
+          <Link href="/dotnet-developer">.NET developer</Link>
         </nav>
       </footer>
       <CommandPalette />

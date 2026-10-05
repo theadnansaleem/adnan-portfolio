@@ -378,6 +378,8 @@ body:has(.hx) { cursor: auto; }
 .hx-facts > p { padding: 14px 0 4px; }
 .hx-facts dd { font-size: 17px; overflow-wrap: anywhere; }
 .hx-facts li span { color: var(--ink-2); font-size: 14px; }
+/* Role pages: several CV bullets per team, so they need air between them */
+.hx-role li { gap: 8px; padding: 18px 0; }
 .hx-page .hx-stats > div { padding: 24px 26px; }
 
 /* ── Confetti ───────────────────────────────────────────────────────────── */
