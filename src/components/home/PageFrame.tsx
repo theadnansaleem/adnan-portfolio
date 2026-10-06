@@ -7,6 +7,7 @@ import { profile } from '@/lib/data';
 import { toggleTheme } from '@/components/ui/ThemeToggle';
 import CommandPalette, { openPalette } from './CommandPalette';
 import { hxFonts } from './fonts';
+import { spotlight } from './spotlight';
 import './home.css';
 
 /** Counts a figure up from zero to its data-count, keeping the data-suffix. */
@@ -26,6 +27,24 @@ export default function PageFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const arabic = pathname === '/ar';
   const root = useRef<HTMLDivElement>(null);
+  const bar = useRef<HTMLDivElement>(null);
+
+  // Reading progress along the top edge, and the highlight that follows the pointer across cards
+  useEffect(() => {
+    const frame = root.current;
+    if (!frame) return;
+    const onScroll = () => {
+      const room = document.documentElement.scrollHeight - window.innerHeight;
+      if (bar.current) bar.current.style.transform = `scaleX(${room > 0 ? Math.min(1, window.scrollY / room) : 0})`;
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    frame.addEventListener('pointermove', spotlight);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      frame.removeEventListener('pointermove', spotlight);
+    };
+  }, [pathname]);
 
   // Content below the first screen rises in as it is reached, and figures count up when seen.
   // The first screen is left alone so the page paints without waiting for this.
@@ -77,6 +96,7 @@ export default function PageFrame({ children }: { children: React.ReactNode }) {
           <path d="M1210 560c150 30 240 170 170 300s-250 160-350 60-60-400 180-360z" />
         </svg>
       </div>
+      <div className="hx-progress" ref={bar} aria-hidden="true" />
       <header className="hx-top">
         <Link className="hx-wordmark" href="/" title="Home">
           adnan<span className="hx-serif">saleem</span>

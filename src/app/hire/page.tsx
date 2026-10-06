@@ -54,7 +54,12 @@ export default function HirePage() {
       </section>
 
       <dl className="hx-stats hx-card">
-        {stats.map((stat) => <div key={stat.label}><dt>{stat.number}</dt><dd>{stat.label}</dd></div>)}
+        {stats.map((stat) => (
+          <div key={stat.label}>
+            <dt data-count={parseInt(stat.number, 10)} data-suffix={stat.number.replace(/\d+/, '')}>{stat.number}</dt>
+            <dd>{stat.label}</dd>
+          </div>
+        ))}
       </dl>
 
       <section className="hx-lab is-stacked">

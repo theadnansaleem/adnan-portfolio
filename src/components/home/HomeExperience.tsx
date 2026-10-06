@@ -11,6 +11,7 @@ import CommandPalette, { openPalette } from './CommandPalette';
 import FitMatcher from './FitMatcher';
 import Terminal from './Terminal';
 import { MOMENTS } from './photos';
+import { spotlight } from './spotlight';
 import './home.css';
 
 // Preview images published by each credential page, saved under public/certs
@@ -232,6 +233,7 @@ export default function HomeExperience({ fontClass, updated }: { fontClass: stri
         target.px = e.clientX / window.innerWidth - 0.5;
         target.py = e.clientY / window.innerHeight - 0.5;
       }
+      spotlight(e);
       const el = e.target as Element;
       const magnet = el.closest?.<HTMLElement>('.hx-mag');
       if (magnet && e.pointerType === 'mouse') {
