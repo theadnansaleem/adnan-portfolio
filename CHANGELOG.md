@@ -7,6 +7,11 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.12.1 - 2026-10-06
+
+### Fixed
+- `/hire`: the job description box of the fit check was invisible, and so were the clocks on `/about`. Since 2.10.0 the scroll animation hid components shared with the home page and never revealed them.
+
 ## 2.12.0 - 2026-10-06
 
 ### Added
