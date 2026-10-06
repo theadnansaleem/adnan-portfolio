@@ -7,6 +7,16 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.10.0 - 2026-10-06
+
+### Added
+- Every page outside the home page now animates as you scroll: sections and cards rise in, and headline figures count up.
+- The pipeline diagrams light each step as the dot reaches it, the harness terminal types its lines in, cards lift on hover and tool logos turn.
+- Quick answers on `/ai-engineer` and `/azure-developer`, also published as FAQ structured data for search and AI assistants.
+
+### Fixed
+- The tool card styles no longer share a class name with the header buttons.
+
 ## 2.9.0 - 2026-10-05
 
 ### Added

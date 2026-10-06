@@ -33,7 +33,7 @@ export default function AzureDeveloperPage() {
           <h2><Image className="hx-h2-logo" src="/ai/azure.svg" alt="" width={44} height={44} unoptimized /> What I deploy on</h2>
           <p>The Azure services I have used on real projects.</p>
         </div>
-        <ul className="hx-grid-3 hx-tools">
+        <ul className="hx-grid-3 hx-toolgrid">
           {SERVICES.map(([name, note, kind]) => (
             <li key={name} className="hx-card">
               <h3>{name}</h3>

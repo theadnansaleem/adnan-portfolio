@@ -15,6 +15,8 @@ export interface Role {
   skillGroups: string[];
   /** Case study slugs, for a role whose studies cannot be found from their stack tags */
   studies?: string[];
+  /** Quick answers shown on the page and published as FAQ structured data: [question, answer] */
+  faq?: string[][];
 }
 
 // Role landing pages. Nothing here is new copy about the work: the pages list the CV bullets,
@@ -53,6 +55,12 @@ export const roles = {
     match: /Azure OpenAI|evaluation|human feedback/i,
     skillGroups: ['AI & LLM Engineering', 'Backend & APIs', 'Cloud & DevOps'],
     studies: ['ai-evaluation-training-interfaces'],
+    faq: [
+      ['Which AI models and tools do you use?', 'Claude, Codex, Gemini, Kimi, DeepSeek and Groq, run through an agent harness I built myself. Claude does most of the implementation, and Codex and Gemini review the finished change.'],
+      ['How do you keep AI-written code safe to ship?', 'Every change takes six steps: ticket, investigate, implement, verify, review and approve. Guard hooks block destructive git and cloud commands, a second agent reviews the change, and I approve every merge myself.'],
+      ['Have you worked on large language models directly?', 'Yes. At Turing in 2020 and 2021 I built evaluation and training interfaces for large language models, used by 100,000+ people for human feedback and data labelling.'],
+      ['Have you put LLMs into production software?', 'Yes. I built Azure OpenAI (GPT) integrations on Qatar\'s government event platforms.'],
+    ],
   },
   azure: {
     path: '/azure-developer',
@@ -65,6 +73,11 @@ export const roles = {
     match: /Azure/i,
     skillGroups: ['Cloud & DevOps', 'Backend & APIs', 'Databases', 'AI & LLM Engineering'],
     studies: ['qatar-events-platform-module-federation', 'hayya-qatar-evisa-platform'],
+    faq: [
+      ['Which Azure services do you use?', 'Azure Functions, App Service, Azure SQL, Blob Storage, Key Vault and Application Insights, with Azure DevOps for pipelines.'],
+      ['Do you work with Azure OpenAI?', 'Yes. I built Azure OpenAI (GPT) integrations on Qatar\'s government event platforms.'],
+      ['How do you deploy to Azure?', 'Through Azure DevOps CI/CD pipelines that build, test and deploy each change.'],
+    ],
   },
 } satisfies Record<string, Role>;
 

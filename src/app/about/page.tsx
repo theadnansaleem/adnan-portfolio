@@ -6,7 +6,7 @@ import { ShareButton } from '@/components/home/AboutBits';
 import { hxHand } from '@/components/home/fonts';
 import { MOMENTS } from '@/components/home/photos';
 import { education, jobs, profile } from '@/lib/data';
-import { pageJsonLd } from '@/lib/seo';
+import { faqJsonLd, pageJsonLd } from '@/lib/seo';
 
 const TITLE = 'About Adnan Saleem: the person behind the work';
 const DESCRIPTION = 'Who M. Adnan Saleem is beyond the CV: where he is based, where he studied, the teams he has worked with, photos, and how to say hello.';
@@ -39,22 +39,11 @@ const QUESTIONS = [
   ['What is the quickest way to reach you?', `Email ${profile.email}, or message me on LinkedIn.`],
 ];
 
-// The quick answers, marked up as questions and answers
-const FAQ_JSON_LD = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: QUESTIONS.map(([question, answer]) => ({
-    '@type': 'Question',
-    name: question,
-    acceptedAnswer: { '@type': 'Answer', text: answer },
-  })),
-}).replace(/</g, '\\u003c');
-
 export default function AboutPage() {
   return (
     <PageFrame>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageJsonLd('/about', 'About', DESCRIPTION, 'AboutPage') }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: FAQ_JSON_LD }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd(QUESTIONS) }} />
       <header className="hx-head">
         <p className="hx-cap"><b>About</b> The person</p>
         <h1>More than a <em>CV</em></h1>

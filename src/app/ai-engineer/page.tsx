@@ -6,11 +6,11 @@ import { roles } from '@/lib/roles';
 
 export const metadata: Metadata = roleMetadata(roles.ai);
 
-// [figure, label, where it comes from]
-const NUMBERS = [
-  ['100,000+', 'people used the interfaces', 'Evaluation and training interfaces for large language models, built at Turing in 2020 and 2021.'],
-  ['3', 'national platforms with GPT', 'Azure OpenAI integrations across the APIs and data contracts of Qatar\'s government event platforms.'],
-  ['6', 'model families in daily use', 'Claude, Codex, Gemini, Kimi, DeepSeek and Groq, run through a harness I built myself.'],
+// [figure, suffix, label, where it comes from]
+const NUMBERS: [number, string, string, string][] = [
+  [100000, '+', 'people used the interfaces', 'Evaluation and training interfaces for large language models, built at Turing in 2020 and 2021.'],
+  [3, '', 'national platforms with GPT', 'Azure OpenAI integrations across the APIs and data contracts of Qatar\'s government event platforms.'],
+  [6, '', 'model families in daily use', 'Claude, Codex, Gemini, Kimi, DeepSeek and Groq, run through a harness I built myself.'],
 ];
 
 // [logo file in /public/ai, name, maker, what it is for me]
@@ -44,9 +44,9 @@ export default function AiEngineerPage() {
   return (
     <RolePage role={roles.ai}>
       <ul className="hx-grid-3">
-        {NUMBERS.map(([figure, label, note]) => (
+        {NUMBERS.map(([figure, suffix, label, note]) => (
           <li key={label} className="hx-card">
-            <h3><strong>{figure}</strong> {label}</h3>
+            <h3><strong data-count={figure} data-suffix={suffix}>{figure.toLocaleString('en-US')}{suffix}</strong> {label}</h3>
             <p>{note}</p>
           </li>
         ))}
@@ -58,7 +58,7 @@ export default function AiEngineerPage() {
           <h2>What I work with every day</h2>
           <p>Six model families, each used where it is strongest.</p>
         </div>
-        <ul className="hx-grid-3 hx-tools">
+        <ul className="hx-grid-3 hx-toolgrid">
           {TOOLS.map(([file, name, maker, note]) => (
             <li key={file} className="hx-card">
               <Image src={`/ai/${file}.svg`} alt="" width={48} height={48} unoptimized />
