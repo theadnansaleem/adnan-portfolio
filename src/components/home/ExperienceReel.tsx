@@ -2,13 +2,25 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { jobs } from '@/lib/data';
+import Link from 'next/link';
+import { caseStudies } from '@/lib/case-studies';
+import { jobs, projects } from '@/lib/data';
 
 // Company logos by job id. Roles without one show the company's initials.
-const LOGOS: Record<number, { src: string; full?: boolean }> = {
+const LOGOS: Record<number, { src: string; shape?: 'full' | 'wide' }> = {
+  1: { src: '/logos/sc.png', shape: 'wide' },
   2: { src: '/logos/volopa.png' },
-  5: { src: '/logos/turing.png', full: true },
+  5: { src: '/logos/turing.png', shape: 'full' },
+  6: { src: '/logos/techsurge.png' },
 };
+
+// Project screenshots shown on a role's card, by job id and project title
+const SHOTS: Record<number, string[]> = {
+  1: ['Hayya Qatar eVisa & Event Access Platform', 'Qatar Events Platform (QEP)', 'Road to Qatar'],
+  2: ['Volopa Financial Services'],
+  4: ['Codex: Cybersecurity Platform'],
+};
+const shotsFor = (jobId: number) => projects.filter((project) => SHOTS[jobId]?.includes(project.title));
 
 /**
  * Experience as a scrubbed sequence: on wide screens the section pins and each
@@ -58,7 +70,7 @@ export default function ExperienceReel() {
             <li key={job.id} className={`hx-card${i === active ? ' is-on' : ''}`}>
               <div className="hx-reel-head">
                 {LOGOS[job.id] ? (
-                  <Image className={`hx-reel-logo${LOGOS[job.id].full ? ' is-full' : ''}`} src={LOGOS[job.id].src} alt="" width={52} height={52} unoptimized />
+                  <Image className={`hx-reel-logo${LOGOS[job.id].shape ? ` is-${LOGOS[job.id].shape}` : ''}`} src={LOGOS[job.id].src} alt="" width={LOGOS[job.id].shape === 'wide' ? 112 : 52} height={52} unoptimized />
                 ) : (
                   <span className="hx-reel-logo" aria-hidden="true">{job.company.split(' ').slice(0, 2).map((word) => word[0]).join('')}</span>
                 )}
@@ -72,6 +84,19 @@ export default function ExperienceReel() {
                 {job.bullets.map((bullet, n) => <li key={bullet} style={{ '--i': n } as React.CSSProperties}>{bullet}</li>)}
               </ul>
               <ul className="hx-tags">{job.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+              <p className="hx-reel-more">
+                {shotsFor(job.id).map((project, n) => {
+                  const shot = <Image src={project.image ?? ''} alt={project.title} width={160} height={100} unoptimized />;
+                  return project.caseStudy ? (
+                    <Link key={project.id} className="hx-reel-shot" style={{ '--i': n } as React.CSSProperties} href={`/work/${project.caseStudy}`} title={`${project.title}: read the case study`}>{shot}</Link>
+                  ) : (
+                    <span key={project.id} className="hx-reel-shot" style={{ '--i': n } as React.CSSProperties} title={project.title}>{shot}</span>
+                  );
+                })}
+                {caseStudies
+                  .filter((study) => study.company === job.company && !shotsFor(job.id).some((project) => project.caseStudy === study.slug))
+                  .map((study) => <Link key={study.slug} className="hx-pill" href={`/work/${study.slug}`}>{study.title} ↘</Link>)}
+              </p>
             </li>
           ))}
         </ol>

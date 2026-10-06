@@ -7,6 +7,15 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.12.0 - 2026-10-06
+
+### Added
+- Experience cards show project previews for the role (Hayya, Qatar Events Platform, Road to Qatar, Volopa, Codex), each linking to its case study, and a link to the case study for the other roles.
+- Supreme Committee and TechSurge logos on their cards.
+
+### Fixed
+- Experience cards are as tall as their own content and sit centred, so short roles no longer leave a large empty area and long roles are not cut off. On shorter screens the stack tags are dropped from the pinned card, and on very short screens the roles are listed in full.
+
 ## 2.11.0 - 2026-10-06
 
 ### Added
