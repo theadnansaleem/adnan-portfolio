@@ -6,7 +6,7 @@ import { caseStudies } from "@/lib/case-studies";
 import { profile } from "@/lib/data";
 
 const SITE_URL = profile.url;
-const TITLE = "Case studies: government, fintech and cybersecurity platforms";
+const TITLE = "Case studies: government, fintech, cybersecurity";
 const DESCRIPTION =
   "Case studies by M. Adnan Saleem: Module Federation micro frontends, the Hayya eVisa platform, React performance, a Visual FoxPro to .NET migration, and more.";
 
