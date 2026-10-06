@@ -669,9 +669,9 @@ button.hx-shot:hover .hx-shot-cue, button.hx-shot:focus-visible .hx-shot-cue { o
 .hx-qa details:not([open]) summary:hover::after { rotate: 90deg; }
 
 /* ── AI tools: each logo sits on a white tile so it reads the same in both themes ── */
-.hx-tools { align-items: stretch; }
-.hx-tools > li { gap: 6px; }
-.hx-tools img { width: 48px; height: 48px; padding: 9px; border-radius: 12px; background: white; margin-bottom: 10px; }
+.hx-toolgrid { align-items: stretch; }
+.hx-toolgrid > li { gap: 6px; }
+.hx-toolgrid img { width: 48px; height: 48px; padding: 9px; border-radius: 12px; background: white; margin-bottom: 10px; }
 .hx-flow-logos { display: flex; flex-wrap: wrap; gap: 6px; }
 .hx-flow-logos img { width: 24px; height: 24px; padding: 4px; border-radius: 6px; background: white; }
 .hx-h2-logo { display: inline-block; vertical-align: -0.12em; width: 0.9em; height: 0.9em; margin-right: 0.15em; }
@@ -698,3 +698,30 @@ button.hx-shot:hover .hx-shot-cue, button.hx-shot:focus-visible .hx-shot-cue { o
 @media (prefers-reduced-motion: reduce) {
   .hx-flow::after { display: none; }
 }
+
+/* ── Motion on the framed pages ─────────────────────────────────────────── */
+/* Step order for the flow nodes and the terminal lines */
+.hx-flow li:nth-child(2), .hx-term-log.is-static > div:nth-child(2) { --i: 1; }
+.hx-flow li:nth-child(3), .hx-term-log.is-static > div:nth-child(3) { --i: 2; }
+.hx-flow li:nth-child(4), .hx-term-log.is-static > div:nth-child(4) { --i: 3; }
+.hx-flow li:nth-child(5), .hx-term-log.is-static > div:nth-child(5) { --i: 4; }
+.hx-flow li:nth-child(6), .hx-term-log.is-static > div:nth-child(6) { --i: 5; }
+@media (prefers-reduced-motion: no-preference) {
+  /* Each flow node lights up as the dot reaches it */
+  .hx-flow li::before { animation: hx-flow-node 7s linear infinite; animation-delay: calc(var(--i, 0) * 1.4s - 0.3s); }
+  .hx-flow li:hover strong { color: var(--mark); }
+  .hx-flow strong { transition: color 0.25s var(--ease); }
+  /* Terminal lines arrive one at a time once the panel is in view */
+  .hx.is-armed .hx-rv .hx-term-log.is-static > div { opacity: 0; }
+  .hx.is-armed .hx-rv.is-in .hx-term-log.is-static > div { animation: hx-line 0.45s var(--ease) forwards; animation-delay: calc(var(--i, 0) * 0.55s + 0.5s); }
+  /* Cards lift on hover, and a tool's logo turns towards the pointer */
+  .hx-page .hx-grid-3 > .hx-card { transition: transform 0.35s var(--ease), border-color 0.3s; }
+  .hx-page .hx-grid-3 > .hx-card:hover { transform: translateY(-6px); border-color: var(--mark); }
+  .hx-toolgrid img { transition: transform 0.4s var(--ease); }
+  .hx-toolgrid li:hover img { transform: scale(1.1) rotate(-6deg); }
+}
+@keyframes hx-flow-node {
+  0%, 9% { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); scale: 1.14; }
+  20%, 100% { background: var(--bg); border-color: var(--line); color: var(--mark); scale: 1; }
+}
+@keyframes hx-line { from { opacity: 0; translate: -8px 0; } to { opacity: 1; translate: 0 0; } }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { profile } from '@/lib/data';
@@ -8,11 +9,63 @@ import CommandPalette, { openPalette } from './CommandPalette';
 import { hxFonts } from './fonts';
 import './home.css';
 
+/** Counts a figure up from zero to its data-count, keeping the data-suffix. */
+function countUp(el: HTMLElement) {
+  const end = Number(el.dataset.count);
+  const started = performance.now();
+  const tick = (now: number) => {
+    const progress = Math.min(1, (now - started) / 900);
+    el.textContent = Math.round(end * (1 - (1 - progress) ** 3)).toLocaleString('en-US') + (el.dataset.suffix ?? '');
+    if (progress < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
 /** Backdrop, top bar and footer for the pages that share the home page's look. */
 export default function PageFrame({ children }: { children: React.ReactNode }) {
-  const arabic = usePathname() === '/ar';
+  const pathname = usePathname();
+  const arabic = pathname === '/ar';
+  const root = useRef<HTMLDivElement>(null);
+
+  // Content below the first screen rises in as it is reached, and figures count up when seen.
+  // The first screen is left alone so the page paints without waiting for this.
+  useEffect(() => {
+    const frame = root.current;
+    if (!frame || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const blocks = [...frame.querySelectorAll<HTMLElement>('.hx-page section > *, .hx-page .hx-grid-3 > li, .hx-page .hx-grid-2 > li, .hx-page .hx-studies > li')];
+    const reveals = blocks.filter(
+      (block) => !blocks.some((other) => other !== block && block.contains(other)) && block.getBoundingClientRect().top > window.innerHeight * 0.9,
+    );
+    reveals.forEach((block) => {
+      block.classList.add('hx-rv');
+      block.style.setProperty('--d', String(block.parentElement ? [...block.parentElement.children].indexOf(block) % 3 : 0));
+    });
+    frame.classList.add('is-armed');
+    const timers: number[] = [];
+    const watch = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const seen = entry.target as HTMLElement;
+        watch.unobserve(seen);
+        if (seen.dataset.count) return countUp(seen);
+        seen.classList.add('is-in');
+        // Once it has arrived the block goes back to its own styles, so its hover transitions apply
+        timers.push(window.setTimeout(() => seen.classList.remove('hx-rv', 'is-in'), 5000));
+      }),
+      { threshold: 0.12 },
+    );
+    reveals.forEach((block) => watch.observe(block));
+    frame.querySelectorAll<HTMLElement>('[data-count]').forEach((figure) => watch.observe(figure));
+    return () => {
+      watch.disconnect();
+      timers.forEach(clearTimeout);
+      reveals.forEach((block) => block.classList.remove('hx-rv', 'is-in'));
+      frame.classList.remove('is-armed');
+    };
+  }, [pathname]);
+
   return (
-    <div className={`hx is-scrolled ${hxFonts}`}>
+    <div ref={root} className={`hx is-scrolled ${hxFonts}`}>
       <div className="hx-stage" aria-hidden="true">
         <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
           <path d="M-80 260C180 120 380 380 620 250S1010 40 1240 210s330 150 480 60" />

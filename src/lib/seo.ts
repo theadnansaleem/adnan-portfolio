@@ -28,3 +28,15 @@ export function pageJsonLd(path: string, name: string, description: string, type
     ],
   }).replace(/</g, '\\u003c');
 }
+
+/** FAQPage structured data for a list of [question, answer] pairs, ready for a JSON-LD script tag. */
+export const faqJsonLd = (questions: string[][]) =>
+  JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: questions.map(([question, answer]) => ({
+      '@type': 'Question',
+      name: question,
+      acceptedAnswer: { '@type': 'Answer', text: answer },
+    })),
+  }).replace(/</g, '\\u003c');

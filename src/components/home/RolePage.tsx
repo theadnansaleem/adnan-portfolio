@@ -3,7 +3,7 @@ import Link from 'next/link';
 import PageFrame from './PageFrame';
 import { profile } from '@/lib/data';
 import { roleEvidence, roleSkills, roleStudies, type Role } from '@/lib/roles';
-import { pageJsonLd } from '@/lib/seo';
+import { faqJsonLd, pageJsonLd } from '@/lib/seo';
 
 export const roleMetadata = (role: Role): Metadata => ({
   title: role.title,
@@ -18,6 +18,7 @@ export default function RolePage({ role, children }: { role: Role; children?: Re
   return (
     <PageFrame>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageJsonLd(role.path, role.name, role.description) }} />
+      {role.faq && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd(role.faq) }} />}
       <header className="hx-head">
         <p className="hx-cap"><b>{role.name}</b> {profile.availability}</p>
         <h1>{before} <em>{strong}</em> {after}</h1>
@@ -84,6 +85,23 @@ export default function RolePage({ role, children }: { role: Role; children?: Re
           </ol>
         </div>
       </section>
+
+      {role.faq && (
+        <section className="hx-lab">
+          <div>
+            <p className="hx-cap"><b>04</b> Quick answers</p>
+            <h2>Asked before you ask</h2>
+          </div>
+          <div className="hx-qa hx-card">
+            {role.faq.map(([question, answer], i) => (
+              <details key={question} open={i === 0}>
+                <summary>{question}</summary>
+                <p>{answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="hx-study-cta hx-card">
         <div>
