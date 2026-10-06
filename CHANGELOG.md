@@ -7,6 +7,13 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.13.0 - 2026-10-06
+
+### Added
+- A soft highlight follows the pointer across every card, on all pages.
+- A reading progress bar along the top of every page outside the home page.
+- Rows in lists and quick answers arrive one after another, the figures on `/hire` count up, and buttons press in when clicked.
+
 ## 2.12.1 - 2026-10-06
 
 ### Fixed

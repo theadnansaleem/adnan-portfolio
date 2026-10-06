@@ -764,3 +764,22 @@ span.hx-reel-logo { background: var(--card); color: var(--mark); font-family: va
   .hx-reel-cards .hx-bullets li, .hx-reel-shot { opacity: 1; translate: 0 0; }
   .hx-reel-cards .hx-tags { display: flex; }
 }
+
+/* ── More motion ───────────────────────────────────────────────────────── */
+/* A soft highlight follows the pointer across every card (spotlight.ts sets --mx and --my) */
+@media (hover: hover) {
+  .hx-card:hover { background-image: radial-gradient(260px circle at var(--mx, -999px) var(--my, -999px), color-mix(in srgb, var(--mark) 13%, transparent), transparent 70%); }
+}
+.hx-pill:active { scale: 0.96; }
+@media (prefers-reduced-motion: no-preference) {
+  /* Rows of a list or of the quick answers follow each other in */
+  .hx.is-armed .hx-page .hx-rv :is(.hx-facts li, .hx-qa details),
+  .hx.is-armed .hx-page .hx-rv:is(.hx-facts, .hx-qa) :is(li, details) { opacity: 0; translate: -14px 0; transition: opacity 0.6s var(--ease), translate 0.7s var(--ease); transition-delay: calc(var(--n, 0) * 80ms + 250ms); }
+  .hx.is-armed .hx-page .hx-rv.is-in :is(.hx-facts li, .hx-qa details),
+  .hx.is-armed .hx-page .hx-rv.is-in:is(.hx-facts, .hx-qa) :is(li, details) { opacity: 1; translate: 0 0; }
+  .hx-page :is(.hx-facts li, .hx-qa details):nth-child(2) { --n: 1; }
+  .hx-page :is(.hx-facts li, .hx-qa details):nth-child(3) { --n: 2; }
+  .hx-page :is(.hx-facts li, .hx-qa details):nth-child(4) { --n: 3; }
+  .hx-page :is(.hx-facts li, .hx-qa details):nth-child(5) { --n: 4; }
+  .hx-page :is(.hx-facts li, .hx-qa details):nth-child(n + 6) { --n: 5; }
+}
