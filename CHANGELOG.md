@@ -7,6 +7,17 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.11.0 - 2026-10-06
+
+### Added
+- Company marks on the experience cards: the Volopa and Turing logos, and initials for the other roles, each animating in with its card.
+
+### Fixed
+- The experience card no longer cuts off its last bullet and tags on tall roles: the card is taller, the type scales with screen height, and it scrolls as a last resort.
+- Page titles on 15 pages were longer than Google shows; all are now 65 characters or fewer, and the title suffix is "Adnan Saleem".
+- Five page descriptions trimmed to 160 characters or fewer.
+- Each article now links to the other articles, and each case study links to the article written about it. Articles were reachable from one page only.
+
 ## 2.10.0 - 2026-10-06
 
 ### Added

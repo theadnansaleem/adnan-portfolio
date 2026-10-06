@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageFrame from './PageFrame';
 import { profile } from '@/lib/data';
-import type { Article } from '@/lib/articles';
+import { articles, type Article } from '@/lib/articles';
 
 const date = (iso: string) => new Date(iso + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 
@@ -57,6 +57,22 @@ export default function ArticlePage({ article: a, children }: { article: Article
           <p className="hx-cap">By {profile.name} · <time dateTime={a.published}>{date(a.published)}</time> · {a.minutes} min read</p>
         </header>
         <div className="hx-prose">{children}</div>
+        <section className="hx-lab">
+          <div>
+            <p className="hx-cap">Keep reading</p>
+            <h2>More articles</h2>
+          </div>
+          <div className="hx-facts hx-card">
+            <ol>
+              {articles.filter((other) => other.slug !== a.slug).map((other) => (
+                <li key={other.slug} className="hx-go">
+                  <strong><Link className="hx-go-link" href={`/articles/${other.slug}`}>{other.title}</Link></strong>
+                  <span>{other.description}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
         <section className="hx-study-cta hx-card">
           <div>
             <p className="hx-cap">The project behind this</p>

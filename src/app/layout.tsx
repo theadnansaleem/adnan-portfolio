@@ -24,7 +24,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: TITLE,
-    template: `%s | ${profile.name}`,
+    // The short name keeps page titles under the length Google shows in full
+    template: '%s | Adnan Saleem',
   },
   description: DESCRIPTION,
   authors: [{ name: profile.name, url: SITE_URL }],

@@ -1,7 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { jobs } from '@/lib/data';
+
+// Company logos by job id. Roles without one show the company's initials.
+const LOGOS: Record<number, { src: string; full?: boolean }> = {
+  2: { src: '/logos/volopa.png' },
+  5: { src: '/logos/turing.png', full: true },
+};
 
 /**
  * Experience as a scrubbed sequence: on wide screens the section pins and each
@@ -49,9 +56,18 @@ export default function ExperienceReel() {
         <ol className="hx-reel-cards">
           {jobs.map((job, i) => (
             <li key={job.id} className={`hx-card${i === active ? ' is-on' : ''}`}>
-              <p className="hx-cap">{job.period} · {job.workMode}</p>
-              <h3>{job.company}</h3>
-              <p className="hx-reel-role">{job.role} · {job.location}</p>
+              <div className="hx-reel-head">
+                {LOGOS[job.id] ? (
+                  <Image className={`hx-reel-logo${LOGOS[job.id].full ? ' is-full' : ''}`} src={LOGOS[job.id].src} alt="" width={52} height={52} unoptimized />
+                ) : (
+                  <span className="hx-reel-logo" aria-hidden="true">{job.company.split(' ').slice(0, 2).map((word) => word[0]).join('')}</span>
+                )}
+                <div>
+                  <p className="hx-cap">{job.period} · {job.workMode}</p>
+                  <h3>{job.company}</h3>
+                  <p className="hx-reel-role">{job.role} · {job.location}</p>
+                </div>
+              </div>
               <ul className="hx-bullets">
                 {job.bullets.map((bullet, n) => <li key={bullet} style={{ '--i': n } as React.CSSProperties}>{bullet}</li>)}
               </ul>

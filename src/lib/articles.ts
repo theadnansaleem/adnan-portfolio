@@ -14,7 +14,7 @@ export interface Article {
 export const articles: Article[] = [
   {
     slug: 'module-federation-micro-frontends-react',
-    title: 'Splitting a React monolith into micro frontends with Module Federation',
+    title: 'React micro frontends with Module Federation: split a monolith',
     description: 'When micro frontends are worth it, how a shell and its remotes fit together, and the contracts that keep independent deploys from breaking each other.',
     published: '2026-10-05',
     caseStudy: 'qatar-events-platform-module-federation',
@@ -30,7 +30,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'visual-foxpro-to-dotnet-migration-guide',
-    title: 'Migrating a Visual FoxPro system to .NET: an order of work that holds up',
+    title: 'Migrating Visual FoxPro to .NET: an order of work that holds up',
     description: 'How to move a legacy Visual FoxPro application to C# and .NET when the only specification is the old code: inventory, data, domain layer, reports, retirement.',
     published: '2026-10-05',
     caseStudy: 'visual-foxpro-to-dotnet-migration',

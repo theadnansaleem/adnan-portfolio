@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageFrame from "@/components/home/PageFrame";
 import { caseStudies, caseStudyBySlug } from "@/lib/case-studies";
+import { articles } from "@/lib/articles";
 import { profile } from "@/lib/data";
 
 const SITE_URL = profile.url;
@@ -45,6 +46,7 @@ export default async function CaseStudyPage({
 
   const index = caseStudies.indexOf(study);
   const next = caseStudies[(index + 1) % caseStudies.length];
+  const written = articles.filter((article) => article.caseStudy === study.slug);
   const pageUrl = `${SITE_URL}/work/${study.slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
@@ -126,6 +128,25 @@ export default async function CaseStudyPage({
             {study.stack.map((tag) => <li key={tag}>{tag}</li>)}
           </ul>
         </section>
+
+        {written.length > 0 && (
+          <section className="hx-lab">
+            <div>
+              <p className="hx-cap"><b>03</b> Articles</p>
+              <h2>How it was done</h2>
+            </div>
+            <div className="hx-facts hx-card">
+              <ol>
+                {written.map((article) => (
+                  <li key={article.slug} className="hx-go">
+                    <strong><Link className="hx-go-link" href={`/articles/${article.slug}`}>{article.title}</Link></strong>
+                    <span>{article.description}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+        )}
 
         <section className="hx-study-cta hx-card">
           <div>

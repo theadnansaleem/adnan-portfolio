@@ -40,7 +40,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "qatar-events-platform-module-federation",
     title: "Micro Frontends with Module Federation on the Qatar Events Platform",
-    metaTitle: "Module Federation micro frontends: Qatar Events Platform",
+    metaTitle: "Micro frontends with Module Federation in React",
     description:
       "How a monolithic React frontend became Module Federation micro frontends on Qatar's National Events Calendar, cutting release cycle time by about 40%.",
     summary: project("Qatar Events Platform (QEP)").description,
@@ -53,7 +53,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "hayya-qatar-evisa-platform",
     title: "Hayya Qatar eVisa and event access platform",
-    metaTitle: "Hayya Qatar eVisa platform: .NET APIs and Core Web Vitals",
+    metaTitle: "Hayya eVisa platform: .NET APIs, Core Web Vitals",
     description:
       "Qatar's official eVisa and event access platform: .NET APIs, SQL Server, Azure OpenAI integrations, and Core Web Vitals work across 3 national platforms.",
     summary: project("Hayya Qatar eVisa & Event Access Platform").description,
@@ -66,7 +66,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "volopa-react-performance",
     title: "React performance on a multi-currency payments platform",
-    metaTitle: "react-window virtualization on a fintech payments platform",
+    metaTitle: "react-window virtualization on a fintech platform",
     description:
       "Volopa payments and card platform: react-window virtualization on 20,000+ row tables, code splitting, and WCAG 2.1 work for customers in 180+ countries.",
     summary: project("Volopa Financial Services").description,
@@ -79,7 +79,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "visual-foxpro-to-dotnet-migration",
     title: "Migrating 42 financial workflows from Visual FoxPro to .NET",
-    metaTitle: "Visual FoxPro to .NET Core migration: 42 financial workflows",
+    metaTitle: "Visual FoxPro to .NET Core migration: 42 workflows",
     description:
       "A 2.5-year solo migration of 42 financial workflows from Visual FoxPro to C#/.NET Core, Entity Framework Core, SQL Server, Angular and Blazor.",
     // No project card for this engagement, so the opening CV bullet is the summary.
@@ -91,7 +91,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "codex-vehicle-cybersecurity-platform",
     title: "Real-time threat dashboards on a vehicle cybersecurity platform",
-    metaTitle: "Codex vehicle cybersecurity platform: React, .NET and RBAC",
+    metaTitle: "Vehicle cybersecurity platform: React, .NET, RBAC",
     description:
       "Codex assesses attack surfaces across 60M+ lines of vehicle software: real-time React dashboards over WebSockets, a Blazor Server module, and 4-tier RBAC.",
     summary: project("Codex: Cybersecurity Platform").description,
@@ -104,9 +104,9 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "ai-evaluation-training-interfaces",
     title: "Evaluation and training interfaces used by 100,000+ people",
-    metaTitle: "AI evaluation and data-labeling interfaces: React, Node.js, AWS",
+    metaTitle: "LLM evaluation and labeling interfaces in React",
     description:
-      "Full-stack evaluation, human feedback and data-labeling interfaces used by 100,000+ people, built with React, Angular, TypeScript and Node.js and deployed on AWS.",
+      "Full-stack evaluation, human feedback and data-labeling interfaces used by 100,000+ people, built with React, Angular, TypeScript and Node.js on AWS.",
     // No project card is tied to this role, so the opening CV bullet is the summary.
     summary: pick(TURING, /100,000\+ people/)[0],
     highlights: pick(TURING, /evaluation dashboards|AWS EC2/),
@@ -118,7 +118,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Reusable UI component libraries across two products",
     metaTitle: "Reusable React and Angular component libraries",
     description:
-      "Responsive, cross-browser React and Angular applications with reusable UI component libraries adopted across 2 internal projects, and a promotion within 6 months.",
+      "Responsive, cross-browser React and Angular applications with reusable UI component libraries adopted across 2 internal projects, plus a promotion in 6 months.",
     summary: pick(TECHSURGE, /component libraries/)[0],
     highlights: pick(TECHSURGE, /Promoted/),
     stack: job(TECHSURGE).tags,
