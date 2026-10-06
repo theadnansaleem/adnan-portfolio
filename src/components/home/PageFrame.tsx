@@ -40,6 +40,9 @@ export default function PageFrame({ children }: { children: React.ReactNode }) {
       block.classList.add('hx-rv');
       block.style.setProperty('--d', String(block.parentElement ? [...block.parentElement.children].indexOf(block) % 3 : 0));
     });
+    // Components shared with the home page carry the reveal class in their markup: watch those too,
+    // or arming the frame would leave them hidden
+    const watched = new Set([...reveals, ...frame.querySelectorAll<HTMLElement>('.hx-rv')]);
     frame.classList.add('is-armed');
     const timers: number[] = [];
     const watch = new IntersectionObserver(
@@ -54,12 +57,12 @@ export default function PageFrame({ children }: { children: React.ReactNode }) {
       }),
       { threshold: 0.12 },
     );
-    reveals.forEach((block) => watch.observe(block));
+    watched.forEach((block) => watch.observe(block));
     frame.querySelectorAll<HTMLElement>('[data-count]').forEach((figure) => watch.observe(figure));
     return () => {
       watch.disconnect();
       timers.forEach(clearTimeout);
-      reveals.forEach((block) => block.classList.remove('hx-rv', 'is-in'));
+      watched.forEach((block) => block.classList.remove('hx-rv', 'is-in'));
       frame.classList.remove('is-armed');
     };
   }, [pathname]);
