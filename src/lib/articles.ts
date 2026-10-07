@@ -4,6 +4,8 @@ export interface Article {
   description: string;
   /** ISO date of first publication */
   published: string;
+  /** ISO date of the last substantial revision, when there has been one */
+  updated?: string;
   /** Case study that covers the same work */
   caseStudy: string;
   minutes: number;
@@ -33,8 +35,9 @@ export const articles: Article[] = [
     title: 'Migrating Visual FoxPro to .NET: an order of work that holds up',
     description: 'How to move a legacy Visual FoxPro application to C# and .NET when the only specification is the old code: inventory, data, domain layer, reports, retirement.',
     published: '2026-10-05',
+    updated: '2026-10-07',
     caseStudy: 'visual-foxpro-to-dotnet-migration',
-    minutes: 3,
+    minutes: 8,
   },
   {
     slug: 'core-web-vitals-react-lcp-code-splitting',

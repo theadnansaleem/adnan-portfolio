@@ -26,7 +26,7 @@ export default function ArticlePage({ article: a, children }: { article: Article
         headline: a.title,
         description: a.description,
         datePublished: a.published,
-        dateModified: a.published,
+        dateModified: a.updated ?? a.published,
         inLanguage: 'en',
         author: { '@id': `${profile.url}/#person` },
         publisher: { '@id': `${profile.url}/#person` },
@@ -54,7 +54,7 @@ export default function ArticlePage({ article: a, children }: { article: Article
           </nav>
           <h1 className="hx-article-title">{a.title}</h1>
           <p>{a.description}</p>
-          <p className="hx-cap">By {profile.name} · <time dateTime={a.published}>{date(a.published)}</time> · {a.minutes} min read</p>
+          <p className="hx-cap">By {profile.name} · <time dateTime={a.published}>{date(a.published)}</time>{a.updated && <> · Updated <time dateTime={a.updated}>{date(a.updated)}</time></>} · {a.minutes} min read</p>
         </header>
         <div className="hx-prose">{children}</div>
         <section className="hx-lab">

@@ -7,6 +7,12 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.14.0 - 2026-10-07
+
+### Changed
+- The Visual FoxPro migration article is more than twice as long: field types and what they become, set-based rewrites of row loops, the rounding difference between FoxPro and .NET, report files, a cutover checklist and common questions.
+- Articles can carry an "Updated" date, shown in the byline and in their structured data.
+
 ## 2.13.0 - 2026-10-06
 
 ### Added
