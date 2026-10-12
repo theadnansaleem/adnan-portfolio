@@ -16,6 +16,7 @@ import './home.css';
 
 // Preview images published by each credential page, saved under public/certs
 const CERT_PREVIEW: Record<string, string> = {
+  'Microsoft Certified: Azure AI Apps and Agents Developer Associate': 'microsoft-ai-apps-agents.png',
   'Cisco: Introduction to Modern AI': 'cisco-modern-ai.png',
   'Cisco: Python Essentials': 'cisco-python.png',
   'Cisco: JavaScript Essentials': 'cisco-javascript.png',
