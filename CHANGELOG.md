@@ -7,6 +7,11 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.14.1 - 2026-10-12
+
+### Added
+- Microsoft Certified: Azure AI Apps and Agents Developer Associate in the certificate list, with its preview and verification link.
+
 ## 2.14.0 - 2026-10-07
 
 ### Changed

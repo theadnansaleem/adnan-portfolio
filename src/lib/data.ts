@@ -311,6 +311,11 @@ export const education: Credential[] = [
 
 export const certifications: Credential[] = [
     {
+        title: "Microsoft Certified: Azure AI Apps and Agents Developer Associate",
+        meta: "Oct 2026",
+        href: "https://learn.microsoft.com/api/credentials/share/en-us/MuhammadAdnanSaleem-7401/819A7D752611DDAB?sharingId=9033F8FC5FC2408C"
+    },
+    {
         title: "Cisco: Introduction to Modern AI",
         meta: "Sep 2026",
         href: "https://www.credly.com/badges/bde8c946-d3d2-4173-87b3-52af3dd5e6c5"
