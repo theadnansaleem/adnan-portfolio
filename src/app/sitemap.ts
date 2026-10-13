@@ -3,37 +3,34 @@ import { profile } from "@/lib/data";
 import { articles } from "@/lib/articles";
 import { caseStudies } from "@/lib/case-studies";
 
-// Home plus one URL per case study; section anchors (#about etc.) are not separate URLs.
+// Section anchors (#about etc.) are not separate URLs. Only articles carry lastModified:
+// they are the only pages with a real date, and a date that changes on every build is ignored.
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: `${profile.url}/`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
       alternates: { languages: { en: `${profile.url}/`, ar: `${profile.url}/ar` } },
     },
     {
       url: `${profile.url}/work`,
-      lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.9,
     },
-    ...["about", "hire", "lab", "ar", "frontend-developer", "dotnet-developer", "ai-engineer", "azure-developer", "articles"].map((page) => ({
+    ...["about", "hire", "lab", "ar", "frontend-developer", "dotnet-developer", "ai-engineer", "azure-developer", "certifications", "articles"].map((page) => ({
       url: `${profile.url}/${page}`,
-      lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
     ...articles.map((a) => ({
       url: `${profile.url}/articles/${a.slug}`,
-      lastModified: new Date(a.published),
+      lastModified: new Date(a.updated ?? a.published),
       changeFrequency: "yearly" as const,
       priority: 0.8,
     })),
     ...caseStudies.map((study) => ({
       url: `${profile.url}/work/${study.slug}`,
-      lastModified: new Date(),
       changeFrequency: "yearly" as const,
       priority: 0.8,
     })),

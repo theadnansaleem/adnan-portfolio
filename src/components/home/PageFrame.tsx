@@ -141,6 +141,7 @@ export default function PageFrame({ children }: { children: React.ReactNode }) {
           <Link href="/articles">Articles</Link>
           <Link href="/hire">Hire</Link>
           <Link href="/lab">Lab</Link>
+          <Link href="/certifications">Certifications</Link>
           <Link href="/frontend-developer">Frontend developer</Link>
           <Link href="/dotnet-developer">.NET developer</Link>
           <Link href="/ai-engineer">AI engineer</Link>

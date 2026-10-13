@@ -9,6 +9,8 @@ export interface Article {
   /** Case study that covers the same work */
   caseStudy: string;
   minutes: number;
+  /** Quick answers shown under the body and published as FAQ structured data: [question, answer] */
+  faq?: string[][];
 }
 
 // The body of each article lives in src/app/articles/<slug>/page.tsx.
@@ -19,16 +21,30 @@ export const articles: Article[] = [
     title: 'React micro frontends with Module Federation: split a monolith',
     description: 'When micro frontends are worth it, how a shell and its remotes fit together, and the contracts that keep independent deploys from breaking each other.',
     published: '2026-10-05',
+    updated: '2026-10-13',
     caseStudy: 'qatar-events-platform-module-federation',
-    minutes: 3,
+    minutes: 6,
+    faq: [
+      ['What is Module Federation?', 'A bundler feature, introduced in webpack 5, that lets one JavaScript application load code from another separately built and deployed application at runtime, while sharing dependencies such as React between them.'],
+      ['When are micro frontends worth it?', "When several teams ship into one frontend and block each other's releases. With a single team, a well-structured monolith with code splitting is simpler and faster."],
+      ['How do micro frontends share React?', 'Each build lists React under shared with singleton set to true, so the page loads one copy and every remote uses it. Two copies on one page break hooks and context.'],
+      ['What happens when a remote fails to load?', 'If it is loaded lazily behind an error boundary, only that section shows a fallback and the rest of the page keeps working.'],
+    ],
   },
   {
     slug: 'react-table-virtualization-20000-rows',
     title: 'Rendering 20,000 rows in React without freezing the page',
     description: 'Why big tables are slow, the windowing maths that fixes it in about ten lines, where memoization fits, and how to measure the result.',
     published: '2026-10-05',
+    updated: '2026-10-13',
     caseStudy: 'volopa-react-performance',
-    minutes: 3,
+    minutes: 5,
+    faq: [
+      ['What is virtualization in React?', 'Rendering only the rows that are visible in the scroll area, plus a few either side, while the full list stays in memory. It is also called windowing.'],
+      ['How many rows can a React table handle?', 'Without virtualization a table starts to feel slow at a few thousand rows, because every row is real DOM. With virtualization the DOM holds a few dozen rows however long the list is, so tens of thousands of rows scroll smoothly.'],
+      ['Should I use virtualization or pagination?', 'Paginate when users look things up and the server can filter and sort. Virtualize when users scan or compare a long list and scrolling is the natural way to read it.'],
+      ['Is react-window better than writing it by hand?', 'For production, yes. It is maintained and handles the edge cases. Writing the fixed-height version once by hand is still the quickest way to understand what the library does.'],
+    ],
   },
   {
     slug: 'visual-foxpro-to-dotnet-migration-guide',
@@ -44,24 +60,45 @@ export const articles: Article[] = [
     title: 'Passing Core Web Vitals in a React app: what moves LCP',
     description: 'How to find the element that sets your LCP, ship less before the first paint with code splitting, preload only what matters, and measure the change properly.',
     published: '2026-10-05',
+    updated: '2026-10-13',
     caseStudy: 'hayya-qatar-evisa-platform',
-    minutes: 3,
+    minutes: 5,
+    faq: [
+      ['What is a good LCP score?', '2.5 seconds or less, measured at the 75th percentile of real visits. Between 2.5 and 4 seconds needs improvement, and above 4 seconds is poor.'],
+      ['Did INP replace FID?', 'Yes. Interaction to Next Paint replaced First Input Delay as a Core Web Vital in March 2024. It measures the whole interaction through to the next paint, not only the delay before the handler starts.'],
+      ['Does code splitting improve LCP?', 'It does when JavaScript is what delays the first paint, which is the usual case in a client-rendered React app. It does little if the LCP element is a slow image or the server response itself is slow.'],
+      ['Why is my Lighthouse score different from Search Console?', 'Lighthouse runs one simulated visit in a lab. Search Console reports what real Chrome users experienced over the previous 28 days. The field data is the one Google uses.'],
+    ],
   },
   {
     slug: 'role-based-access-control-data-redaction-dotnet',
     title: 'Role-based access control with data redaction in ASP.NET Core',
     description: 'Authorization decides who may call an endpoint. Redaction decides what they get back. How to do both in ASP.NET Core, and where data still leaks.',
     published: '2026-10-05',
+    updated: '2026-10-13',
     caseStudy: 'codex-vehicle-cybersecurity-platform',
-    minutes: 3,
+    minutes: 5,
+    faq: [
+      ['What is the difference between authorization and redaction?', 'Authorization decides whether a caller may use an endpoint at all. Redaction decides which fields of the answer that caller receives.'],
+      ['Is hiding a field in the frontend enough?', "No. If the API returns the field, anyone signed in can read it in the browser's network tab. It has to be removed on the server before the response is serialized."],
+      ['Should a forbidden record return 403 or 404?', 'Return 404 when the caller is not allowed to know the record exists, and 403 when the existence is not a secret but the action is not allowed.'],
+      ['Where should redaction happen in ASP.NET Core?', 'In one step between the domain object and the response object, used by every endpoint, export and real-time channel that returns that type.'],
+    ],
   },
   {
     slug: 'real-time-dashboard-react-websocket',
     title: 'A React dashboard that keeps up with a WebSocket feed',
     description: 'Why a live dashboard slows down over time, and the fixes: render once per frame, cap the list, aggregate as events arrive, and plan for reconnects.',
     published: '2026-10-05',
+    updated: '2026-10-13',
     caseStudy: 'codex-vehicle-cybersecurity-platform',
-    minutes: 3,
+    minutes: 5,
+    faq: [
+      ['Why does a React dashboard get slower over time?', 'Usually because a list in state grows for as long as the tab stays open, so every render has more to do, and because each incoming message triggers its own render.'],
+      ['How often should a live dashboard re-render?', 'At most once per animation frame, which is about sixty times a second. Buffer incoming messages and flush them together.'],
+      ['WebSocket or Server-Sent Events for a dashboard?', 'Server-Sent Events are simpler when data only flows from server to browser, and they reconnect on their own. Use a WebSocket when the browser also sends messages, or when you need binary data.'],
+      ['How do I reconnect a WebSocket safely?', 'Retry with a delay that doubles up to a ceiling, add some randomness so clients do not all return at once, and after reconnecting ask the server for the events you missed.'],
+    ],
   },
 ];
 

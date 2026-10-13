@@ -1,6 +1,6 @@
 import { articles } from '@/lib/articles';
 import { caseStudies } from '@/lib/case-studies';
-import { profile } from '@/lib/data';
+import { certifications, profile } from '@/lib/data';
 
 export const dynamic = 'force-static';
 
@@ -22,6 +22,7 @@ export function GET() {
     link('.NET developer: C#, ASP.NET Core and Blazor experience', '/dotnet-developer'),
     link('AI engineer: LLM integration, agent harness and evaluation tooling', '/ai-engineer'),
     link('Azure developer: Azure Functions, App Service and Azure OpenAI', '/azure-developer'),
+    link('Certifications, with links to each issuer record', '/certifications'),
     link('Arabic version', '/ar'),
     link('CV (PDF)', profile.resume),
     '',
@@ -33,7 +34,12 @@ export function GET() {
     '## Articles',
     '',
     link('All articles', '/articles'),
+    link('RSS feed', '/feed.xml'),
     ...articles.map((a) => link(a.title, `/articles/${a.slug}`)),
+    '',
+    '## Certifications',
+    '',
+    ...certifications.map((cert) => `- ${cert.title} (${cert.issuer}, ${cert.meta})`),
     '',
     '## Contact',
     '',

@@ -19,6 +19,7 @@ const ACTIONS: Action[] = [
   { label: 'Check a job description against my stack', hint: 'Page', run: go('/hire') },
   { label: 'Open the lab: live demos', hint: 'Page', run: go('/lab') },
   { label: 'About Adnan: photos and quick answers', hint: 'Page', run: go('/about') },
+  { label: 'Certifications, with verification links', hint: 'Page', run: go('/certifications') },
   { label: 'Frontend developer: React, Next.js, Angular', hint: 'Page', run: go('/frontend-developer') },
   { label: '.NET developer: C#, ASP.NET Core, Blazor', hint: 'Page', run: go('/dotnet-developer') },
   { label: 'AI engineer: LLMs, agents, evaluation', hint: 'Page', run: go('/ai-engineer') },

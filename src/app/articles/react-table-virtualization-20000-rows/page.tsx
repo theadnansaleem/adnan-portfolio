@@ -35,6 +35,20 @@ requestAnimationFrame(() =>
   requestAnimationFrame(() => console.log(performance.now() - started, 'ms to paint')),
 );`;
 
+const DEFERRED = `const [query, setQuery] = useState('');
+const deferredQuery = useDeferredValue(query);
+
+// The input updates at once; the expensive filter follows when the browser has time
+const filtered = useMemo(() => rows.filter(matches(deferredQuery)), [rows, deferredQuery]);`;
+
+const REACT_WINDOW = `import { FixedSizeList } from 'react-window';
+
+<FixedSizeList height={432} width="100%" itemCount={rows.length} itemSize={36} overscanCount={6}>
+  {({ index, style }) => (
+    <div style={style} className="row">{rows[index].name}</div>
+  )}
+</FixedSizeList>`;
+
 export default function Page() {
   return (
     <ArticlePage article={meta}>
@@ -71,6 +85,36 @@ export default function Page() {
       </ul>
       <p>
         Memoization only helps if props are stable. An inline object or arrow function passed to every row defeats it.
+      </p>
+
+      <h2>Keep typing responsive while the list filters</h2>
+      <p>
+        Windowing makes rendering cheap, but filtering 20,000 objects still takes time, and doing it on every keystroke makes the input lag behind the keyboard. React 18 can separate the two: the text field updates immediately and the filter runs at a lower priority.
+      </p>
+      <pre><code>{DEFERRED}</code></pre>
+      <p>
+        If the filter is slow even then, the data set has outgrown the browser and the filtering belongs on the server.
+      </p>
+
+      <h2>Virtualize or paginate?</h2>
+      <ul>
+        <li><strong>Paginate</strong> when people look something up: they search, open one record and leave. The server filters and sorts, and each page is small.</li>
+        <li><strong>Virtualize</strong> when people scan and compare: transaction histories, logs, monitoring views. Scrolling is how they read, and page breaks get in the way.</li>
+        <li><strong>Do both</strong> when the list is too big to download at once. Fetch pages from the server as the user scrolls and virtualize whatever has arrived.</li>
+      </ul>
+
+      <h2>The same thing with react-window</h2>
+      <p>
+        In version 1 of react-window, the hand-written version above becomes one component. The <code>style</code> it passes to each row carries the position, so it has to be applied:
+      </p>
+      <pre><code>{REACT_WINDOW}</code></pre>
+      <p>
+        The numbers are the same three as before: the height of the scroll area, the height of a row, and the overscan.
+      </p>
+
+      <h2>Headers and wide tables</h2>
+      <p>
+        Keep the header row outside the scrolling element, or make it <code>position: sticky</code>, so it does not scroll away with the rows. Column widths must then be fixed or shared between header and body, because the rows no longer sit in one table layout that sizes them together. If the table is wide as well as long, the same arithmetic works sideways: render only the columns in view.
       </p>
 
       <h2>Measure it</h2>
