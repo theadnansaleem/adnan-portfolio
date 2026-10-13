@@ -102,7 +102,7 @@ const HERO: [string, string][] = [
   ['/me/hero/laptop.webp', 'in a grey sweater, working on a laptop'],
 ];
 
-export default function HomeExperience({ fontClass, updated }: { fontClass: string; updated: string }) {
+export default function HomeExperience({ fontClass, updated, faq }: { fontClass: string; updated: string; faq: string[][] }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [current, setCurrent] = useState('home');
   const [look, setLook] = useState<(typeof projects)[number] | null>(null);
@@ -637,6 +637,22 @@ export default function HomeExperience({ fontClass, updated }: { fontClass: stri
             </Link>
           </li>
         </ul>
+      </section>
+
+      <section className="hx-section" id="answers">
+        <header className="hx-head hx-rv">
+          <p className="hx-cap"><b>06</b> Quick answers</p>
+          <h2><Roll parts={[['Asked before you'], ['ask', true]]} /></h2>
+        </header>
+        <div className="hx-qa hx-card hx-rv">
+          {faq.map(([question, answer], i) => (
+            <details key={question} open={i === 0}>
+              <summary>{question}</summary>
+              <p>{answer}</p>
+            </details>
+          ))}
+        </div>
+        <p className="hx-more hx-rv"><Link className="hx-pill" href="/certifications">See the certifications ↘</Link></p>
       </section>
 
       <section className="hx-section hx-contact" id="contact">
