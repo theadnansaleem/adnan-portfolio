@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import ArticlePage, { articleMetadata } from '@/components/home/ArticlePage';
 import { article } from '@/lib/articles';
 
@@ -121,6 +122,9 @@ export default function Page() {
         Google&apos;s <code>web-vitals</code> library reports the same three metrics from your own users, so you do not have to wait for enough traffic to appear in the public data set:
       </p>
       <pre><code>{FIELD}</code></pre>
+      <p>
+        The <Link href="/lab">lab on this site</Link> reads the same browser entries directly and shows them for the page you have open.
+      </p>
       <p>
         Store them with the page path and the device type. The pages that fail are rarely the ones the team tests every day, and the 75th percentile on mobile is usually far from what a developer laptop shows.
       </p>

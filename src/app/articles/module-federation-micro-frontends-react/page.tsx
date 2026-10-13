@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import ArticlePage, { articleMetadata } from '@/components/home/ArticlePage';
 import { article } from '@/lib/articles';
 
@@ -102,6 +103,9 @@ export default function Page() {
         A remote is a network dependency, so it can fail to load. Load each one lazily behind an error boundary, so a broken remote takes down its own section and not the whole page:
       </p>
       <pre><code>{LAZY_REMOTE}</code></pre>
+      <p>
+        The <Link href="/lab">lab on this site</Link> has three sections behind boundaries like this one, with a button to break each.
+      </p>
 
       <h2>Start the app behind an async boundary</h2>
       <p>

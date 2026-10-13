@@ -789,3 +789,15 @@ span.hx-reel-logo { background: var(--card); color: var(--mark); font-family: va
 .hx-certgrid img { width: 100%; height: auto; aspect-ratio: 672 / 352; object-fit: contain; border-radius: 10px; background: #fff; margin-bottom: 10px; }
 .hx-certgrid .hx-cap { display: flex; justify-content: space-between; gap: 12px; }
 .hx-certgrid a:hover { color: var(--mark); }
+
+/* Lab: response body and the stand-in remotes */
+.hx-demo-code { overflow-x: auto; min-height: 168px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.hx-remotes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; list-style: none; }
+.hx-remotes li { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-height: 104px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; font-size: 13px; color: var(--ink-2); }
+.hx-remotes strong { font-size: 15px; color: var(--ink); }
+.hx-remotes strong[data-state="Failed"] { color: #e5484d; }
+[data-theme="light"] .hx-remotes strong[data-state="Failed"] { color: #c4262e; }
+@media (max-width: 760px) {
+  .hx-remotes { grid-template-columns: 1fr; }
+  .hx-remotes li { min-height: 0; }
+}
