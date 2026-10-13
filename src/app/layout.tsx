@@ -9,7 +9,7 @@ import { credentialJsonLd } from '@/lib/seo';
 const SITE_URL = profile.url;
 const TITLE = `${profile.name} | ${profile.jobTitle}`;
 const DESCRIPTION =
-  'M. Adnan Saleem, senior full-stack developer and software engineer: 8 years of React, Next.js, Angular, .NET and Node.js. Remote from Lahore, Pakistan.';
+  'M. Adnan Saleem, senior full-stack software engineer and Microsoft Certified Azure AI developer (AI-103): 8 years of React, Next.js, Angular and .NET.';
 
 export const viewport: Viewport = {
   width: 'device-width',

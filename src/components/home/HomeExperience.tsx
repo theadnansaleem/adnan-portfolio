@@ -13,6 +13,7 @@ import Terminal from './Terminal';
 import { MOMENTS } from './photos';
 import { spotlight } from './spotlight';
 import { hearts } from './hearts';
+import CertHighlight, { MicrosoftMark } from './CertHighlight';
 import './home.css';
 
 
@@ -398,6 +399,7 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
       <section className="hx-hero" id="home">
         <div className="hx-hero-left">
           <p className="hx-badge"><span aria-hidden="true" />{profile.availability} · Open to relocation</p>
+          <a className="hx-badge hx-badge-cert" href={certifications[0].href} target="_blank" rel="noopener noreferrer"><MicrosoftMark /> Microsoft Certified · Azure AI Apps and Agents Developer</a>
           <h1>
             <span className="hx-name">{profile.name}</span>{' '}
             Senior <em>Full-Stack</em> Engineer
@@ -448,6 +450,7 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
             </li>
           ))}
         </ul>
+        <CertHighlight className="hx-rv" />
       </section>
 
       <Band text="Selected work" />
