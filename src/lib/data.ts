@@ -5,7 +5,7 @@ import type { Job, Project, SkillCategory, Stat, Credential } from '@/types';
 export const profile = {
     name: "M. Adnan Saleem",
     alternateNames: ["Muhammad Adnan Saleem", "Adnan Saleem"],
-    headline: "Senior Full-Stack Software Engineer | React | Next.js | Angular | TypeScript | Node.js | .NET",
+    headline: "Senior Full Stack Engineer | React | Next.js | Angular | TypeScript | Node.js | .NET | Azure AI Certified (AI-103)",
     jobTitle: "Senior Full-Stack Software Engineer",
     location: "Lahore, Pakistan (Open to Relocation)",
     availability: "Available Immediately",
@@ -19,9 +19,9 @@ export const profile = {
     booking: "https://calendly.com/heyadnansaleem/30min",
     // The CV summary, split into paragraphs; only the name was added to the opening sentence.
     summary: [
-        "M. Adnan Saleem is a senior full-stack software engineer with 8 years of enterprise application development experience, including 8 years of hands-on Amazon Web Services (AWS) experience. Builds frontends in React, Next.js, and Angular with TypeScript and JavaScript, and backends in Node.js, C#, .NET 6/8, ASP.NET Core Web APIs, and Blazor, with REST and GraphQL APIs and microservices.",
-        "Delivered production platforms for government, fintech, and cybersecurity clients, owning features across UI, APIs, databases (SQL Server with T-SQL and stored procedures, PostgreSQL), Azure OpenAI (GPT) integrations, testing, and CI/CD (Azure DevOps, Jenkins, GitLab CI/CD, GitHub Actions). Rearchitected a monolithic frontend into micro frontends with Module Federation, cutting release cycle time by about 40%, and designed .NET domain layers with Entity Framework Core, Domain-Driven Design, and CQRS.",
-        "Leads code reviews and mentors engineers in Agile/Scrum teams; five years fully remote with US, UK, and German teams; available immediately.",
+        "M. Adnan Saleem is a senior full-stack software engineer with 8+ years of enterprise application and frontend development experience, including 8 years of hands-on Amazon Web Services (AWS) experience. Builds frontends in React, Next.js, and Angular with TypeScript, and backends in Node.js, C#, .NET 6/8, and ASP.NET Core, delivering scalable, secure production platforms for government, fintech, and cybersecurity clients.",
+        "Rearchitected a monolithic frontend into micro frontends with Module Federation, cutting release cycle time by about 40%, and designed .NET domain layers with Entity Framework Core, DDD, and CQRS. Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103), building generative and agentic AI solutions on Microsoft Foundry.",
+        "Leads code reviews and mentors engineers in Agile/Scrum teams; five years fully remote with US, UK, and German teams.",
     ],
 };
 
@@ -30,7 +30,7 @@ export const jobs: Job[] = [
         id: 1,
         period: "Oct 2025 - Aug 2026",
         company: "Supreme Committee for Delivery & Legacy",
-        role: "Senior Fullstack Developer",
+        role: "Senior Full-Stack Developer",
         location: "Doha, Qatar",
         workMode: "Hybrid, Full-Time",
         bullets: [
@@ -47,11 +47,11 @@ export const jobs: Job[] = [
         id: 2,
         period: "Jun 2023 - Oct 2025",
         company: "Volopa Financial Services",
-        role: "Senior Fullstack Developer",
+        role: "Senior Full-Stack Developer",
         location: "London, United Kingdom",
         workMode: "Remote, Full-Time",
         bullets: [
-            "Shipped production features across a multi-currency payments and card platform covering transfers, transaction tracking, and KYC for customers in 180+ countries, with a React and Ant Design frontend over PHP and Node.js backend services, meeting WCAG 2.1 accessibility and UK fintech regulatory standards.",
+            "Shipped production features across a multi-currency payments, card management, and employee expense platform covering transfers, transaction tracking, and KYC for customers in 180+ countries, with a React and Ant Design frontend over PHP and Node.js backend services, meeting WCAG 2.1 accessibility and UK fintech regulatory standards.",
             "Optimized large-scale data tables with react-window virtualization and memoization, reducing render time by approximately 70% on datasets exceeding 20,000 rows.",
             "Introduced dynamic code splitting that cut initial bundle size by approximately 35%, directly improving First Contentful Paint on financial dashboards.",
             "Refactored a legacy codebase into a modular architecture with a reusable component library, reducing feature development time by approximately 25%.",
@@ -67,8 +67,7 @@ export const jobs: Job[] = [
         workMode: "Remote, Part-Time Independent Contract",
         bullets: [
             "Independently migrated 42 financial workflows from a legacy Visual FoxPro system carrying two decades of business logic to C#/.NET Core, delivering Angular and Blazor frontend features as the sole engineer responsible for end-to-end development.",
-            "Redesigned legacy data models and business logic with no existing specification into a maintainable .NET Core domain layer, preserving all 42 existing financial workflows.",
-            "Rebuilt core financial workflows on Entity Framework Core and 42 T-SQL stored procedures against SQL Server, with a testable data access layer.",
+            "Redesigned legacy data models and business logic with no existing specification into a maintainable .NET Core domain layer on Entity Framework Core and 42 T-SQL stored procedures against SQL Server, with a testable data access layer, preserving all 42 financial workflows.",
             "Replaced the legacy Visual FoxPro reports with reporting workflows in the new Blazor application, retiring the old system over a 2.5-year engagement.",
         ],
         tags: ["C#", ".NET Core", "Angular", "Blazor", "Entity Framework Core", "SQL Server", "T-SQL", "Stored Procedures"]
@@ -77,7 +76,7 @@ export const jobs: Job[] = [
         id: 4,
         period: "Dec 2021 - Jun 2023",
         company: "Primary Target GmbH",
-        role: "Mid-Level Fullstack Developer",
+        role: "Mid-Level Full-Stack Developer",
         location: "Bavaria, Germany",
         workMode: "Remote, Full-Time",
         bullets: [
@@ -97,9 +96,8 @@ export const jobs: Job[] = [
         location: "Palo Alto, United States",
         workMode: "Remote, Full-Time (US business hours from Pakistan)",
         bullets: [
-            "Built full-stack evaluation and training interfaces used by 100,000+ people, with React, Angular, TypeScript, and Node.js, supporting human feedback and data-labeling workflows.",
-            "Developed evaluation dashboards and integrated frontend workflows with backend APIs for research and training activities.",
-            "Deployed application components on AWS EC2, S3, and Lambda with Docker, working full US business hours from Pakistan for nearly two years.",
+            "Built full-stack LLM evaluation and training interfaces and dashboards used by 100,000+ people, with React, Angular, TypeScript, and Node.js, supporting human feedback (RLHF) and data-labeling workflows and integrating with backend research APIs.",
+            "Deployed application components on AWS EC2, S3, and Lambda with Docker.",
         ],
         tags: ["React", "Redux", "Angular", "TypeScript", "Node.js", "Python", "PostgreSQL", "Redis", "AWS (EC2, S3, Lambda)", "Docker"]
     },
@@ -149,7 +147,7 @@ export const projects: Project[] = [
         number: "03",
         featured: false,
         title: "Road to Qatar",
-        description: "Supreme Committee fan gaming and engagement platform with interactive challenges, fantasy football, match predictions, and global leaderboards.",
+        description: "Supreme Committee fan platform with interactive challenges, fantasy football, match predictions, and global leaderboards.",
         tags: ["React", "TypeScript", "Redux Toolkit", "REST APIs", ".NET"],
         gradient: "linear-gradient(135deg, #200a12 0%, #45112a 50%, #180610 100%)",
         image: "/projects/roadtoqatar.png"
@@ -171,7 +169,7 @@ export const projects: Project[] = [
         number: "05",
         featured: false,
         title: "Norstella Pharma Solutions Platform",
-        description: "Web platform for Norstella, a group of pharmaceutical solutions providers whose mission is to smooth the path to life-saving therapies for patients and providers.",
+        description: "Web platform for Norstella, a group of pharmaceutical solutions providers.",
         tags: ["React", "Angular", "JavaScript", "Bootstrap", "Zustand", "Server-Side Rendering (SSR)"],
         gradient: "linear-gradient(135deg, #0a1020 0%, #0d2045 50%, #060c1a 100%)",
         href: "https://norstella.com",
@@ -182,7 +180,7 @@ export const projects: Project[] = [
         number: "06",
         featured: false,
         title: "Eclipse AI",
-        description: "Generative AI voice-of-customer analytics platform for customer experience teams. Worked on the React frontend with Redux Toolkit in 2023, alongside the team lead.",
+        description: "Generative AI voice-of-customer analytics platform; worked on the React frontend with Redux Toolkit (2023).",
         tags: ["React", "Redux Toolkit"],
         gradient: "linear-gradient(135deg, #0f0f1f 0%, #1a1a3f 50%, #0a0a1a 100%)",
         href: "https://eclipse-ai.com",
@@ -260,50 +258,50 @@ export const projects: Project[] = [
 export const skills: SkillCategory[] = [
     {
         category: "Frontend",
-        tags: ["React 18", "Next.js 14", "Angular", "TypeScript", "JavaScript (ES6+)", "RxJS", "State Management (Redux, Redux Toolkit, NgRx, Zustand, React Query / TanStack Query)", "React Router", "React Hooks", "SSR / SSG / ISR", "React Server Components", "HTML5", "CSS3"]
+        tags: ["React 18 (React.js)", "Next.js 14 (App Router)", "Angular", "TypeScript", "JavaScript (ES6+)", "RxJS", "State Management (Redux, Redux Toolkit, NgRx, Zustand, React Query / TanStack Query)", "React Router", "React Hooks", "Single-Page Applications (SPA)", "SSR / SSG / ISR", "React Server Components", "HTML5", "CSS3"]
     },
     {
         category: "Backend & APIs",
-        tags: ["C#", ".NET 6", ".NET 8", ".NET Core", "ASP.NET Core Web APIs", "Node.js", "Express.js", "Blazor Server", "Entity Framework Core", "REST APIs", "API Design", "GraphQL", "WebSockets", "Webhooks", "Microservices", "PHP Integration", "Python"]
+        tags: ["C#", ".NET 6", ".NET 8", ".NET Core", "ASP.NET Core Web APIs", "Node.js", "Express.js", "Blazor Server", "Entity Framework Core", "REST / RESTful APIs", "API Design (OpenAPI / Swagger)", "GraphQL", "WebSockets", "SignalR", "Webhooks", "Microservices", "Message Queues (Kafka, RabbitMQ)", "Full-Stack Development (Full Stack)", "PHP Integration", "Python"]
     },
     {
         category: "Architecture & Performance",
-        tags: ["System Design", "Distributed Systems", "Micro-Frontend Architecture (Module Federation)", "Monorepos (Nx, Turborepo)", "Design Systems", "OOP", "SOLID", "Design Patterns", "Domain-Driven Design", "CQRS", "Clean Architecture", "Code Splitting", "Lazy Loading", "Virtualization", "Memoization", "Core Web Vitals (LCP, FID, CLS)", "RBAC", "OAuth 2.0 / JWT / SSO"]
+        tags: ["System Design", "Distributed Systems", "Cloud-Native Applications", "Scalable Micro-Frontend Architecture (Microfrontends: single-spa, Webpack Module Federation 2)", "Component Architecture", "Monorepos (Nx, Turborepo)", "Design Systems", "OOP", "SOLID", "Design Patterns", "Clean, Maintainable Code", "Domain-Driven Design", "CQRS", "Clean Architecture", "Database Design and Data Modeling (Schema Design)", "Code Splitting", "Lazy Loading", "Virtualization", "Memoization", "Frontend / Web Performance Optimization", "Core Web Vitals (LCP, INP, CLS)", "Web Vitals Monitoring (web-vitals, Lighthouse CI)", "Application Security: Authentication and Authorization (OAuth 2.0 / JWT / SSO, RBAC)"]
     },
     {
         category: "Databases",
-        tags: ["SQL Server (T-SQL, Stored Procedures)", "PostgreSQL", "MySQL", "NoSQL (MongoDB, Redis)", "Prisma ORM"]
+        tags: ["SQL", "Microsoft SQL Server (T-SQL, Stored Procedures)", "PostgreSQL", "MySQL", "NoSQL (MongoDB)", "Redis (Caching)", "Prisma ORM"]
     },
     {
         category: "Cloud & DevOps",
-        tags: ["Amazon Web Services (AWS, 8 years)", "EC2", "S3", "Lambda", "Microsoft Azure (Functions, App Service, Azure SQL, Blob Storage, Key Vault, Application Insights)", "Azure DevOps", "Jenkins", "CI/CD (Continuous Integration / Continuous Deployment)", "GitHub Actions", "GitLab CI/CD", "Docker", "Kubernetes", "Terraform (Infrastructure as Code)", "Google Cloud Platform", "Vite", "Webpack", "Git / GitFlow"]
+        tags: ["Amazon Web Services (AWS, 8 years)", "EC2", "S3", "Lambda", "Microsoft Azure (Azure App Service, Azure Functions, Azure OpenAI, Microsoft Foundry)", "Azure DevOps", "Jenkins", "CI/CD (Continuous Integration / Continuous Deployment)", "GitHub Actions", "GitLab CI/CD", "Containerization (Docker, Kubernetes)", "Terraform (Infrastructure as Code)", "Google Cloud Platform", "Vite", "Webpack", "Git / GitFlow"]
     },
     {
         category: "UI, Mobile & Accessibility",
-        tags: ["Tailwind CSS", "Material UI", "Ant Design", "Bootstrap 5", "Styled Components", "Storybook", "Figma Handoff", "Data Visualization (ApexCharts)", "Mobile-First Responsive Design", "PWA", "Flutter (iOS and Android)", "WCAG 2.1", "i18n"]
+        tags: ["Tailwind CSS", "Material UI", "Ant Design", "Bootstrap 5", "Styled Components", "Storybook", "Figma Handoff", "Data Visualization (ApexCharts)", "Mobile-First Responsive Design", "PWA", "Flutter (iOS and Android)", "React Native", "WCAG 2.1", "ARIA", "Semantic HTML", "i18n"]
     },
     {
         category: "Testing & Quality",
-        tags: ["Jest", "Vitest", "React Testing Library", "Playwright", "Cypress", "Test-Driven Development (TDD)", "Unit / Integration / E2E Testing", "Code Review", "Debugging and Production Troubleshooting", "ESLint", "Prettier"]
+        tags: ["Jest", "Vitest", "React Testing Library", "Playwright", "Cypress", "xUnit", "NUnit", "Test-Driven Development (TDD)", "Automated Testing (Unit Testing, Integration Testing, End-to-End / E2E Testing)", "Code Review", "Debugging and Production Troubleshooting", "ESLint", "Prettier"]
     },
     {
         category: "Ways of Working",
-        tags: ["Agile / Scrum", "Code Review", "Mentoring", "Technical Documentation", "QA Collaboration", "Cross-Functional Teams", "Remote (US, UK, Germany)"]
+        tags: ["Agile / Scrum (Sprint Planning, Estimation)", "End-to-End Feature Ownership", "Code Review", "Mentoring", "Technical Documentation", "Engineering Standards and Best Practices", "QA Collaboration", "Cross-Functional Teams (Product Owners, Design, QA)", "Written and Verbal Communication", "Technical Communication with Non-Technical Stakeholders", "Remote (US, UK, Germany)"]
     },
     {
         category: "AI & LLM Engineering",
-        tags: ["Azure OpenAI (GPT) Integration", "Agentic Workflows", "Tool and Function Calling (OpenAI, Anthropic Claude)", "MCP", "RAG", "LangChain", "Vector Databases", "RLHF", "LoRA", "PEFT", "Prompt Engineering", "Streaming Responses (SSE)", "Vercel AI SDK"]
+        tags: ["Generative AI", "Agentic AI", "AI Agents", "Large Language Models (LLMs)", "Microsoft Foundry (Azure AI Foundry)", "Foundry Agent Service", "Azure OpenAI (GPT) Integration", "Azure AI Search", "Azure AI Document Intelligence", "Azure AI Vision", "Azure AI Content Safety", "Responsible AI & AI Governance", "Semantic Kernel", "LangGraph", "Agentic Workflows", "Agent & LLM Orchestration", "Tool and Function Calling (OpenAI, Anthropic Claude)", "MCP", "RAG", "LangChain", "Vector Databases", "RLHF", "LoRA", "PEFT", "Prompt Engineering", "LLM Evaluation Frameworks", "Human-in-the-Loop", "Streaming Responses (SSE)", "Vercel AI SDK", "AI-Assisted Development (Claude Code, GitHub Copilot, Cursor)"]
     }
 ];
 
 export const education: Credential[] = [
     {
-        title: "BS in Computer Science",
+        title: "Bachelor of Science (BS) in Computer Science",
         issuer: "Iqra University",
         meta: "Karachi, Pakistan · GPA 3.60/4.00 · Feb 2014 - May 2018"
     },
     {
-        title: "Extended Diploma in Business Management",
+        title: "Level 5 Extended Diploma in Business Management",
         issuer: "Qualifi Ltd.",
         meta: "London, United Kingdom · May 2023 - Apr 2025"
     }
@@ -311,11 +309,23 @@ export const education: Credential[] = [
 
 export const certifications: Credential[] = [
     {
-        title: "Microsoft Certified: Azure AI Apps and Agents Developer Associate",
+        title: "Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103)",
         issuer: "Microsoft",
         image: "/certs/microsoft-ai-apps-agents.png",
         meta: "Oct 2026",
         href: "https://learn.microsoft.com/api/credentials/share/en-us/MuhammadAdnanSaleem-7401/819A7D752611DDAB?sharingId=9033F8FC5FC2408C"
+    },
+    {
+        title: "Cisco: Optimizing Generative AI",
+        issuer: "Cisco",
+        meta: "Oct 2026",
+        href: "https://www.credly.com/badges/be5838b6-55c6-4828-848b-fea0ba5e5aa0"
+    },
+    {
+        title: "Cisco: Prompt Like an Engineer",
+        issuer: "Cisco",
+        meta: "Oct 2026",
+        href: "https://www.credly.com/badges/76343c36-c992-4fd9-bdea-79d55ae4c4c9"
     },
     {
         title: "Cisco: Introduction to Modern AI",
@@ -325,14 +335,14 @@ export const certifications: Credential[] = [
         href: "https://www.credly.com/badges/bde8c946-d3d2-4173-87b3-52af3dd5e6c5"
     },
     {
-        title: "Cisco: Python Essentials",
+        title: "Cisco: Python Essentials 1",
         issuer: "Cisco",
         image: "/certs/cisco-python.png",
         meta: "Sep 2026",
         href: "https://www.credly.com/badges/840bb802-3fb6-4dcb-959c-7821ec31564e"
     },
     {
-        title: "Cisco: JavaScript Essentials",
+        title: "Cisco: JavaScript Essentials 1",
         issuer: "Cisco",
         image: "/certs/cisco-javascript.png",
         meta: "Sep 2026",

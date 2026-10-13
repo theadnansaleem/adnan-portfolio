@@ -22,7 +22,7 @@ const FAQ = [
   ['Which Microsoft certification do you hold?', `${certifications[0].title}, earned in ${certifications[0].meta}. The link on its card opens Microsoft's own record of it.`],
   ['Can these certifications be verified?', `${verifiable} of the ${certifications.length} link to the issuer's public record. The others have no public record page.`],
   ['What is your level of English?', 'CEFR C1 on the Oxford ELLT (June 2025), and LanguageCert ESOL International B2 in listening, reading, writing and speaking (May 2025).'],
-  ['What did you study?', education.map((item) => `${item.title} at ${item.issuer}`).join(', and an ') + '.'],
+  ['What did you study?', education.map((item) => `${item.title} at ${item.issuer}`).join(', and a ') + '.'],
 ];
 
 export default function CertificationsPage() {
