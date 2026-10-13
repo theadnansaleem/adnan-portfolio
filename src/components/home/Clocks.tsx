@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react';
 import { jobs } from '@/lib/data';
 
-// Time zone per role location. Benington is listed only as "Canada", so it gets no clock.
+// Time zone per role location. Benington is listed only as "Canada"; Eastern Time is assumed.
 const ZONES: Record<string, string> = {
+  Canada: 'America/Toronto',
   'Doha, Qatar': 'Asia/Qatar',
   'London, United Kingdom': 'Europe/London',
   'Bavaria, Germany': 'Europe/Berlin',
@@ -14,8 +15,8 @@ const ZONES: Record<string, string> = {
 
 const timeIn = (zone: string) => new Date().toLocaleTimeString('en-GB', { timeZone: zone, hour: '2-digit', minute: '2-digit' });
 
-/** The teams behind the six roles, each with its local time right now. */
-export default function Clocks() {
+/** The teams behind the six roles, each with its local time right now. With onPick, a team opens its role. */
+export default function Clocks({ onPick }: { onPick?: (index: number) => void }) {
   const [, setTick] = useState(0);
   const [live, setLive] = useState(false);
 
@@ -33,13 +34,17 @@ export default function Clocks() {
         <strong>Lahore</strong>
         <time suppressHydrationWarning>{live ? timeIn('Asia/Karachi') : '--:--'}</time>
       </li>
-      {jobs.map((job) => {
-        const zone = ZONES[job.location];
-        return (
-          <li key={job.id}>
+      {jobs.map((job, i) => {
+        const cell = (
+          <>
             <span className="hx-cap">{job.company}</span>
             <strong>{job.location.split(',')[0]}</strong>
-            <time suppressHydrationWarning>{zone && live ? timeIn(zone) : zone ? '--:--' : 'Remote'}</time>
+            <time suppressHydrationWarning>{live ? timeIn(ZONES[job.location]) : '--:--'}</time>
+          </>
+        );
+        return (
+          <li key={job.id}>
+            {onPick ? <button type="button" onClick={() => onPick(i)} aria-label={`${job.company}: show this role`}>{cell}</button> : cell}
           </li>
         );
       })}

@@ -35,6 +35,8 @@ export default function PageTransition() {
       if (url.origin !== window.location.origin || url.pathname === window.location.pathname) return;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       e.preventDefault();
+      // The home page skips its own opening curtain after this one (see .hx-curtain)
+      document.documentElement.dataset.nav = '';
       el.dataset.state = 'cover';
       window.setTimeout(() => router.push(url.pathname + url.search + url.hash), 460);
     };

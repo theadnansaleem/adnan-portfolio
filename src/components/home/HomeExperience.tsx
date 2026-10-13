@@ -521,7 +521,7 @@ export default function HomeExperience({ fontClass, updated }: { fontClass: stri
           <h2><Roll parts={[['Eight years,'], ['six', true], ['teams']]} /></h2>
           <p>{profile.summary[2]}</p>
         </header>
-        <Clocks />
+        <Clocks onPick={(index) => window.dispatchEvent(new CustomEvent('hx:role', { detail: index }))} />
       </section>
       <ExperienceReel />
 
@@ -621,8 +621,8 @@ export default function HomeExperience({ fontClass, updated }: { fontClass: stri
               <h3>I build with AI and build AI into products</h3>
               <p>Six model families, an agent harness I built myself, and LLM evaluation work since 2020.</p>
               <span className="hx-flow-logos">
-                {['claude', 'codex', 'gemini', 'kimi', 'deepseek', 'groq'].map((file) => (
-                  <Image key={file} src={`/ai/${file}.svg`} alt={file} width={24} height={24} unoptimized />
+                {['Claude', 'Codex', 'Gemini', 'Kimi', 'DeepSeek', 'Groq'].map((name) => (
+                  <Image key={name} src={`/ai/${name.toLowerCase()}.svg`} alt={name} width={24} height={24} unoptimized />
                 ))}
               </span>
               <span className="hx-pill">See how I work ↘</span>
