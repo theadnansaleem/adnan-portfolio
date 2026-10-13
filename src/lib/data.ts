@@ -12,7 +12,7 @@ export const profile = {
     email: "heyadnansaleem@gmail.com",
     linkedin: "https://www.linkedin.com/in/theadnan",
     github: "https://github.com/theadnansaleem",
-    x: "https://x.com/adnan_muhamadi",
+    x: "https://x.com/theadnansaleem",
     url: "https://theadnansaleem.com",
     resume: "/Adnan-Saleem-Resume.pdf",
     // Calendly (or Cal.com) scheduling link. Empty hides every "Book a call" button.
