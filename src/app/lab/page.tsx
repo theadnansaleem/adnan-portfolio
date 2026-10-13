@@ -8,7 +8,7 @@ import FailSmall from '@/components/home/lab/FailSmall';
 import PageVitals from '@/components/home/lab/PageVitals';
 
 const TITLE = 'Lab: live demos';
-const DESCRIPTION = 'Five working demos of techniques from my CV: a virtualized 20,000-row table, a real-time dashboard, tiered data redaction, sections that fail alone, and live Core Web Vitals.';
+const DESCRIPTION = 'Five live demos of techniques from my CV: a virtualized 20,000-row table, a real-time dashboard, tiered data redaction, error boundaries and Core Web Vitals.';
 
 export const metadata: Metadata = {
   title: TITLE,
