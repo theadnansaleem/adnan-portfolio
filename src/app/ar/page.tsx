@@ -24,9 +24,9 @@ const STAT_LABELS: Record<string, string> = {
   'Junior Developers Mentored': 'مطوّرًا مبتدئًا تم إرشادهم',
 };
 const ROLES: Record<string, string> = {
-  'Senior Fullstack Developer': 'مطوّر Full-Stack أول',
+  'Senior Full-Stack Developer': 'مطوّر Full-Stack أول',
   'Freelance Full-Stack Developer': 'مطوّر Full-Stack مستقل',
-  'Mid-Level Fullstack Developer': 'مطوّر Full-Stack متوسط الخبرة',
+  'Mid-Level Full-Stack Developer': 'مطوّر Full-Stack متوسط الخبرة',
   'JavaScript / TypeScript Developer': 'مطوّر JavaScript / TypeScript',
   'Frontend Developer': 'مطوّر واجهات أمامية',
 };

@@ -84,7 +84,7 @@ export const caseStudies: CaseStudy[] = [
       "A 2.5-year solo migration of 42 financial workflows from Visual FoxPro to C#/.NET Core, Entity Framework Core, SQL Server, Angular and Blazor.",
     // No project card for this engagement, so the opening CV bullet is the summary.
     summary: pick(BENINGTON, /Independently migrated/)[0],
-    highlights: pick(BENINGTON, /Redesigned|Rebuilt|Replaced/),
+    highlights: pick(BENINGTON, /Redesigned|Replaced/),
     stack: job(BENINGTON).tags,
     ...role(BENINGTON),
   },
@@ -109,7 +109,7 @@ export const caseStudies: CaseStudy[] = [
       "Full-stack evaluation, human feedback and data-labeling interfaces used by 100,000+ people, built with React, Angular, TypeScript and Node.js on AWS.",
     // No project card is tied to this role, so the opening CV bullet is the summary.
     summary: pick(TURING, /100,000\+ people/)[0],
-    highlights: pick(TURING, /evaluation dashboards|AWS EC2/),
+    highlights: pick(TURING, /AWS EC2/),
     stack: job(TURING).tags,
     ...role(TURING),
   },
