@@ -47,6 +47,8 @@ export const credentialJsonLd = (cert: Credential) => ({
   '@type': 'EducationalOccupationalCredential',
   name: cert.title,
   credentialCategory: 'certification',
+  description: cert.detail,
+  competencyRequired: cert.validates,
   url: cert.href,
   recognizedBy: cert.issuer && { '@type': 'Organization', name: cert.issuer },
 });

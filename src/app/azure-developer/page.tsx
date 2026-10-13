@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import RolePage, { roleMetadata } from '@/components/home/RolePage';
+import CertHighlight from '@/components/home/CertHighlight';
 import { roles } from '@/lib/roles';
 
 export const metadata: Metadata = roleMetadata(roles.azure);
@@ -27,6 +28,7 @@ const FLOW = [
 export default function AzureDeveloperPage() {
   return (
     <RolePage role={roles.azure}>
+      <CertHighlight />
       <section className="hx-lab is-stacked">
         <div>
           <p className="hx-cap"><b>Azure</b> Services</p>

@@ -836,3 +836,19 @@ span.hx-reel-logo { background: var(--card); color: var(--mark); font-family: va
   .hx-tags li { transition: translate 0.3s var(--ease), border-color 0.3s, color 0.3s, background 0.3s; }
   .hx-tags:not(.is-hit) li:hover { translate: 0 -2px; border-color: var(--mark); color: var(--ink); background: var(--pill); }
 }
+
+/* Microsoft certification: badge in the hero and a feature card */
+.hx-badge-cert { margin-top: 8px; white-space: normal; transition: border-color 0.3s, background 0.3s; }
+.hx-badge-cert:hover, .hx-badge-cert:focus-visible { border-color: var(--mark); }
+.hx-certhero { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(20px, 3vw, 44px); align-items: center; padding: clamp(20px, 2.6vw, 36px); margin-top: 16px; }
+.hx-page .hx-certhero { margin-top: 0; }
+.hx-certhero-shot { display: block; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+.hx-certhero-shot img { display: block; width: 100%; height: auto; transition: scale 0.6s var(--ease); }
+.hx-certhero-shot:hover img, .hx-certhero-shot:focus-visible img { scale: 1.03; }
+.hx-certhero .hx-cap { display: flex; align-items: center; gap: 8px; }
+.hx .hx-certhero h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3vw, 46px); line-height: 1.04; margin: 10px 0 12px; }
+.hx-certhero p:not(.hx-cap) { color: var(--ink-2); font-size: 15px; max-width: 560px; }
+.hx-certhero .hx-actions { margin-top: 18px; }
+@media (max-width: 1000px) {
+  .hx-certhero { grid-template-columns: 1fr; }
+}

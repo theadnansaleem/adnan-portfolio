@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import RolePage, { roleMetadata } from '@/components/home/RolePage';
+import CertHighlight from '@/components/home/CertHighlight';
 import { roles } from '@/lib/roles';
 
 export const metadata: Metadata = roleMetadata(roles.ai);
@@ -43,6 +44,7 @@ const HARNESS = [
 export default function AiEngineerPage() {
   return (
     <RolePage role={roles.ai}>
+      <CertHighlight />
       <ul className="hx-grid-3">
         {NUMBERS.map(([figure, suffix, label, note]) => (
           <li key={label} className="hx-card">

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import PageFrame from '@/components/home/PageFrame';
+import CertHighlight from '@/components/home/CertHighlight';
 import { pageJsonLd } from '@/lib/seo';
 import FitMatcher from '@/components/home/FitMatcher';
 import { jobs, profile, stats } from '@/lib/data';
@@ -52,6 +53,8 @@ export default function HirePage() {
           </ol>
         </div>
       </section>
+
+      <CertHighlight />
 
       <dl className="hx-stats hx-card">
         {stats.map((stat) => (

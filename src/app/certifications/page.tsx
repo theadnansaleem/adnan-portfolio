@@ -4,6 +4,7 @@ import Link from 'next/link';
 import PageFrame from '@/components/home/PageFrame';
 import { certifications, education, profile } from '@/lib/data';
 import { credentialJsonLd, faqJsonLd, pageJsonLd } from '@/lib/seo';
+import CertHighlight from '@/components/home/CertHighlight';
 
 const TITLE = 'Certifications: Microsoft Azure AI and Cisco';
 const DESCRIPTION = `The ${certifications.length} certifications held by M. Adnan Saleem, from Microsoft, Cisco and others, each with its date and a link to the issuer's record where one exists.`;
@@ -45,6 +46,8 @@ export default function CertificationsPage() {
         <h1>Certified, and <em>checkable</em></h1>
         <p>{certifications.length} certifications, newest first. {verifiable} link straight to the issuer&apos;s record, so you do not have to take my word for them.</p>
       </header>
+
+      <CertHighlight />
 
       <ul className="hx-grid-3 hx-certgrid">
         {certifications.map((cert) => (
