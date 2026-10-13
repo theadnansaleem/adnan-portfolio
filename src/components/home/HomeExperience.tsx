@@ -12,6 +12,7 @@ import FitMatcher from './FitMatcher';
 import Terminal from './Terminal';
 import { MOMENTS } from './photos';
 import { spotlight } from './spotlight';
+import { hearts } from './hearts';
 import './home.css';
 
 
@@ -572,7 +573,7 @@ export default function HomeExperience({ fontClass, updated }: { fontClass: stri
           <p>Based in Lahore, five years fully remote, and open to relocation.</p>
         </header>
         <div className="hx-film">
-          <ul>
+          <ul onClick={(e) => hearts(e.clientX, e.clientY, rootRef.current)}>
             {/* The row is doubled so the loop has no seam; the copy is decorative */}
             {[...MOMENTS, ...MOMENTS].map((moment, i) => (
               <li key={i}><Image src={`/me/m/${moment.file}.webp`} alt={i < MOMENTS.length ? moment.alt : ''} fill unoptimized /></li>
