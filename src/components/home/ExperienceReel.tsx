@@ -45,12 +45,24 @@ export default function ExperienceReel() {
       el.style.setProperty('--reel', progress.toFixed(4));
       setActive(Math.floor(progress * jobs.length));
     };
+    // A clock in the strip above asks for a role: scroll to its place in the pinned run, or to its card when not pinned
+    const onRole = (e: Event) => {
+      const index = (e as CustomEvent<number>).detail;
+      const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+      const box = el.getBoundingClientRect();
+      const run = box.height - window.innerHeight;
+      const pinned = getComputedStyle(el.firstElementChild as Element).position === 'sticky';
+      if (pinned && run > 0) window.scrollTo({ top: window.scrollY + box.top + (run * (index + 0.5)) / jobs.length, behavior });
+      else el.querySelectorAll('.hx-reel-cards > li')[index]?.scrollIntoView({ behavior, block: 'start' });
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
+    window.addEventListener('hx:role', onRole);
     onScroll();
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
+      window.removeEventListener('hx:role', onRole);
     };
   }, []);
 
@@ -87,9 +99,14 @@ export default function ExperienceReel() {
                 {job.bullets.map((bullet, n) => <li key={bullet} style={{ '--i': n } as React.CSSProperties}>{bullet}</li>)}
               </ul>
               <ul className="hx-tags">{job.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+              {shotsFor(job.id).length > 0 && (
+                <ul className="hx-reel-projects">
+                  {shotsFor(job.id).map((project) => <li key={project.id}><strong>{project.title}.</strong> {project.description}</li>)}
+                </ul>
+              )}
               <p className="hx-reel-more">
                 {shotsFor(job.id).map((project, n) => {
-                  const shot = <Image src={project.image ?? ''} alt={project.title} width={160} height={100} unoptimized />;
+                  const shot = <><Image src={project.image ?? ''} alt="" width={160} height={100} unoptimized /><span>{project.title}</span></>;
                   return project.caseStudy ? (
                     <Link key={project.id} className="hx-reel-shot" style={{ '--i': n } as React.CSSProperties} href={`/work/${project.caseStudy}`} title={`${project.title}: read the case study`}>{shot}</Link>
                   ) : (

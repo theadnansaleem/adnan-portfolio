@@ -318,12 +318,14 @@ export const certifications: Credential[] = [
     {
         title: "Cisco: Optimizing Generative AI",
         issuer: "Cisco",
+        image: "/certs/cisco-optimizing-genai.png",
         meta: "Oct 2026",
         href: "https://www.credly.com/badges/be5838b6-55c6-4828-848b-fea0ba5e5aa0"
     },
     {
         title: "Cisco: Prompt Like an Engineer",
         issuer: "Cisco",
+        image: "/certs/cisco-prompt-engineer.png",
         meta: "Oct 2026",
         href: "https://www.credly.com/badges/76343c36-c992-4fd9-bdea-79d55ae4c4c9"
     },
@@ -358,12 +360,14 @@ export const certifications: Credential[] = [
     {
         title: "Certified Cybersecurity Educator Professional (CCEP)",
         issuer: "Red Team Leaders",
+        image: "/certs/ccep.png",
         meta: "Dec 2025",
         href: "https://courses.redteamleaders.com/exam-completion/4b6458728d78b339"
     },
     {
         title: "Microsoft: Student SOC Program Foundations",
         issuer: "Microsoft",
+        image: "/certs/microsoft-soc.png",
         meta: "Dec 2025"
     },
     {
@@ -391,6 +395,8 @@ export const certifications: Credential[] = [
     {
         title: "Scrimba: Frontend Career Path",
         issuer: "Scrimba",
+        image: "/certs/scrimba.png",
+        href: "https://scrimba.com/certificate/ubwr65ce/gfrontend",
         meta: "Mar 2018"
     }
 ];
