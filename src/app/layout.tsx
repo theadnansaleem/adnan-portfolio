@@ -56,8 +56,8 @@ export const metadata: Metadata = {
   // No title or description here: each page's card falls back to its own Open Graph values.
   twitter: {
     card: 'summary_large_image',
-    creator: '@adnan_muhamadi',
-    site: '@adnan_muhamadi',
+    creator: '@theadnansaleem',
+    site: '@theadnansaleem',
   },
   icons: {
     icon: [
