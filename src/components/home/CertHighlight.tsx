@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { certifications } from '@/lib/data';
+import type { Credential } from '@/types';
 
 // The newest certification leads the list in data.ts
 const cert = certifications[0];
@@ -17,13 +18,26 @@ export function MicrosoftMark({ size = 16 }: { size?: number }) {
   );
 }
 
+/** A certificate picture. When the credential has a dark version, each theme shows its own. */
+export function CertPicture({ cert, ...rest }: { cert: Credential; className?: string; width: number; height: number; sizes: string }) {
+  if (!cert.image) return null;
+  const alt = `${cert.title} certificate`;
+  const classes = (theme: string) => [rest.className, cert.imageDark && theme].filter(Boolean).join(' ');
+  return (
+    <>
+      <Image {...rest} className={classes('hx-light-only')} src={cert.image} alt={alt} />
+      {cert.imageDark && <Image {...rest} className={classes('hx-dark-only')} src={cert.imageDark} alt={alt} />}
+    </>
+  );
+}
+
 /** The Microsoft certification, with what it validates and a link to Microsoft's record of it. */
 export default function CertHighlight({ className = '' }: { className?: string }) {
   return (
     <aside className={`hx-certhero hx-card ${className}`} aria-label="Microsoft certification">
       {cert.image && (
         <a className="hx-certhero-shot" href={cert.href} target="_blank" rel="noopener noreferrer" aria-label="Open the certificate on Microsoft Learn">
-          <Image src={cert.image} alt={`${cert.title} certificate`} width={1120} height={724} sizes="(max-width: 1000px) 100vw, 460px" />
+          <CertPicture cert={cert} width={1120} height={724} sizes="(max-width: 1000px) 100vw, 460px" />
         </a>
       )}
       <div>

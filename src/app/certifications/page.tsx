@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import PageFrame from '@/components/home/PageFrame';
 import { certifications, education, profile } from '@/lib/data';
 import { credentialJsonLd, faqJsonLd, pageJsonLd } from '@/lib/seo';
-import CertHighlight from '@/components/home/CertHighlight';
+import CertHighlight, { CertPicture } from '@/components/home/CertHighlight';
 
 const TITLE = 'Certifications: Microsoft Azure AI and Cisco';
 const DESCRIPTION = `The ${certifications.length} certifications held by M. Adnan Saleem, from Microsoft, Cisco and others, each with its date and a link to the issuer's record where one exists.`;
@@ -52,7 +51,7 @@ export default function CertificationsPage() {
       <ul className="hx-grid-3 hx-certgrid">
         {certifications.map((cert) => (
           <li key={cert.title} className="hx-card">
-            {cert.image && <Image src={cert.image} alt={`${cert.title} certificate`} width={672} height={352} sizes="(max-width: 760px) 100vw, 400px" />}
+            <CertPicture cert={cert} width={672} height={352} sizes="(max-width: 760px) 100vw, 400px" />
             <h2>{cert.title}</h2>
             <p>{cert.issuer}</p>
             <p className="hx-cap">
