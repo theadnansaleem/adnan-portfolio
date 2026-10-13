@@ -17,7 +17,7 @@ export function GET() {
     link('Home: summary, impact, projects, experience and skills', '/'),
     link('About: background, education and quick answers', '/about'),
     link('Hire: role, availability and work history at a glance', '/hire'),
-    link('Lab: live demos of table virtualization and a real-time dashboard', '/lab'),
+    link('Lab: live demos of table virtualization, a real-time dashboard, tiered data redaction, error boundaries and Core Web Vitals', '/lab'),
     link('Frontend developer: React, Next.js and Angular experience', '/frontend-developer'),
     link('.NET developer: C#, ASP.NET Core and Blazor experience', '/dotnet-developer'),
     link('AI engineer: LLM integration, agent harness and evaluation tooling', '/ai-engineer'),
