@@ -18,7 +18,10 @@ const LOGOS: Record<number, { src: string; shape?: 'full' | 'wide' }> = {
 const SHOTS: Record<number, string[]> = {
   1: ['Hayya Qatar eVisa & Event Access Platform', 'Qatar Events Platform (QEP)', 'Road to Qatar'],
   2: ['Volopa Financial Services'],
-  4: ['Codex: Cybersecurity Platform'],
+  3: ['Norstella Pharma Solutions Platform'],
+  4: ['Codex: Cybersecurity Platform', 'Eclipse AI'],
+  5: ['Meta LLaMA: RLHF Tooling', 'Google DeepMind: LLM Optimization'],
+  6: ['National Compliance Management System', 'TopTech TMS', 'VMA Advisor: BG Products'],
 };
 const shotsFor = (jobId: number) => projects.filter((project) => SHOTS[jobId]?.includes(project.title));
 
