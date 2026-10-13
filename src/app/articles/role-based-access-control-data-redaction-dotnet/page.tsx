@@ -37,6 +37,44 @@ const REDACTOR = `public static class FindingRedactor
     };
 }`;
 
+const REQUIREMENT = `public record MinimumTierRequirement(int Tier) : IAuthorizationRequirement;
+
+public class MinimumTierHandler : AuthorizationHandler<MinimumTierRequirement>
+{
+    protected override Task HandleRequirementAsync(
+        AuthorizationHandlerContext context, MinimumTierRequirement requirement)
+    {
+        if (int.TryParse(context.User.FindFirst("tier")?.Value, out var tier) && tier >= requirement.Tier)
+            context.Succeed(requirement);
+
+        return Task.CompletedTask;
+    }
+}
+
+// Program.cs
+builder.Services.AddSingleton<IAuthorizationHandler, MinimumTierHandler>();
+options.AddPolicy("Tier3", policy => policy.AddRequirements(new MinimumTierRequirement(3)));`;
+
+const FALLBACK = `builder.Services.AddAuthorization(options =>
+{
+    // Any endpoint without its own rule still requires a signed-in user
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+});`;
+
+const TABLE_TEST = `[Theory]
+[InlineData(2, false, false)]
+[InlineData(3, true, false)]
+[InlineData(4, true, true)]
+public void Each_tier_sees_only_its_fields(int tier, bool seesComponent, bool seesSteps)
+{
+    var dto = FindingRedactor.For(tier, SampleFinding());
+
+    Assert.Equal(seesComponent, dto.AffectedComponent is not null);
+    Assert.Equal(seesSteps, dto.ReproductionSteps is not null);
+}`;
+
 export default function Page() {
   return (
     <ArticlePage article={meta}>
@@ -61,6 +99,25 @@ export default function Page() {
       </p>
       <pre><code>{POLICIES}</code></pre>
 
+      <p>
+        Listing the allowed values works for four tiers and gets tedious beyond that. When the rule is really &quot;this tier or higher&quot;, say so once with a requirement and a handler:
+      </p>
+      <pre><code>{REQUIREMENT}</code></pre>
+
+      <h2>Deny by default</h2>
+      <p>
+        An endpoint that someone forgot to decorate should not be public. A fallback policy applies to every endpoint that has no rule of its own, so forgetting an attribute fails closed:
+      </p>
+      <pre><code>{FALLBACK}</code></pre>
+      <p>
+        The few endpoints that really are public, such as sign-in and health checks, then say so explicitly with <code>[AllowAnonymous]</code>, which is easy to find in review.
+      </p>
+
+      <h2>Where the tier comes from</h2>
+      <p>
+        The tier must come from something the server issued and can verify: a claim in a signed token or a server-side session. It must never be read from a request header, query string or body, because the caller controls those. A claim in a token also stays valid until the token expires, so a user who is moved down a tier keeps the old access until then. Keep access tokens short-lived, and for the most sensitive records look the tier up on the server for each request.
+      </p>
+
       <h2>One redaction step, used everywhere</h2>
       <p>
         The endpoint loads the full record and hands it to a single function that builds the response for the caller&apos;s tier:
@@ -80,9 +137,23 @@ export default function Page() {
         <li><strong>Real-time channels.</strong> A WebSocket that broadcasts full records to every subscriber undoes all of the above. Redact per connection.</li>
       </ul>
 
+      <h2>403, or 404?</h2>
+      <p>
+        The status code is part of what you reveal. If a low-tier caller asks for a record they may not see and gets <code>403 Forbidden</code>, they have learned that the record exists. Where existence itself is sensitive, return <code>404 Not Found</code>, exactly as for an id that was never issued. Use 403 when the caller may know the thing exists but may not perform the action.
+      </p>
+
+      <h2>Record who looked</h2>
+      <p>
+        For sensitive data, access control is not finished until reads are recorded: who requested which record, at which tier, and when. Log the identifiers, never the values, or the audit log becomes the easiest place to steal the data from.
+      </p>
+
       <h2>Test it as a table</h2>
       <p>
         Access rules are a grid of tiers against fields, so test them as one: for every tier, request the same record and assert exactly which fields are present. When someone adds a field, the test for the lowest tier fails until they decide who may see it. That failing test is the review.
+      </p>
+      <pre><code>{TABLE_TEST}</code></pre>
+      <p>
+        One row per tier, one column per sensitive field. The test reads like the policy document, which is the point: a security reviewer who does not write C# can still check it.
       </p>
     </ArticlePage>
   );

@@ -18,6 +18,25 @@ const Reports = React.lazy(() => import('./Reports'));
 const RESERVE = `/* The image box has its final size before the image arrives, so nothing jumps */
 .hero-image { aspect-ratio: 16 / 9; width: 100%; }`;
 
+const HERO = `<!-- In the HTML itself, not added later by JavaScript, and never lazy-loaded -->
+<img src="/hero.avif" width="1200" height="675" fetchpriority="high" alt="Stadium at night" />`;
+
+const TRANSITION = `const [isPending, startTransition] = useTransition();
+
+function onChange(event) {
+  setText(event.target.value);                              // urgent: the field shows the key press
+  startTransition(() => setQuery(event.target.value));     // can wait: the results list
+}`;
+
+const FIELD = `import { onCLS, onINP, onLCP } from 'web-vitals';
+
+const send = (metric) =>
+  navigator.sendBeacon('/vitals', JSON.stringify({ name: metric.name, value: metric.value, id: metric.id }));
+
+onLCP(send);
+onINP(send);
+onCLS(send);`;
+
 export default function Page() {
   return (
     <ArticlePage article={meta}>
@@ -40,6 +59,27 @@ export default function Page() {
         Lighthouse and the Performance panel in Chrome both name the element that counts as the largest paint. Until you know which one it is, every optimization is a guess. It is usually a hero image or a headline, and the question is always the same: what has to download and run before that one element can appear?
       </p>
 
+      <h2>LCP is four delays added together</h2>
+      <p>The time to the largest paint breaks down into four parts, and each has a different fix:</p>
+      <ul>
+        <li><strong>Time to first byte.</strong> How long the server takes to start answering. Fixed with caching, a CDN, or rendering on the server ahead of time.</li>
+        <li><strong>Resource load delay.</strong> The gap before the browser even starts fetching the LCP resource. Long when the image is only discovered after JavaScript runs.</li>
+        <li><strong>Resource load duration.</strong> The download itself. Fixed with smaller, better-compressed files.</li>
+        <li><strong>Element render delay.</strong> The resource has arrived but the page cannot paint it yet, usually because scripts or stylesheets are still blocking.</li>
+      </ul>
+      <p>
+        In a client-rendered React app the second and fourth parts are usually the large ones: nothing can be discovered or painted until the bundle has downloaded and run. That is why the next two sections matter most.
+      </p>
+
+      <h2>If the LCP element is an image</h2>
+      <pre><code>{HERO}</code></pre>
+      <ul>
+        <li><strong>Put it in the first HTML response.</strong> An image that React adds after hydration cannot start downloading until the JavaScript has finished.</li>
+        <li><strong>Mark it as high priority</strong> with <code>fetchpriority=&quot;high&quot;</code>, and never give it <code>loading=&quot;lazy&quot;</code>.</li>
+        <li><strong>Send the right size.</strong> Use <code>srcset</code> so a phone does not download a desktop image, and a modern format such as AVIF or WebP.</li>
+        <li><strong>Set width and height</strong> so the space is reserved before the file arrives.</li>
+      </ul>
+
       <h2>Ship less before the first paint</h2>
       <p>
         Most React apps send every screen to every visitor. Code splitting sends a screen only when it is opened:
@@ -58,6 +98,10 @@ export default function Page() {
       <p>
         INP suffers when one interaction re-renders too much. Two tools cover most cases. Memoization (<code>React.memo</code>, <code>useMemo</code>) stops components and calculations from repeating when their inputs did not change. Virtualization keeps long lists and tables down to the rows that are on screen.
       </p>
+      <p>
+        When the work cannot be avoided, tell React which part is urgent. A transition lets the key press paint first and the heavy update follow:
+      </p>
+      <pre><code>{TRANSITION}</code></pre>
 
       <h2>Stop the page from jumping</h2>
       <p>
@@ -71,6 +115,15 @@ export default function Page() {
         <li>Change one thing at a time, so you know what worked. I tried deferring hidden images on this site and it measured no gain, so it was dropped.</li>
         <li>Lab tools estimate. Real-user data, from the Chrome UX Report or your own analytics, is what Google uses, so confirm there once traffic allows.</li>
       </ul>
+
+      <h2>Collect the numbers from real visits</h2>
+      <p>
+        Google&apos;s <code>web-vitals</code> library reports the same three metrics from your own users, so you do not have to wait for enough traffic to appear in the public data set:
+      </p>
+      <pre><code>{FIELD}</code></pre>
+      <p>
+        Store them with the page path and the device type. The pages that fail are rarely the ones the team tests every day, and the 75th percentile on mobile is usually far from what a developer laptop shows.
+      </p>
     </ArticlePage>
   );
 }

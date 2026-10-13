@@ -40,6 +40,31 @@ setCounts((prev) => ({ ...prev, [event.level]: prev[event.level] + 1 }));
 setHistory((prev) => [...prev.slice(0, -1), prev[prev.length - 1] + 1]);
 setInterval(() => setHistory((prev) => [...prev.slice(1), 0]), 1000);`;
 
+const HIDDEN = `socket.onmessage = (message) => {
+  buffer.push(JSON.parse(message.data));
+  if (buffer.length > 40) buffer.shift();              // the buffer is capped too
+  if (!frame) frame = requestAnimationFrame(flush);
+};`;
+
+const RECONNECT = `let attempt = 0;
+let lastId = null;
+let timer = 0;
+
+function connect() {
+  const socket = new WebSocket(lastId ? \`\${url}?after=\${lastId}\` : url);
+
+  socket.onopen = () => { attempt = 0; };
+  socket.onmessage = (message) => {
+    const event = JSON.parse(message.data);
+    lastId = event.id;
+    receive(event);
+  };
+  socket.onclose = () => {
+    const ceiling = Math.min(30000, 1000 * 2 ** attempt++);   // 1s, 2s, 4s ... up to 30s
+    timer = setTimeout(connect, ceiling / 2 + Math.random() * (ceiling / 2));
+  };
+}`;
+
 export default function Page() {
   return (
     <ArticlePage article={meta}>
@@ -63,6 +88,15 @@ export default function Page() {
         A burst of any size now costs one render. The cleanup function matters as much as the handler: without it, every remount leaves a socket open behind it.
       </p>
 
+      <h2>The hidden-tab trap</h2>
+      <p>
+        Browsers stop calling <code>requestAnimationFrame</code> while a tab is in the background, but the socket keeps receiving. With the code above, a dashboard left in another tab over lunch buffers every message until someone looks at it again, then tries to process them all at once. Cap the buffer the same way as the list:
+      </p>
+      <pre><code>{HIDDEN}</code></pre>
+      <p>
+        Counters that must stay exact should be updated in the message handler, not in the flush, so they stay correct while nothing is being drawn.
+      </p>
+
       <h2>Keep only what the screen can show</h2>
       <p>
         An analyst reads the latest few dozen events, not the last ten thousand. Cap the list (the demo keeps 40) and leave history to the server, which can page through it on request.
@@ -83,6 +117,27 @@ export default function Page() {
         <li><strong>Show the state.</strong> A dashboard that silently stopped updating is worse than one that says it is reconnecting.</li>
         <li><strong>Catch up.</strong> After reconnecting, ask the server for what was missed, using the last event id you saw.</li>
       </ul>
+
+      <p>Put together, the reconnect logic is short:</p>
+      <pre><code>{RECONNECT}</code></pre>
+      <p>
+        The random part of the delay matters. Without it, every client that lost the connection at the same moment comes back at the same moment, and the restarted server is hit by all of them together.
+      </p>
+
+      <h2>Notice a connection that died quietly</h2>
+      <p>
+        A connection can stop delivering without closing: a laptop wakes from sleep, a proxy drops an idle connection, a phone changes network. The browser may not fire <code>onclose</code> for a long time. Have the server send a small heartbeat message every few seconds, and if the client has received nothing for two or three intervals, close the socket yourself and let the reconnect logic take over.
+      </p>
+
+      <h2>Do not trust the feed</h2>
+      <p>
+        One malformed message should not stop the dashboard. Wrap the parse in a <code>try</code> block, check that the fields you rely on are present, and drop anything that fails while counting how often it happens. Treat text from the feed as text: render it through React as usual and never as HTML.
+      </p>
+
+      <h2>WebSocket or Server-Sent Events?</h2>
+      <p>
+        If data only flows from the server to the browser, Server-Sent Events are worth a look before a WebSocket. They run over ordinary HTTP, reconnect on their own, and resend the last event id for you through the <code>Last-Event-ID</code> header. Choose a WebSocket when the browser also needs to send messages on the same connection, or when the payload is binary.
+      </p>
 
       <h2>Give the user control</h2>
       <ul>

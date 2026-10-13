@@ -32,6 +32,13 @@ export const roles = {
     lead: 'Eight years building frontends in React, Next.js and Angular with TypeScript, on government, fintech and cybersecurity platforms. Based in Lahore, five years fully remote with US, UK and German teams, and available immediately.',
     match: /React|Angular|Next\.js|frontend|front-end|Micro Frontends|Core Web Vitals|virtualization|component|dashboards|responsive|WCAG|TypeScript|Redux|Zustand/i,
     skillGroups: ['Frontend', 'Architecture & Performance', 'UI, Mobile & Accessibility', 'Testing & Quality'],
+    faq: [
+      ['Which frontend frameworks do you work in?', 'React, Next.js and Angular, with TypeScript. Eight years across government, fintech and cybersecurity platforms.'],
+      ['Have you split a large frontend into micro frontends?', 'Yes. On the Qatar Events Platform I rearchitected a monolithic React frontend into micro frontends with Module Federation, which cut release cycle time by about 40%.'],
+      ['What have you done for frontend performance?', 'Virtualization and memoization cut render time by about 70% on tables over 20,000 rows, code splitting cut an initial bundle by about 35%, and LCP improved by about 35% on core pages of a national platform.'],
+      ['Do you build accessible interfaces?', 'Yes. The multi-currency payments platform I worked on met WCAG 2.1 accessibility and UK fintech regulatory standards.'],
+      ['Are you available for remote work?', 'Yes. I am based in Lahore, have worked fully remote for five years with US, UK and German teams, and am available immediately.'],
+    ],
   },
   dotnet: {
     path: '/dotnet-developer',
@@ -43,6 +50,13 @@ export const roles = {
     lead: 'Backends in C#, .NET 6/8, ASP.NET Core Web APIs and Blazor, with SQL Server, T-SQL and Entity Framework Core, on government, fintech and cybersecurity platforms. Based in Lahore, five years fully remote with US, UK and German teams, and available immediately.',
     match: /\.NET|C#|Blazor|Entity Framework|EF Core|SQL Server|T-SQL|ASP\.NET|CQRS|Domain-Driven|DDD|stored procedures/i,
     skillGroups: ['Backend & APIs', 'Databases', 'Architecture & Performance', 'Cloud & DevOps'],
+    faq: [
+      ['Which .NET versions and frameworks do you use?', 'C# on .NET 6 and .NET 8, with ASP.NET Core Web APIs, Blazor Server and Entity Framework Core.'],
+      ['Have you migrated a legacy system to .NET?', 'Yes. As the sole engineer I migrated 42 financial workflows from a Visual FoxPro system to C# and .NET Core over a 2.5-year engagement, and retired the old system.'],
+      ['Which databases do you work with?', 'SQL Server with T-SQL and stored procedures, plus PostgreSQL and MySQL. The FoxPro migration was rebuilt on Entity Framework Core and 42 T-SQL stored procedures.'],
+      ['Do you use Domain-Driven Design and CQRS?', 'Yes. On a vehicle cybersecurity platform I created a C#/.NET Core module with Blazor Server and Entity Framework Core, applying Domain-Driven Design and CQRS for admin and reporting workflows.'],
+      ['Do you also build the frontend?', 'Yes. I am full-stack: React, Next.js, Angular and Blazor on the frontend, .NET and Node.js behind it.'],
+    ],
   },
   ai: {
     path: '/ai-engineer',

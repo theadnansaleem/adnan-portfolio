@@ -3,6 +3,7 @@ import Link from 'next/link';
 import PageFrame from './PageFrame';
 import { profile } from '@/lib/data';
 import { articles, type Article } from '@/lib/articles';
+import { faqJsonLd } from '@/lib/seo';
 
 const date = (iso: string) => new Date(iso + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 
@@ -10,8 +11,8 @@ export const articleMetadata = (a: Article): Metadata => ({
   // No site suffix: the titles are long enough on their own
   title: { absolute: a.title },
   description: a.description,
-  alternates: { canonical: `/articles/${a.slug}` },
-  openGraph: { type: 'article', title: a.title, description: a.description, url: `/articles/${a.slug}`, publishedTime: a.published, authors: [profile.name], images: ['/opengraph-image'] },
+  alternates: { canonical: `/articles/${a.slug}`, types: { 'application/rss+xml': '/feed.xml' } },
+  openGraph: { type: 'article', title: a.title, description: a.description, url: `/articles/${a.slug}`, publishedTime: a.published, modifiedTime: a.updated, authors: [profile.name], images: ['/opengraph-image'] },
 });
 
 /** Frame for one article: heading, byline, body, and a pointer to the matching case study. */
@@ -47,6 +48,7 @@ export default function ArticlePage({ article: a, children }: { article: Article
   return (
     <PageFrame>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      {a.faq && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd(a.faq) }} />}
       <article className="hx-study">
         <header className="hx-head">
           <nav aria-label="Breadcrumb" className="hx-cap hx-crumbs">
@@ -57,6 +59,22 @@ export default function ArticlePage({ article: a, children }: { article: Article
           <p className="hx-cap">By {profile.name} · <time dateTime={a.published}>{date(a.published)}</time>{a.updated && <> · Updated <time dateTime={a.updated}>{date(a.updated)}</time></>} · {a.minutes} min read</p>
         </header>
         <div className="hx-prose">{children}</div>
+        {a.faq && (
+          <section className="hx-lab">
+            <div>
+              <p className="hx-cap">Quick answers</p>
+              <h2>The short version</h2>
+            </div>
+            <div className="hx-qa hx-card">
+              {a.faq.map(([question, answer], i) => (
+                <details key={question} open={i === 0}>
+                  <summary>{question}</summary>
+                  <p>{answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
         <section className="hx-lab">
           <div>
             <p className="hx-cap">Keep reading</p>

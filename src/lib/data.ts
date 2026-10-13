@@ -312,57 +312,75 @@ export const education: Credential[] = [
 export const certifications: Credential[] = [
     {
         title: "Microsoft Certified: Azure AI Apps and Agents Developer Associate",
+        issuer: "Microsoft",
+        image: "/certs/microsoft-ai-apps-agents.png",
         meta: "Oct 2026",
         href: "https://learn.microsoft.com/api/credentials/share/en-us/MuhammadAdnanSaleem-7401/819A7D752611DDAB?sharingId=9033F8FC5FC2408C"
     },
     {
         title: "Cisco: Introduction to Modern AI",
+        issuer: "Cisco",
+        image: "/certs/cisco-modern-ai.png",
         meta: "Sep 2026",
         href: "https://www.credly.com/badges/bde8c946-d3d2-4173-87b3-52af3dd5e6c5"
     },
     {
         title: "Cisco: Python Essentials",
+        issuer: "Cisco",
+        image: "/certs/cisco-python.png",
         meta: "Sep 2026",
         href: "https://www.credly.com/badges/840bb802-3fb6-4dcb-959c-7821ec31564e"
     },
     {
         title: "Cisco: JavaScript Essentials",
+        issuer: "Cisco",
+        image: "/certs/cisco-javascript.png",
         meta: "Sep 2026",
         href: "https://www.credly.com/badges/9ac940fc-1dd9-4b30-98db-bb35e64f1e5f"
     },
     {
         title: "Cisco: Introduction to Cybersecurity",
+        issuer: "Cisco",
+        image: "/certs/cisco-cybersecurity.png",
         meta: "Sep 2026",
         href: "https://www.credly.com/badges/82b24207-0c45-4910-970f-9cebc99da8d8/public_url"
     },
     {
         title: "Certified Cybersecurity Educator Professional (CCEP)",
+        issuer: "Red Team Leaders",
         meta: "Dec 2025",
         href: "https://courses.redteamleaders.com/exam-completion/4b6458728d78b339"
     },
     {
         title: "Microsoft: Student SOC Program Foundations",
+        issuer: "Microsoft",
         meta: "Dec 2025"
     },
     {
         title: "HP LIFE: Data Science & Analytics",
+        issuer: "HP LIFE",
+        image: "/certs/hp-life.png",
         meta: "Nov 2025",
         href: "https://www.life-global.org/certificate/cf5a824e-9321-4809-a5ce-f7a370c78b9c"
     },
     {
         title: "Oxford ELLT: English Language Level Test (CEFR C1)",
+        issuer: "Oxford International",
         meta: "Jun 2025"
     },
     {
         title: "LanguageCert: ESOL International B2 (Listening, Reading, Writing)",
+        issuer: "LanguageCert",
         meta: "May 2025"
     },
     {
         title: "LanguageCert: ESOL International B2 (Speaking)",
+        issuer: "LanguageCert",
         meta: "May 2025"
     },
     {
         title: "Scrimba: Frontend Career Path",
+        issuer: "Scrimba",
         meta: "Mar 2018"
     }
 ];

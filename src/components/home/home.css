@@ -417,7 +417,7 @@ body:has(.hx) { cursor: auto; }
 
 /* Touch targets: small text links and chips get a taller hit area on phones */
 @media (max-width: 760px) {
-  .hx-creds h3 a, .hx-foot a, .hx-rows h3 a { display: inline-block; padding: 7px 0; }
+  .hx-creds h3 a, .hx-certgrid a, .hx-foot a, .hx-rows h3 a { display: inline-block; padding: 7px 0; }
   .hx-term-chips button { min-height: 38px; padding: 4px 14px; }
 }
 
@@ -783,3 +783,9 @@ span.hx-reel-logo { background: var(--card); color: var(--mark); font-family: va
   .hx-page :is(.hx-facts li, .hx-qa details):nth-child(5) { --n: 4; }
   .hx-page :is(.hx-facts li, .hx-qa details):nth-child(n + 6) { --n: 5; }
 }
+
+/* Certifications page: the certificate picture sits on white, as the issuers publish it */
+.hx-certgrid h2 { margin: 0; font-family: inherit; font-size: 19px; font-weight: 600; line-height: 1.3; letter-spacing: 0; }
+.hx-certgrid img { width: 100%; height: auto; aspect-ratio: 672 / 352; object-fit: contain; border-radius: 10px; background: #fff; margin-bottom: 10px; }
+.hx-certgrid .hx-cap { display: flex; justify-content: space-between; gap: 12px; }
+.hx-certgrid a:hover { color: var(--mark); }

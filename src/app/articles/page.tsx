@@ -10,7 +10,7 @@ const DESCRIPTION = 'Practical write-ups by Adnan Saleem on micro frontends, Rea
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  alternates: { canonical: '/articles' },
+  alternates: { canonical: '/articles', types: { 'application/rss+xml': '/feed.xml' } },
   openGraph: { title: TITLE, description: DESCRIPTION, url: '/articles', images: ['/opengraph-image'] },
 };
 

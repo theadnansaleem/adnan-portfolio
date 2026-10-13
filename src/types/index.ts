@@ -37,6 +37,8 @@ export interface Credential {
     issuer?: string;
     meta: string;
     href?: string;
+    /** Picture of the certificate, under /public */
+    image?: string;
 }
 
 export interface CaseStudy {

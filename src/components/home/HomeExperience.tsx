@@ -14,15 +14,6 @@ import { MOMENTS } from './photos';
 import { spotlight } from './spotlight';
 import './home.css';
 
-// Preview images published by each credential page, saved under public/certs
-const CERT_PREVIEW: Record<string, string> = {
-  'Microsoft Certified: Azure AI Apps and Agents Developer Associate': 'microsoft-ai-apps-agents.png',
-  'Cisco: Introduction to Modern AI': 'cisco-modern-ai.png',
-  'Cisco: Python Essentials': 'cisco-python.png',
-  'Cisco: JavaScript Essentials': 'cisco-javascript.png',
-  'Cisco: Introduction to Cybersecurity': 'cisco-cybersecurity.png',
-  'HP LIFE: Data Science & Analytics': 'hp-life.png',
-};
 
 /** The LinkedIn mark, in its own blue on a white tile so it reads on both themes. */
 function LinkedInMark({ size = 18 }: { size?: number }) {
@@ -559,17 +550,15 @@ export default function HomeExperience({ fontClass, updated }: { fontClass: stri
           <div className="hx-card hx-rv" style={{ '--d': 1 } as React.CSSProperties}>
             <p className="hx-cap">Certifications</p>
             <ul>
-              {certifications.map((item) => {
-                const preview = CERT_PREVIEW[item.title];
-                return (
-                  <li key={item.title} className={preview ? 'has-preview' : undefined}>
-                    <h3>{item.href ? <a className="hx-out" href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a> : item.title}</h3>
-                    <p>{item.meta}</p>
-                    {preview && <Image className="hx-cert" src={'/certs/' + preview} alt={item.title + ' certificate'} width={672} height={352} sizes="340px" />}
-                  </li>
-                );
-              })}
+              {certifications.map((item) => (
+                <li key={item.title} className={item.image ? 'has-preview' : undefined}>
+                  <h3>{item.href ? <a className="hx-out" href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a> : item.title}</h3>
+                  <p>{item.meta}</p>
+                  {item.image && <Image className="hx-cert" src={item.image} alt={item.title + ' certificate'} width={672} height={352} sizes="340px" />}
+                </li>
+              ))}
             </ul>
+            <p><Link className="hx-pill" href="/certifications">All certifications, with verification links ↘</Link></p>
           </div>
         </div>
       </section>
@@ -679,6 +668,7 @@ export default function HomeExperience({ fontClass, updated }: { fontClass: stri
           <Link href="/articles">Articles</Link>
           <Link href="/hire">Hire</Link>
           <Link href="/lab">Lab</Link>
+          <Link href="/certifications">Certifications</Link>
           <Link href="/frontend-developer">Frontend developer</Link>
           <Link href="/dotnet-developer">.NET developer</Link>
           <Link href="/ai-engineer">AI engineer</Link>

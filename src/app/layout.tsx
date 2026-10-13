@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import SiteShell from '@/components/layout/SiteShell';
 import { certifications, profile, skills } from '@/lib/data';
+import { credentialJsonLd } from '@/lib/seo';
 
 const SITE_URL = profile.url;
 const TITLE = `${profile.name} | ${profile.jobTitle}`;
@@ -107,11 +108,7 @@ const jsonLd = {
         skills: skills.flatMap((group) => group.tags).join(', '),
         occupationLocation: { '@type': 'City', name: 'Lahore' },
       },
-      hasCredential: certifications.map((cert) => ({
-        '@type': 'EducationalOccupationalCredential',
-        name: cert.title,
-        url: cert.href,
-      })),
+      hasCredential: certifications.map(credentialJsonLd),
     },
     {
       '@type': 'WebSite',

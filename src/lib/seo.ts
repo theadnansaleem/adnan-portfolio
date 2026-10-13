@@ -1,3 +1,4 @@
+import type { Credential } from '@/types';
 import { profile } from './data';
 
 /** WebPage and breadcrumb JSON-LD for a top-level page, serialised for an inline script. */
@@ -40,3 +41,12 @@ export const faqJsonLd = (questions: string[][]) =>
       acceptedAnswer: { '@type': 'Answer', text: answer },
     })),
   }).replace(/</g, '\\u003c');
+
+/** One certification as schema.org structured data. */
+export const credentialJsonLd = (cert: Credential) => ({
+  '@type': 'EducationalOccupationalCredential',
+  name: cert.title,
+  credentialCategory: 'certification',
+  url: cert.href,
+  recognizedBy: cert.issuer && { '@type': 'Organization', name: cert.issuer },
+});
