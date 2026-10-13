@@ -13,7 +13,7 @@ import Terminal from './Terminal';
 import { MOMENTS } from './photos';
 import { spotlight } from './spotlight';
 import { hearts } from './hearts';
-import CertHighlight, { MicrosoftMark } from './CertHighlight';
+import CertHighlight, { CertPicture, MicrosoftMark } from './CertHighlight';
 import './home.css';
 
 
@@ -558,7 +558,7 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
                 <li key={item.title} className={item.image ? 'has-preview' : undefined}>
                   <h3>{item.href ? <a className="hx-out" href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a> : item.title}</h3>
                   <p>{item.meta}</p>
-                  {item.image && <Image className="hx-cert" src={item.image} alt={item.title + ' certificate'} width={672} height={352} sizes="340px" />}
+                  <CertPicture cert={item} className="hx-cert" width={672} height={352} sizes="340px" />
                 </li>
               ))}
             </ul>

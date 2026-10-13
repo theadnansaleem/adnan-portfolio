@@ -852,3 +852,7 @@ span.hx-reel-logo { background: var(--card); color: var(--mark); font-family: va
 @media (max-width: 1000px) {
   .hx-certhero { grid-template-columns: 1fr; }
 }
+
+/* A certificate with a dark version shows the one that matches the theme (dark is the default) */
+.hx img.hx-light-only, [data-theme="light"] .hx img.hx-dark-only { display: none; }
+[data-theme="light"] .hx img.hx-light-only { display: block; }

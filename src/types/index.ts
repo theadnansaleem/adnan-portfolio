@@ -39,6 +39,8 @@ export interface Credential {
     href?: string;
     /** Picture of the certificate, under /public */
     image?: string;
+    /** The same certificate on a dark background, shown on the dark theme */
+    imageDark?: string;
     /** One or two sentences about the credential, from the CV */
     detail?: string;
     /** What the exam validates, from the CV */
