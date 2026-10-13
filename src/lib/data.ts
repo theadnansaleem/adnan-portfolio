@@ -314,7 +314,7 @@ export const certifications: Credential[] = [
         detail: "Issued by Microsoft in October 2026. AI-103 is the successor to AI-102 (Azure AI Engineer Associate), which retired in June 2026.",
         validates: ["Microsoft Foundry", "Azure OpenAI", "Agents with function calling and multi-agent orchestration", "RAG with Azure AI Search", "Azure AI Content Safety", "Azure AI Vision", "Azure AI Document Intelligence", "Azure AI Language and Speech"],
         image: "/certs/microsoft-ai-apps-agents.png",
-        imageDark: "/certs/microsoft-ai-apps-agents-dark.jpg",
+        imageDark: "/certs/microsoft-ai-apps-agents-plain-dark.jpg",
         meta: "Oct 2026",
         href: "https://learn.microsoft.com/api/credentials/share/en-us/MuhammadAdnanSaleem-7401/819A7D752611DDAB?sharingId=9033F8FC5FC2408C"
     },
