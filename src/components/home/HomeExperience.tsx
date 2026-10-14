@@ -678,6 +678,7 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
           <li><a className="hx-pill is-big hx-mag" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
           <li><a className="hx-pill is-big hx-mag" href={profile.x} target="_blank" rel="noopener noreferrer">X ↗</a></li>
           <li><a className="hx-pill is-big hx-mag" href={profile.facebook} target="_blank" rel="noopener noreferrer">Facebook ↗</a></li>
+          <li><a className="hx-pill is-big hx-mag" href={profile.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a></li>
         </ul>
       </section>
 
@@ -756,6 +757,7 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
           <li><a href={profile.github} target="_blank" rel="noopener noreferrer">↳ GitHub</a></li>
           <li><a href={profile.x} target="_blank" rel="noopener noreferrer">↳ X</a></li>
           <li><a href={profile.facebook} target="_blank" rel="noopener noreferrer">↳ Facebook</a></li>
+          <li><a href={profile.instagram} target="_blank" rel="noopener noreferrer">↳ Instagram</a></li>
           <li><a href={profile.resume} target="_blank" rel="noopener noreferrer">↳ CV</a></li>
         </ul>
       </div>

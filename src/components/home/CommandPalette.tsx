@@ -37,6 +37,7 @@ const ACTIONS: Action[] = [
   { label: 'GitHub', hint: 'Opens in a new tab', run: open(profile.github) },
   { label: 'X', hint: 'Opens in a new tab', run: open(profile.x) },
   { label: 'Facebook', hint: 'Opens in a new tab', run: open(profile.facebook) },
+  { label: 'Instagram', hint: 'Opens in a new tab', run: open(profile.instagram) },
   { label: 'Switch light and dark theme', hint: 'Theme', run: toggleTheme },
 ];
 

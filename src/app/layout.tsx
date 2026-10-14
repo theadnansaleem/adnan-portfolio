@@ -89,7 +89,7 @@ const jsonLd = {
       url: `${SITE_URL}/`,
       image: `${SITE_URL}/opengraph-image`,
       email: `mailto:${profile.email}`,
-      sameAs: [profile.linkedin, profile.github, profile.x, profile.facebook],
+      sameAs: [profile.linkedin, profile.github, profile.x, profile.facebook, profile.instagram],
       knowsLanguage: 'en',
       knowsAbout: [...new Set(skills.flatMap((group) => group.tags))],
       alumniOf: [
