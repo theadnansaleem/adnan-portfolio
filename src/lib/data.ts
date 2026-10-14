@@ -383,16 +383,19 @@ export const certifications: Credential[] = [
     {
         title: "Oxford ELLT: English Language Level Test (CEFR C1)",
         issuer: "Oxford International",
+        image: "/certs/oxford-ellt.jpg",
         meta: "Jun 2025"
     },
     {
         title: "LanguageCert: ESOL International B2 (Listening, Reading, Writing)",
         issuer: "LanguageCert",
+        image: "/certs/languagecert-lrw.jpg",
         meta: "May 2025"
     },
     {
         title: "LanguageCert: ESOL International B2 (Speaking)",
         issuer: "LanguageCert",
+        image: "/certs/languagecert-speaking.jpg",
         meta: "May 2025"
     },
     {

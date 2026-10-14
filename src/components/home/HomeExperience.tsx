@@ -95,6 +95,7 @@ const PAGES = [['/work', 'Case studies'], ['/articles', 'Articles'], ['/lab', 'L
 
 // Hero portraits: 1100px cutouts with transparency, bottom-aligned so they swap in place
 const HERO: [string, string][] = [
+  ['/me/hero/suit.webp', 'in a dark suit and red tie, hands in his pockets'],
   ['/me/adnan-soft.webp', 'in a dark suit and red tie, chin resting on his hand'],
   ['/me/hero/tie.webp', 'in a dark suit and red tie'],
   ['/me/hero/polo.webp', 'in a beige polo shirt'],
