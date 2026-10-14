@@ -677,6 +677,7 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
           {profile.booking && <li><a className="hx-pill is-big hx-mag" href={profile.booking} target="_blank" rel="noopener noreferrer">Book a call ↗</a></li>}
           <li><a className="hx-pill is-big hx-mag" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
           <li><a className="hx-pill is-big hx-mag" href={profile.x} target="_blank" rel="noopener noreferrer">X ↗</a></li>
+          <li><a className="hx-pill is-big hx-mag" href={profile.facebook} target="_blank" rel="noopener noreferrer">Facebook ↗</a></li>
         </ul>
       </section>
 
@@ -753,6 +754,8 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
           <li><a href={`mailto:${profile.email}`}>↳ {profile.email}</a></li>
           <li><a href={profile.linkedin} target="_blank" rel="noopener noreferrer"><LinkedInMark size={14} /> LinkedIn</a></li>
           <li><a href={profile.github} target="_blank" rel="noopener noreferrer">↳ GitHub</a></li>
+          <li><a href={profile.x} target="_blank" rel="noopener noreferrer">↳ X</a></li>
+          <li><a href={profile.facebook} target="_blank" rel="noopener noreferrer">↳ Facebook</a></li>
           <li><a href={profile.resume} target="_blank" rel="noopener noreferrer">↳ CV</a></li>
         </ul>
       </div>

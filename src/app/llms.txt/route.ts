@@ -46,6 +46,8 @@ export function GET() {
     `- Email: ${profile.email}`,
     `- LinkedIn: ${profile.linkedin}`,
     `- GitHub: ${profile.github}`,
+    `- X: ${profile.x}`,
+    `- Facebook: ${profile.facebook}`,
     '',
   ].join('\n');
   return new Response(text, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });

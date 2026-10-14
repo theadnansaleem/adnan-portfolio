@@ -35,6 +35,8 @@ const ACTIONS: Action[] = [
   ...articles.map((a) => ({ label: a.title, hint: 'Article', run: go(`/articles/${a.slug}`) })),
   { label: 'LinkedIn', hint: 'Opens in a new tab', run: open(profile.linkedin) },
   { label: 'GitHub', hint: 'Opens in a new tab', run: open(profile.github) },
+  { label: 'X', hint: 'Opens in a new tab', run: open(profile.x) },
+  { label: 'Facebook', hint: 'Opens in a new tab', run: open(profile.facebook) },
   { label: 'Switch light and dark theme', hint: 'Theme', run: toggleTheme },
 ];
 

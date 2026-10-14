@@ -13,6 +13,7 @@ export const profile = {
     linkedin: "https://www.linkedin.com/in/theadnan",
     github: "https://github.com/theadnansaleem",
     x: "https://x.com/theadnansaleem",
+    facebook: "https://www.facebook.com/theadnansaleem",
     url: "https://theadnansaleem.com",
     resume: "/Adnan-Saleem-Resume.pdf",
     // Calendly (or Cal.com) scheduling link. Empty hides every "Book a call" button.
