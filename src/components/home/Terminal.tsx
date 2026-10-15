@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { jobs, profile, projects, skills, stats } from '@/lib/data';
 import { toggleTheme } from '@/components/ui/ThemeToggle';
+import { trackPortfolioAction } from '@/lib/analytics';
 
 const HELP = [
   'whoami        who is this',
@@ -33,7 +34,10 @@ function answer(input: string): string[] | 'clear' {
       return groups.flatMap((g) => [`# ${g.category}`, `  ${g.tags.join(', ')}`]);
     }
     case 'contact': return [`email     ${profile.email}`, `linkedin  ${profile.linkedin}`, `github    ${profile.github}`];
-    case 'cv': window.open(profile.resume, '_blank', 'noopener'); return ['Opening the CV in a new tab.'];
+    case 'cv':
+      trackPortfolioAction('cv', 'terminal');
+      window.open(profile.resume, '_blank', 'noopener');
+      return ['Opening the CV in a new tab.'];
     case 'theme': toggleTheme(); return ['Theme switched.'];
     case 'clear': return 'clear';
     case 'sudo':

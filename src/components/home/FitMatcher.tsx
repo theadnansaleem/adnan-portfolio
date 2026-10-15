@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from 'react';
-import { jobs, skills } from '@/lib/data';
+import { jobs, profile, skills } from '@/lib/data';
 
 // "State Management (Redux, NgRx, React Query / TanStack Query)" yields each name on its own
 // and "React 18" also answers to plain "React". A few spellings recruiters use are added by hand.
@@ -44,7 +44,7 @@ export default function FitMatcher() {
   }, [text]);
 
   return (
-    <div className="hx-fit hx-card hx-rv">
+    <div className="hx-fit hx-card hx-rv" data-clarity-mask="True">
       <div className="hx-fit-in">
         <label htmlFor="hx-jd" className="hx-cap">Job description</label>
         <textarea
@@ -89,6 +89,10 @@ export default function FitMatcher() {
               </>
             )}
             <p className="hx-fit-note">A keyword comparison, not a verdict: it only counts technology names it recognises.</p>
+            <div className="hx-actions">
+              <a className="hx-pill is-solid" href={`mailto:${profile.email}`}>Discuss this role</a>
+              {profile.booking && <a className="hx-pill" href={profile.booking} target="_blank" rel="noopener noreferrer">Book a call ↗</a>}
+            </div>
           </>
         )}
       </div>

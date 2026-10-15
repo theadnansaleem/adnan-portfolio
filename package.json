@@ -1,12 +1,13 @@
 {
   "name": "muhammad-adnan-portfolio",
-  "version": "2.22.4",
+  "version": "2.23.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "node --test tests/*.test.mjs",
     "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
