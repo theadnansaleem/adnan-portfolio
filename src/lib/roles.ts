@@ -25,11 +25,11 @@ export const roles = {
   frontend: {
     path: '/frontend-developer',
     name: 'Frontend developer',
-    title: 'Senior Frontend Developer: React, Next.js, Angular',
-    heading: ['Senior', 'Frontend', 'Developer'],
+    title: 'Senior React Developer for Remote Teams',
+    heading: ['Senior', 'React', 'Developer'],
     description:
-      'Senior frontend developer with 8 years of React, Next.js, Angular and TypeScript on government and fintech platforms. Remote from Lahore, available now.',
-    lead: 'Eight years building frontends in React, Next.js and Angular with TypeScript, on government, fintech and cybersecurity platforms. Based in Lahore, five years fully remote with US, UK and German teams, and available immediately.',
+      'Hire a senior React developer with 8 years of frontend experience in React, Next.js, Angular and TypeScript. Based in Lahore, available for remote work now.',
+    lead: 'I build React and Next.js applications with TypeScript. Eight years of frontend experience across React, Next.js and Angular on government, fintech and cybersecurity platforms, including five years fully remote with US, UK and German teams. Based in Lahore and available immediately for international remote roles.',
     match: /React|Angular|Next\.js|frontend|front-end|Micro Frontends|Core Web Vitals|virtualization|component|dashboards|responsive|WCAG|TypeScript|Redux|Zustand/i,
     skillGroups: ['Frontend', 'Architecture & Performance', 'UI, Mobile & Accessibility', 'Testing & Quality'],
     faq: [

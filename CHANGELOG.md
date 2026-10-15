@@ -7,6 +7,12 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.22.3 - 2026-10-15
+
+### Changed
+- React and full-stack hiring pages have clearer titles, headings and descriptions for international remote roles.
+- The home page links to React experience beside the impact section, and the hiring page links to experience and case studies.
+
 ## 2.14.1 - 2026-10-12
 
 ### Added
