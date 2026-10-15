@@ -1,0 +1,730 @@
+{
+  "recorded_at": "2026-10-15T08:35:09.667Z",
+  "source_commit": "a0ef1bb8dca1a905a2174cef91435fe4345a41b5",
+  "source_path": "src/components/home/lab/VirtualRows.tsx",
+  "source_sha256": "88a9bfcbf4ef9b070f506ad82d724ab1844ba009467e9ef59217174863e574a2",
+  "environment": {
+    "cpu": "Apple M5",
+    "memory_gib": 16,
+    "os": "macOS 27.0.1 (26A434)",
+    "browser": "Codex in-app browser, Chromium 155 (reported Chrome/155.0.0.0)",
+    "viewport_css_px": [
+      1280,
+      720
+    ],
+    "device_pixel_ratio": 2,
+    "display_refresh_rate": "not recorded",
+    "node": "26.5.0",
+    "next": "16.3.5",
+    "react": "19.2.3",
+    "react_dom": "19.2.3",
+    "build": "npm run build; npm run start -- --hostname 127.0.0.1 --port 3047",
+    "page": "http://127.0.0.1:3047/lab",
+    "visibility": "visible",
+    "throttling": "No CPU or network throttling applied by the test; normal desktop workload, not an isolated machine."
+  },
+  "metric": "Milliseconds from the input handler to its second requestAnimationFrame callback, rounded per sample. Not paint time, INP, or React render duration.",
+  "dataset": {
+    "rows": 20000,
+    "seed": 42,
+    "eur_rows": 2361,
+    "row_height_px": 36,
+    "scroll_area_height_px": 432,
+    "overscan": 6,
+    "scroll_top": 0,
+    "implementation": "Hand-written fixed-height windowing, not react-window; no memoized row component."
+  },
+  "protocol": {
+    "block_order": [
+      "off",
+      "on",
+      "on",
+      "off"
+    ],
+    "warmup_pairs_per_block": 3,
+    "measured_pairs_per_block": 5,
+    "pair": [
+      "blank-to-EUR",
+      "EUR-to-blank"
+    ],
+    "input": "Browser automation replaced the entire input with EUR, then cleared it; one change per action.",
+    "observation": "Screenshot after every input, then read the displayed timer and DOM row count. Automation/capture overhead may affect timings.",
+    "controls": "Pause the simulated threat feed; keep transfers scrollTop=0 and the page visible. Toggle-mode timings excluded. No reload between official blocks.",
+    "exclusions": "Preliminary pilot runs were excluded after full-DOM accessibility snapshots exceeded the browser message limit; all 64 official samples use screenshot observation. No official measured sample was removed.",
+    "trace": "full-dom-trace.json.gz is a separate diagnostic filter/clear pair after the 64 samples, with tracing enabled. It is excluded from summary statistics."
+  },
+  "summaries": [
+    {
+      "transition": "blank-to-EUR",
+      "off": {
+        "n": 10,
+        "median_ms": 432,
+        "min_ms": 368,
+        "max_ms": 618
+      },
+      "on": {
+        "n": 10,
+        "median_ms": 11,
+        "min_ms": 10,
+        "max_ms": 14
+      }
+    },
+    {
+      "transition": "EUR-to-blank",
+      "off": {
+        "n": 10,
+        "median_ms": 793.5,
+        "min_ms": 704,
+        "max_ms": 2570
+      },
+      "on": {
+        "n": 10,
+        "median_ms": 11.5,
+        "min_ms": 9,
+        "max_ms": 15
+      }
+    }
+  ],
+  "samples": [
+    {
+      "block": 1,
+      "phase": "warmup",
+      "pair": 1,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 508,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 1,
+      "phase": "warmup",
+      "pair": 1,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 846,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    },
+    {
+      "block": 1,
+      "phase": "warmup",
+      "pair": 2,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 533,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 1,
+      "phase": "warmup",
+      "pair": 2,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 1606,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    },
+    {
+      "block": 1,
+      "phase": "warmup",
+      "pair": 3,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 477,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 1,
+      "phase": "warmup",
+      "pair": 3,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 791,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    },
+    {
+      "block": 1,
+      "phase": "measured",
+      "pair": 1,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 415,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 1,
+      "phase": "measured",
+      "pair": 1,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 732,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    },
+    {
+      "block": 1,
+      "phase": "measured",
+      "pair": 2,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 420,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 1,
+      "phase": "measured",
+      "pair": 2,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 1682,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    },
+    {
+      "block": 1,
+      "phase": "measured",
+      "pair": 3,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 443,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 1,
+      "phase": "measured",
+      "pair": 3,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 2570,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    },
+    {
+      "block": 1,
+      "phase": "measured",
+      "pair": 4,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 398,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 1,
+      "phase": "measured",
+      "pair": 4,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 831,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    },
+    {
+      "block": 1,
+      "phase": "measured",
+      "pair": 5,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 553,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 1,
+      "phase": "measured",
+      "pair": 5,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 771,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    },
+    {
+      "block": 2,
+      "phase": "warmup",
+      "pair": 1,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 12,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 2,
+      "phase": "warmup",
+      "pair": 1,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 13,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 2,
+      "phase": "warmup",
+      "pair": 2,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 14,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 2,
+      "phase": "warmup",
+      "pair": 2,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 10,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 2,
+      "phase": "warmup",
+      "pair": 3,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 13,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 2,
+      "phase": "warmup",
+      "pair": 3,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 16,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 2,
+      "phase": "measured",
+      "pair": 1,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 14,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 2,
+      "phase": "measured",
+      "pair": 1,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 14,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 2,
+      "phase": "measured",
+      "pair": 2,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 11,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 2,
+      "phase": "measured",
+      "pair": 2,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 9,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 2,
+      "phase": "measured",
+      "pair": 3,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 12,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 2,
+      "phase": "measured",
+      "pair": 3,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 14,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 2,
+      "phase": "measured",
+      "pair": 4,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 12,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 2,
+      "phase": "measured",
+      "pair": 4,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 15,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 2,
+      "phase": "measured",
+      "pair": 5,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 13,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 2,
+      "phase": "measured",
+      "pair": 5,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 14,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "warmup",
+      "pair": 1,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 13,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "warmup",
+      "pair": 1,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 12,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "warmup",
+      "pair": 2,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 9,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "warmup",
+      "pair": 2,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 14,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "warmup",
+      "pair": 3,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 13,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "warmup",
+      "pair": 3,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 12,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "measured",
+      "pair": 1,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 11,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "measured",
+      "pair": 1,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 10,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "measured",
+      "pair": 2,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 10,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "measured",
+      "pair": 2,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 11,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "measured",
+      "pair": 3,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 10,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "measured",
+      "pair": 3,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 12,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "measured",
+      "pair": 4,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 11,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "measured",
+      "pair": 4,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 9,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "measured",
+      "pair": 5,
+      "virtual": true,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 11,
+      "data_rows": 2361,
+      "dom_rows": 18
+    },
+    {
+      "block": 3,
+      "phase": "measured",
+      "pair": 5,
+      "virtual": true,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 11,
+      "data_rows": 20000,
+      "dom_rows": 18
+    },
+    {
+      "block": 4,
+      "phase": "warmup",
+      "pair": 1,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 696,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 4,
+      "phase": "warmup",
+      "pair": 1,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 1111,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    },
+    {
+      "block": 4,
+      "phase": "warmup",
+      "pair": 2,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 956,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 4,
+      "phase": "warmup",
+      "pair": 2,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 2067,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    },
+    {
+      "block": 4,
+      "phase": "warmup",
+      "pair": 3,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 554,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 4,
+      "phase": "warmup",
+      "pair": 3,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 1054,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    },
+    {
+      "block": 4,
+      "phase": "measured",
+      "pair": 1,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 426,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 4,
+      "phase": "measured",
+      "pair": 1,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 729,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    },
+    {
+      "block": 4,
+      "phase": "measured",
+      "pair": 2,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 438,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 4,
+      "phase": "measured",
+      "pair": 2,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 704,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    },
+    {
+      "block": 4,
+      "phase": "measured",
+      "pair": 3,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 468,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 4,
+      "phase": "measured",
+      "pair": 3,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 816,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    },
+    {
+      "block": 4,
+      "phase": "measured",
+      "pair": 4,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 368,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 4,
+      "phase": "measured",
+      "pair": 4,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 748,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    },
+    {
+      "block": 4,
+      "phase": "measured",
+      "pair": 5,
+      "virtual": false,
+      "transition": "blank-to-EUR",
+      "elapsed_ms": 618,
+      "data_rows": 2361,
+      "dom_rows": 2361
+    },
+    {
+      "block": 4,
+      "phase": "measured",
+      "pair": 5,
+      "virtual": false,
+      "transition": "EUR-to-blank",
+      "elapsed_ms": 1146,
+      "data_rows": 20000,
+      "dom_rows": 20000
+    }
+  ]
+}

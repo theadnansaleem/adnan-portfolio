@@ -7,6 +7,12 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.23.1 - 2026-10-15
+
+### Changed
+- The React virtualization article includes a reproducible 20,000-row synthetic benchmark, raw warmup/measured samples, median/range results, environment, source revision, screenshots and a separate diagnostic trace.
+- The table demo labels its frame-based timer as an update-delay estimate and captures a separate start time for each interaction.
+
 ## 2.23.0 - 2026-10-15
 
 ### Added

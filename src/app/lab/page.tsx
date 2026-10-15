@@ -27,7 +27,7 @@ export default function LabPage() {
         <p>Five lines from my CV, each running in your browser with synthetic data. Break things: that is what they are for.</p>
       </header>
 
-      <section className="hx-lab">
+      <section className="hx-lab" id="virtualization">
         <div>
           <p className="hx-cap"><b>01</b> Volopa Financial Services</p>
           <h2>20,000 rows that still scroll</h2>
