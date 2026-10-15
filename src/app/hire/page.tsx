@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import PageFrame from '@/components/home/PageFrame';
 import CertHighlight from '@/components/home/CertHighlight';
 import { pageJsonLd } from '@/lib/seo';
 import FitMatcher from '@/components/home/FitMatcher';
 import { jobs, profile, stats } from '@/lib/data';
 
-const TITLE = 'Hire me: the short version for recruiters';
-const DESCRIPTION = 'Role, availability, location, work history at a glance, and a tool that checks a job description against my stack.';
+const TITLE = 'Hire a Remote Full-Stack Developer';
+const DESCRIPTION = 'Senior full-stack developer for remote teams: React, Next.js and .NET, 8 years of experience and 5 years with US, UK and German teams. Available now.';
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -27,10 +28,10 @@ const FACTS = [
 export default function HirePage() {
   return (
     <PageFrame>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageJsonLd('/hire', 'Hire', DESCRIPTION) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageJsonLd('/hire', TITLE, DESCRIPTION) }} />
       <header className="hx-head">
         <p className="hx-cap"><b>Hire</b> For recruiters and hiring managers</p>
-        <h1>The two-minute <em>version</em></h1>
+        <h1>Hire a senior <em>full-stack developer</em></h1>
         <p>{profile.summary[0]}</p>
         <div className="hx-actions">
           <a className="hx-pill is-solid is-big" href={profile.resume} target="_blank" rel="noopener noreferrer">Download CV ↓</a>
@@ -53,6 +54,11 @@ export default function HirePage() {
           </ol>
         </div>
       </section>
+
+      <div className="hx-actions">
+        <Link className="hx-pill" href="/frontend-developer">React and frontend experience ↘</Link>
+        <Link className="hx-pill" href="/work">Full-stack case studies ↘</Link>
+      </div>
 
       <CertHighlight />
 

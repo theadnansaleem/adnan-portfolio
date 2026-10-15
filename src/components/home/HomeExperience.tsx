@@ -451,6 +451,7 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
             </li>
           ))}
         </ul>
+        <p className="hx-more hx-rv"><Link className="hx-pill hx-mag" href="/frontend-developer">React and frontend experience ↘</Link></p>
         <CertHighlight className="hx-rv" />
       </section>
 
