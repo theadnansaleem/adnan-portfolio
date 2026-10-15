@@ -34,14 +34,14 @@ export const articles: Article[] = [
   {
     slug: 'react-table-virtualization-20000-rows',
     title: 'Rendering 20,000 rows in React without freezing the page',
-    description: 'Why big tables are slow, the windowing maths that fixes it in about ten lines, where memoization fits, and how to measure the result.',
+    description: 'A reproducible React virtualization benchmark with 20,000 synthetic rows, raw runs, median filter delays, fixed-height windowing code and measurement limits.',
     published: '2026-10-05',
-    updated: '2026-10-13',
+    updated: '2026-10-15',
     caseStudy: 'volopa-react-performance',
-    minutes: 5,
+    minutes: 9,
     faq: [
       ['What is virtualization in React?', 'Rendering only the rows that are visible in the scroll area, plus a few either side, while the full list stays in memory. It is also called windowing.'],
-      ['How many rows can a React table handle?', 'Without virtualization a table starts to feel slow at a few thousand rows, because every row is real DOM. With virtualization the DOM holds a few dozen rows however long the list is, so tens of thousands of rows scroll smoothly.'],
+      ['How many rows can a React table handle?', 'It depends on row complexity, device and interaction. This synthetic example keeps 20,000 rows in memory but mounts 18 at scroll position zero. The article reports repeatable filter measurements, not a universal row limit.'],
       ['Should I use virtualization or pagination?', 'Paginate when users look things up and the server can filter and sort. Virtualize when users scan or compare a long list and scrolling is the natural way to read it.'],
       ['Is react-window better than writing it by hand?', 'For production, yes. It is maintained and handles the edge cases. Writing the fixed-height version once by hand is still the quickest way to understand what the library does.'],
     ],
