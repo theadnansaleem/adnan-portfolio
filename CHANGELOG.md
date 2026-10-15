@@ -7,6 +7,11 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.22.4 - 2026-10-15
+
+### Changed
+- Removed the first home-page portrait from the rotation; the seated portrait is now the default.
+
 ## 2.22.3 - 2026-10-15
 
 ### Changed
