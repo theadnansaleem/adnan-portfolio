@@ -7,6 +7,12 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.23.2 - 2026-10-15
+
+### Changed
+- The Qatar Module Federation case study adds a conceptual architecture diagram, a before/after delivery workflow and context for the reported release-cycle improvement.
+- Its reviewed update date appears in the page, structured data, Open Graph metadata and sitemap; the implementation guide links to the expanded case.
+
 ## 2.23.1 - 2026-10-15
 
 ### Changed

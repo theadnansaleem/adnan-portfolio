@@ -1,9 +1,8 @@
 import { jobs, projects } from "./data";
 import type { CaseStudy } from "@/types";
 
-// Case studies reuse the CV bullets and project copy already in data.ts.
-// Nothing here is written fresh: pick() selects bullets from the role and
-// throws at build time if the CV wording changed and a filter stopped matching.
+// Case-study highlights reuse the CV bullets in data.ts. pick() throws at build
+// time if the CV wording changed and a filter stopped matching.
 function job(company: string) {
   const found = jobs.find((j) => j.company === company);
   if (!found) throw new Error(`case-studies: no job for "${company}"`);
@@ -40,10 +39,11 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "qatar-events-platform-module-federation",
     title: "Micro Frontends with Module Federation on the Qatar Events Platform",
-    metaTitle: "Micro frontends with Module Federation in React",
+    metaTitle: "React Module Federation: Qatar Events Platform",
     description:
-      "How a monolithic React frontend became Module Federation micro frontends on Qatar's National Events Calendar, cutting release cycle time by about 40%.",
+      "Qatar Events Platform React case study: Module Federation architecture, versioned shell/remote contracts, and the shift to independent frontend releases.",
     summary: project("Qatar Events Platform (QEP)").description,
+    updated: "2026-10-15",
     highlights: pick(SC, /Module Federation|ApexCharts|Standardized Vite/),
     stack: project("Qatar Events Platform (QEP)").tags,
     live: project("Qatar Events Platform (QEP)").href,

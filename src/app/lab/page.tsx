@@ -54,7 +54,7 @@ export default function LabPage() {
         <AccessTiers />
       </section>
 
-      <section className="hx-lab">
+      <section className="hx-lab" id="failure-isolation">
         <div>
           <p className="hx-cap"><b>04</b> Supreme Committee for Delivery &amp; Legacy</p>
           <h2>Break one section, keep the page</h2>

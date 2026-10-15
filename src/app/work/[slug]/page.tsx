@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageFrame from "@/components/home/PageFrame";
+import QatarFederationCase from "@/components/home/QatarFederationCase";
 import { caseStudies, caseStudyBySlug } from "@/lib/case-studies";
 import { articles } from "@/lib/articles";
 import { profile } from "@/lib/data";
@@ -31,6 +32,7 @@ export async function generateMetadata({
       url: `/work/${study.slug}`,
       title: `${study.metaTitle} | ${profile.name}`,
       description: study.description,
+      modifiedTime: study.updated,
     },
   };
 }
@@ -57,6 +59,7 @@ export default async function CaseStudyPage({
         url: pageUrl,
         name: study.metaTitle,
         description: study.description,
+        dateModified: study.updated,
         inLanguage: "en",
         isPartOf: { "@id": `${SITE_URL}/#website` },
         about: { "@id": `${SITE_URL}/#person` },
@@ -89,6 +92,7 @@ export default async function CaseStudyPage({
           </nav>
           <h1>{study.title}</h1>
           <p>{study.summary}</p>
+          {study.updated && <p className="hx-cap">Updated <time dateTime={study.updated}>{new Date(`${study.updated}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</time></p>}
         </header>
 
         <dl className="hx-stats hx-card">
@@ -103,6 +107,8 @@ export default async function CaseStudyPage({
             <Image src={study.image} alt={`${study.title} screenshot`} fill sizes="(max-width: 1280px) 100vw, 1180px" priority />
           </div>
         )}
+
+        {study.slug === 'qatar-events-platform-module-federation' && <QatarFederationCase />}
 
         <section className="hx-lab">
           <div>
