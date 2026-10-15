@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 const TOTAL = 20_000, ROW = 36, VIEW = 432, OVERSCAN = 6;
 const CURRENCIES = ['GBP', 'EUR', 'USD', 'AED', 'CAD', 'JPY', 'SEK', 'PLN'];
@@ -26,8 +26,7 @@ export default function VirtualRows() {
   const [virtual, setVirtual] = useState(true);
   const [top, setTop] = useState(0);
   const [query, setQuery] = useState('');
-  const [paint, setPaint] = useState<number | null>(null);
-  const started = useRef(0);
+  const [elapsed, setElapsed] = useState<number | null>(null);
 
   const rows = useMemo(() => {
     const q = query.trim().toUpperCase();
@@ -38,11 +37,11 @@ export default function VirtualRows() {
   const last = virtual ? Math.min(rows.length, Math.ceil((top + VIEW) / ROW) + OVERSCAN) : rows.length;
   const visible = rows.slice(first, last);
 
-  // Time from the click to the frame after the browser has painted the result
+  // Frame-dependent estimate, not a React render duration or a paint timestamp.
   const timed = (change: () => void) => {
-    started.current = performance.now();
+    const started = performance.now();
     change();
-    requestAnimationFrame(() => requestAnimationFrame(() => setPaint(Math.round(performance.now() - started.current))));
+    requestAnimationFrame(() => requestAnimationFrame(() => setElapsed(Math.round(performance.now() - started))));
   };
 
   return (
@@ -62,7 +61,7 @@ export default function VirtualRows() {
       <dl className="hx-demo-stats" aria-live="polite">
         <div><dt>{rows.length.toLocaleString('en-US')}</dt><dd>rows in the data</dd></div>
         <div><dt>{visible.length.toLocaleString('en-US')}</dt><dd>rows in the DOM</dd></div>
-        <div><dt>{paint === null ? '–' : `${paint} ms`}</dt><dd>last update to paint</dd></div>
+        <div><dt>{elapsed === null ? '–' : `${elapsed} ms`}</dt><dd>update delay estimate</dd></div>
       </dl>
       <div className="hx-vrows" data-lenis-prevent style={{ height: VIEW }} onScroll={(e) => setTop(e.currentTarget.scrollTop)} tabIndex={0} aria-label="Transfers table">
         <div style={{ height: rows.length * ROW, position: 'relative' }}>
@@ -75,7 +74,7 @@ export default function VirtualRows() {
           </div>
         </div>
       </div>
-      <p className="hx-demo-note">Synthetic data. Turn virtualization off and the browser has to build all {TOTAL.toLocaleString('en-US')} rows at once; watch the paint time.</p>
+      <p className="hx-demo-note">Synthetic data. Timing runs from the update handler to the second animation-frame callback, rounded to milliseconds. It includes frame scheduling and is not a paint timestamp. Compare the same filter action in each mode.</p>
     </div>
   );
 }

@@ -607,7 +607,7 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
             <Link href="/lab">
               <span className="hx-cap">Lab · Demo 01</span>
               <h3>20,000 rows that still scroll</h3>
-              <p>The virtualization technique from my payments work, running live. Switch it off and watch the paint time.</p>
+              <p>The virtualization technique from my payments work, running live. Compare filtering with virtualization on and off.</p>
               <span className="hx-pill">Open the demo ↘</span>
             </Link>
           </li>
