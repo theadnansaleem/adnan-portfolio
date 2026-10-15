@@ -5,17 +5,24 @@ import { articles } from '@/lib/articles';
 import { caseStudies } from '@/lib/case-studies';
 import { profile } from '@/lib/data';
 import { toggleTheme } from '@/components/ui/ThemeToggle';
+import { trackPortfolioAction, type PortfolioAction } from '@/lib/analytics';
 
 interface Action { label: string; hint: string; run: () => void }
 
-const go = (href: string) => () => { window.location.href = href; };
-const open = (href: string) => () => { window.open(href, '_blank', 'noopener'); };
+const go = (href: string, action?: PortfolioAction) => () => {
+  if (action) trackPortfolioAction(action, 'command_palette');
+  window.location.href = href;
+};
+const open = (href: string, action?: PortfolioAction) => () => {
+  if (action) trackPortfolioAction(action, 'command_palette');
+  window.open(href, '_blank', 'noopener');
+};
 
 const ACTIONS: Action[] = [
-  { label: 'Download CV', hint: 'PDF', run: open(profile.resume) },
-  { label: 'Email Adnan', hint: profile.email, run: go(`mailto:${profile.email}`) },
+  { label: 'Download CV', hint: 'PDF', run: open(profile.resume, 'cv') },
+  { label: 'Email Adnan', hint: profile.email, run: go(`mailto:${profile.email}`, 'email') },
   { label: 'Copy email address', hint: 'Clipboard', run: () => { navigator.clipboard?.writeText(profile.email); } },
-  ...(profile.booking ? [{ label: 'Book a call', hint: 'Calendar', run: open(profile.booking) }] : []),
+  ...(profile.booking ? [{ label: 'Book a call', hint: 'Calendar', run: open(profile.booking, 'booking') }] : []),
   { label: 'Check a job description against my stack', hint: 'Page', run: go('/hire') },
   { label: 'Open the lab: live demos', hint: 'Page', run: go('/lab') },
   { label: 'About Adnan: photos and quick answers', hint: 'Page', run: go('/about') },
@@ -33,7 +40,7 @@ const ACTIONS: Action[] = [
   { label: 'Contact', hint: 'Section', run: go('/#contact') },
   ...caseStudies.map((study) => ({ label: study.title, hint: 'Case study', run: go(`/work/${study.slug}`) })),
   ...articles.map((a) => ({ label: a.title, hint: 'Article', run: go(`/articles/${a.slug}`) })),
-  { label: 'LinkedIn', hint: 'Opens in a new tab', run: open(profile.linkedin) },
+  { label: 'LinkedIn', hint: 'Opens in a new tab', run: open(profile.linkedin, 'linkedin') },
   { label: 'GitHub', hint: 'Opens in a new tab', run: open(profile.github) },
   { label: 'X', hint: 'Opens in a new tab', run: open(profile.x) },
   { label: 'Facebook', hint: 'Opens in a new tab', run: open(profile.facebook) },

@@ -7,6 +7,12 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.23.0 - 2026-10-15
+
+### Added
+- Job-fit results offer direct email and call-booking actions without sharing the pasted job description.
+- Google Analytics events record CV-link and contact clicks across pages, the command palette and the terminal, with action metadata and sanitized page URLs.
+
 ## 2.22.4 - 2026-10-15
 
 ### Changed
