@@ -53,6 +53,8 @@ export interface CaseStudy {
     metaTitle: string;
     description: string;
     summary: string;
+    /** ISO date of the last substantial case-study revision, when reviewed. */
+    updated?: string;
     highlights: string[];
     stack: string[];
     live?: string;

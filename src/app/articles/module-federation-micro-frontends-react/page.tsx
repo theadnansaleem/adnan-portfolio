@@ -71,6 +71,10 @@ export default function Page() {
         On the Qatar Events Platform I rearchitected a monolithic React frontend into micro frontends using Module Federation. With versioned contracts between the shell and the remotes, release cycle time dropped by about 40% and teams could deploy independently. This is the shape of that kind of split, and the parts that decide whether it helps or hurts.
       </p>
 
+      <p>
+        The <Link href="/work/qatar-events-platform-module-federation#architecture">Qatar case study includes a conceptual architecture diagram and before/after delivery workflow</Link>, with the limits of the reported result. The code below uses illustrative module names and example domains rather than production configuration.
+      </p>
+
       <h2>First, check that you have the problem</h2>
       <p>
         Micro frontends solve an organisational problem, not a technical one. They are worth the cost when several teams ship into one frontend and block each other: one release train, one long build, one team&apos;s unfinished work holding up another team&apos;s fix. If one team owns the whole frontend, a well-structured monolith with code splitting is simpler and faster.

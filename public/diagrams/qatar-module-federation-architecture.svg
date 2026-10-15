@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="460" viewBox="0 0 600 460" role="img" aria-labelledby="title description">
+  <title id="title">Conceptual Module Federation architecture</title>
+  <desc id="description">A shell loads remote modules at runtime through versioned contracts. Remote A and Remote B each have their own build and release. They are illustrative placeholders; the number and names of production remotes are not shown.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c4d385"/>
+    </marker>
+  </defs>
+  <rect width="600" height="460" rx="20" fill="#0c0e0a"/>
+  <g fill="#181c12" stroke="#788448" stroke-width="2">
+    <rect x="36" y="32" width="528" height="120" rx="14" stroke="#d9ff43"/>
+    <rect x="36" y="284" width="246" height="144" rx="14"/>
+    <rect x="318" y="284" width="246" height="144" rx="14"/>
+  </g>
+  <g fill="none" stroke="#c4d385" stroke-width="3">
+    <path d="M 300 152 V 220 H 159 V 280" marker-end="url(#arrow)"/>
+    <path d="M 300 220 H 441 V 280" marker-end="url(#arrow)"/>
+  </g>
+  <g font-family="system-ui, sans-serif" text-anchor="middle" fill="#f2f3eb">
+    <text x="300" y="81" font-size="32" font-weight="600">Shell / host</text>
+    <text x="300" y="121" font-size="24">Runtime composition</text>
+    <text x="300" y="258" font-size="23" fill="#d9ff43">Versioned contracts</text>
+    <text x="159" y="328" font-size="30" font-weight="600">Remote A</text>
+    <text x="441" y="328" font-size="30" font-weight="600">Remote B</text>
+    <g font-size="24">
+      <text x="159" y="369">Own build</text>
+      <text x="159" y="405">Own release</text>
+      <text x="441" y="369">Own build</text>
+      <text x="441" y="405">Own release</text>
+    </g>
+  </g>
+</svg>

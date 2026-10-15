@@ -3,8 +3,8 @@ import { profile } from "@/lib/data";
 import { articles } from "@/lib/articles";
 import { caseStudies } from "@/lib/case-studies";
 
-// Section anchors (#about etc.) are not separate URLs. Only articles carry lastModified:
-// they are the only pages with a real date, and a date that changes on every build is ignored.
+// Section anchors are not separate URLs. Use reviewed content dates for lastModified,
+// rather than a timestamp that changes on every build.
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
@@ -31,6 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...caseStudies.map((study) => ({
       url: `${profile.url}/work/${study.slug}`,
+      ...(study.updated && { lastModified: new Date(study.updated) }),
       changeFrequency: "yearly" as const,
       priority: 0.8,
     })),
