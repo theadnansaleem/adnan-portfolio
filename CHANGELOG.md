@@ -10,7 +10,7 @@ That bumps `package.json`, commits, and tags in one step.
 ## 2.22.4 - 2026-10-15
 
 ### Changed
-- Removed the first home-page portrait from the rotation; the seated portrait is now the default.
+- Removed the first home-page portrait from the rotation and swapped the first two remaining portraits; the red-tie portrait is now the default, followed by the seated portrait.
 
 ## 2.22.3 - 2026-10-15
 
