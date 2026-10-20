@@ -7,6 +7,12 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.23.6 - 2026-10-20
+
+### Changed
+- The Visual FoxPro to .NET guide adds a FoxPro to C# equivalents table, the same late-fee rule written with EF Core `ExecuteUpdateAsync`, and a C# loader that reads FoxPro tables through the OLE DB provider.
+- Its common questions move into the article's quick answers, so they are published as FAQ structured data, with one new question on reading FoxPro tables from .NET.
+
 ## 2.23.5 - 2026-10-20
 
 ### Changed

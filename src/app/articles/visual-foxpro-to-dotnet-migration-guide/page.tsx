@@ -17,6 +17,27 @@ SET status = 'LATE',
 WHERE status = 'OPEN'
   AND due_date < CAST(GETDATE() AS date);`;
 
+const EF_UPDATE = `var today = DateTime.Today;
+await db.Invoices
+    .Where(i => i.Status == "OPEN" && i.DueDate < today)
+    .ExecuteUpdateAsync(set => set
+        .SetProperty(i => i.Status, "LATE")
+        .SetProperty(i => i.Fee, i => Math.Round(i.Amount * 0.015m, 2)));`;
+
+const DBF_READ = `// Windows only: System.Data.OleDb, process built for x86
+using var conn = new OleDbConnection(
+    @"Provider=VFPOLEDB.1;Data Source=C:\\legacy\\data\\");
+conn.Open();
+using var cmd = new OleDbCommand(
+    "SELECT * FROM invoices WHERE NOT DELETED()", conn);
+using var reader = cmd.ExecuteReader();
+while (reader.Read())
+{
+    // Character fields come padded with spaces
+    var customer = ((string)reader["customer"]).TrimEnd();
+    // map each field into the new schema here
+}`;
+
 const ROUNDING = `Math.Round(2.345m, 2);                                // 2.34: half goes to the even digit
 Math.Round(2.345m, 2, MidpointRounding.AwayFromZero);  // 2.35: what FoxPro and T-SQL do`;
 
@@ -57,7 +78,11 @@ export default function Page() {
         <li><strong>Code pages.</strong> Each table records the code page it was written in. Convert to Unicode while loading, and check names and addresses with accented characters afterwards.</li>
       </ul>
       <p>
-        One practical note on reading the files: Microsoft&apos;s Visual FoxPro OLE DB provider is 32-bit only, so a loader that uses it has to run as a 32-bit process. Exporting from FoxPro to delimited files is the fallback when that is awkward.
+        One practical note on reading the files: Microsoft&apos;s Visual FoxPro OLE DB provider is 32-bit only, so a loader that uses it has to run as a 32-bit process. Exporting from FoxPro to delimited files is the fallback when that is awkward. A minimal loader in C# looks like this:
+      </p>
+      <pre><code>{DBF_READ}</code></pre>
+      <p>
+        <code>NOT DELETED()</code> leaves out rows that were flagged for deletion but never packed. Run the loader into staging tables first, then transform into the new schema in T-SQL, so each rehearsal starts from the same raw copy.
       </p>
 
       <h2>4. Put the rules in a domain layer</h2>
@@ -70,6 +95,13 @@ export default function Page() {
       <pre><code>{FOXPRO_LOOP}</code></pre>
       <p>becomes a single set-based update:</p>
       <pre><code>{SQL_SET}</code></pre>
+      <p>
+        From C#, Entity Framework Core 7 and later can express the same rule without loading a single row. <code>ExecuteUpdateAsync</code> sends one <code>UPDATE</code> to SQL Server:
+      </p>
+      <pre><code>{EF_UPDATE}</code></pre>
+      <p>
+        The <code>Math.Round</code> call inside the query never runs in .NET. EF Core translates it to T-SQL <code>ROUND</code>, so it rounds a half away from zero, the way FoxPro did. The same call on a value in memory rounds differently, which the rounding trap below explains.
+      </p>
       <p>A few FoxPro habits need particular care when you read the old code:</p>
       <ul>
         <li><strong>Macro substitution.</strong> <code>&amp;variable</code> builds a command from a string at run time. Search for every place it is used and work out what it can expand to, because that code path is invisible to a plain reading.</li>
@@ -77,6 +109,33 @@ export default function Page() {
         <li><strong>Global error handlers.</strong> An <code>ON ERROR</code> routine can swallow failures and carry on. The old system may have been producing wrong results quietly; decide with the business whether to reproduce or correct each case.</li>
         <li><strong>Index expressions.</strong> Indexes are often built on expressions such as <code>UPPER(name)</code>, and lookups depend on them. Carry the same behaviour over with a collation or a computed column.</li>
       </ul>
+
+      <h2>Converting FoxPro code to C#: common equivalents</h2>
+      <p>
+        Most FoxPro functions have a direct C# counterpart. The differences that cause bugs are small: where counting starts, what happens on bad input, and what &quot;empty&quot; means.
+      </p>
+      <div className="hx-prose-table" role="region" aria-label="Visual FoxPro to C# equivalents" tabIndex={0}>
+        <table>
+          <caption>Visual FoxPro functions and commands with their C# equivalents</caption>
+          <thead><tr><th scope="col">Visual FoxPro</th><th scope="col">C#</th><th scope="col">Watch for</th></tr></thead>
+          <tbody>
+            <tr><td><code>SCAN ... ENDSCAN</code></td><td><code>foreach</code>, or a set-based update</td><td>A loop that writes one row at a time is usually one SQL statement.</td></tr>
+            <tr><td><code>LOCATE FOR</code>, <code>SEEK</code></td><td><code>FirstOrDefault(predicate)</code></td><td>FoxPro moves a record pointer; C# returns the row or null.</td></tr>
+            <tr><td><code>IIF(cond, a, b)</code></td><td><code>cond ? a : b</code></td><td>None.</td></tr>
+            <tr><td><code>NVL(x, y)</code></td><td><code>x ?? y</code></td><td>None.</td></tr>
+            <tr><td><code>EMPTY(x)</code></td><td>Depends on the type</td><td>True for blank strings, zero, empty dates and <code>.F.</code>. Decide per field, often <code>string.IsNullOrWhiteSpace</code> or <code>== 0</code>.</td></tr>
+            <tr><td><code>ALLTRIM(s)</code></td><td><code>s.Trim()</code></td><td>Character fields are padded, so most reads need it.</td></tr>
+            <tr><td><code>SUBSTR(s, start, n)</code></td><td><code>s.Substring(start - 1, n)</code></td><td>FoxPro counts from 1, C# from 0.</td></tr>
+            <tr><td><code>AT(find, s)</code></td><td><code>s.IndexOf(find) + 1</code></td><td>FoxPro returns 0 when not found, C# returns -1.</td></tr>
+            <tr><td><code>VAL(s)</code></td><td><code>decimal.TryParse</code></td><td><code>VAL(&quot;12abc&quot;)</code> returns 12; parsing in C# fails instead.</td></tr>
+            <tr><td><code>BETWEEN(x, a, b)</code></td><td><code>x &gt;= a &amp;&amp; x &lt;= b</code></td><td>Both ends are included.</td></tr>
+            <tr><td><code>INLIST(x, a, b, c)</code></td><td><code>new[] {'{'} a, b, c {'}'}.Contains(x)</code></td><td>None.</td></tr>
+            <tr><td><code>DATE()</code></td><td><code>DateTime.Today</code></td><td>Returns midnight as a <code>DateTime</code>; use <code>DateOnly</code> where only the date matters.</td></tr>
+            <tr><td><code>GOMONTH(d, n)</code></td><td><code>d.AddMonths(n)</code></td><td>Both clamp to the end of a shorter month.</td></tr>
+            <tr><td><code>DIMENSION a[10]</code></td><td><code>new T[10]</code> or <code>List&lt;T&gt;</code></td><td>FoxPro arrays start at 1.</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <h2>The rounding trap</h2>
       <p>
@@ -122,19 +181,6 @@ export default function Page() {
         <li>Do not improve behaviour while migrating it. Match first, then change, so a difference always means a bug.</li>
       </ul>
 
-      <h2>Common questions</h2>
-      <p>
-        <strong>Is Visual FoxPro still supported?</strong> No. Version 9 was the last release, and Microsoft&apos;s extended support for it ended in January 2015. Existing applications keep running, but nothing is being fixed.
-      </p>
-      <p>
-        <strong>Can a FoxPro application be converted automatically?</strong> Tools can translate syntax, but the result keeps the old structure: logic inside forms, shared state and row-by-row loops. For a system that will be maintained for years, rewriting workflow by workflow against tests gives a better result than a mechanical translation.
-      </p>
-      <p>
-        <strong>How long does a migration take?</strong> It depends on the number of workflows and on how much of the knowledge is written down. Mine covered 42 workflows as a part-time engagement over two and a half years, with one engineer and no specification.
-      </p>
-      <p>
-        <strong>Should the database move first or the application?</strong> The data model, because everything else is tested against it. Moving the tables to SQL Server early also lets old and new run against comparable data while workflows move across one at a time.
-      </p>
     </ArticlePage>
   );
 }
