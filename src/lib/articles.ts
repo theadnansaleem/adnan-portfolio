@@ -72,8 +72,8 @@ export const articles: Article[] = [
   },
   {
     slug: 'role-based-access-control-data-redaction-dotnet',
-    title: 'Role-based access control with data redaction in ASP.NET Core',
-    description: 'Authorization decides who may call an endpoint. Redaction decides what they get back. How to do both in ASP.NET Core, and where data still leaks.',
+    title: 'Role-based data redaction and access control in ASP.NET Core',
+    description: 'Authorization decides who may call an endpoint. Role-based redaction decides what they get back. How to do both in ASP.NET Core, and where data still leaks.',
     published: '2026-10-05',
     updated: '2026-10-13',
     caseStudy: 'codex-vehicle-cybersecurity-platform',
