@@ -645,7 +645,7 @@ button.hx-shot:hover .hx-shot-cue, button.hx-shot:focus-visible .hx-shot-cue { o
 .hx-prose figure img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 12px; }
 .hx-prose figcaption { font-size: 0.8em; margin-top: 8px; }
 .hx-prose li + li { margin-top: 0.5em; }
-.hx-prose code { font: 0.88em ui-monospace, SFMono-Regular, Menlo, monospace; padding: 0.1em 0.35em; border-radius: 5px; background: var(--card); border: 1px solid var(--line); color: var(--ink); }
+.hx-prose code { font: 0.88em ui-monospace, SFMono-Regular, Menlo, monospace; padding: 0.1em 0.35em; border-radius: 5px; background: var(--card); border: 1px solid var(--line); color: var(--ink); overflow-wrap: break-word; }
 .hx-prose pre { overflow-x: auto; padding: 16px 18px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); line-height: 1.5; }
 .hx-prose pre code { padding: 0; border: 0; background: none; font-size: 13.5px; white-space: pre; }
 
