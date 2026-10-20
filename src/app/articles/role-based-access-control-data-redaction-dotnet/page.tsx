@@ -64,6 +64,75 @@ const FALLBACK = `builder.Services.AddAuthorization(options =>
         .Build();
 });`;
 
+const PROJECTION = `public static class FindingRedactor
+{
+    // The same rules as For(), as an expression a database query can use
+    public static Expression<Func<Finding, FindingDto>> ForTier(int tier) =>
+        f => new FindingDto
+    {
+        Id = f.Id,
+        Title = f.Title,
+        Severity = f.Severity,
+        AffectedComponent = tier >= 3 ? f.AffectedComponent : null,
+        ReproductionSteps = tier >= 4 ? f.ReproductionSteps : null,
+    };
+}
+
+// The list endpoint: EF Core builds the redaction into the SQL
+var findings = await _db.Findings
+    .Where(f => f.ProjectId == projectId)
+    .Select(FindingRedactor.ForTier(tier))
+    .ToListAsync();`;
+
+const RESOURCE = `public record SameTeamRequirement : IAuthorizationRequirement;
+
+public class SameTeamHandler : AuthorizationHandler<SameTeamRequirement, Finding>
+{
+    protected override Task HandleRequirementAsync(
+        AuthorizationHandlerContext context,
+        SameTeamRequirement requirement,
+        Finding finding)
+    {
+        if (context.User.FindFirst("team")?.Value == finding.TeamId.ToString())
+            context.Succeed(requirement);
+
+        return Task.CompletedTask;
+    }
+}
+
+// Program.cs
+builder.Services.AddSingleton<IAuthorizationHandler, SameTeamHandler>();
+options.AddPolicy("SameTeam", policy =>
+    policy.Requirements.Add(new SameTeamRequirement()));
+
+// In the endpoint, after the record is loaded
+var result = await _authorization.AuthorizeAsync(User, finding, "SameTeam");
+if (!result.Succeeded) return NotFound();`;
+
+const LOG_REDACTION = `// Packages: Microsoft.Extensions.Compliance.Redaction
+//           Microsoft.Extensions.Telemetry
+public static class DataTaxonomy
+{
+    public static DataClassification Sensitive => new("Security", nameof(Sensitive));
+}
+
+public sealed class SensitiveAttribute : DataClassificationAttribute
+{
+    public SensitiveAttribute() : base(DataTaxonomy.Sensitive) { }
+}
+
+// Program.cs: the default redactor erases anything classified
+builder.Logging.EnableRedaction();
+builder.Services.AddRedaction();
+
+public static partial class Log
+{
+    [LoggerMessage(LogLevel.Warning,
+        "Export of finding {FindingId} failed for {ReporterEmail}")]
+    public static partial void ExportFailed(
+        this ILogger logger, Guid findingId, [Sensitive] string reporterEmail);
+}`;
+
 const TABLE_TEST = `[Theory]
 [InlineData(2, false, false)]
 [InlineData(3, true, false)]
@@ -119,6 +188,15 @@ export default function Page() {
         The tier must come from something the server issued and can verify: a claim in a signed token or a server-side session. It must never be read from a request header, query string or body, because the caller controls those. A claim in a token also stays valid until the token expires, so a user who is moved down a tier keeps the old access until then. Keep access tokens short-lived, and for the most sensitive records look the tier up on the server for each request.
       </p>
 
+      <h2>Resource-based authorization: rules that depend on the record</h2>
+      <p>
+        Tiers answer &quot;how much may this person see?&quot;. Many systems also need &quot;may this person see this particular record?&quot;: only findings from their own team, or only documents they own. An <code>[Authorize]</code> attribute cannot answer that, because it runs before the record is loaded. Load the record first, then ask the authorization service with the record in hand:
+      </p>
+      <pre><code>{RESOURCE}</code></pre>
+      <p>
+        The rule still lives in a named policy and a handler, so it is tested and reviewed like the tier rules. Returning <code>404</code> follows the reasoning in the section on status codes below. For lists, the same rule belongs in the query&apos;s <code>Where</code> clause, or the list shows what the detail endpoint refuses.
+      </p>
+
       <h2>One redaction step, used everywhere</h2>
       <p>
         The endpoint loads the full record and hands it to a single function that builds the response for the caller&apos;s tier:
@@ -127,6 +205,15 @@ export default function Page() {
       <pre><code>{REDACTOR}</code></pre>
       <p>
         Three properties make this hold up over time. The domain object never leaves the server; only the response object does. Every sensitive field states its own rule, so a reviewer can read the whole policy in one file. And a new field is absent from the response until someone adds it to the redactor, which makes the default safe.
+      </p>
+
+      <h2>Redact lists inside the database query</h2>
+      <p>
+        Loading full records and redacting them in memory works for one record. For a list of thousands, it reads every sensitive column only to throw most of it away. Write the same rules as an expression instead, and Entity Framework Core turns them into part of the SQL:
+      </p>
+      <pre><code>{PROJECTION}</code></pre>
+      <p>
+        The database never sends the values a caller may not read, and the detail endpoint can use the same expression with <code>.Where(f =&gt; f.Id == id).Select(FindingRedactor.ForTier(tier))</code>. Keep one copy of the rules: <code>For</code> can call <code>ForTier(tier).Compile()</code>, cached per tier, so the list, the detail page and the tests cannot drift apart.
       </p>
 
       <h2>Where data leaks anyway</h2>
@@ -146,6 +233,15 @@ export default function Page() {
       <h2>Record who looked</h2>
       <p>
         For sensitive data, access control is not finished until reads are recorded: who requested which record, at which tier, and when. Log the identifiers, never the values, or the audit log becomes the easiest place to steal the data from.
+      </p>
+
+      <h2>Redact sensitive data in logs</h2>
+      <p>
+        Logging identifiers rather than values is the rule, and a library can enforce it for the values that slip through. Microsoft&apos;s <code>Microsoft.Extensions.Compliance.Redaction</code> lets you classify a log parameter as sensitive, and the logger redacts it before it is written:
+      </p>
+      <pre><code>{LOG_REDACTION}</code></pre>
+      <p>
+        With no redactor configured for a classification, the value is erased. An HMAC redactor can replace it with a keyed hash instead, which lets you correlate log lines about the same person without storing who they are; Microsoft still marks that one experimental.
       </p>
 
       <h2>Test it as a table</h2>

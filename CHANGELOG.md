@@ -7,6 +7,14 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.23.7 - 2026-10-20
+
+### Changed
+- The role-based access control article adds resource-based authorization for per-record rules, redaction inside the EF Core query for lists, and log redaction with Microsoft.Extensions.Compliance.Redaction, plus two quick answers.
+
+### Fixed
+- Long inline code in articles wraps instead of running past the text column on phones.
+
 ## 2.23.6 - 2026-10-20
 
 ### Changed
