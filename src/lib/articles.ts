@@ -48,8 +48,8 @@ export const articles: Article[] = [
   },
   {
     slug: 'visual-foxpro-to-dotnet-migration-guide',
-    title: 'Migrating Visual FoxPro to .NET: an order of work that holds up',
-    description: 'How to move a legacy Visual FoxPro application to C# and .NET when the only specification is the old code: inventory, data, domain layer, reports, retirement.',
+    title: 'Visual FoxPro to .NET and C#: a step-by-step migration guide',
+    description: 'How to convert a legacy Visual FoxPro app to C#, .NET and SQL Server when the old code is the only spec: inventory, data, domain rules, reports, cutover.',
     published: '2026-10-05',
     updated: '2026-10-07',
     caseStudy: 'visual-foxpro-to-dotnet-migration',
@@ -87,7 +87,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'real-time-dashboard-react-websocket',
-    title: 'A React dashboard that keeps up with a WebSocket feed',
+    title: 'A real-time React dashboard that keeps up with WebSockets',
     description: 'Why a live dashboard slows down over time, and the fixes: render once per frame, cap the list, aggregate as events arrive, and plan for reconnects.',
     published: '2026-10-05',
     updated: '2026-10-13',
