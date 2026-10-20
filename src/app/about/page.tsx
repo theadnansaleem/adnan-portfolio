@@ -8,7 +8,7 @@ import { MOMENTS } from '@/components/home/photos';
 import { education, jobs, profile } from '@/lib/data';
 import { faqJsonLd, pageJsonLd } from '@/lib/seo';
 
-const TITLE = 'About Adnan Saleem: the person behind the work';
+const TITLE = 'About Adnan Saleem, senior full-stack engineer in Lahore';
 const DESCRIPTION = 'Who M. Adnan Saleem is beyond the CV: where he is based, where he studied, the teams he has worked with, photos, and how to say hello.';
 
 export const metadata: Metadata = {

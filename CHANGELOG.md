@@ -7,6 +7,11 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.23.3 - 2026-10-20
+
+### Changed
+- The Visual FoxPro, real-time dashboard and About page titles now use the words people search for (FoxPro to .NET and C#, real-time React dashboard, senior full-stack engineer), after Search Console showed impressions with no clicks.
+
 ## 2.23.2 - 2026-10-15
 
 ### Changed
