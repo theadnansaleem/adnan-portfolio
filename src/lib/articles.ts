@@ -51,9 +51,16 @@ export const articles: Article[] = [
     title: 'Visual FoxPro to .NET and C#: a step-by-step migration guide',
     description: 'How to convert a legacy Visual FoxPro app to C#, .NET and SQL Server when the old code is the only spec: inventory, data, domain rules, reports, cutover.',
     published: '2026-10-05',
-    updated: '2026-10-07',
+    updated: '2026-10-20',
     caseStudy: 'visual-foxpro-to-dotnet-migration',
-    minutes: 8,
+    minutes: 10,
+    faq: [
+      ['Is Visual FoxPro still supported?', "No. Version 9 was the last release, and Microsoft's extended support for it ended in January 2015. Existing applications keep running, but nothing is being fixed."],
+      ['Can a FoxPro application be converted to C# automatically?', 'Tools can translate syntax, but the result keeps the old structure: logic inside forms, shared state and row-by-row loops. For a system that will be maintained for years, rewriting workflow by workflow against tests gives a better result than a mechanical translation.'],
+      ['How long does a FoxPro to .NET migration take?', 'It depends on the number of workflows and on how much of the knowledge is written down. Mine covered 42 workflows as a part-time engagement over two and a half years, with one engineer and no specification.'],
+      ['Should the database move first or the application?', 'The data model, because everything else is tested against it. Moving the tables to SQL Server early also lets old and new run against comparable data while workflows move across one at a time.'],
+      ['Can .NET read FoxPro tables directly?', "Yes, through Microsoft's Visual FoxPro OLE DB provider and the System.Data.OleDb package. The provider is 32-bit and Windows only, so the loader has to run as an x86 process on Windows."],
+    ],
   },
   {
     slug: 'core-web-vitals-react-lcp-code-splitting',
