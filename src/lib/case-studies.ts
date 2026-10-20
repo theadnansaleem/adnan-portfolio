@@ -79,7 +79,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "visual-foxpro-to-dotnet-migration",
     title: "Migrating 42 financial workflows from Visual FoxPro to .NET",
-    metaTitle: "Visual FoxPro to .NET Core migration: 42 workflows",
+    metaTitle: "Visual FoxPro to .NET migration case study: 42 workflows",
     description:
       "A 2.5-year solo migration of 42 financial workflows from Visual FoxPro to C#/.NET Core, Entity Framework Core, SQL Server, Angular and Blazor.",
     // No project card for this engagement, so the opening CV bullet is the summary.
