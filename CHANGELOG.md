@@ -7,6 +7,11 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.23.8 - 2026-10-20
+
+### Changed
+- The real-time dashboard article adds a complete useLiveFeed hook (per-frame renders, capped buffer, reconnect with backoff and jitter, catch-up id, heartbeat timeout, malformed-message guard), a usage example with status and log roles, a link to the virtualization article, and two quick answers.
+
 ## 2.23.7 - 2026-10-20
 
 ### Changed

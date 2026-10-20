@@ -65,6 +65,98 @@ function connect() {
   };
 }`;
 
+const HOOK = `export function useLiveFeed(url, { limit = 40, heartbeatMs = 10000 } = {}) {
+  const [events, setEvents] = useState([]);
+  const [status, setStatus] = useState('connecting');
+
+  useEffect(() => {
+    const buffer = [];
+    let socket;
+    let attempt = 0;
+    let lastId = null;
+    let frame = 0;
+    let retryTimer = 0;
+    let silenceTimer = 0;
+    let stopped = false;
+
+    const flush = () => {
+      frame = 0;
+      const batch = buffer.splice(0).reverse();
+      setEvents((prev) => [...batch, ...prev].slice(0, limit));
+    };
+
+    const reconnect = () => {
+      clearTimeout(silenceTimer);
+      if (stopped) return;
+      setStatus('reconnecting');
+      const ceiling = Math.min(30000, 1000 * 2 ** attempt++);
+      retryTimer = setTimeout(connect, ceiling / 2 + Math.random() * (ceiling / 2));
+    };
+
+    // Nothing heard for three heartbeats: drop the socket without waiting for onclose
+    const watchSilence = () => {
+      clearTimeout(silenceTimer);
+      silenceTimer = setTimeout(() => {
+        socket.onclose = null;
+        socket.close();
+        reconnect();
+      }, heartbeatMs * 3);
+    };
+
+    function connect() {
+      socket = new WebSocket(lastId ? \`\${url}?after=\${lastId}\` : url);
+      watchSilence();
+
+      socket.onopen = () => {
+        attempt = 0;
+        setStatus('live');
+      };
+      socket.onmessage = (message) => {
+        watchSilence();
+        let event;
+        try {
+          event = JSON.parse(message.data);
+        } catch {
+          return; // count these in real code
+        }
+        if (event.type === 'heartbeat' || !event.id) return;
+        lastId = event.id;
+        buffer.push(event);
+        if (buffer.length > limit) buffer.shift();
+        if (!frame) frame = requestAnimationFrame(flush);
+      };
+      socket.onclose = reconnect;
+    }
+
+    connect();
+    return () => {
+      stopped = true;
+      clearTimeout(retryTimer);
+      clearTimeout(silenceTimer);
+      cancelAnimationFrame(frame);
+      socket.onclose = null;
+      socket.close();
+    };
+  }, [url, limit, heartbeatMs]);
+
+  return { events, status };
+}`;
+
+const USAGE = `function ThreatFeed() {
+  const { events, status } = useLiveFeed('wss://example.com/feed');
+
+  return (
+    <>
+      <p role="status">{status === 'live' ? 'Live' : 'Reconnecting'}</p>
+      <ul role="log">
+        {events.map((event) => (
+          <li key={event.id}>{event.level}: {event.message}</li>
+        ))}
+      </ul>
+    </>
+  );
+}`;
+
 export default function Page() {
   return (
     <ArticlePage article={meta}>
@@ -101,6 +193,9 @@ export default function Page() {
       <p>
         An analyst reads the latest few dozen events, not the last ten thousand. Cap the list (the demo keeps 40) and leave history to the server, which can page through it on request.
       </p>
+      <p>
+        When analysts do need a long history on screen, render it with windowing so only the visible rows exist in the page. <Link href="/articles/react-table-virtualization-20000-rows">Rendering 20,000 rows in React without freezing the page</Link> shows how, with the measurements.
+      </p>
 
       <h2>Aggregate as events arrive</h2>
       <p>
@@ -132,6 +227,19 @@ export default function Page() {
       <h2>Do not trust the feed</h2>
       <p>
         One malformed message should not stop the dashboard. Wrap the parse in a <code>try</code> block, check that the fields you rely on are present, and drop anything that fails while counting how often it happens. Treat text from the feed as text: render it through React as usual and never as HTML.
+      </p>
+
+      <h2>Put together: a useLiveFeed hook</h2>
+      <p>
+        Every piece above fits in one custom hook: a render per frame, a capped buffer and list, reconnects with backoff and jitter, a catch-up id, a heartbeat timeout and a guard against malformed messages. Components then read two values and nothing else:
+      </p>
+      <pre><code>{HOOK}</code></pre>
+      <p>
+        When the silence timer fires, the hook removes its <code>onclose</code> handler before closing and reconnects straight away. A connection that died quietly can take a long time to report that it closed, which is the situation the timer exists for. The cleanup does the same, so unmounting never schedules a reconnect.
+      </p>
+      <pre><code>{USAGE}</code></pre>
+      <p>
+        <code>role=&quot;status&quot;</code> lets screen readers announce a lost connection, and <code>role=&quot;log&quot;</code> announces new events without interrupting. Counters and chart buckets from the aggregation section belong inside <code>onmessage</code>, next to <code>buffer.push</code>, so they stay exact while the tab is hidden.
       </p>
 
       <h2>WebSocket or Server-Sent Events?</h2>
