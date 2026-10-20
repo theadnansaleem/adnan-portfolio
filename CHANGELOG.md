@@ -7,6 +7,11 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.23.5 - 2026-10-20
+
+### Changed
+- The Visual FoxPro case study title reads "Visual FoxPro to .NET migration case study", so it matches FoxPro searches without repeating the guide's title.
+
 ## 2.23.4 - 2026-10-20
 
 ### Changed
