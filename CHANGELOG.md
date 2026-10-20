@@ -7,6 +7,11 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.23.4 - 2026-10-20
+
+### Changed
+- The role-based access control article title and description put "role-based" next to "redaction", the phrase people search for.
+
 ## 2.23.3 - 2026-10-20
 
 ### Changed
