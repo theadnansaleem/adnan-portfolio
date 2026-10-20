@@ -99,14 +99,16 @@ export const articles: Article[] = [
     title: 'A real-time React dashboard that keeps up with WebSockets',
     description: 'Why a live dashboard slows down over time, and the fixes: render once per frame, cap the list, aggregate as events arrive, and plan for reconnects.',
     published: '2026-10-05',
-    updated: '2026-10-13',
+    updated: '2026-10-20',
     caseStudy: 'codex-vehicle-cybersecurity-platform',
-    minutes: 5,
+    minutes: 7,
     faq: [
       ['Why does a React dashboard get slower over time?', 'Usually because a list in state grows for as long as the tab stays open, so every render has more to do, and because each incoming message triggers its own render.'],
       ['How often should a live dashboard re-render?', 'At most once per animation frame, which is about sixty times a second. Buffer incoming messages and flush them together.'],
       ['WebSocket or Server-Sent Events for a dashboard?', 'Server-Sent Events are simpler when data only flows from server to browser, and they reconnect on their own. Use a WebSocket when the browser also sends messages, or when you need binary data.'],
       ['How do I reconnect a WebSocket safely?', 'Retry with a delay that doubles up to a ceiling, add some randomness so clients do not all return at once, and after reconnecting ask the server for the events you missed.'],
+      ['How do I detect a WebSocket connection that died without closing?', 'Have the server send a small heartbeat every few seconds. If the client hears nothing for two or three intervals, drop the socket and reconnect yourself, because the browser may not fire onclose for a long time.'],
+      ['Should a live dashboard keep every event in React state?', 'No. Keep the few dozen events the screen shows, update counters and chart buckets as events arrive, and leave the full history to the server to page through.'],
     ],
   },
 ];
