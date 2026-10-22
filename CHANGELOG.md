@@ -15,6 +15,11 @@ That bumps `package.json`, commits, and tags in one step.
 ### Changed
 - The Visual FoxPro to .NET guide links to the new data migration article from its data section.
 
+## 2.25.2 - 2026-10-22
+
+### Added
+- The frontend and .NET role pages list the articles written from that role's work, so each article is linked from its hub page as well as from the articles index.
+
 ## 2.25.1 - 2026-10-22
 
 ### Changed

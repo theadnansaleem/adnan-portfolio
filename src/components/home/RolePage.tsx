@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageFrame from './PageFrame';
 import { profile } from '@/lib/data';
-import { roleEvidence, roleSkills, roleStudies, type Role } from '@/lib/roles';
+import { roleArticles, roleEvidence, roleSkills, roleStudies, type Role } from '@/lib/roles';
 import { faqJsonLd, pageJsonLd } from '@/lib/seo';
 
 export const roleMetadata = (role: Role): Metadata => ({
@@ -15,6 +15,7 @@ export const roleMetadata = (role: Role): Metadata => ({
 /** One role, shown through the CV bullets, skills and case studies that match it. Children sit under the header. */
 export default function RolePage({ role, children }: { role: Role; children?: React.ReactNode }) {
   const [before, strong, after] = role.heading;
+  const written = roleArticles(role);
   return (
     <PageFrame>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageJsonLd(role.path, role.name, role.description) }} />
@@ -86,10 +87,29 @@ export default function RolePage({ role, children }: { role: Role; children?: Re
         </div>
       </section>
 
+      {written.length > 0 && (
+        <section className="hx-lab">
+          <div>
+            <p className="hx-cap"><b>04</b> Articles</p>
+            <h2>How I approach it</h2>
+          </div>
+          <div className="hx-facts hx-card">
+            <ol>
+              {written.map((a) => (
+                <li key={a.slug} className="hx-go">
+                  <strong><Link className="hx-go-link" href={`/articles/${a.slug}`}>{a.title}</Link></strong>
+                  <span>{a.description}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      )}
+
       {role.faq && (
         <section className="hx-lab">
           <div>
-            <p className="hx-cap"><b>04</b> Quick answers</p>
+            <p className="hx-cap"><b>{written.length > 0 ? '05' : '04'}</b> Quick answers</p>
             <h2>Asked before you ask</h2>
           </div>
           <div className="hx-qa hx-card">

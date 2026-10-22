@@ -1,3 +1,4 @@
+import { articles } from './articles';
 import { caseStudies } from './case-studies';
 import { jobs, skills } from './data';
 
@@ -15,6 +16,8 @@ export interface Role {
   skillGroups: string[];
   /** Case study slugs, for a role whose studies cannot be found from their stack tags */
   studies?: string[];
+  /** Article slugs written from this role's work, in the order to show them */
+  articles?: string[];
   /** Quick answers shown on the page and published as FAQ structured data: [question, answer] */
   faq?: string[][];
 }
@@ -32,6 +35,13 @@ export const roles = {
     lead: 'I build React and Next.js applications with TypeScript. Eight years of frontend experience across React, Next.js and Angular on government, fintech and cybersecurity platforms, including five years fully remote with US, UK and German teams. Based in Lahore and available immediately for international remote roles.',
     match: /React|Angular|Next\.js|frontend|front-end|Micro Frontends|Core Web Vitals|virtualization|component|dashboards|responsive|WCAG|TypeScript|Redux|Zustand/i,
     skillGroups: ['Frontend', 'Architecture & Performance', 'UI, Mobile & Accessibility', 'Testing & Quality'],
+    articles: [
+      'module-federation-micro-frontends-react',
+      'react-table-virtualization-20000-rows',
+      'core-web-vitals-react-lcp-code-splitting',
+      'real-time-dashboard-react-websocket',
+      'react-state-management-redux-zustand-context',
+    ],
     faq: [
       ['Which frontend frameworks do you work in?', 'React, Next.js and Angular, with TypeScript. Eight years across government, fintech and cybersecurity platforms.'],
       ['Have you split a large frontend into micro frontends?', 'Yes. On the Qatar Events Platform I rearchitected a monolithic React frontend into micro frontends with Module Federation, which cut release cycle time by about 40%.'],
@@ -50,6 +60,7 @@ export const roles = {
     lead: 'Backends in C#, .NET 6/8, ASP.NET Core Web APIs and Blazor, with SQL Server, T-SQL and Entity Framework Core, on government, fintech and cybersecurity platforms. Based in Lahore, five years fully remote with US, UK and German teams, and available immediately.',
     match: /\.NET|C#|Blazor|Entity Framework|EF Core|SQL Server|T-SQL|ASP\.NET|CQRS|Domain-Driven|DDD|stored procedures/i,
     skillGroups: ['Backend & APIs', 'Databases', 'Architecture & Performance', 'Cloud & DevOps'],
+    articles: ['visual-foxpro-to-dotnet-migration-guide', 'visual-foxpro-to-sql-server-data-migration', 'role-based-access-control-data-redaction-dotnet'],
     faq: [
       ['Which .NET versions and frameworks do you use?', 'C# on .NET 6 and .NET 8, with ASP.NET Core Web APIs, Blazor Server and Entity Framework Core.'],
       ['Have you migrated a legacy system to .NET?', 'Yes. As the sole engineer I migrated 42 financial workflows from a Visual FoxPro system to C# and .NET Core over a 2.5-year engagement, and retired the old system.'],
@@ -103,5 +114,8 @@ export const roleEvidence = (role: Role) =>
 
 export const roleStudies = (role: Role) =>
   caseStudies.filter((study) => (role.studies ? role.studies.includes(study.slug) : study.stack.some((tag) => role.match.test(tag))));
+
+export const roleArticles = (role: Role) =>
+  (role.articles ?? []).map((slug) => articles.find((a) => a.slug === slug)).filter((a) => a !== undefined);
 
 export const roleSkills = (role: Role) => skills.filter((group) => role.skillGroups.includes(group.category));
