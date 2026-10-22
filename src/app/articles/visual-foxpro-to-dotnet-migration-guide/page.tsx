@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import ArticlePage, { articleMetadata } from '@/components/home/ArticlePage';
 import { article } from '@/lib/articles';
 
@@ -83,6 +84,9 @@ export default function Page() {
       <pre><code>{DBF_READ}</code></pre>
       <p>
         <code>NOT DELETED()</code> leaves out rows that were flagged for deletion but never packed. Run the loader into staging tables first, then transform into the new schema in T-SQL, so each rehearsal starts from the same raw copy.
+      </p>
+      <p>
+        The full type mapping, the staging load with <code>BULK INSERT</code> and <code>SqlBulkCopy</code>, control totals and the rehearsal checklist are in the companion article, <Link href="/articles/visual-foxpro-to-sql-server-data-migration">Visual FoxPro to SQL Server: a repeatable data migration</Link>.
       </p>
 
       <h2>4. Put the rules in a domain layer</h2>

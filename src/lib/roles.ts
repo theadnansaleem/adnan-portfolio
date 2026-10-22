@@ -60,7 +60,7 @@ export const roles = {
     lead: 'Backends in C#, .NET 6/8, ASP.NET Core Web APIs and Blazor, with SQL Server, T-SQL and Entity Framework Core, on government, fintech and cybersecurity platforms. Based in Lahore, five years fully remote with US, UK and German teams, and available immediately.',
     match: /\.NET|C#|Blazor|Entity Framework|EF Core|SQL Server|T-SQL|ASP\.NET|CQRS|Domain-Driven|DDD|stored procedures/i,
     skillGroups: ['Backend & APIs', 'Databases', 'Architecture & Performance', 'Cloud & DevOps'],
-    articles: ['visual-foxpro-to-dotnet-migration-guide', 'role-based-access-control-data-redaction-dotnet'],
+    articles: ['visual-foxpro-to-dotnet-migration-guide', 'visual-foxpro-to-sql-server-data-migration', 'role-based-access-control-data-redaction-dotnet'],
     faq: [
       ['Which .NET versions and frameworks do you use?', 'C# on .NET 6 and .NET 8, with ASP.NET Core Web APIs, Blazor Server and Entity Framework Core.'],
       ['Have you migrated a legacy system to .NET?', 'Yes. As the sole engineer I migrated 42 financial workflows from a Visual FoxPro system to C# and .NET Core over a 2.5-year engagement, and retired the old system.'],

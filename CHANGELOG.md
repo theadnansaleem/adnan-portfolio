@@ -7,6 +7,14 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.26.0 - 2026-10-22
+
+### Added
+- Article: Visual FoxPro to SQL Server: a repeatable data migration. File inventory, a full FoxPro to SQL Server type mapping, OLE DB and COPY TO export paths, staging with BULK INSERT and SqlBulkCopy, T-SQL transforms with control totals, deleted rows, code pages, index expressions and SET EXACT, keys and constraints, a rehearsal checklist and five quick answers.
+
+### Changed
+- The Visual FoxPro to .NET guide links to the new data migration article from its data section.
+
 ## 2.25.2 - 2026-10-22
 
 ### Added
