@@ -7,6 +7,11 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.25.0 - 2026-10-22
+
+### Added
+- Article: Redux Toolkit, Zustand or Context: where React state belongs. Server, shared client, local and URL state, with TanStack Query, Redux Toolkit, Zustand and Context examples, a decision table and five quick answers.
+
 ## 2.24.0 - 2026-10-22
 
 ### Added
