@@ -55,7 +55,7 @@ export default function Page() {
   return (
     <ArticlePage article={meta}>
       <p>
-        On a multi-currency payments platform I optimized large data tables with react-window virtualization and memoization, which cut render time by about 70% on datasets over 20,000 rows. That is a historical client result. The synthetic benchmark below is a separate reproduction of the windowing technique, using the hand-written <Link href="/lab#virtualization">live demo on this site</Link>; it does not recreate the client application or validate that percentage.
+        On a multi-currency payments platform I optimized large data tables with react-window virtualization and memoization, which cut render time by about 70% on datasets over 20,000 rows. That is a historical client result. The synthetic benchmark below is a separate reproduction of the windowing technique, using the hand-written <a href="#try-it">live demo at the end of this article</a>; it does not recreate the client application or validate that percentage.
       </p>
 
       <h2 id="benchmark">Reproducible React virtualization benchmark: 20,000 rows</h2>

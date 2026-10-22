@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import ArticlePage, { articleMetadata } from '@/components/home/ArticlePage';
 import { article } from '@/lib/articles';
 
@@ -149,7 +148,7 @@ export default function Page() {
   return (
     <ArticlePage article={meta}>
       <p>
-        On a vehicle cybersecurity platform I secured sensitive security data with four-tier role-based access control, secure .NET API integrations, and data redaction pipelines filtered by caller tier. The idea underneath is simple and often skipped: deciding who may call an endpoint is only half of access control. The other half is deciding what each caller gets back. The <Link href="/lab">tier demo on this site</Link> shows one record answered four ways.
+        On a vehicle cybersecurity platform I secured sensitive security data with four-tier role-based access control, secure .NET API integrations, and data redaction pipelines filtered by caller tier. The idea underneath is simple and often skipped: deciding who may call an endpoint is only half of access control. The other half is deciding what each caller gets back. The <a href="#try-it">tier demo below</a> shows one record answered four ways.
       </p>
 
       <h2>Hiding a field in the UI is not security</h2>

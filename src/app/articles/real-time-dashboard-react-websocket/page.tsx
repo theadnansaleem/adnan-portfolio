@@ -161,7 +161,7 @@ export default function Page() {
   return (
     <ArticlePage article={meta}>
       <p>
-        For a vehicle cybersecurity platform I engineered real-time threat detection dashboards in React and TypeScript on WebSocket feeds, which cut analyst time-to-insight by about 20%. A live dashboard has one job that a normal page does not: it must stay responsive while data keeps arriving, for hours. The <Link href="/lab">feed demo on this site</Link> shows the same state handling on a simulated feed.
+        For a vehicle cybersecurity platform I engineered real-time threat detection dashboards in React and TypeScript on WebSocket feeds, which cut analyst time-to-insight by about 20%. A live dashboard has one job that a normal page does not: it must stay responsive while data keeps arriving, for hours. The <a href="#try-it">feed demo below</a> shows the same state handling on a simulated feed.
       </p>
 
       <h2>What goes wrong first</h2>

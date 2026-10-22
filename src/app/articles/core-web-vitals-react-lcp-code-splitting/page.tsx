@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import ArticlePage, { articleMetadata } from '@/components/home/ArticlePage';
 import { article } from '@/lib/articles';
 
@@ -123,7 +122,7 @@ export default function Page() {
       </p>
       <pre><code>{FIELD}</code></pre>
       <p>
-        The <Link href="/lab">lab on this site</Link> reads the same browser entries directly and shows them for the page you have open.
+        The <a href="#try-it">demo at the end of this article</a> reads the same browser entries directly and shows them for the page you have open.
       </p>
       <p>
         Store them with the page path and the device type. The pages that fail are rarely the ones the team tests every day, and the 75th percentile on mobile is usually far from what a developer laptop shows.

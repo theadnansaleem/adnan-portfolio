@@ -1,9 +1,27 @@
+import { Children, cloneElement, isValidElement, type ComponentType, type ReactElement } from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageFrame from './PageFrame';
+import ShareArticle from './ShareArticle';
+import VirtualRows from './lab/VirtualRows';
+import ThreatFeed from './lab/ThreatFeed';
+import AccessTiers from './lab/AccessTiers';
+import FailSmall from './lab/FailSmall';
+import PageVitals from './lab/PageVitals';
 import { profile } from '@/lib/data';
 import { articles, type Article } from '@/lib/articles';
 import { faqJsonLd } from '@/lib/seo';
+
+// The lab demo that matches each article, with the instruction the lab page gives for it
+const demos: Record<string, { Demo: ComponentType; hint: string }> = {
+  'react-table-virtualization-20000-rows': { Demo: VirtualRows, hint: 'Filter, scroll, then switch virtualization off.' },
+  'real-time-dashboard-react-websocket': { Demo: ThreatFeed, hint: 'A simulated feed: raise the rate and watch the counters, chart and log stay in step.' },
+  'role-based-access-control-data-redaction-dotnet': { Demo: AccessTiers, hint: 'Change the tier and watch what the response leaves out.' },
+  'module-federation-micro-frontends-react': { Demo: FailSmall, hint: 'Each section sits behind its own error boundary. Break one and use the others.' },
+  'core-web-vitals-react-lcp-code-splitting': { Demo: PageVitals, hint: 'The same metrics for the page you are on, read live from your browser.' },
+};
+
+const anchor = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 const date = (iso: string) => new Date(iso + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 
@@ -45,6 +63,18 @@ export default function ArticlePage({ article: a, children }: { article: Article
     ],
   }).replace(/</g, '\\u003c');
 
+  // Every plain-text h2 in the body gets an id, so the contents list and search results can link to it
+  const contents: [string, string][] = [];
+  const body = Children.map(children, (child) => {
+    if (!isValidElement(child) || child.type !== 'h2') return child;
+    const h2 = child as ReactElement<{ children?: unknown; id?: string }>;
+    if (typeof h2.props.children !== 'string') return child;
+    const id = anchor(h2.props.children);
+    contents.push([id, h2.props.children]);
+    return cloneElement(h2, { id });
+  });
+  const demo = demos[a.slug];
+
   return (
     <PageFrame>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
@@ -57,8 +87,28 @@ export default function ArticlePage({ article: a, children }: { article: Article
           <h1 className="hx-article-title">{a.title}</h1>
           <p>{a.description}</p>
           <p className="hx-cap">By {profile.name} · <time dateTime={a.published}>{date(a.published)}</time>{a.updated && <> · Updated <time dateTime={a.updated}>{date(a.updated)}</time></>} · {a.minutes} min read</p>
+          <ShareArticle url={url} title={a.title} />
         </header>
-        <div className="hx-prose">{children}</div>
+        {contents.length > 2 && (
+          <nav className="hx-toc hx-card" aria-label="On this page">
+            <p className="hx-cap">On this page</p>
+            <ol>
+              {contents.map(([id, text]) => <li key={id}><a href={`#${id}`}>{text}</a></li>)}
+              {demo && <li><a href="#try-it">Try it live</a></li>}
+            </ol>
+          </nav>
+        )}
+        <div className="hx-prose">{body}</div>
+        {demo && (
+          <section className="hx-lab" id="try-it">
+            <div>
+              <p className="hx-cap">Live demo</p>
+              <h2>Try it live</h2>
+              <p>{demo.hint} <Link href="/lab">All five demos</Link>.</p>
+            </div>
+            <demo.Demo />
+          </section>
+        )}
         {a.faq && (
           <section className="hx-lab">
             <div>

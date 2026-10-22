@@ -17,6 +17,21 @@ export interface Article {
 // Claims about my own work in them restate CV bullets; the rest is general engineering practice.
 export const articles: Article[] = [
   {
+    slug: 'react-state-management-redux-zustand-context',
+    title: 'Redux Toolkit, Zustand or Context: where React state belongs',
+    description: 'Server state, shared client state, local UI state and URL state each have a natural home. When to use TanStack Query, Redux Toolkit, Zustand or Context.',
+    published: '2026-10-22',
+    caseStudy: 'qatar-events-platform-module-federation',
+    minutes: 7,
+    faq: [
+      ['Should I use Redux Toolkit or Zustand?', 'Zustand when a few components share client state and you want little setup. Redux Toolkit when many screens write to the same state and you need named actions and DevTools history to trace changes.'],
+      ['Is React Context a replacement for Redux?', 'No. Context passes a value down the tree, and every component that reads it re-renders when it changes. It suits values that rarely change, such as a theme, a locale or the signed-in user.'],
+      ['Where should data from an API live?', 'In a server-state cache such as TanStack Query, or RTK Query if the app already uses Redux Toolkit. They handle caching, refetching and shared requests, which a client store makes you write by hand.'],
+      ['Why does my Zustand selector cause an infinite loop?', 'In Zustand 5, a selector that returns a new array or object on every call can trigger React\'s "Maximum update depth exceeded" error. Return primitives, or wrap the selector in useShallow.'],
+      ['Can Redux and Zustand be used in the same app?', 'Yes. Each store owns different state, and many apps pair a server-state cache with one small client store. What matters is that each piece of state has one owner.'],
+    ],
+  },
+  {
     slug: 'module-federation-micro-frontends-react',
     title: 'React micro frontends with Module Federation: split a monolith',
     description: 'When micro frontends are worth it, how a shell and its remotes fit together, and the contracts that keep independent deploys from breaking each other.',

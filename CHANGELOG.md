@@ -7,6 +7,21 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.25.0 - 2026-10-22
+
+### Added
+- Article: Redux Toolkit, Zustand or Context: where React state belongs. Server, shared client, local and URL state, with TanStack Query, Redux Toolkit, Zustand and Context examples, a decision table and five quick answers.
+
+## 2.24.0 - 2026-10-22
+
+### Added
+- Articles have an "On this page" contents list, and every section heading has an anchor.
+- Each article with a matching lab demo shows it live at the end ("Try it live"); links in the text that pointed at /lab now point at the embedded demo.
+- Copy-link and LinkedIn share buttons on every article, tracked as the GA4 share event.
+
+### Fixed
+- The Web Vitals demo's tiles no longer overflow their card on phones; they stack in one column under 480px.
+
 ## 2.23.8 - 2026-10-20
 
 ### Changed

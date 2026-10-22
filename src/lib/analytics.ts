@@ -7,6 +7,15 @@ declare global {
   }
 }
 
+/** GA4's recommended share event. */
+export function trackShare(method: 'copy_link' | 'linkedin') {
+  try {
+    window.gtag?.('event', 'share', { method, content_type: 'article', item_id: window.location.pathname });
+  } catch {
+    // Blocked analytics must never interrupt sharing.
+  }
+}
+
 export function trackPortfolioAction(action: PortfolioAction, source: ActionSource) {
   if (typeof window === 'undefined') return;
   try {

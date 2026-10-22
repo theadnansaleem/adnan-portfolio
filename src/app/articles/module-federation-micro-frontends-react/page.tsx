@@ -108,7 +108,7 @@ export default function Page() {
       </p>
       <pre><code>{LAZY_REMOTE}</code></pre>
       <p>
-        The <Link href="/lab">lab on this site</Link> has three sections behind boundaries like this one, with a button to break each.
+        The <a href="#try-it">demo at the end of this article</a> has three sections behind boundaries like this one, with a button to break each.
       </p>
 
       <h2>Start the app behind an async boundary</h2>

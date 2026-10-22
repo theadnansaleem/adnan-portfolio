@@ -41,7 +41,7 @@ export default function PageVitals() {
 
   return (
     <div className="hx-demo hx-card">
-      <dl className="hx-demo-stats" aria-live="polite">
+      <dl className="hx-demo-stats is-long" aria-live="polite">
         <div><dt data-state={grade(vitals.lcp, LIMITS.lcp)}>{show(vitals.lcp, (n) => `${(n / 1000).toFixed(2)} s`)}</dt><dd>largest contentful paint</dd></div>
         <div><dt data-state={grade(vitals.cls, LIMITS.cls)}>{show(vitals.cls ?? (shifts ? 0 : undefined), (n) => n.toFixed(3))}</dt><dd>layout shift</dd></div>
         <div><dt data-state={grade(vitals.slowest, LIMITS.slowest)}>{show(vitals.slowest, (n) => `${Math.round(n)} ms`)}</dt><dd>slowest interaction</dd></div>
