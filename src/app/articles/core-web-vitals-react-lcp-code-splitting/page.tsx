@@ -37,6 +37,65 @@ onLCP(send);
 onINP(send);
 onCLS(send);`;
 
+const YIELD = `async function applyFilters(rows, filters) {
+  for (const chunk of chunksOf(rows, 500)) {
+    processChunk(chunk, filters);
+    // Let the browser paint between chunks:
+    // scheduler.yield() where it exists, setTimeout elsewhere
+    if ('scheduler' in window && 'yield' in scheduler) await scheduler.yield();
+    else await new Promise((resolve) => setTimeout(resolve, 0));
+  }
+}`;
+
+const ATTRIBUTION = `import { onINP, onLCP } from 'web-vitals/attribution';
+
+onLCP(({ value, attribution: a }) => {
+  // Which of the four delays is the big one?
+  send('LCP', value, {
+    element: a.target,
+    ttfb: a.timeToFirstByte,
+    loadDelay: a.resourceLoadDelay,
+    loadDuration: a.resourceLoadDuration,
+    renderDelay: a.elementRenderDelay,
+  });
+});
+
+onINP(({ value, attribution: a }) => {
+  // Which element, and was it the handler or the paint that was slow?
+  send('INP', value, {
+    element: a.interactionTarget,
+    type: a.interactionType,
+    inputDelay: a.inputDelay,
+    processing: a.processingDuration,
+    presentation: a.presentationDelay,
+  });
+});`;
+
+const NEXT_VITALS = `// app/web-vitals.tsx
+'use client';
+import { useReportWebVitals } from 'next/web-vitals';
+
+export function WebVitals() {
+  useReportWebVitals((metric) => {
+    navigator.sendBeacon('/vitals', JSON.stringify(metric));
+  });
+  return null;
+}
+
+// app/layout.tsx: render <WebVitals /> once inside <body>`;
+
+const NEXT_IMAGE = `import Image from 'next/image';
+
+// The hero: preloaded from <head>, never lazy.
+// Next.js 16 calls this preload; earlier versions used priority
+<Image
+  src="/hero.avif"
+  width={1200}
+  height={675}
+  preload
+  alt="Stadium at night"
+/>`;
+
 export default function Page() {
   return (
     <ArticlePage article={meta}>
@@ -53,6 +112,17 @@ export default function Page() {
       <p>
         Google judges these on real visits at the 75th percentile, so a fast laptop on office wifi tells you very little. Test with mobile emulation and a throttled connection.
       </p>
+      <div className="hx-prose-table" role="region" aria-label="Core Web Vitals thresholds" tabIndex={0}>
+        <table>
+          <caption>The thresholds, as published in Google&apos;s web-vitals library</caption>
+          <thead><tr><th scope="col">Metric</th><th scope="col">Good</th><th scope="col">Needs improvement</th><th scope="col">Poor</th></tr></thead>
+          <tbody>
+            <tr><td>LCP</td><td>2.5 s or less</td><td>2.5 s to 4 s</td><td>over 4 s</td></tr>
+            <tr><td>INP</td><td>200 ms or less</td><td>200 ms to 500 ms</td><td>over 500 ms</td></tr>
+            <tr><td>CLS</td><td>0.1 or less</td><td>0.1 to 0.25</td><td>over 0.25</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <h2>Find the LCP element first</h2>
       <p>
@@ -103,6 +173,15 @@ export default function Page() {
       </p>
       <pre><code>{TRANSITION}</code></pre>
 
+      <h2>Break up long tasks</h2>
+      <p>
+        An interaction is three parts: the input delay before your handler starts, the processing time of the handler, and the presentation delay until the next frame is painted. A handler that runs for 300 milliseconds blocks all three for every other interaction that arrives meanwhile. When the work cannot be made smaller, split it into chunks and hand control back to the browser between them:
+      </p>
+      <pre><code>{YIELD}</code></pre>
+      <p>
+        <code>scheduler.yield()</code> resumes your work as a prioritised task, ahead of other queued work, which a plain <code>setTimeout</code> does not. It is in Chrome from version 129 and Firefox from 142; Safari does not have it at the time of writing, hence the fallback. Large DOMs make the presentation part slow on their own, which is where virtualization and <code>content-visibility</code> come in.
+      </p>
+
       <h2>Stop the page from jumping</h2>
       <p>
         Layout shift comes from content that arrives without reserved space: images, embeds, late banners, fonts that swap to a different width. Reserve the space up front:
@@ -126,6 +205,28 @@ export default function Page() {
       </p>
       <p>
         Store them with the page path and the device type. The pages that fail are rarely the ones the team tests every day, and the 75th percentile on mobile is usually far from what a developer laptop shows.
+      </p>
+
+      <h2>Where the time goes: attribution</h2>
+      <p>
+        A bad number on its own does not say what to fix. The library&apos;s attribution build splits each metric into the parts described above, and names the element involved:
+      </p>
+      <pre><code>{ATTRIBUTION}</code></pre>
+      <p>
+        With the LCP parts recorded, the fix is usually obvious: a large <code>resourceLoadDelay</code> means the image is discovered late, a large <code>elementRenderDelay</code> means scripts are blocking the paint. For INP, <code>interactionTarget</code> is a CSS selector for the element the user touched, which is how you find the one slow button among hundreds of fast ones.
+      </p>
+
+      <h2>In Next.js</h2>
+      <p>
+        Next.js wraps the same library. One client component in the root layout reports every metric:
+      </p>
+      <pre><code>{NEXT_VITALS}</code></pre>
+      <p>
+        For the LCP image, the <code>Image</code> component adds the <code>width</code>, <code>height</code> and <code>srcset</code> for you. What it cannot guess is which image matters, so say so:
+      </p>
+      <pre><code>{NEXT_IMAGE}</code></pre>
+      <p>
+        Use it on one image per page, the one that is the largest paint on most viewports. Preloading several images puts them in a queue together, which is the font problem from earlier in a different costume.
       </p>
     </ArticlePage>
   );

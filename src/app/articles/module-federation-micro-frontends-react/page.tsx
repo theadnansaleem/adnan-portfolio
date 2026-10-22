@@ -64,6 +64,40 @@ declare module 'events/EventsApp' {
   export default EventsApp;
 }`;
 
+const SHARED_STRICT = `shared: {
+  react: {
+    singleton: true,            // one copy on the page; the highest version wins
+    requiredVersion: '^18.0.0', // what this build was tested against
+    strictVersion: true,        // a mismatch is an error, not a console warning
+  },
+}`;
+
+const MF2_CONFIG = `// shell/webpack.config.js (rspack.config.js is the same shape)
+const { ModuleFederationPlugin } = require('@module-federation/enhanced/webpack');
+
+new ModuleFederationPlugin({
+  name: 'shell',
+  remotes: {
+    // The manifest instead of remoteEntry.js: type hints, preloading, devtools
+    events: 'events@https://events.example.com/mf-manifest.json',
+  },
+  shared: {
+    react: { singleton: true, requiredVersion: '^18.0.0' },
+    'react-dom': { singleton: true, requiredVersion: '^18.0.0' },
+  },
+});`;
+
+const RUNTIME = `import { loadRemote, registerRemotes } from '@module-federation/enhanced/runtime';
+
+// Remotes from configuration or an API response, not from the build
+registerRemotes([
+  { name: 'events', entry: 'https://events.example.com/mf-manifest.json' },
+]);
+
+const EventsApp = React.lazy(() =>
+  loadRemote('events/EventsApp').then((m) => ({ default: m.default })),
+);`;
+
 export default function Page() {
   return (
     <ArticlePage article={meta}>
@@ -90,6 +124,15 @@ export default function Page() {
       <pre><code>{HOST_CONFIG}</code></pre>
       <p>
         The <code>shared</code> block matters most. React must be a singleton: two copies on one page break hooks and context. Declaring a required version makes a mismatch a visible warning, not a silent second copy.
+      </p>
+
+      <h2>Shared versions, in detail</h2>
+      <p>
+        Three settings on each shared library decide what happens when the shell and a remote were built against different versions. With <code>singleton</code>, webpack keeps one copy and picks the highest version present. <code>requiredVersion</code> is the range this build was tested against. By default a singleton that falls outside that range is still used, with a console warning that nobody reads in production. <code>strictVersion</code> turns that into a runtime error, which is what you want in CI and staging:
+      </p>
+      <pre><code>{SHARED_STRICT}</code></pre>
+      <p>
+        Keep the shared list short. Every library in it is negotiated at startup, and every one that is not a singleton can be downloaded twice when versions diverge. React, the router and the design system belong there; a date library used by one remote does not.
       </p>
 
       <h2>The contract is the product</h2>
@@ -144,6 +187,22 @@ export default function Page() {
         <li><strong>Keep old chunks on the server for a while.</strong> A user with the page already open still holds the previous manifest, which points at the previous chunk names. Delete those on deploy and that user gets a failed load on their next click.</li>
         <li><strong>Rolling back is a redeploy of the previous <code>remoteEntry.js</code>.</strong> Because the old chunks are still there, it takes effect on the next page load.</li>
       </ul>
+
+      <h2>Module Federation 2.0: manifests and runtime loading</h2>
+      <p>
+        The configuration above is the webpack 5 original and still works. Module Federation 2.0, published as <code>@module-federation/enhanced</code>, keeps the same <code>name</code>, <code>exposes</code>, <code>remotes</code> and <code>shared</code> shape, runs on webpack and Rspack, and adds two things worth having.
+      </p>
+      <pre><code>{MF2_CONFIG}</code></pre>
+      <p>
+        The first is the manifest. Each remote build emits <code>mf-manifest.json</code> next to <code>remoteEntry.js</code>, describing what it exposes and shares. Point a remote at the manifest instead of the JavaScript entry and the host gets the remote&apos;s types without a hand-written declaration file, can preload the remote&apos;s assets, and shows up in the Module Federation devtools.
+      </p>
+      <p>
+        The second is a runtime API. The static <code>import(&apos;events/EventsApp&apos;)</code> needs the remote&apos;s URL at build time. With <code>loadRemote</code> the host loads a remote by name, and <code>registerRemotes</code> adds remotes from configuration or an API response, so one shell build can serve staging and production with different remote URLs:
+      </p>
+      <pre><code>{RUNTIME}</code></pre>
+      <p>
+        The error boundary and the async entry file do not change. A remote loaded through the runtime API is still a network dependency, and shared modules are still negotiated before the first render.
+      </p>
 
       <h2>Working on one remote locally</h2>
       <p>

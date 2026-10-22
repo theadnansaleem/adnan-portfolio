@@ -7,6 +7,13 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.25.1 - 2026-10-22
+
+### Changed
+- The Module Federation article adds shared-version settings (strictVersion), Module Federation 2.0 with mf-manifest.json on webpack and Rspack, and runtime loading with loadRemote and registerRemotes, plus three quick answers.
+- The Core Web Vitals article adds the thresholds table, breaking up long tasks with scheduler.yield, LCP and INP attribution, and the Next.js useReportWebVitals and Image preload equivalents, plus three quick answers.
+- The virtualization article adds server-paged loading for very large lists and variable row heights with TanStack Virtual, plus two quick answers.
+
 ## 2.25.0 - 2026-10-22
 
 ### Added

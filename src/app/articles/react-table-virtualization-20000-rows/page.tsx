@@ -51,6 +51,49 @@ const REACT_WINDOW = `import { FixedSizeList } from 'react-window';
   )}
 </FixedSizeList>`;
 
+const TANSTACK = `import { useVirtualizer } from '@tanstack/react-virtual';
+
+function Log({ entries }) {
+  const parentRef = useRef(null);
+  const virtualizer = useVirtualizer({
+    count: entries.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 48, // a guess; rows are measured as they render
+    overscan: 6,
+  });
+
+  return (
+    <div ref={parentRef} style={{ height: 432, overflow: 'auto' }}>
+      <div style={{ height: virtualizer.getTotalSize(), position: 'relative' }}>
+        {virtualizer.getVirtualItems().map((row) => (
+          <div
+            key={row.key}
+            data-index={row.index}
+            ref={virtualizer.measureElement}
+            style={{
+              position: 'absolute',
+              top: 0,
+              width: '100%',
+              transform: \`translateY(\${row.start}px)\`,
+            }}
+          >
+            {entries[row.index].message}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}`;
+
+const PAGED = `const PAGE = 200;
+const items = virtualizer.getVirtualItems();
+const lastVisible = items[items.length - 1]?.index ?? 0;
+
+// Within half a page of the end of what is loaded, and nothing in flight: fetch the next page
+useEffect(() => {
+  if (hasMore && !loading && lastVisible >= rows.length - PAGE / 2) loadMore();
+}, [lastVisible, rows.length, hasMore, loading]);`;
+
 export default function Page() {
   return (
     <ArticlePage article={meta}>
@@ -160,6 +203,15 @@ npm run start -- --hostname 127.0.0.1 --port 3047`}</code></pre>
         <li><strong>Do both</strong> when the list is too big to download at once. Fetch pages from the server as the user scrolls and virtualize whatever has arrived.</li>
       </ul>
 
+      <h2>A million rows</h2>
+      <p>
+        Past a few hundred thousand rows the browser is the wrong place for the data, whatever the rendering technique. Downloading it takes longer than anyone will wait, filtering it on the main thread freezes the input, and the memory is paid by every visitor. The pattern that scales is the third option above: the server owns the data and the sort order, the client fetches pages as the user scrolls, and the virtualizer renders whatever has arrived.
+      </p>
+      <pre><code>{PAGED}</code></pre>
+      <p>
+        The DOM then holds a few dozen rows whether the total is twenty thousand or twenty million. Show the server&apos;s total count in the header, so the user knows how long the list is, and reset the loaded pages when the filter or sort changes.
+      </p>
+
       <h2>The same thing with react-window</h2>
       <p>
         In version 1 of react-window, the hand-written version above becomes one component. The <code>style</code> it passes to each row carries the position, so it has to be applied:
@@ -167,6 +219,15 @@ npm run start -- --hostname 127.0.0.1 --port 3047`}</code></pre>
       <pre><code>{REACT_WINDOW}</code></pre>
       <p>
         The numbers are the same three as before: the height of the scroll area, the height of a row, and the overscan.
+      </p>
+
+      <h2>Variable row heights with TanStack Virtual</h2>
+      <p>
+        The arithmetic above assumes every row is the same height. Log lines, comments and messages are not, and guessing wrong leaves gaps or overlaps. A library that measures rows as they render solves it; TanStack Virtual does so with a resize observer, and asks only for an estimate to lay out the rows it has not seen yet:
+      </p>
+      <pre><code>{TANSTACK}</code></pre>
+      <p>
+        Three details carry the weight. <code>estimateSize</code> should be close to the largest common height, so positions start near their final values. <code>measureElement</code> on the row&apos;s <code>ref</code>, together with <code>data-index</code>, is what reports the real height back. And <code>getTotalSize()</code> grows and shrinks as measurements arrive, so the scrollbar stays honest. The same hook handles fixed heights, columns and grids, so it is a reasonable default for new work.
       </p>
 
       <h2>Headers and wide tables</h2>
@@ -185,7 +246,7 @@ npm run start -- --hostname 127.0.0.1 --port 3047`}</code></pre>
 
       <h2>What to watch for</h2>
       <ul>
-        <li><strong>Variable row heights.</strong> The arithmetic above needs a fixed height. For rows that grow, use a library that measures them, and expect more complexity.</li>
+        <li><strong>Variable row heights.</strong> The arithmetic above needs a fixed height. For rows that grow, use a library that measures them, as in the <a href="#variable-row-heights-with-tanstack-virtual">TanStack Virtual example</a>.</li>
         <li><strong>Find in page.</strong> The browser&apos;s search cannot see rows that are not in the DOM. Provide your own filter, as the demo does.</li>
         <li><strong>Accessibility.</strong> Tell assistive technology the real size with <code>aria-rowcount</code> and <code>aria-rowindex</code>, and make the scroll area focusable so it can be scrolled from the keyboard.</li>
         <li><strong>Production use.</strong> For real products use a maintained library such as react-window. It handles the edge cases; the principle is exactly the one above.</li>
