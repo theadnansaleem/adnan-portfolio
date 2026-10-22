@@ -364,10 +364,11 @@ body:has(.hx) { cursor: auto; }
 .hx-demo-bar input[type="search"] { flex: 1; min-width: 200px; height: 40px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--pill); color: inherit; font: inherit; font-size: 14px; }
 .hx-demo-bar label { display: flex; align-items: center; gap: 10px; }
 .hx-demo-bar input[type="range"] { accent-color: var(--mark); }
-.hx-demo-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.hx-demo-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .hx-demo-stats > div { padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line); }
 .hx-demo-stats dt { font-family: var(--serif); font-size: 34px; line-height: 1; }
 .hx-demo-stats dd { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); margin-top: 4px; }
+@media (max-width: 480px) { .hx-demo-stats.is-long { grid-template-columns: 1fr; } }
 .hx-vrows { overflow-y: auto; border: 1px solid var(--line); border-radius: 10px; font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; }
 .hx-vrow { display: grid; grid-template-columns: 1.1fr 1fr 1.2fr 0.8fr; align-items: center; gap: 10px; padding: 0 14px; border-bottom: 1px solid var(--line); white-space: nowrap; overflow: hidden; }
 .hx-vrow span { overflow: hidden; text-overflow: ellipsis; }
@@ -505,6 +506,17 @@ button.hx-shot:hover .hx-shot-cue, button.hx-shot:focus-visible .hx-shot-cue { o
 /* ── Case study pages ───────────────────────────────────────────────────── */
 .hx-crumbs a:hover { color: var(--mark); }
 .hx-study { display: flex; flex-direction: column; gap: clamp(36px, 5vw, 70px); }
+.hx-prose h2[id], #try-it { scroll-margin-top: 96px; }
+.hx-toc { max-width: 720px; padding: 22px 26px; }
+.hx-toc ol { margin: 10px 0 0; padding-left: 1.6em; display: grid; gap: 6px; list-style: decimal; }
+.hx-toc li { list-style: decimal; }
+.hx-toc li::marker { color: var(--ink-2); font-size: 0.9em; }
+#try-it p a { color: var(--mark); text-decoration: underline; text-underline-offset: 3px; }
+#try-it p a:hover, #try-it p a:focus-visible { color: var(--ink); }
+.hx-toc a { color: var(--ink-2); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+.hx-toc a:hover, .hx-toc a:focus-visible { color: var(--ink); text-decoration-color: currentColor; }
+.hx-share { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 18px; }
+.hx-share [role="status"] { font-size: 14px; color: var(--ink-2); }
 .hx-study .hx-stats dt { font-size: clamp(20px, 2vw, 30px); line-height: 1.1; }
 .hx-study-shot { position: relative; aspect-ratio: 16 / 9; overflow: hidden; }
 .hx-study-shot img { object-fit: cover; object-position: top; }
