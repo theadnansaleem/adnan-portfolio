@@ -7,6 +7,11 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.25.2 - 2026-10-22
+
+### Added
+- The frontend and .NET role pages list the articles written from that role's work, so each article is linked from its hub page as well as from the articles index.
+
 ## 2.25.1 - 2026-10-22
 
 ### Changed
