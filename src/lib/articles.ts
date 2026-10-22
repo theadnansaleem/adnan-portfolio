@@ -17,6 +17,21 @@ export interface Article {
 // Claims about my own work in them restate CV bullets; the rest is general engineering practice.
 export const articles: Article[] = [
   {
+    slug: 'visual-foxpro-to-sql-server-data-migration',
+    title: 'Visual FoxPro to SQL Server: a repeatable data migration',
+    description: 'Moving Visual FoxPro tables into SQL Server: a mapping for every field type, deleted rows, code pages, and a staging load with control totals you can rehearse.',
+    published: '2026-10-22',
+    caseStudy: 'visual-foxpro-to-dotnet-migration',
+    minutes: 12,
+    faq: [
+      ['How do I migrate a Visual FoxPro database to SQL Server?', 'Inventory the .dbf, .fpt and .cdx files, map every field type to a SQL Server type, load the raw rows into staging tables with BULK INSERT or SqlBulkCopy, then transform them into the new schema in T-SQL with row counts and money totals compared at each step. Rehearse the whole load from one command until the totals agree three times.'],
+      ['What SQL Server type should a FoxPro Currency field become?', 'decimal(19,4). FoxPro Currency is exact to four decimal places. SQL Server money has the same range, but Microsoft recommends decimal with at least four places for values used in calculations.'],
+      ['Why do deleted FoxPro records appear after migration?', 'FoxPro DELETE only flags the record; the row stays in the .dbf until the table is packed, and SET DELETED defaults to off. Carry DELETED() into staging as a column, count the flagged rows, and load only unflagged rows into the final schema.'],
+      ['Can SQL Server read FoxPro tables directly?', 'Only through the Visual FoxPro OLE DB provider, which ships as a 32-bit DLL. A 64-bit SQL Server cannot load it as a linked server, so the usual route is an x86 .NET loader with SqlBulkCopy, or a COPY TO export from FoxPro loaded with BULK INSERT.'],
+      ['How do I convert FoxPro code pages to Unicode?', 'Read the code page mark from each table with CPDBF(), export with COPY TO ... AS 1252 or let the OLE DB provider translate to .NET strings, and load into nvarchar columns. With BULK INSERT, set CODEPAGE to match the export, then check rows with accented characters by eye.'],
+    ],
+  },
+  {
     slug: 'react-state-management-redux-zustand-context',
     title: 'Redux Toolkit, Zustand or Context: where React state belongs',
     description: 'Server state, shared client state, local UI state and URL state each have a natural home. When to use TanStack Query, Redux Toolkit, Zustand or Context.',
