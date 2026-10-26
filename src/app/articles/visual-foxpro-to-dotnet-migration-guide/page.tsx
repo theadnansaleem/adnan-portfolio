@@ -160,7 +160,7 @@ export default function Page() {
         Reports are where users notice differences first, and they depend on everything underneath. Rebuild them after the workflows that feed them, and compare old and new output line by line on the same data. A report that matches is the most convincing evidence that a workflow was migrated correctly.
       </p>
       <p>
-        FoxPro reports live in <code>.frx</code> files that hold the layout, the grouping and the expressions for each field, so a report can contain calculations that appear nowhere else in the code. Open each one and list its expressions before rebuilding it.
+        FoxPro reports live in <code>.frx</code> files that hold the layout, the grouping and the expressions for each field, so a report can contain calculations that appear nowhere else in the code. Open each one and list its expressions before rebuilding it. The inventory, the T-SQL totals, the Blazor screen and the parity tests are in <Link href="/articles/visual-foxpro-reports-to-blazor-dotnet">Replacing Visual FoxPro reports with Blazor and SQL Server</Link>.
       </p>
 
       <h2>7. Migrate one workflow at a time, then retire</h2>

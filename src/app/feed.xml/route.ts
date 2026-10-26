@@ -11,7 +11,7 @@ export function GET() {
     .sort((a, b) => b.published.localeCompare(a.published))
     .map((a) => {
       const url = `${profile.url}/articles/${a.slug}`;
-      return `<item><title>${escape(a.title)}</title><link>${url}</link><guid>${url}</guid><pubDate>${new Date(a.published).toUTCString()}</pubDate><description>${escape(a.description)}</description></item>`;
+      return `<item><title>${escape(a.title)}</title><link>${url}</link><guid>${url}</guid><pubDate>${new Date(a.published).toUTCString()}</pubDate><description>${escape(a.description)}</description>${a.tags.map((t) => `<category>${escape(t)}</category>`).join('')}</item>`;
     });
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>

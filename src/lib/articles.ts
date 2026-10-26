@@ -1,3 +1,6 @@
+export const topics = ['React', '.NET', 'Azure AI', 'Legacy migration'] as const;
+export type Topic = (typeof topics)[number];
+
 export interface Article {
   slug: string;
   title: string;
@@ -9,6 +12,10 @@ export interface Article {
   /** Case study that covers the same work */
   caseStudy: string;
   minutes: number;
+  /** The one section of the articles index this belongs to */
+  topic: Topic;
+  /** Search terms the article answers; also the related-article signal, the OG tags and the feed categories */
+  tags: string[];
   /** Quick answers shown under the body and published as FAQ structured data: [question, answer] */
   faq?: string[][];
 }
@@ -17,12 +24,85 @@ export interface Article {
 // Claims about my own work in them restate CV bullets; the rest is general engineering practice.
 export const articles: Article[] = [
   {
+    slug: 'rag-azure-openai-azure-ai-search-dotnet',
+    title: 'RAG in .NET with Azure OpenAI and Azure AI Search',
+    description: 'Retrieval-augmented generation in C#: chunk and embed documents, index them in Azure AI Search, run a hybrid vector query, and ground the answer with citations.',
+    published: '2026-10-26',
+    caseStudy: 'qatar-events-platform-module-federation',
+    minutes: 11,
+    topic: 'Azure AI',
+    tags: ['RAG', 'Azure OpenAI', 'Azure AI Search', 'C#', '.NET', 'ASP.NET Core', 'embeddings', 'vector search', 'Microsoft Foundry', 'generative AI'],
+    faq: [
+      ['What is retrieval-augmented generation?', 'A pattern where the application first retrieves the passages most relevant to a question from its own documents, then sends those passages to a language model with the question, so the answer is grounded in your data instead of the model\'s training set.'],
+      ['Which Azure services does a RAG app need?', 'An embedding deployment and a chat deployment in Azure OpenAI, and an Azure AI Search index with a vector field. Document Intelligence is optional for turning PDFs into text.'],
+      ['Should I use vector search or keyword search for RAG?', 'Both, in one hybrid query. Vector search finds passages that mean the same thing in different words; keyword search finds exact product names, codes and identifiers that embeddings blur. Azure AI Search fuses the two result lists with reciprocal rank fusion.'],
+      ['How big should a chunk be?', 'A few hundred tokens with some overlap. Chunks that are too small lose the sentence that answers the question; chunks that are too large dilute the embedding and waste the prompt budget.'],
+      ['How do I stop the model inventing answers?', 'Tell it in the system message to answer only from the supplied passages and to say when they do not contain the answer, pass the passages with identifiers, require a citation per claim, and check in tests that answers to questions outside the corpus come back as "not found".'],
+      ['What is the difference between Azure OpenAI On Your Data and building RAG yourself?', 'On Your Data wires Azure AI Search into the chat completion call for you, so one request does retrieval and generation. Building it yourself means two calls, but you control chunking, filters, the number of passages and the prompt, and you can test retrieval on its own.'],
+    ],
+  },
+  {
+    slug: 'entity-framework-core-stored-procedures-sql-server',
+    title: 'Stored procedures in Entity Framework Core: call, map, test',
+    description: 'When a stored procedure belongs in an EF Core app, how to call one with FromSql and ExecuteSql, read output parameters, map saves, and test the data layer.',
+    published: '2026-10-26',
+    caseStudy: 'visual-foxpro-to-dotnet-migration',
+    minutes: 10,
+    topic: '.NET',
+    tags: ['Entity Framework Core', 'stored procedures', 'SQL Server', 'T-SQL', 'C#', 'ASP.NET Core', 'FromSql', 'SqlQuery'],
+    faq: [
+      ['How do I call a stored procedure in Entity Framework Core?', 'For entity results, FromSql on the DbSet with an EXECUTE statement and interpolated parameters, then ToListAsync. For scalar or unmapped result types, Database.SqlQuery<T>. For procedures that return nothing, Database.ExecuteSqlAsync. FromSql was added in EF Core 7; older versions use FromSqlInterpolated.'],
+      ['Can I add Where or OrderBy after FromSql on a stored procedure?', 'No. EF Core composes LINQ by wrapping your SQL in a subquery, and SQL Server does not allow a procedure call inside a subquery. Call AsEnumerable or AsAsyncEnumerable straight after FromSql and filter in memory, or move the filter into a procedure parameter.'],
+      ['How do I get an output parameter back from a stored procedure in EF Core?', 'Create a SqlParameter with Direction set to Output, pass it to ExecuteSqlRawAsync alongside the input parameters, and read its Value after the call completes.'],
+      ['Is FromSql safe from SQL injection?', 'Yes, when values are placed inside the interpolated string: EF Core turns each one into a DbParameter. FromSqlRaw with string concatenation is not safe, and it is the only option when a column or table name has to vary, so validate that name against an allow list.'],
+      ['Can EF Core use stored procedures for SaveChanges?', 'Yes, since EF Core 7. InsertUsingStoredProcedure, UpdateUsingStoredProcedure and DeleteUsingStoredProcedure on the entity builder map each operation to a procedure, with HasParameter, HasOriginalValueParameter and HasResultColumn describing its shape. Microsoft notes that the support does not mean procedures are recommended.'],
+      ['How do I unit test code that calls stored procedures?', 'You cannot, in memory: the procedure is the logic. Put each call behind a small interface so the business code can be tested with a fake, and run the real procedures against a disposable SQL Server in an integration test.'],
+    ],
+  },
+  {
+    slug: 'ddd-cqrs-blazor-server-entity-framework-core',
+    title: 'DDD and CQRS in a .NET module without the ceremony',
+    description: 'DDD and CQRS in a Blazor Server and EF Core module: aggregates that guard the rules, one handler per command, queries as projections, no MediatR.',
+    published: '2026-10-26',
+    caseStudy: 'codex-vehicle-cybersecurity-platform',
+    minutes: 10,
+    topic: '.NET',
+    tags: ['Domain-Driven Design', 'CQRS', 'Blazor Server', 'Entity Framework Core', 'C#', 'ASP.NET Core', 'clean architecture'],
+    faq: [
+      ['What is CQRS in simple terms?', 'Command Query Responsibility Segregation: code that changes data (commands) is separate from code that reads it (queries). Commands go through the domain model and its rules; queries read whatever shape the screen needs, straight from the database.'],
+      ['Do I need MediatR for CQRS?', 'No. CQRS is a separation, not a library. A command is a record, a handler is a class with one Handle method, and the handler is injected where it is used. MediatR adds a dispatcher and a pipeline, which helps once there are dozens of handlers with shared behaviours such as validation and logging.'],
+      ['Does CQRS require two databases?', 'No. The usual form has one database with two kinds of code reading and writing it. Separate read stores arrive only when the read load or the read shape justifies the synchronisation work.'],
+      ['What is an aggregate in Domain-Driven Design?', 'A cluster of objects, with one root entity, that is loaded and saved as a unit and enforces its own invariants. Code outside the aggregate changes it only through methods on the root, never by setting properties on its children.'],
+      ['Why should Blazor Server use IDbContextFactory instead of a scoped DbContext?', 'In server-side Blazor, scoped services live for the user\'s circuit, so a scoped DbContext is shared by every component on the page and can be used concurrently, which DbContext does not support. Microsoft recommends AddDbContextFactory and one context per operation.'],
+      ['Where do domain events get published?', 'After the aggregate\'s changes are saved. An EF Core SaveChanges interceptor can collect the events from tracked aggregates and dispatch them once the transaction commits, so a handler never sees an event for a change that was rolled back.'],
+    ],
+  },
+  {
+    slug: 'visual-foxpro-reports-to-blazor-dotnet',
+    title: 'Replacing Visual FoxPro reports with Blazor and SQL Server',
+    description: 'How to retire FoxPro .frx reports without losing a number: inventory, totals in T-SQL, a Blazor QuickGrid screen, CSV and PDF exports, and parity tests.',
+    published: '2026-10-26',
+    caseStudy: 'visual-foxpro-to-dotnet-migration',
+    minutes: 9,
+    topic: 'Legacy migration',
+    tags: ['Visual FoxPro', 'reports', 'Blazor', 'SQL Server', 'T-SQL', 'QuickGrid', 'legacy modernization', 'FoxPro to .NET migration'],
+    faq: [
+      ['How do I convert Visual FoxPro reports to .NET?', 'Inventory the .frx files and who still runs each one, read the report\'s query and calculated fields as the specification, move the aggregation into a T-SQL query or procedure, render the result in a Blazor page, and prove parity by running old and new for the same period and comparing totals.'],
+      ['What is an .frx file?', 'A Visual FoxPro report definition. It is itself a FoxPro table: each row is a band, field, line or label, with the expression, position and format in its columns. USE the .frx as a table to read every expression it contains.'],
+      ['Which .NET reporting tool replaces FoxPro reports?', 'For on-screen reports, a Blazor page with QuickGrid and a T-SQL query is enough. For printed output, choose a PDF library for .NET and check its licence terms for your company size. Most FoxPro reports turn out to be lists with totals that need no report designer at all.'],
+      ['Why do the totals differ between the FoxPro report and the new one?', 'Usually one of four things: rows FoxPro skipped because SET DELETED was on, rounding done per line in FoxPro and once at the end in SQL, a filter buried in the report\'s data environment, or a date range that FoxPro treated as inclusive. Compare row counts before comparing sums.'],
+      ['Should reports be migrated before or after the data?', 'After. A report is a view over the data, so migrating it before the tables are in SQL Server means writing it twice. The same rule holds for the application logic: move the data model first, then the workflows, then the reports that read what the workflows wrote.'],
+    ],
+  },
+  {
     slug: 'visual-foxpro-to-sql-server-data-migration',
     title: 'Visual FoxPro to SQL Server: a repeatable data migration',
     description: 'Moving Visual FoxPro tables into SQL Server: a mapping for every field type, deleted rows, code pages, and a staging load with control totals you can rehearse.',
     published: '2026-10-22',
     caseStudy: 'visual-foxpro-to-dotnet-migration',
     minutes: 12,
+    topic: 'Legacy migration',
+    tags: ['Visual FoxPro', 'SQL Server', 'data migration', 'T-SQL', 'BULK INSERT', 'SqlBulkCopy', 'legacy modernization'],
     faq: [
       ['How do I migrate a Visual FoxPro database to SQL Server?', 'Inventory the .dbf, .fpt and .cdx files, map every field type to a SQL Server type, load the raw rows into staging tables with BULK INSERT or SqlBulkCopy, then transform them into the new schema in T-SQL with row counts and money totals compared at each step. Rehearse the whole load from one command until the totals agree three times.'],
       ['What SQL Server type should a FoxPro Currency field become?', 'decimal(19,4). FoxPro Currency is exact to four decimal places. SQL Server money has the same range, but Microsoft recommends decimal with at least four places for values used in calculations.'],
@@ -38,6 +118,8 @@ export const articles: Article[] = [
     published: '2026-10-22',
     caseStudy: 'qatar-events-platform-module-federation',
     minutes: 7,
+    topic: 'React',
+    tags: ['React', 'Redux Toolkit', 'Zustand', 'React Context', 'TanStack Query', 'state management', 'TypeScript'],
     faq: [
       ['Should I use Redux Toolkit or Zustand?', 'Zustand when a few components share client state and you want little setup. Redux Toolkit when many screens write to the same state and you need named actions and DevTools history to trace changes.'],
       ['Is React Context a replacement for Redux?', 'No. Context passes a value down the tree, and every component that reads it re-renders when it changes. It suits values that rarely change, such as a theme, a locale or the signed-in user.'],
@@ -54,6 +136,8 @@ export const articles: Article[] = [
     updated: '2026-10-22',
     caseStudy: 'qatar-events-platform-module-federation',
     minutes: 8,
+    topic: 'React',
+    tags: ['React', 'micro frontends', 'Module Federation', 'webpack', 'Rspack', 'frontend architecture'],
     faq: [
       ['What is Module Federation?', 'A bundler feature, introduced in webpack 5, that lets one JavaScript application load code from another separately built and deployed application at runtime, while sharing dependencies such as React between them.'],
       ['When are micro frontends worth it?', "When several teams ship into one frontend and block each other's releases. With a single team, a well-structured monolith with code splitting is simpler and faster."],
@@ -72,6 +156,8 @@ export const articles: Article[] = [
     updated: '2026-10-22',
     caseStudy: 'volopa-react-performance',
     minutes: 11,
+    topic: 'React',
+    tags: ['React', 'virtualization', 'react-window', 'TanStack Virtual', 'web performance', 'large tables'],
     faq: [
       ['What is virtualization in React?', 'Rendering only the rows that are visible in the scroll area, plus a few either side, while the full list stays in memory. It is also called windowing.'],
       ['How many rows can a React table handle?', 'It depends on row complexity, device and interaction. This synthetic example keeps 20,000 rows in memory but mounts 18 at scroll position zero. The article reports repeatable filter measurements, not a universal row limit.'],
@@ -89,6 +175,8 @@ export const articles: Article[] = [
     updated: '2026-10-20',
     caseStudy: 'visual-foxpro-to-dotnet-migration',
     minutes: 10,
+    topic: 'Legacy migration',
+    tags: ['Visual FoxPro', 'FoxPro to .NET migration', 'C#', '.NET', 'SQL Server', 'Entity Framework Core', 'legacy modernization'],
     faq: [
       ['Is Visual FoxPro still supported?', "No. Version 9 was the last release, and Microsoft's extended support for it ended in January 2015. Existing applications keep running, but nothing is being fixed."],
       ['Can a FoxPro application be converted to C# automatically?', 'Tools can translate syntax, but the result keeps the old structure: logic inside forms, shared state and row-by-row loops. For a system that will be maintained for years, rewriting workflow by workflow against tests gives a better result than a mechanical translation.'],
@@ -105,6 +193,8 @@ export const articles: Article[] = [
     updated: '2026-10-22',
     caseStudy: 'hayya-qatar-evisa-platform',
     minutes: 7,
+    topic: 'React',
+    tags: ['React', 'Core Web Vitals', 'LCP', 'INP', 'code splitting', 'web performance', 'Next.js'],
     faq: [
       ['What is a good LCP score?', '2.5 seconds or less, measured at the 75th percentile of real visits. Between 2.5 and 4 seconds needs improvement, and above 4 seconds is poor.'],
       ['Did INP replace FID?', 'Yes. Interaction to Next Paint replaced First Input Delay as a Core Web Vital in March 2024. It measures the whole interaction through to the next paint, not only the delay before the handler starts.'],
@@ -123,6 +213,8 @@ export const articles: Article[] = [
     updated: '2026-10-20',
     caseStudy: 'codex-vehicle-cybersecurity-platform',
     minutes: 8,
+    topic: '.NET',
+    tags: ['ASP.NET Core', '.NET', 'authorization', 'RBAC', 'data redaction', 'C#', 'Entity Framework Core', 'API security'],
     faq: [
       ['What is the difference between authorization and redaction?', 'Authorization decides whether a caller may use an endpoint at all. Redaction decides which fields of the answer that caller receives.'],
       ['Is hiding a field in the frontend enough?', "No. If the API returns the field, anyone signed in can read it in the browser's network tab. It has to be removed on the server before the response is serialized."],
@@ -140,6 +232,8 @@ export const articles: Article[] = [
     updated: '2026-10-20',
     caseStudy: 'codex-vehicle-cybersecurity-platform',
     minutes: 7,
+    topic: 'React',
+    tags: ['React', 'WebSocket', 'real-time dashboard', 'Server-Sent Events', 'web performance', 'TypeScript'],
     faq: [
       ['Why does a React dashboard get slower over time?', 'Usually because a list in state grows for as long as the tab stays open, so every render has more to do, and because each incoming message triggers its own render.'],
       ['How often should a live dashboard re-render?', 'At most once per animation frame, which is about sixty times a second. Buffer incoming messages and flush them together.'],
@@ -150,6 +244,15 @@ export const articles: Article[] = [
     ],
   },
 ];
+
+/** The three articles closest to this one: same topic first, then the most shared tags */
+export const related = (a: Article, count = 3) =>
+  articles
+    .filter((other) => other.slug !== a.slug)
+    .map((other) => ({ other, score: (other.topic === a.topic ? 10 : 0) + other.tags.filter((t) => a.tags.includes(t)).length }))
+    .sort((x, y) => y.score - x.score)
+    .slice(0, count)
+    .map(({ other }) => other);
 
 export const article = (slug: string) => {
   const found = articles.find((a) => a.slug === slug);
