@@ -6,6 +6,7 @@ import { caseStudies } from "@/lib/case-studies";
 // Section anchors are not separate URLs. Use reviewed content dates for lastModified,
 // rather than a timestamp that changes on every build.
 export default function sitemap(): MetadataRoute.Sitemap {
+  const newest = articles.map((a) => a.updated ?? a.published).sort().at(-1);
   return [
     {
       url: `${profile.url}/`,
@@ -18,7 +19,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.9,
     },
-    ...["about", "hire", "lab", "ar", "frontend-developer", "dotnet-developer", "ai-engineer", "azure-developer", "certifications", "articles"].map((page) => ({
+    {
+      url: `${profile.url}/articles`,
+      ...(newest && { lastModified: new Date(newest) }),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    },
+    ...["about", "hire", "lab", "ar", "frontend-developer", "dotnet-developer", "ai-engineer", "azure-developer", "certifications"].map((page) => ({
       url: `${profile.url}/${page}`,
       changeFrequency: "monthly" as const,
       priority: 0.7,

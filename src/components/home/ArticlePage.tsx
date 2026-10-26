@@ -9,7 +9,7 @@ import AccessTiers from './lab/AccessTiers';
 import FailSmall from './lab/FailSmall';
 import PageVitals from './lab/PageVitals';
 import { profile } from '@/lib/data';
-import { articles, type Article } from '@/lib/articles';
+import { related, type Article } from '@/lib/articles';
 import { faqJsonLd } from '@/lib/seo';
 
 // The lab demo that matches each article, with the instruction the lab page gives for it
@@ -29,8 +29,9 @@ export const articleMetadata = (a: Article): Metadata => ({
   // No site suffix: the titles are long enough on their own
   title: { absolute: a.title },
   description: a.description,
+  keywords: a.tags,
   alternates: { canonical: `/articles/${a.slug}`, types: { 'application/rss+xml': '/feed.xml' } },
-  openGraph: { type: 'article', title: a.title, description: a.description, url: `/articles/${a.slug}`, publishedTime: a.published, modifiedTime: a.updated, authors: [profile.name], images: ['/opengraph-image'] },
+  openGraph: { type: 'article', title: a.title, description: a.description, url: `/articles/${a.slug}`, publishedTime: a.published, modifiedTime: a.updated, authors: [profile.name], section: a.topic, tags: a.tags, images: ['/opengraph-image'] },
 });
 
 /** Frame for one article: heading, byline, body, and a pointer to the matching case study. */
@@ -47,8 +48,13 @@ export default function ArticlePage({ article: a, children }: { article: Article
         datePublished: a.published,
         dateModified: a.updated ?? a.published,
         inLanguage: 'en',
+        articleSection: a.topic,
+        keywords: a.tags.join(', '),
+        timeRequired: `PT${a.minutes}M`,
+        image: `${profile.url}/opengraph-image`,
         author: { '@id': `${profile.url}/#person` },
         publisher: { '@id': `${profile.url}/#person` },
+        isPartOf: { '@id': `${profile.url}/#website` },
         mainEntityOfPage: url,
       },
       {
@@ -87,6 +93,9 @@ export default function ArticlePage({ article: a, children }: { article: Article
           <h1 className="hx-article-title">{a.title}</h1>
           <p>{a.description}</p>
           <p className="hx-cap">By {profile.name} · <time dateTime={a.published}>{date(a.published)}</time>{a.updated && <> · Updated <time dateTime={a.updated}>{date(a.updated)}</time></>} · {a.minutes} min read</p>
+          <ul className="hx-tags" aria-label="Topics">
+            {a.tags.map((tag) => <li key={tag}>{tag}</li>)}
+          </ul>
           <ShareArticle url={url} title={a.title} />
         </header>
         {contents.length > 2 && (
@@ -128,11 +137,11 @@ export default function ArticlePage({ article: a, children }: { article: Article
         <section className="hx-lab">
           <div>
             <p className="hx-cap">Keep reading</p>
-            <h2>More articles</h2>
+            <h2>Related articles</h2>
           </div>
           <div className="hx-facts hx-card">
             <ol>
-              {articles.filter((other) => other.slug !== a.slug).map((other) => (
+              {related(a).map((other) => (
                 <li key={other.slug} className="hx-go">
                   <strong><Link className="hx-go-link" href={`/articles/${other.slug}`}>{other.title}</Link></strong>
                   <span>{other.description}</span>

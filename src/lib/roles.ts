@@ -60,7 +60,14 @@ export const roles = {
     lead: 'Backends in C#, .NET 6/8, ASP.NET Core Web APIs and Blazor, with SQL Server, T-SQL and Entity Framework Core, on government, fintech and cybersecurity platforms. Based in Lahore, five years fully remote with US, UK and German teams, and available immediately.',
     match: /\.NET|C#|Blazor|Entity Framework|EF Core|SQL Server|T-SQL|ASP\.NET|CQRS|Domain-Driven|DDD|stored procedures/i,
     skillGroups: ['Backend & APIs', 'Databases', 'Architecture & Performance', 'Cloud & DevOps'],
-    articles: ['visual-foxpro-to-dotnet-migration-guide', 'visual-foxpro-to-sql-server-data-migration', 'role-based-access-control-data-redaction-dotnet'],
+    articles: [
+      'visual-foxpro-to-dotnet-migration-guide',
+      'visual-foxpro-to-sql-server-data-migration',
+      'visual-foxpro-reports-to-blazor-dotnet',
+      'entity-framework-core-stored-procedures-sql-server',
+      'ddd-cqrs-blazor-server-entity-framework-core',
+      'role-based-access-control-data-redaction-dotnet',
+    ],
     faq: [
       ['Which .NET versions and frameworks do you use?', 'C# on .NET 6 and .NET 8, with ASP.NET Core Web APIs, Blazor Server and Entity Framework Core.'],
       ['Have you migrated a legacy system to .NET?', 'Yes. As the sole engineer I migrated 42 financial workflows from a Visual FoxPro system to C# and .NET Core over a 2.5-year engagement, and retired the old system.'],
@@ -80,6 +87,7 @@ export const roles = {
     match: /Azure OpenAI|evaluation|human feedback/i,
     skillGroups: ['AI & LLM Engineering', 'Backend & APIs', 'Cloud & DevOps'],
     studies: ['ai-evaluation-training-interfaces'],
+    articles: ['rag-azure-openai-azure-ai-search-dotnet'],
     faq: [
       ['Are you Microsoft certified?', 'Yes. Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103), earned in October 2026. It covers Microsoft Foundry, Azure OpenAI, agents with function calling and multi-agent orchestration, and RAG with Azure AI Search.'],
       ['Which AI models and tools do you use?', 'Claude, Codex, Gemini, Kimi, DeepSeek and Groq, run through an agent harness I built myself. Claude does most of the implementation, and Codex and Gemini review the finished change.'],
@@ -98,6 +106,7 @@ export const roles = {
     lead: 'I deploy .NET and React applications on Microsoft Azure: Azure Functions, App Service, Azure SQL, Blob Storage, Key Vault and Application Insights, with Azure DevOps pipelines and Azure OpenAI (GPT) integrations on Qatar\'s government platforms. Based in Lahore, five years fully remote with US, UK and German teams, and available immediately.',
     match: /Azure/i,
     skillGroups: ['Cloud & DevOps', 'Backend & APIs', 'Databases', 'AI & LLM Engineering'],
+    articles: ['rag-azure-openai-azure-ai-search-dotnet'],
     studies: ['qatar-events-platform-module-federation', 'hayya-qatar-evisa-platform'],
     faq: [
       ['Are you Microsoft certified?', 'Yes. Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103), earned in October 2026. It covers Microsoft Foundry, Azure OpenAI, agents with function calling and multi-agent orchestration, and RAG with Azure AI Search.'],

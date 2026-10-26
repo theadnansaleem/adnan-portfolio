@@ -7,6 +7,20 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.27.0 - 2026-10-26
+
+### Added
+- Article: RAG in .NET with Azure OpenAI and Azure AI Search. Chunking and embeddings, a vector index, hybrid queries with semantic ranking, grounded prompts with citations, On Your Data, and retrieval tests, plus six quick answers.
+- Article: Stored procedures in Entity Framework Core. FromSql, SqlQuery and ExecuteSql, output parameters, the composition limit, SaveChanges mapped to procedures, and testing the data access layer, plus six quick answers.
+- Article: DDD and CQRS in a .NET module without the ceremony. Aggregates, commands and handlers without MediatR, queries as projections, IDbContextFactory in Blazor Server, and domain events through a SaveChanges interceptor, plus six quick answers.
+- Article: Replacing Visual FoxPro reports with Blazor and SQL Server. The .frx inventory, totals in T-SQL, a Blazor QuickGrid, PDF and Excel exports, and parity tests, plus five quick answers.
+- Every article has a topic and tags. Tags show under the title, go out as keywords, Open Graph article tags, feed categories and TechArticle keywords, and pick the three related articles shown at the end of each piece.
+- The articles index groups articles by topic and publishes the list as ItemList structured data.
+
+### Changed
+- TechArticle structured data adds articleSection, timeRequired, image and isPartOf.
+- The .NET, AI engineer and Azure developer pages list the new articles. The articles index carries the newest article date in the sitemap.
+
 ## 2.26.0 - 2026-10-22
 
 ### Added
