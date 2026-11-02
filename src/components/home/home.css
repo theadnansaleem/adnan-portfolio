@@ -129,6 +129,15 @@ body:has(.hx) { cursor: auto; }
 /* The layer the cursor uncovers, clipped to the portrait's silhouette and
    shown only inside the liquid shape that trails the pointer. It is the same
    portrait printed in lime with a dot screen, so it lines up exactly. */
+/* Code card in the portrait's place while SHOW_PHOTOS is off; it sits just under the giant name (same top and size maths) */
+.hx-stand {
+  position: absolute; z-index: 2; left: 50%; top: calc(clamp(84px, 13svh, 150px) + clamp(64px, 17.5vw, 330px) * 0.9 + 6svh); translate: -50% 0;
+  width: max-content; max-width: calc(100vw - var(--gut) * 2); margin: 0; padding: 20px 22px; pointer-events: none; overflow: hidden;
+  font: 13px/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--ink); white-space: pre;
+  animation: hx-rise 1.2s var(--ease) 1.05s both;
+}
+.hx-stand i { font-style: normal; color: var(--ink-2); }
+.hx-stand b { font-weight: 400; color: var(--mark); }
 .hx-code { position: absolute; inset: 0; -webkit-mask: center bottom / contain no-repeat; mask: center bottom / contain no-repeat; /* the image is set inline to the showing portrait */ }
 .hx-code > div { position: absolute; inset: 0; background: var(--accent); clip-path: circle(0); /* JS replaces this with the liquid outline that follows the cursor */ }
 .hx-code img { object-fit: contain; object-position: bottom; mix-blend-mode: multiply; filter: grayscale(1) contrast(1.45) brightness(1.08); }
@@ -269,6 +278,7 @@ body:has(.hx) { cursor: auto; }
   /* Phone: name and portrait fill the top, the copy follows underneath */
   .hx-giant { top: 84px; font-size: 21vw; }
   .hx-portrait { --size: min(100vw, 56svh); top: calc(62svh - var(--size)); }
+  .hx-stand { top: calc(62svh - min(100vw, 56svh) * 0.74); font-size: 12px; padding: 16px 18px; }
   /* Sits on the faded foot of the portrait, clear of the badge and the text below */
   .hx-slides { top: calc(57svh - 40px); }
   .hx-hero { height: auto; min-height: 0; display: block; padding: 57svh var(--gut) 34px; }
@@ -483,6 +493,9 @@ button.hx-shot:hover .hx-shot-cue, button.hx-shot:focus-visible .hx-shot-cue { o
 .hx-film li { position: relative; flex: none; width: clamp(150px, 16vw, 240px); aspect-ratio: 3 / 4; border-radius: 14px; overflow: hidden; background: var(--line); transition: transform 0.5s var(--ease); }
 .hx-film li:hover { transform: scale(1.06); z-index: 1; }
 .hx-film img { object-fit: cover; object-position: top; }
+/* The caption that stands in for a photo while SHOW_PHOTOS is off (home photo row, about scrapbook) */
+.hx-note { display: grid; place-items: center; height: 100%; aspect-ratio: 4 / 5; padding: 16px; border-radius: 8px; background: var(--line); text-align: center; font-family: var(--serif); font-style: italic; font-size: clamp(24px, 2.2vw, 32px); line-height: 1.05; }
+.hx-film .hx-note { position: absolute; inset: 0; aspect-ratio: auto; border-radius: 0; background: none; }
 @keyframes hx-film { to { transform: translateX(calc(-50% - 7px)); } }
 .hx-facts-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 30px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--card); }
 .hx-facts-row > div { padding: 18px 22px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }

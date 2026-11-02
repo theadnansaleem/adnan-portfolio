@@ -7,6 +7,11 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.27.1 - 2026-11-02
+
+### Changed
+- Photos of Adnan are hidden for now. The home hero shows a short code card where the portrait stood, and the home photo row and the about page scrapbook show each photo's caption instead. One flag, `SHOW_PHOTOS` in `src/components/home/photos.ts`, brings the photos back.
+
 ## 2.27.0 - 2026-10-26
 
 ### Added

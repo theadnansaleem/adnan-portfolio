@@ -4,7 +4,7 @@ import PageFrame from '@/components/home/PageFrame';
 import Clocks from '@/components/home/Clocks';
 import { ShareButton } from '@/components/home/AboutBits';
 import { hxHand } from '@/components/home/fonts';
-import { MOMENTS } from '@/components/home/photos';
+import { MOMENTS, SHOW_PHOTOS } from '@/components/home/photos';
 import { education, jobs, profile } from '@/lib/data';
 import { faqJsonLd, pageJsonLd } from '@/lib/seo';
 
@@ -62,15 +62,17 @@ export default function AboutPage() {
           {MOMENTS.map((moment) => (
             <li key={moment.file}>
               <figure>
-                <Image src={`/me/m/${moment.file}.webp`} alt={moment.alt} width={720} height={moment.height} unoptimized />
-                <figcaption>
+                {SHOW_PHOTOS
+                  ? <Image src={`/me/m/${moment.file}.webp`} alt={moment.alt} width={720} height={moment.height} unoptimized />
+                  : <span className="hx-note">{moment.note}</span>}
+                {SHOW_PHOTOS && <figcaption>
                   {/* Hand-drawn arrow that keeps nudging up at the photo */}
                   <svg viewBox="0 0 48 56" aria-hidden="true">
                     <path d="M40 52C22 50 10 38 14 10" />
                     <path d="M4 20 14 8l9 13" />
                   </svg>
                   <span>{moment.note}</span>
-                </figcaption>
+                </figcaption>}
               </figure>
             </li>
           ))}

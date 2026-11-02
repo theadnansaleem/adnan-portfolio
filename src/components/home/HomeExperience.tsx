@@ -10,7 +10,7 @@ import ExperienceReel from './ExperienceReel';
 import CommandPalette, { openPalette } from './CommandPalette';
 import FitMatcher from './FitMatcher';
 import Terminal from './Terminal';
-import { MOMENTS } from './photos';
+import { MOMENTS, SHOW_PHOTOS } from './photos';
 import { spotlight } from './spotlight';
 import { hearts } from './hearts';
 import CertHighlight, { CertPicture, MicrosoftMark } from './CertHighlight';
@@ -339,6 +339,7 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
           The portraits are pre-built WebP cutouts with transparency, so they skip the optimizer. */}
       <p className="hx-giant" aria-hidden="true"><span>Adnan</span> <span><em>Saleem</em></span></p>
       <div className="hx-portrait" ref={portraitRef}>
+        {SHOW_PHOTOS && <>
         {/* Only the showing portrait is described; the hidden ones stay silent for screen readers */}
         {HERO.map(([src, wearing], i) => (
           <Image key={src} className={i === slide ? 'is-on' : undefined} src={src} alt={i === slide ? `Portrait of ${profile.name} ${wearing}` : ''} fill priority={i === 0} unoptimized />
@@ -347,12 +348,24 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
         <div className="hx-code" aria-hidden="true" style={{ WebkitMaskImage: `url(${HERO[slide][0]})`, maskImage: `url(${HERO[slide][0]})` }}>
           <div><Image src={HERO[slide][0]} alt="" fill unoptimized /></div>
         </div>
+        </>}
       </div>
-      <div className="hx-slides" role="group" aria-label="Choose a portrait">
+      {/* Stand-in while the photos are off: outside the portrait, whose feathered mask would fade it on phones */}
+      {!SHOW_PHOTOS && (
+        <pre className="hx-card hx-stand" aria-hidden="true">
+          <i>const</i> adnan = {'{'}{'\n'}
+          {'  '}role: <b>&apos;Senior Full-Stack Engineer&apos;</b>,{'\n'}
+          {'  '}stack: [<b>&apos;React&apos;</b>, <b>&apos;.NET&apos;</b>, <b>&apos;AWS&apos;</b>],{'\n'}
+          {'  '}based: <b>&apos;Lahore&apos;</b>,{'\n'}
+          {'  '}status: <b>&apos;{profile.availability}&apos;</b>,{'\n'}
+          {'}'};
+        </pre>
+      )}
+      {SHOW_PHOTOS && <div className="hx-slides" role="group" aria-label="Choose a portrait">
         {HERO.map(([src], i) => (
           <button key={src} type="button" aria-label={`Portrait ${i + 1} of ${HERO.length}`} aria-pressed={i === slide} onClick={() => { setSlide(i); setAutoplay(false); }} />
         ))}
-      </div>
+      </div>}
 
       <header className="hx-top">
         <a className="hx-wordmark" href="#home" title="Back to top" onClick={closeMenu}>
@@ -416,7 +429,7 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
             <a className="hx-pill is-big hx-mag" href={profile.linkedin} target="_blank" rel="noopener noreferrer"><LinkedInMark /> LinkedIn</a>
           </div>
         </div>
-        <p className="hx-hint hx-cap" aria-hidden="true">Move the cursor over the portrait</p>
+        {SHOW_PHOTOS && <p className="hx-hint hx-cap" aria-hidden="true">Move the cursor over the portrait</p>}
       </section>
 
       <section className="hx-band" aria-label="At a glance">
@@ -580,7 +593,11 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
           <ul onClick={(e) => hearts(e.clientX, e.clientY, rootRef.current)}>
             {/* The row is doubled so the loop has no seam; the copy is decorative */}
             {[...MOMENTS, ...MOMENTS].map((moment, i) => (
-              <li key={i}><Image src={`/me/m/${moment.file}.webp`} alt={i < MOMENTS.length ? moment.alt : ''} fill unoptimized /></li>
+              <li key={i}>
+                {SHOW_PHOTOS
+                  ? <Image src={`/me/m/${moment.file}.webp`} alt={i < MOMENTS.length ? moment.alt : ''} fill unoptimized />
+                  : <span className="hx-note" aria-hidden={i >= MOMENTS.length || undefined}>{moment.note}</span>}
+              </li>
             ))}
           </ul>
         </div>
