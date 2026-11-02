@@ -1,3 +1,6 @@
+// Off switch for every photo of Adnan on the site (hero portraits, home photo row, about scrapbook). Flip back to true to restore.
+export const SHOW_PHOTOS = false;
+
 export interface Moment { file: string; height: number; alt: string; note: string }
 
 // The scrapbook on the about page and the photo row on the home page. Files are 720 wide WebP under public/me/m,
