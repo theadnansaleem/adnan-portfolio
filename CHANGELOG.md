@@ -7,6 +7,11 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.27.2 - 2026-11-08
+
+### Security
+- Next.js 16.3.5 to 16.4.5, with `eslint-config-next` to match. 16.3.5 was below the 16.3.6 fix for a critical remote code execution issue in `next/og` `ImageResponse` (GHSA-vcvr-r3jv-pc5j), which the share images use, and the 16.3 line gets no further security releases. The upgrade also brings `sharp` 0.35.5, the version the October 14 Image Optimization advisory requires.
+
 ## 2.27.1 - 2026-11-02
 
 ### Changed
