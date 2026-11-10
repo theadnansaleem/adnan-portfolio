@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: '/articles', types: { 'application/rss+xml': '/feed.xml' } },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: '/articles', images: ['/opengraph-image'] },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: '/articles' },
 };
 
 // The list of every article, so search engines see the whole index as one ordered set
