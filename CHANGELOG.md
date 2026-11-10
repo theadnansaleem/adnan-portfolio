@@ -17,6 +17,7 @@ That bumps `package.json`, commits, and tags in one step.
 
 ### Changed
 - The case study share image and the new article share image are drawn by one function, `card()` in `src/app/og/card.tsx`.
+- On a page shorter than the window, the footer sits at the bottom edge of the window.
 - README describes the site, its content model and how to run it, in place of the create-next-app default. The analytics section is unchanged.
 
 ## 2.27.2 - 2026-11-08

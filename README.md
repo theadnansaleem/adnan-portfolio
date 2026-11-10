@@ -2,7 +2,7 @@
 
 Source for [theadnansaleem.com](https://theadnansaleem.com), the portfolio of M. Adnan Saleem, senior full-stack software engineer: React, Next.js, Angular and TypeScript over .NET and Node.js.
 
-The site is statically generated with the Next.js App Router. Every page is built from a few typed data files that mirror the CV, so a case study or a role page cannot claim something the CV does not.
+The site is statically generated with the Next.js App Router. Every page is built from a few typed data files that mirror the CV. Case study summaries and highlights, and the experience lists on the role pages, are the CV's own bullets, not copies of them.
 
 ## What is on it
 
@@ -21,8 +21,8 @@ A command palette (Cmd+K or Ctrl+K) searches every page, case study and article.
 ## How it is put together
 
 - `src/lib/data.ts` mirrors the CV: profile, jobs, projects, skills, education and certifications. Content changes go into the CV first, then here.
-- `src/lib/case-studies.ts` builds each case study from those CV bullets. `pick()` throws at build time if a bullet it relies on has been reworded, so a case study cannot drift from the CV unnoticed.
-- `src/lib/roles.ts` defines each role page as a pattern over the CV bullets, plus the case studies and articles that go with it.
+- `src/lib/case-studies.ts` builds each case study from those CV bullets. `pick()` throws at build time when its pattern no longer matches any bullet, so a reworded CV line cannot drop out of a case study silently.
+- `src/lib/roles.ts` defines each role page as a pattern over the CV bullets, plus the case studies and articles that go with it. Titles, introductions and quick answers are written by hand.
 - `src/lib/articles.ts` holds the article metadata: topic, tags and quick answers. The body of each article is `src/app/articles/<slug>/page.tsx`.
 - `src/components/home/` holds the shared page frame, the article and role page templates, and the lab demos.
 

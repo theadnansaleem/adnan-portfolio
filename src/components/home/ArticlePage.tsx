@@ -27,13 +27,16 @@ const anchor = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').
 
 const date = (iso: string) => new Date(iso + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 
+// The card shows the title and topic, so its address changes with the article's revision date and crawlers fetch it again
+const shareImage = (a: Article) => `/articles/${a.slug}/opengraph-image?v=${a.updated ?? a.published}`;
+
 export const articleMetadata = (a: Article): Metadata => ({
   // No site suffix: the titles are long enough on their own
   title: { absolute: a.title },
   description: a.description,
   keywords: a.tags,
   alternates: { canonical: `/articles/${a.slug}`, types: { 'application/rss+xml': '/feed.xml' } },
-  openGraph: { type: 'article', title: a.title, description: a.description, url: `/articles/${a.slug}`, publishedTime: a.published, modifiedTime: a.updated, authors: [profile.name], section: a.topic, tags: a.tags, images: [{ url: `/articles/${a.slug}/opengraph-image`, width: 1200, height: 630, alt: a.title }] },
+  openGraph: { type: 'article', title: a.title, description: a.description, url: `/articles/${a.slug}`, publishedTime: a.published, modifiedTime: a.updated, authors: [profile.name], section: a.topic, tags: a.tags, images: [{ url: shareImage(a), width: 1200, height: 630, alt: a.title }] },
 });
 
 /** Frame for one article: heading, byline, body, and a pointer to the matching case study. */
@@ -53,7 +56,7 @@ export default function ArticlePage({ article: a, children }: { article: Article
         articleSection: a.topic,
         keywords: a.tags.join(', '),
         timeRequired: `PT${a.minutes}M`,
-        image: `${url}/opengraph-image`,
+        image: profile.url + shareImage(a),
         author: { '@id': `${profile.url}/#person` },
         publisher: { '@id': `${profile.url}/#person` },
         isPartOf: { '@id': `${profile.url}/#website` },

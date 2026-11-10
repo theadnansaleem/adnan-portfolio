@@ -45,9 +45,9 @@ export const roles = {
     faq: [
       ['Who can migrate a Visual FoxPro application to .NET?', 'I can. As the sole engineer I migrated 42 financial workflows from a legacy Visual FoxPro system to C# and .NET Core for a client in Canada, over a 2.5-year engagement, and retired the old system. I work remotely and have spent five years with US, UK and German teams.'],
       ['Do you take on Visual FoxPro migration projects?', 'Yes. I am available immediately and work remotely from Lahore. My last FoxPro migration ran as a part-time independent contract.'],
-      ['Can you migrate a FoxPro system that has no documentation?', 'Yes. The system I migrated carried two decades of business logic and had no specification. I redesigned its data models and business logic into a maintainable .NET Core domain layer and preserved all 42 financial workflows.'],
+      ['Can you migrate a FoxPro system that has no specification?', 'Yes. The system I migrated carried two decades of business logic and had no specification. I redesigned its data models and business logic into a maintainable .NET Core domain layer and preserved all 42 financial workflows.'],
       ['What does a FoxPro system become after the migration?', 'In mine: C# and .NET Core with a domain layer on Entity Framework Core, 42 T-SQL stored procedures on SQL Server with a testable data access layer, and Angular and Blazor on the frontend.'],
-      ['Do you migrate the data and the reports as well as the code?', 'Yes. The data models were redesigned on SQL Server, and the legacy Visual FoxPro reports were replaced with reporting workflows in the new Blazor application before the old system was retired.'],
+      ['Do you redesign the data model and replace the reports as well as the code?', 'Yes. I redesigned the legacy data models on SQL Server with Entity Framework Core and 42 T-SQL stored procedures, and replaced the legacy Visual FoxPro reports with reporting workflows in the new Blazor application.'],
       ['How long does a Visual FoxPro to .NET migration take?', 'It depends on the number of workflows and on how much of the knowledge is written down. Mine covered 42 workflows in two and a half years as a part-time engagement, with one engineer and no specification.'],
     ],
   },

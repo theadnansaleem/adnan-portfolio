@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageFrame from '@/components/home/PageFrame';
 
-// The root layout's canonical and robots values describe the home page, so they are cleared here
-export const metadata: Metadata = { title: 'Page not found', robots: { index: false }, alternates: { canonical: null } };
+// The root layout's canonical, robots and share card describe the home page, so they are cleared here
+export const metadata: Metadata = { title: 'Page not found', description: 'There is no page at this address.', robots: { index: false }, alternates: { canonical: null }, openGraph: null, twitter: null };
 
 export default function NotFound() {
   return (

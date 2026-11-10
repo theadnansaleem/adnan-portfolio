@@ -1,10 +1,11 @@
 import { card } from "@/app/og/card";
-import { articles } from "@/lib/articles";
+import { article, articles } from "@/lib/articles";
 import { profile } from "@/lib/data";
 
 export const alt = "Article";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return articles.map((a) => ({ slug: a.slug }));
@@ -17,6 +18,6 @@ export default async function Image({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const a = articles.find((entry) => entry.slug === slug);
-  return card(a ? a.topic : "Article", a ? a.title : profile.jobTitle, profile.name);
+  const a = article(slug);
+  return card(a.topic, a.title, profile.name);
 }
