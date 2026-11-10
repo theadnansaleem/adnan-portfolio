@@ -7,6 +7,14 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.29.0 - 2026-11-10
+
+### Added
+- The five role pages, the hire page, the case studies index and the articles index each have their own share image, drawn by `card()`. They all showed the site-wide card before.
+
+### Fixed
+- An unknown case study address under `/work/<slug>/opengraph-image` returns 404 instead of a generic card, as the article images already did.
+
 ## 2.28.0 - 2026-11-10
 
 ### Added

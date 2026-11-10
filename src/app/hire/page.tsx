@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: '/hire' },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: '/hire', images: ['/opengraph-image'] },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: '/hire' },
 };
 
 const FACTS = [

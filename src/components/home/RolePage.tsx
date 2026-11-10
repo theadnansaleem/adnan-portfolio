@@ -10,7 +10,7 @@ export const roleMetadata = (role: Role): Metadata => ({
   title: role.title,
   description: role.description,
   alternates: { canonical: role.path },
-  openGraph: { title: role.title, description: role.description, url: role.path, images: ['/opengraph-image'] },
+  openGraph: { title: role.title, description: role.description, url: role.path },
 });
 
 /** A line linking the role pages that cite an article or case study. */
