@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageFrame from './PageFrame';
@@ -11,6 +12,12 @@ export const roleMetadata = (role: Role): Metadata => ({
   alternates: { canonical: role.path },
   openGraph: { title: role.title, description: role.description, url: role.path, images: ['/opengraph-image'] },
 });
+
+/** A line linking the role pages that cite an article or case study. */
+export function RoleLinks({ roles }: { roles: Role[] }) {
+  if (roles.length === 0) return null;
+  return <p>Related experience: {roles.map((role, i) => <Fragment key={role.path}>{i > 0 && ', '}<Link href={role.path}>{role.name}</Link></Fragment>)}.</p>;
+}
 
 /** One role, shown through the CV bullets, skills and case studies that match it. Children sit under the header. */
 export default function RolePage({ role, children }: { role: Role; children?: React.ReactNode }) {

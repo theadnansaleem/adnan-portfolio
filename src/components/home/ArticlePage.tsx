@@ -2,6 +2,7 @@ import { Children, cloneElement, isValidElement, type ComponentType, type ReactE
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageFrame from './PageFrame';
+import { RoleLinks } from './RolePage';
 import ShareArticle from './ShareArticle';
 import VirtualRows from './lab/VirtualRows';
 import ThreatFeed from './lab/ThreatFeed';
@@ -10,6 +11,7 @@ import FailSmall from './lab/FailSmall';
 import PageVitals from './lab/PageVitals';
 import { profile } from '@/lib/data';
 import { related, type Article } from '@/lib/articles';
+import { rolesForArticle } from '@/lib/roles';
 import { faqJsonLd } from '@/lib/seo';
 
 // The lab demo that matches each article, with the instruction the lab page gives for it
@@ -31,7 +33,7 @@ export const articleMetadata = (a: Article): Metadata => ({
   description: a.description,
   keywords: a.tags,
   alternates: { canonical: `/articles/${a.slug}`, types: { 'application/rss+xml': '/feed.xml' } },
-  openGraph: { type: 'article', title: a.title, description: a.description, url: `/articles/${a.slug}`, publishedTime: a.published, modifiedTime: a.updated, authors: [profile.name], section: a.topic, tags: a.tags, images: ['/opengraph-image'] },
+  openGraph: { type: 'article', title: a.title, description: a.description, url: `/articles/${a.slug}`, publishedTime: a.published, modifiedTime: a.updated, authors: [profile.name], section: a.topic, tags: a.tags, images: [{ url: `/articles/${a.slug}/opengraph-image`, width: 1200, height: 630, alt: a.title }] },
 });
 
 /** Frame for one article: heading, byline, body, and a pointer to the matching case study. */
@@ -51,7 +53,7 @@ export default function ArticlePage({ article: a, children }: { article: Article
         articleSection: a.topic,
         keywords: a.tags.join(', '),
         timeRequired: `PT${a.minutes}M`,
-        image: `${profile.url}/opengraph-image`,
+        image: `${url}/opengraph-image`,
         author: { '@id': `${profile.url}/#person` },
         publisher: { '@id': `${profile.url}/#person` },
         isPartOf: { '@id': `${profile.url}/#website` },
@@ -155,6 +157,7 @@ export default function ArticlePage({ article: a, children }: { article: Article
             <p className="hx-cap">The project behind this</p>
             <h2>Read the case study</h2>
             <p>What I built, where, and the numbers that came out of it.</p>
+            <RoleLinks roles={rolesForArticle(a.slug)} />
           </div>
           <div className="hx-actions">
             <Link className="hx-pill is-solid is-big" href={`/work/${a.caseStudy}`}>Open the case study ↘</Link>

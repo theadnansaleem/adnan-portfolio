@@ -713,6 +713,7 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
           <Link href="/dotnet-developer">.NET developer</Link>
           <Link href="/ai-engineer">AI engineer</Link>
           <Link href="/azure-developer">Azure developer</Link>
+          <Link href="/visual-foxpro-migration">FoxPro migration</Link>
           <Link href="/ar" lang="ar">العربية</Link>
         </nav>
       </footer>

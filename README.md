@@ -1,39 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# theadnansaleem.com
 
-## Getting Started
+Source for [theadnansaleem.com](https://theadnansaleem.com), the portfolio of M. Adnan Saleem, senior full-stack software engineer: React, Next.js, Angular and TypeScript over .NET and Node.js.
 
-First, run the development server:
+The site is statically generated with the Next.js App Router. Every page is built from a few typed data files that mirror the CV, so a case study or a role page cannot claim something the CV does not.
+
+## What is on it
+
+| Path | What it is |
+| --- | --- |
+| `/` | Summary, impact, selected work, experience, stack, an in-page terminal and contact |
+| `/work`, `/work/<slug>` | Case studies of production work, each built from CV bullets |
+| `/articles`, `/articles/<slug>` | Technical articles written from that work, grouped by topic, with an RSS feed at `/feed.xml` |
+| `/lab` | Live demos: table virtualization, a real-time dashboard, tiered data redaction, error boundaries and Core Web Vitals |
+| `/hire` | Facts for recruiters, and a fit check that compares a pasted job description with the CV without leaving the browser |
+| `/frontend-developer`, `/dotnet-developer`, `/ai-engineer`, `/azure-developer`, `/visual-foxpro-migration` | The CV bullets, skills, case studies and articles that belong to one role |
+| `/about`, `/certifications`, `/ar` | Background, credentials with issuer links, and an Arabic version |
+
+A command palette (Cmd+K or Ctrl+K) searches every page, case study and article.
+
+## How it is put together
+
+- `src/lib/data.ts` mirrors the CV: profile, jobs, projects, skills, education and certifications. Content changes go into the CV first, then here.
+- `src/lib/case-studies.ts` builds each case study from those CV bullets. `pick()` throws at build time if a bullet it relies on has been reworded, so a case study cannot drift from the CV unnoticed.
+- `src/lib/roles.ts` defines each role page as a pattern over the CV bullets, plus the case studies and articles that go with it.
+- `src/lib/articles.ts` holds the article metadata: topic, tags and quick answers. The body of each article is `src/app/articles/<slug>/page.tsx`.
+- `src/components/home/` holds the shared page frame, the article and role page templates, and the lab demos.
+
+## Search and sharing
+
+- JSON-LD on every page: `Person` and `WebSite` site-wide, `ProfilePage` on the home page, `TechArticle` on articles, and `BreadcrumbList` and `FAQPage` where they apply.
+- `sitemap.xml`, `robots.txt`, `feed.xml` and `llms.txt` are generated from the same data files.
+- Share images are rendered at build time with `next/og`: one for the site, one per case study and one per article.
+- `npm run indexnow` submits the sitemap URLs to IndexNow after a deploy.
+
+## Run it
+
+Node.js 20.9 or later.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # production build, every page prerendered
+npm run lint
+npx tsc --noEmit
+npm test           # needs Node.js 22.18 or later, which runs the TypeScript it imports
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS 4 with CSS variables for the light and dark themes. Lenis handles smooth scrolling. Deployed on Vercel.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Releases
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Versions follow [Semantic Versioning](https://semver.org), and every release is described in [CHANGELOG.md](CHANGELOG.md).
 
 ## Portfolio analytics
 

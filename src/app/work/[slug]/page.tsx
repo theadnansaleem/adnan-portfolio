@@ -4,9 +4,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageFrame from "@/components/home/PageFrame";
 import QatarFederationCase from "@/components/home/QatarFederationCase";
+import { RoleLinks } from "@/components/home/RolePage";
 import { caseStudies, caseStudyBySlug } from "@/lib/case-studies";
 import { articles } from "@/lib/articles";
 import { profile } from "@/lib/data";
+import { rolesForStudy } from "@/lib/roles";
 
 const SITE_URL = profile.url;
 
@@ -159,6 +161,7 @@ export default async function CaseStudyPage({
             <p className="hx-cap">Work with me</p>
             <h2>Available immediately</h2>
             <p>Based in Lahore, Pakistan, open to remote work and relocation.</p>
+            <RoleLinks roles={rolesForStudy(study.slug)} />
           </div>
           <div className="hx-actions">
             <a className="hx-pill is-solid is-big" href={profile.resume} target="_blank" rel="noopener noreferrer">Download CV ↓</a>

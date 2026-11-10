@@ -25,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
       priority: 0.8,
     },
-    ...["about", "hire", "lab", "ar", "frontend-developer", "dotnet-developer", "ai-engineer", "azure-developer", "certifications"].map((page) => ({
+    ...["about", "hire", "lab", "ar", "frontend-developer", "dotnet-developer", "ai-engineer", "azure-developer", "visual-foxpro-migration", "certifications"].map((page) => ({
       url: `${profile.url}/${page}`,
       changeFrequency: "monthly" as const,
       priority: 0.7,

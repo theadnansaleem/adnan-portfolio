@@ -361,7 +361,7 @@ body:has(.hx) { cursor: auto; }
 .hx-clocks .is-home .hx-cap, .hx-clocks .is-home time { color: var(--accent-ink); }
 
 /* ── Pages that share the frame (/lab, /hire) ───────────────────────────── */
-.hx-page { position: relative; z-index: 3; max-width: 1280px; margin: 0 auto; padding: 150px var(--gut) 100px; display: flex; flex-direction: column; gap: clamp(40px, 6vw, 80px); }
+.hx-page { position: relative; z-index: 3; max-width: 1280px; margin: 0 auto; padding: 150px var(--gut) 100px; display: flex; flex-direction: column; gap: clamp(40px, 6vw, 80px); min-height: 100svh; }
 .hx-page h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(52px, 8vw, 128px); line-height: 0.95; letter-spacing: -0.02em; margin: 14px 0 20px; }
 .hx-page .hx-head { margin-bottom: 0; }
 .hx-page .hx-head > p:last-child, .hx-page .hx-head > p:nth-child(3) { color: var(--ink-2); font-size: clamp(16px, 1.25vw, 19px); max-width: 720px; }
@@ -524,8 +524,8 @@ button.hx-shot:hover .hx-shot-cue, button.hx-shot:focus-visible .hx-shot-cue { o
 .hx-toc ol { margin: 10px 0 0; padding-left: 1.6em; display: grid; gap: 6px; list-style: decimal; }
 .hx-toc li { list-style: decimal; }
 .hx-toc li::marker { color: var(--ink-2); font-size: 0.9em; }
-#try-it p a { color: var(--mark); text-decoration: underline; text-underline-offset: 3px; }
-#try-it p a:hover, #try-it p a:focus-visible { color: var(--ink); }
+#try-it p a, .hx-study-cta p a { color: var(--mark); text-decoration: underline; text-underline-offset: 3px; }
+#try-it p a:hover, #try-it p a:focus-visible, .hx-study-cta p a:hover, .hx-study-cta p a:focus-visible { color: var(--ink); }
 .hx-toc a { color: var(--ink-2); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
 .hx-toc a:hover, .hx-toc a:focus-visible { color: var(--ink); text-decoration-color: currentColor; }
 .hx-share { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 18px; }
