@@ -22,6 +22,7 @@ export function GET() {
     link('.NET developer: C#, ASP.NET Core and Blazor experience', '/dotnet-developer'),
     link('AI engineer: LLM integration, agent harness and evaluation tooling', '/ai-engineer'),
     link('Azure developer: Azure Functions, App Service and Azure OpenAI', '/azure-developer'),
+    link('Visual FoxPro migration: a FoxPro system moved to C#, .NET and SQL Server, with the guides written from it', '/visual-foxpro-migration'),
     link('Certifications, with links to each issuer record', '/certifications'),
     link('Arabic version', '/ar'),
     link('CV (PDF)', profile.resume),

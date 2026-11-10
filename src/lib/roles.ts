@@ -25,6 +25,32 @@ export interface Role {
 // Role landing pages. Nothing here is new copy about the work: the pages list the CV bullets,
 // skills and case studies that match each role, so they stay in step with data.ts.
 export const roles = {
+  foxpro: {
+    path: '/visual-foxpro-migration',
+    name: 'Visual FoxPro migration',
+    title: 'Visual FoxPro Migration Developer for Hire',
+    heading: ['Visual FoxPro', 'Migration', 'to .NET'],
+    description:
+      'Hire the developer who migrated 42 financial workflows from Visual FoxPro to C#, .NET Core and SQL Server as the sole engineer. Remote, available now.',
+    lead: 'I have taken a legacy Visual FoxPro system to C#, .NET and SQL Server, from the first workflow to retiring the old system. As the sole engineer on a 2.5-year engagement I migrated 42 financial workflows carrying two decades of business logic, with no existing specification, onto a .NET Core domain layer with Entity Framework Core and 42 T-SQL stored procedures, and replaced the FoxPro reports in Blazor. Based in Lahore, five years fully remote with US, UK and German teams, and available immediately for the next one.',
+    match: /FoxPro|legacy data models/i,
+    skillGroups: ['Backend & APIs', 'Databases'],
+    studies: ['visual-foxpro-to-dotnet-migration'],
+    articles: [
+      'visual-foxpro-to-dotnet-migration-guide',
+      'visual-foxpro-to-sql-server-data-migration',
+      'visual-foxpro-reports-to-blazor-dotnet',
+      'entity-framework-core-stored-procedures-sql-server',
+    ],
+    faq: [
+      ['Who can migrate a Visual FoxPro application to .NET?', 'I can. As the sole engineer I migrated 42 financial workflows from a legacy Visual FoxPro system to C# and .NET Core for a client in Canada, over a 2.5-year engagement, and retired the old system. I work remotely and have spent five years with US, UK and German teams.'],
+      ['Do you take on Visual FoxPro migration projects?', 'Yes. I am available immediately and work remotely from Lahore. My last FoxPro migration ran as a part-time independent contract.'],
+      ['Can you migrate a FoxPro system that has no specification?', 'Yes. The system I migrated carried two decades of business logic and had no specification. I redesigned its data models and business logic into a maintainable .NET Core domain layer and preserved all 42 financial workflows.'],
+      ['What does a FoxPro system become after the migration?', 'In mine: C# and .NET Core with a domain layer on Entity Framework Core, 42 T-SQL stored procedures on SQL Server with a testable data access layer, and Angular and Blazor on the frontend.'],
+      ['Do you redesign the data model and replace the reports as well as the code?', 'Yes. I redesigned the legacy data models on SQL Server with Entity Framework Core and 42 T-SQL stored procedures, and replaced the legacy Visual FoxPro reports with reporting workflows in the new Blazor application.'],
+      ['How long does a Visual FoxPro to .NET migration take?', 'It depends on the number of workflows and on how much of the knowledge is written down. Mine covered 42 workflows in two and a half years as a part-time engagement, with one engineer and no specification.'],
+    ],
+  },
   frontend: {
     path: '/frontend-developer',
     name: 'Frontend developer',
@@ -123,6 +149,13 @@ export const roleEvidence = (role: Role) =>
 
 export const roleStudies = (role: Role) =>
   caseStudies.filter((study) => (role.studies ? role.studies.includes(study.slug) : study.stack.some((tag) => role.match.test(tag))));
+
+/** Role pages that list this case study, the most specific first. */
+export const rolesForStudy = (slug: string) =>
+  Object.values<Role>(roles).filter((role) => roleStudies(role).some((study) => study.slug === slug));
+
+/** Role pages that cite this article, the most specific first. */
+export const rolesForArticle = (slug: string) => Object.values<Role>(roles).filter((role) => role.articles?.includes(slug));
 
 export const roleArticles = (role: Role) =>
   (role.articles ?? []).map((slug) => articles.find((a) => a.slug === slug)).filter((a) => a !== undefined);

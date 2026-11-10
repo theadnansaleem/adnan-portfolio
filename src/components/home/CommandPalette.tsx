@@ -31,6 +31,7 @@ const ACTIONS: Action[] = [
   { label: '.NET developer: C#, ASP.NET Core, Blazor', hint: 'Page', run: go('/dotnet-developer') },
   { label: 'AI engineer: LLMs, agents, evaluation', hint: 'Page', run: go('/ai-engineer') },
   { label: 'Azure developer: Functions, App Service, OpenAI', hint: 'Page', run: go('/azure-developer') },
+  { label: 'Visual FoxPro migration: FoxPro to .NET and SQL Server', hint: 'Page', run: go('/visual-foxpro-migration') },
   { label: 'Home', hint: 'Page', run: go('/') },
   { label: 'Impact', hint: 'Section', run: go('/#about') },
   { label: 'Selected work', hint: 'Section', run: go('/#projects') },

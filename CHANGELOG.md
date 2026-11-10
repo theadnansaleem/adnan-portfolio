@@ -7,6 +7,19 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.28.0 - 2026-11-10
+
+### Added
+- Page: Visual FoxPro migration, at `/visual-foxpro-migration`. The CV bullets, case study and four articles from the FoxPro to .NET migration on one page, with six quick answers. It is in the sitemap, `llms.txt`, the command palette and both footers.
+- Every article and case study names the role pages that cite it, as links in its closing card.
+- Every article has its own share image, with its topic, title and author, in place of the site-wide one. TechArticle structured data points at the same image.
+- A 404 page with the site frame and links to the home page, case studies, articles and the hire page. Unmatched addresses showed the framework default with no navigation.
+
+### Changed
+- The case study share image and the new article share image are drawn by one function, `card()` in `src/app/og/card.tsx`.
+- On a page shorter than the window, the footer sits at the bottom edge of the window.
+- README describes the site, its content model and how to run it, in place of the create-next-app default. The analytics section is unchanged.
+
 ## 2.27.2 - 2026-11-08
 
 ### Security

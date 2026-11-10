@@ -87,7 +87,7 @@ export default function PageFrame({ children }: { children: React.ReactNode }) {
   }, [pathname]);
 
   return (
-    <div ref={root} className={`hx is-scrolled ${hxFonts}`}>
+    <div ref={root} className={`hx hx-frame is-scrolled ${hxFonts}`}>
       <div className="hx-stage" aria-hidden="true">
         <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
           <path d="M-80 260C180 120 380 380 620 250S1010 40 1240 210s330 150 480 60" />
@@ -146,6 +146,7 @@ export default function PageFrame({ children }: { children: React.ReactNode }) {
           <Link href="/dotnet-developer">.NET developer</Link>
           <Link href="/ai-engineer">AI engineer</Link>
           <Link href="/azure-developer">Azure developer</Link>
+          <Link href="/visual-foxpro-migration">FoxPro migration</Link>
         </nav>
       </footer>
       <CommandPalette />
