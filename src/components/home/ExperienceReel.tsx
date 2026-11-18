@@ -20,7 +20,6 @@ const SHOTS: Record<number, string[]> = {
   2: ['Volopa Financial Services'],
   3: ['Norstella Pharma Solutions Platform'],
   4: ['Codex: Cybersecurity Platform', 'Eclipse AI'],
-  5: ['Meta LLaMA: RLHF Tooling', 'Google DeepMind: LLM Optimization'],
   6: ['National Compliance Management System', 'TopTech TMS', 'VMA Advisor: BG Products'],
 };
 const shotsFor = (jobId: number) => projects.filter((project) => SHOTS[jobId]?.includes(project.title));

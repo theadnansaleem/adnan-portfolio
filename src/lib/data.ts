@@ -21,7 +21,7 @@ export const profile = {
     booking: "https://calendly.com/heyadnansaleem/30min",
     // The CV summary, split into paragraphs; only the name was added to the opening sentence.
     summary: [
-        "M. Adnan Saleem is a senior full-stack software engineer with 8+ years of enterprise application and frontend development experience, including 8 years of hands-on Amazon Web Services (AWS) experience. Builds frontends in React, Next.js, and Angular with TypeScript, and backends in Node.js, C#, .NET 6/8, and ASP.NET Core, delivering scalable, secure production platforms for government, fintech, and cybersecurity clients.",
+        "M. Adnan Saleem is a senior full-stack software engineer with seven years of enterprise application and frontend development experience. Builds frontends in React, Next.js, and Angular with TypeScript, and backends in Node.js, C#, .NET 6/8, and ASP.NET Core, delivering scalable, secure production platforms for government, fintech, and cybersecurity clients.",
         "Rearchitected a monolithic frontend into micro frontends with Module Federation, cutting release cycle time by about 40%, and designed .NET domain layers with Entity Framework Core, DDD, and CQRS. Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103), building generative and agentic AI solutions on Microsoft Foundry.",
         "Leads code reviews and mentors engineers in Agile/Scrum teams; five years fully remote with US, UK, and German teams.",
     ],
@@ -192,28 +192,6 @@ export const projects: Project[] = [
         id: 7,
         number: "07",
         featured: false,
-        title: "Meta LLaMA: RLHF Tooling",
-        description: "Full-stack infrastructure for training, fine-tuning, alignment, and evaluation of LLaMA 2 and early LLaMA 3. Built agentic evaluation pipelines, human feedback collection interfaces, and multi-turn prompt orchestration tooling for ML researchers.",
-        tags: ["React", "Node.js", "Python", "RLHF", "AWS"],
-        gradient: "linear-gradient(135deg, #1a1200 0%, #2e2000 50%, #0f0b00 100%)",
-        href: "https://ai.meta.com/llama/",
-        image: "/projects/llama.png"
-    },
-    {
-        id: 8,
-        number: "08",
-        featured: false,
-        title: "Google DeepMind: LLM Optimization",
-        description: "Fine-tuned and optimized large language models using DeepMind frameworks and Meta's LLaMA architecture. Implemented RLHF, LoRA, and PEFT techniques with prompt engineering and benchmarking pipelines for model alignment.",
-        tags: ["Python", "PyTorch", "RLHF", "LoRA", "Docker"],
-        gradient: "radial-gradient(ellipse at 30% 50%, #0f1f0a 0%, #050a04 60%)",
-        href: "https://deepmind.google",
-        image: "/projects/deepmind.png"
-    },
-    {
-        id: 9,
-        number: "09",
-        featured: false,
         title: "Codex: Cybersecurity Platform",
         description: "Digital thread assessment tool mapping components, protocols, and software across vehicle stacks with 60M+ lines of code to automatically surface attack vectors, remediations, and penetration test data.",
         tags: ["React", "TypeScript", "C#", "Blazor Server", ".NET"],
@@ -223,8 +201,8 @@ export const projects: Project[] = [
         caseStudy: "codex-vehicle-cybersecurity-platform"
     },
     {
-        id: 10,
-        number: "10",
+        id: 8,
+        number: "08",
         featured: false,
         title: "National Compliance Management System",
         description: "Comprehensive compliance management platform for US oil and gas operators, encompassing policies, procedures, and practices to meet legal, regulatory, and ethical standards with non-compliance risk mitigation.",
@@ -234,8 +212,8 @@ export const projects: Project[] = [
         image: "/projects/ncms.png"
     },
     {
-        id: 11,
-        number: "11",
+        id: 9,
+        number: "09",
         featured: false,
         title: "TopTech TMS",
         description: "Terminal Management System for a US-based oil and gas company, handling the full operational workflow of fuel terminal logistics including truck management, scheduling, and compliance tracking.",
@@ -245,8 +223,8 @@ export const projects: Project[] = [
         image: "/projects/toptech.png"
     },
     {
-        id: 12,
-        number: "12",
+        id: 10,
+        number: "10",
         featured: false,
         title: "VMA Advisor: BG Products",
         description: "Platform for BG Products, Inc. which manufactures and distributes professional-use additives, cleaners, specialty lubricants, and precision tools used to service vehicles in countries worldwide.",
@@ -276,7 +254,7 @@ export const skills: SkillCategory[] = [
     },
     {
         category: "Cloud & DevOps",
-        tags: ["Amazon Web Services (AWS, 8 years)", "EC2", "S3", "Lambda", "Microsoft Azure (Azure App Service, Azure Functions, Azure OpenAI, Microsoft Foundry)", "Azure DevOps", "Jenkins", "CI/CD (Continuous Integration / Continuous Deployment)", "GitHub Actions", "GitLab CI/CD", "Containerization (Docker, Kubernetes)", "Terraform (Infrastructure as Code)", "Google Cloud Platform", "Vite", "Webpack", "Git / GitFlow"]
+        tags: ["Amazon Web Services (AWS)", "EC2", "S3", "Lambda", "Microsoft Azure (Azure App Service, Azure Functions, Azure OpenAI, Microsoft Foundry)", "Azure DevOps", "Jenkins", "CI/CD (Continuous Integration / Continuous Deployment)", "GitHub Actions", "GitLab CI/CD", "Containerization (Docker, Kubernetes)", "Terraform (Infrastructure as Code)", "Google Cloud Platform", "Vite", "Webpack", "Git / GitFlow"]
     },
     {
         category: "UI, Mobile & Accessibility",
@@ -417,7 +395,7 @@ export const marqueeItems: string[] = [
 ];
 
 export const stats: Stat[] = [
-    { number: "8", label: "Years of Experience" },
+    { number: "7", label: "Years of Experience" },
     { number: "5", label: "Years Fully Remote" },
     { number: "10+", label: "Government Entities Served" },
     { number: "27", label: "Junior Developers Mentored" }

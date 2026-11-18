@@ -81,7 +81,7 @@ export default function CertificationsPage() {
         <div>
           <p className="hx-cap">Beyond the certificates</p>
           <h2>See the work itself</h2>
-          <p>Eight years of production platforms for government, fintech and cybersecurity clients.</p>
+          <p>Seven years of production platforms for government, fintech and cybersecurity clients.</p>
         </div>
         <div className="hx-actions">
           <Link className="hx-pill is-solid is-big" href="/work">Read the case studies ↘</Link>

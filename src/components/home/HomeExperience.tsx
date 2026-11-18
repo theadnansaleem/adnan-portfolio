@@ -61,7 +61,7 @@ const IMPACT = [
 const FEATURED = projects.slice(0, 6);
 const MORE = projects.slice(6);
 // The names a recruiter recognises, straight from the project list
-const WORKED_ON = ['Hayya Qatar', 'Qatar Events Platform', 'Volopa', 'Meta LLaMA', 'Google DeepMind', 'Norstella', 'Codex'];
+const WORKED_ON = ['Hayya Qatar', 'Qatar Events Platform', 'Volopa', 'Norstella', 'Codex'];
 
 const projectLink = (p: (typeof projects)[number]) => (p.caseStudy ? `/work/${p.caseStudy}` : p.href);
 
@@ -420,7 +420,7 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
         </div>
         <div className="hx-hero-right">
           <p className="hx-lede">
-            8 years building enterprise platforms for government, fintech and cybersecurity clients.
+            7 years building enterprise platforms for government, fintech and cybersecurity clients.
             React, Next.js and Angular up front. Node.js, C#, .NET and AWS behind.
           </p>
           <div className="hx-actions">
@@ -535,7 +535,7 @@ export default function HomeExperience({ fontClass, updated, faq }: { fontClass:
       <section className="hx-section hx-exp" id="experience">
         <header className="hx-head hx-rv">
           <p className="hx-cap"><b>03</b> Experience</p>
-          <h2><Roll parts={[['Eight years,'], ['six', true], ['teams']]} /></h2>
+          <h2><Roll parts={[['Seven years,'], ['six', true], ['teams']]} /></h2>
           <p>{profile.summary[2]}</p>
         </header>
         <Clocks onPick={(index) => window.dispatchEvent(new CustomEvent('hx:role', { detail: index }))} />

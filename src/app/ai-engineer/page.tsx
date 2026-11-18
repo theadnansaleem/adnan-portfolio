@@ -137,11 +137,6 @@ export default function AiEngineerPage() {
               <span>Built the evaluation and training interfaces people used to give feedback and label data for large language models of the GPT-3 generation, used by 100,000+ people and deployed on AWS. ChatGPT launched about a year after this work ended. Details in the <Link href="/work/ai-evaluation-training-interfaces">case study</Link>.</span>
             </li>
             <li>
-              <span className="hx-cap">LLaMA 2 and early LLaMA 3</span>
-              <strong>Meta LLaMA</strong>
-              <span>Training, fine-tuning, alignment and evaluation tooling, with human feedback collection interfaces for ML researchers.</span>
-            </li>
-            <li>
               <span className="hx-cap">2025 to 2026</span>
               <strong>Azure OpenAI in production</strong>
               <span>GPT integrations across the APIs and data contracts of three national platforms in Qatar.</span>
