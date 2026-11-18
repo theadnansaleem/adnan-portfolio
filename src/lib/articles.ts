@@ -24,6 +24,51 @@ export interface Article {
 // Claims about my own work in them restate CV bullets; the rest is general engineering practice.
 export const articles: Article[] = [
   {
+    slug: 'visual-foxpro-forms-to-blazor',
+    title: 'Visual FoxPro forms to Blazor: events, buffering, validation',
+    description: 'Move a Visual FoxPro form to Blazor and EF Core: read the .scx as a table, move Valid rules into the domain, and replace table buffering with rowversion.',
+    published: '2026-11-18',
+    caseStudy: 'visual-foxpro-to-dotnet-migration',
+    minutes: 10,
+    topic: 'Legacy migration',
+    tags: ['Visual FoxPro', 'Blazor', 'C#', '.NET', 'Entity Framework Core', 'SQL Server', 'legacy migration', 'forms', 'optimistic concurrency', 'validation'],
+    faq: [
+      ['Can a Visual FoxPro form be converted to Blazor automatically?', 'Not usefully. The .scx file can be read as a table, which gives you every control and its event code, but the business rules in that code should move into a domain layer and the screen should be redesigned for the web. Use the inventory as a checklist, not as input to a converter.'],
+      ['What replaces TABLEUPDATE and TABLEREVERT in .NET?', 'A short-lived Entity Framework Core DbContext per save replaces TABLEUPDATE, and reloading the record replaces TABLEREVERT. A rowversion column gives the same conflict check as optimistic buffering: SaveChanges throws DbUpdateConcurrencyException if another user saved first.'],
+      ['Where should the code from a FoxPro Valid event go?', 'Business rules go into the entity or domain service, so imports, batch jobs and other screens enforce them too. Only shape checks, such as required fields and number ranges, stay in the Blazor form as data annotations.'],
+    ],
+  },
+  {
+    slug: 'rlhf-human-feedback-interface-react',
+    title: 'Building a human feedback (RLHF) review interface in React',
+    description: 'A pairwise LLM comparison screen in React and Node.js: what to store, randomised order, keyboard shortcuts, drafts that survive a reload, idempotent submits.',
+    published: '2026-11-18',
+    caseStudy: 'ai-evaluation-training-interfaces',
+    minutes: 9,
+    topic: 'React',
+    tags: ['RLHF', 'human feedback', 'LLM evaluation', 'data labeling', 'React', 'TypeScript', 'Node.js', 'idempotency', 'generative AI'],
+    faq: [
+      ['What does an RLHF review interface collect?', 'Usually pairwise preferences: two model responses to the same prompt, which one the reviewer prefers and by how much, often with rubric scores and a short reason. Store the preferred response by id, the order it was shown in, and the guideline version, so every judgement can be audited later.'],
+      ['Why randomise which response appears on the left?', 'So that any habit a reviewer has about one side cannot turn into a preference for one model. Record the order shown with each result; then the share of left-side wins per reviewer is a measurable quality check.'],
+      ['How do you stop a retried submit from counting twice?', 'Generate one idempotency key per task attempt in the browser and send it with the submit. The server stores the first result for that key and answers any retry with the same response, so a timeout and a retry still record one judgement.'],
+    ],
+  },
+  {
+    slug: 'react-custom-hooks-library',
+    title: 'A React custom hooks library a team will actually use',
+    description: 'Which hooks belong in a shared React library, useSyncExternalStore for browser state, useEffectEvent for stale closures, and testing hooks with renderHook.',
+    published: '2026-11-18',
+    caseStudy: 'codex-vehicle-cybersecurity-platform',
+    minutes: 8,
+    topic: 'React',
+    tags: ['React', 'custom hooks', 'TypeScript', 'useSyncExternalStore', 'useEffectEvent', 'React Testing Library', 'Vitest', 'frontend architecture'],
+    faq: [
+      ['When should a custom hook go into a shared library?', 'When it has been written at least three times, the hand-written copies share a bug such as a missing cleanup or a stale closure, and it does one job. Data fetching and global state stay out: a query cache and a store already solve those.'],
+      ['What is useEffectEvent in React?', 'A hook, stable since React 19.2, that wraps a function so it always sees the latest props and state without being listed as an effect dependency. It replaces the ref-based useLatest or useEventCallback patterns for event handlers called from effects.'],
+      ['How do you test a custom React hook?', 'Mount it on its own with renderHook from React Testing Library, change its inputs with rerender, and use fake timers for anything time-based. Test the behaviour components depend on, not the implementation.'],
+    ],
+  },
+  {
     slug: 'rag-azure-openai-azure-ai-search-dotnet',
     title: 'RAG in .NET with Azure OpenAI and Azure AI Search',
     description: 'Retrieval-augmented generation in C#: chunk and embed documents, index them in Azure AI Search, run a hybrid vector query, and ground the answer with citations.',

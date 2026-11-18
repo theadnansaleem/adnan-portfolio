@@ -4,6 +4,7 @@ import Link from "next/link";
 import PageFrame from "@/components/home/PageFrame";
 import { caseStudies } from "@/lib/case-studies";
 import { profile } from "@/lib/data";
+import { pageTitle } from "@/lib/seo";
 
 const SITE_URL = profile.url;
 const TITLE = "Case studies: government, fintech, cybersecurity";
@@ -11,7 +12,7 @@ const DESCRIPTION =
   "Case studies by M. Adnan Saleem: Module Federation micro frontends, the Hayya eVisa platform, React performance, a Visual FoxPro to .NET migration, and more.";
 
 export const metadata: Metadata = {
-  title: TITLE,
+  title: pageTitle(TITLE),
   description: DESCRIPTION,
   alternates: { canonical: "/work" },
   openGraph: {

@@ -17,7 +17,7 @@ export function GET() {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>
 <title>${escape(profile.name)}: articles</title>
 <link>${profile.url}/articles</link>
-<description>Practical write-ups on React, micro frontends, .NET and legacy migration.</description>
+<description>Practical write-ups on React, .NET, Azure AI and Visual FoxPro migration.</description>
 <language>en</language>
 <atom:link href="${profile.url}/feed.xml" rel="self" type="application/rss+xml"/>
 ${items.join('\n')}

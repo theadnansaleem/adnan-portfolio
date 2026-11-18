@@ -40,6 +40,7 @@ export const roles = {
       'visual-foxpro-to-dotnet-migration-guide',
       'visual-foxpro-to-sql-server-data-migration',
       'visual-foxpro-reports-to-blazor-dotnet',
+      'visual-foxpro-forms-to-blazor',
       'entity-framework-core-stored-procedures-sql-server',
     ],
     faq: [
@@ -67,6 +68,8 @@ export const roles = {
       'core-web-vitals-react-lcp-code-splitting',
       'real-time-dashboard-react-websocket',
       'react-state-management-redux-zustand-context',
+      'react-custom-hooks-library',
+      'rlhf-human-feedback-interface-react',
     ],
     faq: [
       ['Which frontend frameworks do you work in?', 'React, Next.js and Angular, with TypeScript. Eight years across government, fintech and cybersecurity platforms.'],
@@ -90,6 +93,7 @@ export const roles = {
       'visual-foxpro-to-dotnet-migration-guide',
       'visual-foxpro-to-sql-server-data-migration',
       'visual-foxpro-reports-to-blazor-dotnet',
+      'visual-foxpro-forms-to-blazor',
       'entity-framework-core-stored-procedures-sql-server',
       'ddd-cqrs-blazor-server-entity-framework-core',
       'role-based-access-control-data-redaction-dotnet',
@@ -113,7 +117,7 @@ export const roles = {
     match: /Azure OpenAI|evaluation|human feedback/i,
     skillGroups: ['AI & LLM Engineering', 'Backend & APIs', 'Cloud & DevOps'],
     studies: ['ai-evaluation-training-interfaces'],
-    articles: ['rag-azure-openai-azure-ai-search-dotnet'],
+    articles: ['rag-azure-openai-azure-ai-search-dotnet', 'rlhf-human-feedback-interface-react'],
     faq: [
       ['Are you Microsoft certified?', 'Yes. Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103), earned in October 2026. It covers Microsoft Foundry, Azure OpenAI, agents with function calling and multi-agent orchestration, and RAG with Azure AI Search.'],
       ['Which AI models and tools do you use?', 'Claude, Codex, Gemini, Kimi, DeepSeek and Groq, run through an agent harness I built myself. Claude does most of the implementation, and Codex and Gemini review the finished change.'],

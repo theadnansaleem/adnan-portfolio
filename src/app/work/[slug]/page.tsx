@@ -9,6 +9,7 @@ import { caseStudies, caseStudyBySlug } from "@/lib/case-studies";
 import { articles } from "@/lib/articles";
 import { profile } from "@/lib/data";
 import { rolesForStudy } from "@/lib/roles";
+import { pageTitle } from "@/lib/seo";
 
 const SITE_URL = profile.url;
 
@@ -26,7 +27,7 @@ export async function generateMetadata({
   if (!study) return {};
 
   return {
-    title: study.metaTitle,
+    title: pageTitle(study.metaTitle),
     description: study.description,
     alternates: { canonical: `/work/${study.slug}` },
     openGraph: {

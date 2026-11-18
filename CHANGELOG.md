@@ -7,6 +7,17 @@ The version lives in `package.json` and in git tags (`v2.0.0`); it is not shown 
 Release with `npm version patch`, `npm version minor` or `npm version major`.
 That bumps `package.json`, commits, and tags in one step.
 
+## 2.30.0 - 2026-11-18
+
+### Added
+- Article: Visual FoxPro forms to Blazor: events, buffering, validation. The FoxPro and .NET role pages list it.
+- Article: A React custom hooks library a team will actually use. The frontend role page lists it.
+- Article: Building a human feedback (RLHF) review interface in React. The frontend and AI engineer role pages list it.
+
+### Fixed
+- Role pages, case studies and the case studies index drop the " | Adnan Saleem" title suffix when it would push the title past 62 characters, where search results cut it off. Eight titles were 63 to 71 characters.
+- The sitemap lists the language alternates on `/ar` as well as on `/`, so the hreflang pair is reciprocal.
+
 ## 2.29.0 - 2026-11-10
 
 ### Added

@@ -1,6 +1,9 @@
 import type { Credential } from '@/types';
 import { profile } from './data';
 
+/** A page title for the layout's "%s | Adnan Saleem" template, used on its own when the suffix would push it past 62 characters and search results would cut it off. */
+export const pageTitle = (title: string) => (title.length + ' | Adnan Saleem'.length > 62 ? { absolute: title } : title);
+
 /** WebPage and breadcrumb JSON-LD for a top-level page, serialised for an inline script. */
 export function pageJsonLd(path: string, name: string, description: string, type = 'WebPage', inLanguage = 'en') {
   const url = profile.url + path;

@@ -4,10 +4,10 @@ import Link from 'next/link';
 import PageFrame from './PageFrame';
 import { profile } from '@/lib/data';
 import { roleArticles, roleEvidence, roleSkills, roleStudies, type Role } from '@/lib/roles';
-import { faqJsonLd, pageJsonLd } from '@/lib/seo';
+import { faqJsonLd, pageJsonLd, pageTitle } from '@/lib/seo';
 
 export const roleMetadata = (role: Role): Metadata => ({
-  title: role.title,
+  title: pageTitle(role.title),
   description: role.description,
   alternates: { canonical: role.path },
   openGraph: { title: role.title, description: role.description, url: role.path },
