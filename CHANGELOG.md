@@ -12,7 +12,6 @@ That bumps `package.json`, commits, and tags in one step.
 ### Added
 - Article: Visual FoxPro forms to Blazor: events, buffering, validation. The FoxPro and .NET role pages list it.
 - Article: A React custom hooks library a team will actually use. The frontend role page lists it.
-- Article: Building a human feedback (RLHF) review interface in React. The frontend and AI engineer role pages list it.
 
 ### Fixed
 - Role pages, case studies and the case studies index drop the " | Adnan Saleem" title suffix when it would push the title past 62 characters, where search results cut it off. Eight titles were 63 to 71 characters.

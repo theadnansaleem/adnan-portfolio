@@ -39,21 +39,6 @@ export const articles: Article[] = [
     ],
   },
   {
-    slug: 'rlhf-human-feedback-interface-react',
-    title: 'Building a human feedback (RLHF) review interface in React',
-    description: 'A pairwise LLM comparison screen in React and Node.js: what to store, randomised order, keyboard shortcuts, drafts that survive a reload, idempotent submits.',
-    published: '2026-11-18',
-    caseStudy: 'ai-evaluation-training-interfaces',
-    minutes: 9,
-    topic: 'React',
-    tags: ['RLHF', 'human feedback', 'LLM evaluation', 'data labeling', 'React', 'TypeScript', 'Node.js', 'idempotency', 'generative AI'],
-    faq: [
-      ['What does an RLHF review interface collect?', 'Usually pairwise preferences: two model responses to the same prompt, which one the reviewer prefers and by how much, often with rubric scores and a short reason. Store the preferred response by id, the order it was shown in, and the guideline version, so every judgement can be audited later.'],
-      ['Why randomise which response appears on the left?', 'So that any habit a reviewer has about one side cannot turn into a preference for one model. Record the order shown with each result; then the share of left-side wins per reviewer is a measurable quality check.'],
-      ['How do you stop a retried submit from counting twice?', 'Generate one idempotency key per task attempt in the browser and send it with the submit. The server stores the first result for that key and answers any retry with the same response, so a timeout and a retry still record one judgement.'],
-    ],
-  },
-  {
     slug: 'react-custom-hooks-library',
     title: 'A React custom hooks library a team will actually use',
     description: 'Which hooks belong in a shared React library, useSyncExternalStore for browser state, useEffectEvent for stale closures, and testing hooks with renderHook.',
