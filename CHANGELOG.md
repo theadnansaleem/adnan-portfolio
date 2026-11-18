@@ -17,6 +17,8 @@ That bumps `package.json`, commits, and tags in one step.
 ### Fixed
 - Role pages, case studies and the case studies index drop the " | Adnan Saleem" title suffix when it would push the title past 62 characters, where search results cut it off. Eight titles were 63 to 71 characters.
 - The sitemap lists the language alternates on `/ar` as well as on `/`, so the hreflang pair is reciprocal.
+- Experience reads seven years, not eight, everywhere on the site (English and Arabic), matching the documented start date of October 2019. The AWS skill no longer claims a number of years.
+- The two projects that named Meta and Google DeepMind are removed from the project list, the experience reel, the home page names and the AI engineer page. Their screenshots are deleted and the remaining projects renumbered.
 
 ## 2.29.0 - 2026-11-10
 

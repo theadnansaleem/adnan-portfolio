@@ -58,8 +58,8 @@ export const roles = {
     title: 'Senior React Developer for Remote Teams',
     heading: ['Senior', 'React', 'Developer'],
     description:
-      'Hire a senior React developer with 8 years of frontend experience in React, Next.js, Angular and TypeScript. Based in Lahore, available for remote work now.',
-    lead: 'I build React and Next.js applications with TypeScript. Eight years of frontend experience across React, Next.js and Angular on government, fintech and cybersecurity platforms, including five years fully remote with US, UK and German teams. Based in Lahore and available immediately for international remote roles.',
+      'Hire a senior React developer with 7 years of frontend experience in React, Next.js, Angular and TypeScript. Based in Lahore, available for remote work now.',
+    lead: 'I build React and Next.js applications with TypeScript. Seven years of frontend experience across React, Next.js and Angular on government, fintech and cybersecurity platforms, including five years fully remote with US, UK and German teams. Based in Lahore and available immediately for international remote roles.',
     match: /React|Angular|Next\.js|frontend|front-end|Micro Frontends|Core Web Vitals|virtualization|component|dashboards|responsive|WCAG|TypeScript|Redux|Zustand/i,
     skillGroups: ['Frontend', 'Architecture & Performance', 'UI, Mobile & Accessibility', 'Testing & Quality'],
     articles: [
@@ -72,7 +72,7 @@ export const roles = {
       'rlhf-human-feedback-interface-react',
     ],
     faq: [
-      ['Which frontend frameworks do you work in?', 'React, Next.js and Angular, with TypeScript. Eight years across government, fintech and cybersecurity platforms.'],
+      ['Which frontend frameworks do you work in?', 'React, Next.js and Angular, with TypeScript. Seven years across government, fintech and cybersecurity platforms.'],
       ['Have you split a large frontend into micro frontends?', 'Yes. On the Qatar Events Platform I rearchitected a monolithic React frontend into micro frontends with Module Federation, which cut release cycle time by about 40%.'],
       ['What have you done for frontend performance?', 'Virtualization and memoization cut render time by about 70% on tables over 20,000 rows, code splitting cut an initial bundle by about 35%, and LCP improved by about 35% on core pages of a national platform.'],
       ['Do you build accessible interfaces?', 'Yes. The multi-currency payments platform I worked on met WCAG 2.1 accessibility and UK fintech regulatory standards.'],

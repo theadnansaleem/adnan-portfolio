@@ -7,7 +7,7 @@ import FitMatcher from '@/components/home/FitMatcher';
 import { jobs, profile, stats } from '@/lib/data';
 
 const TITLE = 'Hire a Remote Full-Stack Developer';
-const DESCRIPTION = 'Senior full-stack developer for remote teams: React, Next.js and .NET, 8 years of experience and 5 years with US, UK and German teams. Available now.';
+const DESCRIPTION = 'Senior full-stack developer for remote teams: React, Next.js and .NET, 7 years of experience and 5 years with US, UK and German teams. Available now.';
 
 export const metadata: Metadata = {
   title: TITLE,

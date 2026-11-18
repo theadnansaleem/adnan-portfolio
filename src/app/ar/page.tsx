@@ -7,7 +7,7 @@ import { pageJsonLd } from '@/lib/seo';
 
 const TITLE = 'محمد عدنان سليم | مهندس برمجيات أول Full-Stack';
 const DESCRIPTION =
-  'مهندس برمجيات أول بخبرة ثماني سنوات في بناء منصات مؤسسية لجهات حكومية وشركات تقنية مالية وأمن سيبراني، متاح فورًا ومنفتح على الانتقال إلى دول الخليج.';
+  'مهندس برمجيات أول بخبرة سبع سنوات في بناء منصات مؤسسية لجهات حكومية وشركات تقنية مالية وأمن سيبراني، متاح فورًا ومنفتح على الانتقال إلى دول الخليج.';
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -57,7 +57,7 @@ export default function ArabicPage() {
           <p className="hx-cap"><b>النسخة العربية</b> متاح فورًا · منفتح على الانتقال</p>
           <h1>محمد عدنان سليم<br /><em>مهندس برمجيات أول</em></h1>
           <p>
-            ثماني سنوات في بناء منصات مؤسسية لجهات حكومية وشركات تقنية مالية وأمن سيبراني.
+            سبع سنوات في بناء منصات مؤسسية لجهات حكومية وشركات تقنية مالية وأمن سيبراني.
             الواجهات الأمامية باستخدام <span dir="ltr">React</span> و <span dir="ltr">Next.js</span> و <span dir="ltr">Angular</span>،
             والواجهات الخلفية باستخدام <span dir="ltr">Node.js</span> و <span dir="ltr">C#</span> و <span dir="ltr">.NET</span> و <span dir="ltr">AWS</span>.
           </p>
